@@ -321,8 +321,11 @@ const Header = (props) => {
                       <div className="mini-cart-items">
                         {carts &&
                           carts.length > 0 &&
-                          carts.map((catItem, crt) => (
-                            <div className="mini-cart-item clearfix" key={crt}>
+                          carts.map((catItem) => (
+                            <div
+                              className="mini-cart-item clearfix"
+                              key={catItem}
+                            >
                               <div className="mini-cart-item-image">
                                 <span>
                                   <img src={catItem.proImg} alt="icon" />
