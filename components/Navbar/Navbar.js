@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Header from "../Header/Header";
 
@@ -15,7 +17,11 @@ export default function Navbar(props) {
 
   return (
     <div className={className}>
-        <Header hclass={props.hclass} Logo={props.Logo} topbarNone={props.topbarNone}/>
+      <Header
+        hclass={props.hclass}
+        Logo={props.Logo}
+        topbarNone={props.topbarNone}
+      />
     </div>
-  ); 
+  );
 }
