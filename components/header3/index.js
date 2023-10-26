@@ -1,25 +1,20 @@
-"use client";
-
 import React, { useState } from "react";
+import Logo from "/public/images/logo-2.svg";
 import Link from "next/link";
 import Image from "next/image";
-import MobileMenu from "../MobileMenu/MobileMenu";
-import { totalPrice } from "../../utils";
-import { connect } from "react-redux";
-import { removeFromCart } from "../../store/actions/action";
+import MobileMenu from "../../components/MobileMenu/MobileMenu";
+import Projects from "../../api/project";
 
-const Header = (props) => {
+const Header3 = (props) => {
   const [menuActive, setMenuState] = useState(false);
-  const [cartActive, setcartState] = useState(false);
-
-  const SubmitHandler = (e) => {
-    e.preventDefault();
-  };
 
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
-  const { carts } = props;
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <header id="header">
@@ -32,18 +27,18 @@ const Header = (props) => {
                   <MobileMenu />
                 </div>
               </div>
-              <div className="col-lg-3 col-md-6 col-6">
+              <div className="col-lg-2 col-md-6 col-6">
                 <div className="navbar-header">
                   <Link
                     onClick={ClickHandler}
                     className="navbar-brand"
                     href="/home"
                   >
-                    <Image src={props.Logo} alt="logo" />
+                    <Image src={Logo} alt="" />
                   </Link>
                 </div>
               </div>
-              <div className="col-lg-6 col-md-1 col-1">
+              <div className="col-lg-9 col-md-1 col-1">
                 <div
                   id="navbar"
                   className="collapse navbar-collapse navigation-holder"
@@ -264,98 +259,91 @@ const Header = (props) => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-3 col-md-2 col-2">
+              <div className="col-lg-1 col-md-1 col-2">
                 <div className="header-right">
-                  <div className="header-search-form-wrapper">
-                    <div className="cart-search-contact">
-                      <button
-                        onClick={() => setMenuState(!menuActive)}
-                        className="search-toggle-btn"
-                      >
-                        <i
-                          className={`fi ti-search ${
-                            menuActive ? "ti-close" : "fi "
-                          }`}
-                        ></i>
-                      </button>
+                  <div className="header-right-menu-wrapper">
+                    <div className="header-right-menu">
                       <div
-                        className={`header-search-form ${
-                          menuActive ? "header-search-content-toggle" : ""
+                        className="right-menu-toggle-btn"
+                        onClick={() => setMenuState(!menuActive)}
+                      >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <div
+                        className={`header-right-menu-wrap ${
+                          menuActive ? "right-menu-active" : ""
                         }`}
                       >
-                        <form onSubmit={SubmitHandler}>
-                          <div>
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Search here..."
-                            />
-                            <button type="submit">
-                              <i className="fi ti-search"></i>
-                            </button>
+                        <button
+                          onClick={() => setMenuState(!menuActive)}
+                          className="right-menu-close"
+                        >
+                          <i className="ti-close"></i>
+                        </button>
+                        <div className="logo">
+                          <Image src={Logo} alt="" />
+                        </div>
+                        <div className="header-right-sec">
+                          <div className="project-widget widget">
+                            <h3>Our Latest Projects</h3>
+                            <ul>
+                              {Projects.slice(0, 6).map((project) => (
+                                <li key={project}>
+                                  <Link
+                                    onClick={ClickHandler}
+                                    href="/project/[slug]"
+                                    as={`/project/${project.slug}`}
+                                  >
+                                    <Image src={project.pImg} alt="" />
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mini-cart">
-                    <button
-                      className="cart-toggle-btn"
-                      onClick={() => setcartState(!cartActive)}
-                    >
-                      {" "}
-                      <i className="fi flaticon-shopping-cart"></i>{" "}
-                      <span className="cart-count">{carts.length}</span>
-                    </button>
-                    <div
-                      className={`mini-cart-content ${
-                        cartActive ? "mini-cart-content-toggle" : ""
-                      }`}
-                    >
-                      <button
-                        className="mini-cart-close"
-                        onClick={() => setcartState(!cartActive)}
-                      >
-                        <i className="ti-close"></i>
-                      </button>
-                      <div className="mini-cart-items">
-                        {carts &&
-                          carts.length > 0 &&
-                          carts.map((catItem) => (
-                            <div
-                              className="mini-cart-item clearfix"
-                              key={catItem}
-                            >
-                              <div className="mini-cart-item-image">
-                                <span>
-                                  <img src={catItem.proImg} alt="icon" />
-                                </span>
-                              </div>
-                              <div className="mini-cart-item-des">
-                                <p>{catItem.title} </p>
-                                <span className="mini-cart-item-price">
-                                  ${catItem.price} x {catItem.qty}
-                                </span>
-                                <span className="mini-cart-item-quantity">
-                                  <button className="btn btn-sm btn-danger">
-                                    <i className="ti-close"></i>
-                                  </button>{" "}
-                                </span>
-                              </div>
+                          <div className="widget wpo-contact-widget">
+                            <div className="widget-title">
+                              <h3>Contact Us</h3>
                             </div>
-                          ))}
-                      </div>
-                      <div className="mini-cart-action clearfix">
-                        <span className="mini-checkout-price">
-                          Subtotal: <span> $0 </span>
-                        </span>
-                        <div className="mini-btn">
-                          <Link href="/checkout" className="view-cart-btn s1">
-                            Checkout
-                          </Link>
-                          <Link href="/cart" className="view-cart-btn">
-                            View Cart
-                          </Link>
+                            <div className="contact-ft">
+                              <ul>
+                                <li>
+                                  <i className="fi flaticon-location"></i>68D,
+                                  Belsion Town 2365 <br /> Fna city, LH 3656,
+                                  USA
+                                </li>
+                                <li>
+                                  <i className="fi flaticon-telephone"></i>+ 8
+                                  (123) 123 456 789 <br />+ 8 (123) 123 456 789
+                                </li>
+                                <li>
+                                  <i className="fi flaticon-email"></i>
+                                  arkio@gmail.com
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="widget newsletter-widget">
+                            <div className="widget-title">
+                              <h3>Newsletter</h3>
+                            </div>
+                            <form onSubmit={SubmitHandler}>
+                              <div className="input-1">
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  placeholder="Email Address *"
+                                  required=""
+                                />
+                                <div className="submit clearfix">
+                                  <button type="submit">
+                                    <i className="ti-email"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -370,4 +358,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default Header3;

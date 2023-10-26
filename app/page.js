@@ -1,35 +1,31 @@
 "use client";
 
 import React from "react";
-import About from "../components/about/about";
-import Hero from "../components/hero";
-import Navbar from "../components/Navbar/Navbar";
-import ProjectSection from "../components/Projects";
-import ServiceSection from "../components/Services";
+import Navbar3 from "../components/Navbar3";
+import Hero5 from "../components/hero5";
+import ProjectSectionS4 from "../components/ProjectsS4";
+import ServiceSection3 from "../components/Services3";
 import Scrollbar from "../components/scrollbar/scrollbar";
+import Pricing from "../components/Pricing";
 import Logo from "/public/images/logo.svg";
-import abimg from "/public/images/about.jpg";
-import FunFact from "../components/FunFact/FunFact";
-import TeamSection from "../components/TeamSection";
-import Testimonial from "../components/Testimonial";
-import BlogSection from "../components/BlogSection/BlogSection";
+import About from "../components/about/about";
+import BlogSectionS2 from "../components/BlogSectionS2";
 import Footer from "../components/footer/Footer";
+import abimg from "/public/images/about6.png";
 
-const HomePage = (props) => {
+const HomePage5 = (props) => {
   return (
     <div>
-      <Navbar Logo={Logo} hclass={"header-style-1"} />
-      <Hero />
-      <About abimg={abimg} />
-      <ProjectSection />
-      <ServiceSection />
-      <FunFact />
-      <TeamSection />
-      <Testimonial />
-      <BlogSection />
-      <Footer />
+      <Navbar3 Logo={Logo} hclass={"wpo-header-style-3"} />
+      <Hero5 />
+      <About abClass={"wpo-about-area-s5"} abimg={abimg} />
+      <ServiceSection3 />
+      <ProjectSectionS4 />
+      <Pricing pClass={"wpo-pricing-section-s2"} />
+      <BlogSectionS2 />
+      <Footer ftClass={"wpo-site-footer-s2"} />
       <Scrollbar />
     </div>
   );
 };
-export default HomePage;
+export default HomePage5;
