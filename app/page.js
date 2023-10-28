@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Navbar3 from "../components/Navbar3";
+import Navbar from "../components/Navbar";
 import Hero5 from "../components/hero5";
 import ProjectSectionS4 from "../components/ProjectsS4";
 import ServiceSection3 from "../components/Services3";
@@ -13,10 +13,10 @@ import BlogSectionS2 from "../components/BlogSectionS2";
 import Footer from "../components/footer/Footer";
 import abimg from "/public/images/about6.png";
 
-const HomePage5 = (props) => {
+const HomePage = () => {
   return (
     <div>
-      <Navbar3 Logo={Logo} hclass={"wpo-header-style-3"} />
+      <Navbar Logo={Logo} hclass={"wpo-header-style-3"} />
       <Hero5 />
       <About abClass={"wpo-about-area-s5"} abimg={abimg} />
       <ServiceSection3 />
@@ -28,4 +28,4 @@ const HomePage5 = (props) => {
     </div>
   );
 };
-export default HomePage5;
+export default HomePage;

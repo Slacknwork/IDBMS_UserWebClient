@@ -1,9 +1,7 @@
-"use client";
-
 import React from "react";
-import Header from "../Header/Header";
+import Header3 from "../Header";
 
-export default function Navbar(props) {
+export default function Navbar2(props) {
   const [scroll, setScroll] = React.useState(0);
 
   const handleScroll = () => setScroll(document.documentElement.scrollTop);
@@ -17,11 +15,7 @@ export default function Navbar(props) {
 
   return (
     <div className={className}>
-      <Header
-        hclass={props.hclass}
-        Logo={props.Logo}
-        topbarNone={props.topbarNone}
-      />
+      <Header3 hclass={props.hclass} />
     </div>
   );
 }

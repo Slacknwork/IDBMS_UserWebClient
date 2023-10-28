@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import Logo from "/public/images/logo-2.svg";
 import Link from "next/link";
 import Image from "next/image";
-import MobileMenu from "../../components/MobileMenu/MobileMenu";
+import MobileMenu from "../MobileMenu/MobileMenu";
 import Projects from "../../api/project";
 
 const Header3 = (props) => {
   const [menuActive, setMenuState] = useState(false);
-
-  const ClickHandler = () => {
-    window.scrollTo(10, 0);
-  };
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -29,11 +25,7 @@ const Header3 = (props) => {
               </div>
               <div className="col-lg-2 col-md-6 col-6">
                 <div className="navbar-header">
-                  <Link
-                    onClick={ClickHandler}
-                    className="navbar-brand"
-                    href="/home"
-                  >
+                  <Link className="navbar-brand" href="/home">
                     <Image src={Logo} alt="" />
                   </Link>
                 </div>
@@ -48,139 +40,89 @@ const Header3 = (props) => {
                   </button>
                   <ul className="nav navbar-nav mb-2 mb-lg-0">
                     <li className="menu-item-has-children">
-                      <Link onClick={ClickHandler} href="/">
-                        Home
-                      </Link>
+                      <Link href="/">Home</Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link onClick={ClickHandler} href="/home">
-                            Home Style 1
-                          </Link>
+                          <Link href="/home">Home Style 1</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/home2">
-                            Home Style 2
-                          </Link>
+                          <Link href="/home2">Home Style 2</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/home3">
-                            Home Style 3
-                          </Link>
+                          <Link href="/home3">Home Style 3</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/home4">
-                            Home Style 4
-                          </Link>
+                          <Link href="/home4">Home Style 4</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/home5">
-                            Home Style 5
-                          </Link>
+                          <Link href="/home5">Home Style 5</Link>
                         </li>
                       </ul>
                     </li>
                     <li>
-                      <Link onClick={ClickHandler} href="/about">
-                        About
-                      </Link>
+                      <Link href="/about">About</Link>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link href="/service">Service</Link>
+                      <Link href="/interior">Interior</Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link onClick={ClickHandler} href="/service">
-                            Service
-                          </Link>
+                          <Link href="/service">Service</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/service-s2">
-                            Service S2
-                          </Link>
+                          <Link href="/service-s2">Service S2</Link>
                         </li>
                         <li>
-                          <Link
-                            onClick={ClickHandler}
-                            href="/service/Perfect-Planning"
-                          >
+                          <Link href="/service/Perfect-Planning">
                             Service Single
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link onClick={ClickHandler} href="/project">
-                        Project
-                      </Link>
+                      <Link href="/project">Project</Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link onClick={ClickHandler} href="/project">
-                            Project
-                          </Link>
+                          <Link href="/project">Project</Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/project-s2">
-                            Project S2
-                          </Link>
+                          <Link href="/project-s2">Project S2</Link>
                         </li>
                         <li>
-                          <Link
-                            onClick={ClickHandler}
-                            href="/project/Architecture-Design"
-                          >
+                          <Link href="/project/Architecture-Design">
                             Project Single
                           </Link>
                         </li>
                       </ul>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link onClick={ClickHandler} href="/blog">
-                        Blog
-                      </Link>
+                      <Link href="/blog">Blog</Link>
                       <ul className="sub-menu">
                         <li>
-                          <Link onClick={ClickHandler} href="/blog">
-                            Blog right sidebar
-                          </Link>
+                          <Link href="/blog">Blog right sidebar</Link>
                         </li>
                         <li>
-                          <Link
-                            onClick={ClickHandler}
-                            href="/blog-left-sidebar"
-                          >
+                          <Link href="/blog-left-sidebar">
                             Blog left sidebar
                           </Link>
                         </li>
                         <li>
-                          <Link onClick={ClickHandler} href="/blog-fullwidth">
-                            Blog fullwidth
-                          </Link>
+                          <Link href="/blog-fullwidth">Blog fullwidth</Link>
                         </li>
                         <li className="menu-item-has-children">
-                          <Link onClick={ClickHandler} href="/">
-                            Blog details
-                          </Link>
+                          <Link href="/">Blog details</Link>
                           <ul className="sub-menu">
                             <li>
-                              <Link
-                                onClick={ClickHandler}
-                                href="/blog-single/Best-Architecture-Design"
-                              >
+                              <Link href="/blog-single/Best-Architecture-Design">
                                 Blog details right sidebar
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                onClick={ClickHandler}
-                                href="/blog-single-left-sidebar/Best-Architecture-Design"
-                              >
+                              <Link href="/blog-single-left-sidebar/Best-Architecture-Design">
                                 Blog details left sidebar
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                onClick={ClickHandler}
-                                href="/blog-single-fullwidth/Best-Architecture-Design"
-                              >
+                              <Link href="/blog-single-fullwidth/Best-Architecture-Design">
                                 Blog details fullwidth
                               </Link>
                             </li>
@@ -188,73 +130,8 @@ const Header3 = (props) => {
                         </li>
                       </ul>
                     </li>
-                    <li className="menu-item-has-children">
-                      <Link onClick={ClickHandler} href="/">
-                        Pages
-                      </Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link onClick={ClickHandler} href="/shop">
-                            Shop
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={ClickHandler}
-                            href="/product-single/Black-Timber-Chairs"
-                          >
-                            Shop Single
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/cart">
-                            Cart
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/checkout">
-                            Checkout
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/pricing">
-                            Pricing
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            onClick={ClickHandler}
-                            href="/team-single/William-Watson"
-                          >
-                            Team Single
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/testimonial">
-                            Testimonial
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/404">
-                            404 Error
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/login">
-                            Login
-                          </Link>
-                        </li>
-                        <li>
-                          <Link onClick={ClickHandler} href="/register">
-                            Register
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
                     <li>
-                      <Link onClick={ClickHandler} href="/contact">
-                        Contact
-                      </Link>
+                      <Link href="/contact">Contact</Link>
                     </li>
                   </ul>
                 </div>
@@ -292,7 +169,6 @@ const Header3 = (props) => {
                               {Projects.slice(0, 6).map((project) => (
                                 <li key={project}>
                                   <Link
-                                    onClick={ClickHandler}
                                     href="/project/[slug]"
                                     as={`/project/${project.slug}`}
                                   >
