@@ -1,5 +1,5 @@
 import React from "react";
-import Header3 from "../Header";
+import Header from "../Header";
 
 export default function Navbar2(props) {
   const [scroll, setScroll] = React.useState(0);
@@ -15,7 +15,7 @@ export default function Navbar2(props) {
 
   return (
     <div className={className}>
-      <Header3 hclass={props.hclass} />
+      <Header hclass={props.hclass} />
     </div>
   );
 }

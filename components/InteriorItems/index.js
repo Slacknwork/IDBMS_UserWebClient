@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const ShopProduct = ({ products }) => {
+const InteriorItems = ({ products }) => {
   const ClickHandler = () => {
     window.scrollTo(10, 0);
   };
@@ -72,4 +72,4 @@ const ShopProduct = ({ products }) => {
   );
 };
 
-export default ShopProduct;
+export default InteriorItems;

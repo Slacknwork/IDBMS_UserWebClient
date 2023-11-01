@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "/public/images/logo-2.svg";
+import { HiUserCircle } from "react-icons/hi";
 import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
@@ -25,7 +26,7 @@ const Header3 = (props) => {
               </div>
               <div className="col-lg-2 col-md-6 col-6">
                 <div className="navbar-header">
-                  <Link className="navbar-brand" href="/home">
+                  <Link className="navbar-brand" href="/">
                     <Image src={Logo} alt="" />
                   </Link>
                 </div>
@@ -41,52 +42,13 @@ const Header3 = (props) => {
                   <ul className="nav navbar-nav mb-2 mb-lg-0">
                     <li className="menu-item-has-children">
                       <Link href="/">Home</Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link href="/home">Home Style 1</Link>
-                        </li>
-                        <li>
-                          <Link href="/home2">Home Style 2</Link>
-                        </li>
-                        <li>
-                          <Link href="/home3">Home Style 3</Link>
-                        </li>
-                        <li>
-                          <Link href="/home4">Home Style 4</Link>
-                        </li>
-                        <li>
-                          <Link href="/home5">Home Style 5</Link>
-                        </li>
-                      </ul>
                     </li>
                     <li>
                       <Link href="/about">About</Link>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link href="/interior">Interior</Link>
+                      <Link href="/project">Projects</Link>
                       <ul className="sub-menu">
-                        <li>
-                          <Link href="/service">Service</Link>
-                        </li>
-                        <li>
-                          <Link href="/service-s2">Service S2</Link>
-                        </li>
-                        <li>
-                          <Link href="/service/Perfect-Planning">
-                            Service Single
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="menu-item-has-children">
-                      <Link href="/project">Project</Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link href="/project">Project</Link>
-                        </li>
-                        <li>
-                          <Link href="/project-s2">Project S2</Link>
-                        </li>
                         <li>
                           <Link href="/project/Architecture-Design">
                             Project Single
@@ -95,43 +57,7 @@ const Header3 = (props) => {
                       </ul>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link href="/blog">Blog</Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link href="/blog">Blog right sidebar</Link>
-                        </li>
-                        <li>
-                          <Link href="/blog-left-sidebar">
-                            Blog left sidebar
-                          </Link>
-                        </li>
-                        <li>
-                          <Link href="/blog-fullwidth">Blog fullwidth</Link>
-                        </li>
-                        <li className="menu-item-has-children">
-                          <Link href="/">Blog details</Link>
-                          <ul className="sub-menu">
-                            <li>
-                              <Link href="/blog-single/Best-Architecture-Design">
-                                Blog details right sidebar
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href="/blog-single-left-sidebar/Best-Architecture-Design">
-                                Blog details left sidebar
-                              </Link>
-                            </li>
-                            <li>
-                              <Link href="/blog-single-fullwidth/Best-Architecture-Design">
-                                Blog details fullwidth
-                              </Link>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <Link href="/contact">Contact</Link>
+                      <Link href="/interior">Interior</Link>
                     </li>
                   </ul>
                 </div>
@@ -140,14 +66,12 @@ const Header3 = (props) => {
                 <div className="header-right">
                   <div className="header-right-menu-wrapper">
                     <div className="header-right-menu">
-                      <div
-                        className="right-menu-toggle-btn"
+                      <HiUserCircle
+                        size={40}
+                        title="User"
+                        style={{ cursor: "pointer", color: "white" }}
                         onClick={() => setMenuState(!menuActive)}
-                      >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
+                      ></HiUserCircle>
                       <div
                         className={`header-right-menu-wrap ${
                           menuActive ? "right-menu-active" : ""
@@ -159,12 +83,10 @@ const Header3 = (props) => {
                         >
                           <i className="ti-close"></i>
                         </button>
-                        <div className="logo">
-                          <Image src={Logo} alt="" />
-                        </div>
+                        <h3 className="text-white mb-4">username</h3>
                         <div className="header-right-sec">
                           <div className="project-widget widget">
-                            <h3>Our Latest Projects</h3>
+                            <h4 className="text-white">Our Latest Projects</h4>
                             <ul>
                               {Projects.slice(0, 6).map((project) => (
                                 <li key={project}>
