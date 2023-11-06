@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Projects from "../../api/project";
+import { useSelector } from "react-redux";
 
 const Header3 = (props) => {
-  const [menuActive, setMenuState] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
+
+  const user = useSelector((state) => state.user);
 
   const openMenu = (state) => {
-    setMenuState(state);
+    setMenuActive(state);
   };
 
   const SubmitHandler = (e) => {
@@ -87,7 +90,7 @@ const Header3 = (props) => {
                         >
                           <i className="ti-close"></i>
                         </button>
-                        <h3 className="text-white mb-4">username</h3>
+                        <h3 className="text-white mb-4">{user.username}</h3>
                         <div className="header-right-sec">
                           <div className="project-widget widget">
                             <h4 className="text-white">Our Latest Projects</h4>
