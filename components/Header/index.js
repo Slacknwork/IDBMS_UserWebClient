@@ -9,6 +9,10 @@ import Projects from "../../api/project";
 const Header3 = (props) => {
   const [menuActive, setMenuState] = useState(false);
 
+  const openMenu = (state) => {
+    setMenuState(state);
+  };
+
   const SubmitHandler = (e) => {
     e.preventDefault();
   };
@@ -70,7 +74,7 @@ const Header3 = (props) => {
                         size={40}
                         title="User"
                         style={{ cursor: "pointer", color: "white" }}
-                        onClick={() => setMenuState(!menuActive)}
+                        onClick={() => openMenu(!menuActive)}
                       ></HiUserCircle>
                       <div
                         className={`header-right-menu-wrap ${
@@ -78,7 +82,7 @@ const Header3 = (props) => {
                         }`}
                       >
                         <button
-                          onClick={() => setMenuState(!menuActive)}
+                          onClick={() => openMenu(!menuActive)}
                           className="right-menu-close"
                         >
                           <i className="ti-close"></i>
