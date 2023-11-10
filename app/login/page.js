@@ -10,9 +10,15 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserLoginState } from "../../store/reducers/user";
 
 const LoginPage = (props) => {
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
 
   const [value, setValue] = useState({
     email: "user@gmail.com",
@@ -37,6 +43,7 @@ const LoginPage = (props) => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    dispatch(setUserLoginState(true));
     if (validator.allValid()) {
       setValue({
         email: "",
