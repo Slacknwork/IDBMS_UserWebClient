@@ -6,14 +6,17 @@ import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Projects from "../../api/project";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
-const Header3 = (props) => {
+const Header = (props) => {
+  const router = useRouter();
+
   const [menuActive, setMenuActive] = useState(false);
 
   const user = useSelector((state) => state.user);
 
   const openMenu = (state) => {
-    setMenuActive(state);
+    user.loggedIn ? setMenuActive(state) : router.push("/login");
   };
 
   const SubmitHandler = (e) => {
@@ -123,7 +126,7 @@ const Header3 = (props) => {
                                   (123) 123 456 789 <br />+ 8 (123) 123 456 789
                                 </li>
                                 <li>
-                                  <i className="fi flaticon-email"></i>
+                                  <i className="fi flaticon-email"></i>{" "}
                                   arkio@gmail.com
                                 </li>
                               </ul>
@@ -163,4 +166,4 @@ const Header3 = (props) => {
   );
 };
 
-export default Header3;
+export default Header;
