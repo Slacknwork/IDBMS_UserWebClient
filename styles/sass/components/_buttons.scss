@@ -1,12 +1,16 @@
 .theme-btn,
 .theme-btn-s3,
 .theme-btn-s4 {
+	border: 0;
+	border-radius: 0.25em;
 	background: $theme-primary-color;
 	color: $white;
 	display: inline-block;
 	font-weight: 600;
-	padding: 15px 45px;
-	border: 0;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	width: 100%;
+	text-align: center;
 	text-transform: capitalize;
 	-webkit-backface-visibility: hidden;
 	z-index: 1;

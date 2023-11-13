@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function ProjectLayout(props) {
-  return (
-    <ClientLayout>
-      {props.landing}
-      {props.list}
-    </ClientLayout>
-  );
+  return <ClientLayout>{props.list}</ClientLayout>;
 }

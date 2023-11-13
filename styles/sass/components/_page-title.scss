@@ -1,7 +1,7 @@
 // page-title
 .wpo-page-title{
     background: url(/images/page-title.jpg) no-repeat center top / cover;
-    min-height: 450px;
+    min-height: 275px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -43,7 +43,7 @@
 
 		ol{
 			padding-left: 0;
-			margin-bottom: 0;
+			margin-bottom: -20px;
 			li{
 				display: inline-block;
 				padding: 0px 8px;
