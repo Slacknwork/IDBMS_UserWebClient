@@ -98,7 +98,7 @@ const ProjectList = () => {
           style={{ marginTop: "2rem", marginBottom: "2rem" }}
         >
           <Nav tabs>
-            <NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
               <NavLink
                 className={classnames({ active: activeTab === "1" })}
                 onClick={() => {
@@ -108,7 +108,7 @@ const ProjectList = () => {
                 All
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
               <NavLink
                 className={classnames({ active: activeTab === "2" })}
                 onClick={() => {
@@ -118,7 +118,7 @@ const ProjectList = () => {
                 Decor
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
               <NavLink
                 className={classnames({ active: activeTab === "3" })}
                 onClick={() => {

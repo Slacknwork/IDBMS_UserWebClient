@@ -58,13 +58,6 @@ const Header = (props) => {
                     </li>
                     <li className="menu-item-has-children">
                       <Link href="/project">Projects</Link>
-                      <ul className="sub-menu">
-                        <li>
-                          <Link href="/project/Architecture-Design">
-                            Project Single
-                          </Link>
-                        </li>
-                      </ul>
                     </li>
                     <li className="menu-item-has-children">
                       <Link href="/interior">Interior</Link>
