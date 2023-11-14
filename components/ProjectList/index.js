@@ -85,8 +85,8 @@ const ProjectList = () => {
               </div>
             </div>
             <div className="col col-3 m-auto text-center">
-              <Link href="/project" className="theme-btn">
-                New Project
+              <Link href="/project/booking" className="theme-btn" replace>
+                Book Project
               </Link>
             </div>
           </div>

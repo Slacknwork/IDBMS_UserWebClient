@@ -13,4 +13,8 @@ const ProjectListPage = () => {
   );
 };
 
-export default ProjectListPage;
+const ProjectPage = () => {
+  return <ProjectListPage></ProjectListPage>;
+};
+
+export default ProjectPage;
