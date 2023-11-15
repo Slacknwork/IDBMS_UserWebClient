@@ -18,34 +18,37 @@ const SubmitHandler = (e) => {
 
 const ProjectItem = (projectDetails) => {
   return (
-    <div className="row align-items-center shadow m-4">
-      <div className="col-lg-4">
-        <div className="shop-img">
-          <img src={projectDetails.shopImg} alt="" />
+    <div className="container">
+      <div className="row shadow p-4 my-3 mx-2" style={{ height: "28rem" }}>
+        <div className="col-lg-4 my-auto">
+          <div className="shop-img">
+            <img
+              src={projectDetails.shopImg}
+              style={{ width: "24rem", height: "24rem" }}
+              alt=""
+            />
+          </div>
         </div>
-      </div>
-      <div className="col-lg-8">
-        <div className="shop-info">
-          <h3>{projectDetails.title}</h3>
-          <span className="review_count">( 3 Customer Reviews )</span>
-          <div className="clearfix"></div>
-          <span className="price-num">${projectDetails.price}</span>
-          <div className="des">
-            <p>
-              Samsa woke from troubled dreams, he found himself transformed in
-              his bed into a horrible vermin. He lay on his armour-like back,
-              and if he lifted his head a little he could see his brown belly,
-              slightly domed and divided by arches into stiff sections. The
-              bedding was hardly able to cover it and seemed ready to slide off
-              any moment. His many legs, pitifully thin compared with the size
-              of the rest of him.
-            </p>
-            <p>
-              He lay on his armour-like back, and if he lifted his head a little
-              he could see his brown belly, slightly domed and divided by arches
-              into stiff sections. The bedding was hardly able to cover it and
-              seem
-            </p>
+        <div className="col-lg-8 d-flex align-items-start justify-content-between">
+          <div className="shop-info my-4">
+            <h3 className="">Project Title</h3>
+            <div className="des">
+              <p style={{ textAlign: "justify" }}>Project Description</p>
+              <p>Project Total Price</p>
+              <p>Project Stage</p>
+            </div>
+          </div>
+          <div className="mt-auto d-flex gap-3">
+            <div>
+              <Link href="/project/booking" className="theme-btn px-4" replace>
+                Details
+              </Link>
+            </div>
+            <div>
+              <Link href="/project/booking" className="theme-btn px-4" replace>
+                Payment
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -131,15 +134,15 @@ const ProjectList = () => {
           </Nav>
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
-              <Row>
-                <Col sm="12">
-                  {api().map((product) => (
+              <Row className="my-3">
+                {api().map((product) => (
+                  <Col sm="12" key={product}>
                     <ProjectItem
                       projectDetails={product}
                       key={product}
                     ></ProjectItem>
-                  ))}
-                </Col>
+                  </Col>
+                ))}
                 <Col sm="12">
                   <div className="pagination-wrapper pagination-wrapper-center">
                     <ul className="pg-pagination">

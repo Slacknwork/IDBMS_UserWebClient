@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import PageTitle from "/components/PageTitle";
 import DecorProjectBooking from "/components/DecorProjectBooking";
 
-const ProjectBookingPage = () => {
+const DecorProjectBookingPage = () => {
   return (
     <Fragment>
       <PageTitle
@@ -16,4 +16,4 @@ const ProjectBookingPage = () => {
   );
 };
 
-export default ProjectBookingPage;
+export default DecorProjectBookingPage;
