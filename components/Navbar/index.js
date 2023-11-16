@@ -11,10 +11,10 @@ export default function Navbar2(props) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const className = scroll > 80 ? "fixed-navbar active" : "fixed-navbar";
+  // const className = scroll > 80 ? "fixed-navbar" : "fixed-navbar";
 
   return (
-    <div className={className}>
+    <div className="fixed-navbar">
       <Header hclass={props.hclass} />
     </div>
   );
