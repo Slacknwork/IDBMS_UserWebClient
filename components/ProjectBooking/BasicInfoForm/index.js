@@ -5,13 +5,16 @@ const BasicInfoForm = () => {
     <div className="wpo-contact-form-area pb-0">
       <form className="contact-validation-active">
         <div className="row">
-          <div className="col col-lg-6 col-12">
+          <div className="col col-12">
+            <h3 className="mb-3">Basic Information</h3>
+          </div>
+          <div className="col col-lg-4 col-12">
             <div className="form-field">
               <label className="mb-1">Project Name</label>
               <input type="text" name="name" placeholder="Your Name" />
             </div>
           </div>
-          <div className="col col-lg-6 col-12">
+          <div className="col col-lg-4 col-12">
             <div className="form-field">
               <label className="mb-1">Project Category</label>
               <select type="text" name="subject">
@@ -25,7 +28,13 @@ const BasicInfoForm = () => {
               </select>
             </div>
           </div>
-          <div className="col col-lg-12 col-12">
+          <div className="col col-lg-4 col-12">
+            <div className="form-field">
+              <label className="mb-1">Use purpose</label>
+              <input type="text" name="name" placeholder="Your Name" />
+            </div>
+          </div>
+          <div className="col col-lg-6 col-12">
             <div className="form-field">
               <label className="mb-1">Project Description</label>
               <textarea
@@ -35,7 +44,7 @@ const BasicInfoForm = () => {
               ></textarea>
             </div>
           </div>
-          <div className="col col-lg-12 col-12">
+          <div className="col col-lg-6 col-12">
             <div className="form-field">
               <label className="mb-1">Project Note</label>
               <textarea

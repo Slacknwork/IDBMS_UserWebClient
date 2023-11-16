@@ -22,6 +22,13 @@ const ProjectBooking = ({ category }) => {
     >
       <div className="container">
         {formElements[activeTab]}
+        <div
+          className="d-flex justify-content-end mx-4 mt-4"
+          style={{ gap: "3rem" }}
+        >
+          <h4 className="my-auto">Area: 5000m2</h4>
+          <h4 className="my-auto">Total price: 50,000,000 VND</h4>
+        </div>
         <div className="d-flex justify-content-between">
           <div className="d-flex m-4">
             {activeTab > 0 ? (
