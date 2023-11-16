@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+import url from "/constants/url";
+
 const ProjectTypeSelect = (props) => {
   return (
     <div className={`wpo-service-area section-padding ${props.sClass}`}>
@@ -11,7 +13,9 @@ const ProjectTypeSelect = (props) => {
               <i></i>
               <h2>Decor Project</h2>
               <p>Book Architects to make an Interior Decor Project</p>
-              <Link href="/project/booking/decor">Book</Link>
+              <Link href={"/project/booking/decor" + url.id.BOOKING_SECTION}>
+                Book
+              </Link>
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-12">
@@ -19,7 +23,11 @@ const ProjectTypeSelect = (props) => {
               <i></i>
               <h2>Construction Project</h2>
               <p>Book IDT to build on an existing Design</p>
-              <Link href="/project/booking/construction">Book</Link>
+              <Link
+                href={"/project/booking/construction" + url.id.BOOKING_SECTION}
+              >
+                Book
+              </Link>
             </div>
           </div>
         </div>

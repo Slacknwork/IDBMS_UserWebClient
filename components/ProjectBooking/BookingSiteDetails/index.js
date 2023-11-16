@@ -32,7 +32,7 @@ const SiteItem = () => {
   );
 };
 
-const SiteForm = () => {
+const BookingSiteDetails = () => {
   return (
     <div className="wpo-contact-form-area pb-0">
       <form className="contact-validation-active">
@@ -62,4 +62,4 @@ const SiteForm = () => {
   );
 };
 
-export default SiteForm;
+export default BookingSiteDetails;
