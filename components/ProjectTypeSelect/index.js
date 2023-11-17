@@ -9,7 +9,10 @@ const ProjectTypeSelect = (props) => {
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6 col-12">
-            <div className="wpo-service-item">
+            <div
+              className="wpo-service-item rounded-2"
+              style={{ backgroundColor: "white" }}
+            >
               <i></i>
               <h2>Decor Project</h2>
               <p>Book Architects to make an Interior Decor Project</p>
@@ -19,7 +22,10 @@ const ProjectTypeSelect = (props) => {
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-12">
-            <div className="wpo-service-item">
+            <div
+              className="wpo-service-item rounded-2"
+              style={{ backgroundColor: "white" }}
+            >
               <i></i>
               <h2>Construction Project</h2>
               <p>Book IDT to build on an existing Design</p>

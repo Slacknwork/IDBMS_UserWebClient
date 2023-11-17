@@ -10,8 +10,10 @@ import BookingSiteList from "/components/ProjectBooking/BookingSiteList";
 import Navigation from "/components/ProjectBooking/Navigation";
 
 export default function ProjectBookingSite({ params }) {
-  const backUrl = `${url.routes.PROJECT}${url.routes.BOOKING}/${params.type}${url.id.BOOKING_SECTION}`;
-  const nextUrl = `${url.routes.PROJECT}${url.routes.BOOKING}/${params.type}${url.routes.SUBMIT}${url.id.BOOKING_SECTION}`;
+  const BASE_URL = `${url.routes.PROJECT}${url.routes.BOOKING}/${params.type}`;
+
+  const BACK_URL = `${BASE_URL}${url.id.BOOKING_SECTION}`;
+  const NEXT_URL = `${BASE_URL}${url.routes.SUBMIT}${url.id.BOOKING_SECTION}`;
 
   return (
     <Fragment>
@@ -19,7 +21,7 @@ export default function ProjectBookingSite({ params }) {
       <ProjectBooking>
         <BookingSiteList projectType={params.type} />
       </ProjectBooking>
-      <Navigation backUrl={backUrl} nextUrl={nextUrl}></Navigation>
+      <Navigation backUrl={BACK_URL} nextUrl={NEXT_URL}></Navigation>
     </Fragment>
   );
 }

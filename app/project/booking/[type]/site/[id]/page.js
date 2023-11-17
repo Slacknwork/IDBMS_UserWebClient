@@ -2,15 +2,14 @@
 
 import React, { Fragment } from "react";
 
-import url from "/constants/url";
-
 import PageTitle from "/components/PageTitle";
 import ProjectBooking from "/components/ProjectBooking";
 import Navigation from "/components/ProjectBooking/Navigation";
 import BookingSiteDetails from "/components/ProjectBooking/BookingSiteDetails";
+import url from "/constants/url";
 
 export default function ProjectBookingSite({ params }) {
-  const backUrl = `${url.routes.PROJECT}${url.routes.BOOKING}/${params.type}${url.routes.SITE}${url.id.BOOKING_SECTION}`;
+  const BACK_URL = `${url.routes.PROJECT}${url.routes.BOOKING}/${params.type}${url.routes.SITE}${url.id.BOOKING_SECTION}`;
 
   return (
     <Fragment>
@@ -18,7 +17,7 @@ export default function ProjectBookingSite({ params }) {
       <ProjectBooking>
         <BookingSiteDetails />
       </ProjectBooking>
-      <Navigation backUrl={backUrl}></Navigation>
+      <Navigation backUrl={BACK_URL}></Navigation>
     </Fragment>
   );
 }
