@@ -1,5 +1,7 @@
 import React from "react";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+import Link from "next/link";
+
+import url from "/constants/url";
 
 const Scrollbar = () => {
   return (
@@ -7,9 +9,9 @@ const Scrollbar = () => {
       <div className="header-menu">
         <ul className="smothscroll">
           <li>
-            <AnchorLink href="#__next">
+            <Link href={url.id.NAVBAR}>
               <i className="ti-arrow-up"></i>
-            </AnchorLink>
+            </Link>
           </li>
         </ul>
       </div>

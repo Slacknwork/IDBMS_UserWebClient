@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header";
 
-export default function Navbar2(props) {
+export default function Navbar(props) {
   const [scroll, setScroll] = React.useState(0);
 
   const handleScroll = () => setScroll(document.documentElement.scrollTop);
@@ -14,7 +14,7 @@ export default function Navbar2(props) {
   // const className = scroll > 80 ? "fixed-navbar" : "fixed-navbar";
 
   return (
-    <div className="fixed-navbar">
+    <div id="#navbar" className="fixed-navbar">
       <Header hclass={props.hclass} />
     </div>
   );

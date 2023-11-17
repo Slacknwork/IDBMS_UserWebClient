@@ -1,7 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-const SiteItem = () => {
+import url from "/constants/url";
+
+const SiteItem = ({ projectType }) => {
+  const siteDetailsUrl =
+    "/project/booking/" + projectType + "/site/1" + url.id.BOOKING_SECTION;
+
   return (
     <div className="container">
       <div className="row shadow p-4 my-4 mx-1" style={{ height: "18rem" }}>
@@ -21,7 +26,7 @@ const SiteItem = () => {
           </div>
           <div className="mt-auto d-flex gap-3">
             <div>
-              <Link href="/project/booking" className="theme-btn px-4" replace>
+              <Link href={siteDetailsUrl} className="theme-btn px-4" replace>
                 Details
               </Link>
             </div>
@@ -32,7 +37,7 @@ const SiteItem = () => {
   );
 };
 
-const BookingSiteList = () => {
+const BookingSiteList = ({ projectType }) => {
   return (
     <div className="wpo-contact-form-area pb-0">
       <form className="contact-validation-active">
@@ -51,10 +56,10 @@ const BookingSiteList = () => {
               overflowY: "scroll",
             }}
           >
-            <SiteItem />
-            <SiteItem />
-            <SiteItem />
-            <SiteItem />
+            <SiteItem projectType={projectType} />
+            <SiteItem projectType={projectType} />
+            <SiteItem projectType={projectType} />
+            <SiteItem projectType={projectType} />
           </div>
         </div>
       </form>
