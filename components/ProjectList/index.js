@@ -19,7 +19,10 @@ const SubmitHandler = (e) => {
 const ProjectItem = (projectDetails) => {
   return (
     <div className="container">
-      <div className="row shadow p-4 my-3 mx-2" style={{ height: "28rem" }}>
+      <div
+        className="row shadow p-4 my-3 mx-2"
+        style={{ height: "28rem", backgroundColor: "white" }}
+      >
         <div className="col-lg-4 my-auto">
           <div className="shop-img">
             <img

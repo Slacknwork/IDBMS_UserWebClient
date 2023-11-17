@@ -10,7 +10,7 @@ export default function ClientLayout({ children }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {children}
+        <div style={{ backgroundColor: "#f0f0f0" }}>{children}</div>
         <ToastContainer />
       </PersistGate>
     </Provider>

@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function ProjectLayout(props) {
-  return <div>{props.children}</div>;
+  return <div style={{ backgroundColor: "#f0f0f0" }}>{props.children}</div>;
 }

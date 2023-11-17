@@ -1,5 +1,6 @@
 import React from "react";
-import Link from "next/link";
+
+import { FaTrash } from "react-icons/fa";
 
 const SiteDetailsForm = () => {
   return (
@@ -35,33 +36,93 @@ const SiteDetailsForm = () => {
     </div>
   );
 };
-const RoomItem = () => {
+
+const FloorTableItem = () => {
   return (
-    <div className="container">
-      <div className="row shadow p-4 my-4 mx-1" style={{ height: "18rem" }}>
-        <div className="col-4 col-lg-3 my-auto">
-          <div className="shop-img">
-            <div style={{ width: "14rem", height: "14rem" }} />
-          </div>
+    <tr>
+      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
+        1
+      </th>
+      <td className="align-middle">Floor Name</td>
+      <td className="align-middle">1000m2</td>
+      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle m-0">
+        <div className="d-flex">
+          <button
+            type="button"
+            className="theme-btn m-1"
+            style={{ width: "6rem", zIndex: 0 }}
+          >
+            Details
+          </button>
+          <button
+            type="button"
+            className="theme-btn m-1"
+            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
+          >
+            <FaTrash />
+          </button>
         </div>
-        <div className="col-8 col-lg-9 d-flex align-items-start justify-content-between">
-          <div className="shop-info my-auto">
-            <h3 className="">Site name</h3>
-            <div className="des">
-              <p>Address: 420 Something Street</p>
-              <p>Total area: 1000m2</p>
-              <p>Total price: 10,000,000 VND</p>
-            </div>
-          </div>
-          <div className="mt-auto d-flex gap-3">
-            <div>
-              <Link href="/project/booking" className="theme-btn px-4" replace>
-                Details
-              </Link>
-            </div>
-          </div>
+      </td>
+      <td className="align-middle m-0">
+        <div className="my-auto m-1">
+          <button
+            type="button"
+            className="theme-btn p-0 my-1"
+            style={{ zIndex: 0 }}
+          >
+            Up
+          </button>
+          <button
+            type="button"
+            className="theme-btn p-0 my-1"
+            style={{ zIndex: 0 }}
+          >
+            Down
+          </button>
         </div>
-      </div>
+      </td>
+    </tr>
+  );
+};
+
+const FloorTable = () => {
+  return (
+    <div
+      style={{
+        height: "25rem",
+        overflowY: "scroll",
+      }}
+    >
+      <table className="table table-striped table-hover">
+        <thead
+          className="shadow-sm"
+          style={{ position: "sticky", top: 0, zIndex: 1 }}
+        >
+          <tr>
+            <th scope="col" style={{ width: "6rem" }}>
+              Floor No.
+            </th>
+            <th scope="col">Name</th>
+            <th scope="col">Total Area</th>
+            <th scope="col">Total Price</th>
+            <th scope="col" style={{ width: "15rem" }}>
+              Actions
+            </th>
+            <th scope="col" style={{ width: "6rem" }}>
+              Move
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -72,24 +133,18 @@ const BookingSiteDetails = () => {
       <form className="contact-validation-active">
         <SiteDetailsForm></SiteDetailsForm>
         <div className="row">
-          <div className="col col-lg-12 col-12 mb-4">
+          <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Rooms</h3>
+              <h3 className="my-auto">Floors</h3>
               <div className="d-flex">
                 <button className="theme-btn-s4 px-4 py-2">Add</button>
               </div>
             </div>
           </div>
-          <div
-            style={{
-              height: "30rem",
-              overflowY: "scroll",
-            }}
-          >
-            <RoomItem />
-            <RoomItem />
-            <RoomItem />
-            <RoomItem />
+        </div>
+        <div className="row">
+          <div className="col col-lg-12 col-12">
+            <FloorTable></FloorTable>
           </div>
         </div>
       </form>
