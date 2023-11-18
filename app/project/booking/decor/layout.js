@@ -1,3 +1,5 @@
+import ClientLayout from "./ClientLayout";
+
 export const metadata = {
   title: {
     default: "IDT - Booking",
@@ -5,5 +7,5 @@ export const metadata = {
 };
 
 export default function ProjectLayout(props) {
-  return <div style={{ backgroundColor: "#f0f0f0" }}>{props.children}</div>;
+  return <ClientLayout>{props.children}</ClientLayout>;
 }

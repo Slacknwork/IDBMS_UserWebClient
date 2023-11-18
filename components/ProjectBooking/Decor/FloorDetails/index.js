@@ -2,18 +2,18 @@ import React from "react";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 
-import url from "/constants/url";
+import urls from "/constants/urls";
 
-const SiteDetailsForm = () => {
+const FloorDetailsForm = () => {
   return (
     <div className="row">
       <div className="col col-lg-4 col-12 my-auto">
-        <h3>Site Information</h3>
-        <p>A site is required to have at least 1 floor</p>
+        <h3>Floor Information</h3>
+        <p>A floor is required to have at least 1 room</p>
       </div>
       <div className="col col-lg-4 col-12">
         <div className="form-field">
-          <label className="mb-1">Site Name</label>
+          <label className="mb-1">Floor Name</label>
           <input type="text" name="name" placeholder="Your Name" />
         </div>
       </div>
@@ -25,7 +25,7 @@ const SiteDetailsForm = () => {
       </div>
       <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <label className="mb-1">Site Description</label>
+          <label className="mb-1">Floor Description</label>
           <textarea type="text" name="message" placeholder="Message"></textarea>
         </div>
       </div>
@@ -33,15 +33,20 @@ const SiteDetailsForm = () => {
   );
 };
 
-const FloorTableItem = () => {
-  const RoomHref = `1${url.routes.FLOOR}/1${url.id.BOOKING_SECTION}`;
+const RoomTableItem = () => {
+  const RoomHref =
+    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
+      1,
+      1,
+      1
+    );
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
         1
       </th>
-      <td className="align-middle">Floor Name</td>
+      <td className="align-middle">Room Name</td>
       <td className="align-middle">1000m2</td>
       <td className="align-middle">1,000,000 VND</td>
       <td className="align-middle m-0">
@@ -62,29 +67,11 @@ const FloorTableItem = () => {
           </button>
         </div>
       </td>
-      <td className="align-middle m-0">
-        <div className="my-auto m-1">
-          <button
-            type="button"
-            className="theme-btn p-0 my-1"
-            style={{ zIndex: 0 }}
-          >
-            Up
-          </button>
-          <button
-            type="button"
-            className="theme-btn p-0 my-1"
-            style={{ zIndex: 0 }}
-          >
-            Down
-          </button>
-        </div>
-      </td>
     </tr>
   );
 };
 
-const FloorTable = () => {
+const RoomTable = () => {
   return (
     <div
       style={{
@@ -99,26 +86,21 @@ const FloorTable = () => {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Floor No.
+              Room No.
             </th>
             <th scope="col">Name</th>
-            <th scope="col">Total Area</th>
-            <th scope="col">Total Price</th>
+            <th scope="col">Area</th>
+            <th scope="col">Price</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
-            </th>
-            <th scope="col" style={{ width: "6rem" }}>
-              Move
             </th>
           </tr>
         </thead>
         <tbody>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
+          <RoomTableItem></RoomTableItem>
+          <RoomTableItem></RoomTableItem>
+          <RoomTableItem></RoomTableItem>
+          <RoomTableItem></RoomTableItem>
         </tbody>
       </table>
     </div>
@@ -129,11 +111,11 @@ const BookingSiteDetails = () => {
   return (
     <div className="wpo-contact-form-area pb-0">
       <form className="contact-validation-active">
-        <SiteDetailsForm></SiteDetailsForm>
+        <FloorDetailsForm></FloorDetailsForm>
         <div className="row">
           <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Floors</h3>
+              <h3 className="my-auto">Rooms</h3>
               <div className="d-flex">
                 <button className="theme-btn-s4 px-4 py-2">Add</button>
               </div>
@@ -142,7 +124,7 @@ const BookingSiteDetails = () => {
         </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <FloorTable></FloorTable>
+            <RoomTable></RoomTable>
           </div>
         </div>
       </form>

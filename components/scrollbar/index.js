@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import url from "/constants/url";
+import urls from "/constants/urls";
 
 const Scrollbar = () => {
   return (
@@ -9,7 +9,7 @@ const Scrollbar = () => {
       <div className="header-menu">
         <ul className="smothscroll">
           <li>
-            <Link href={url.id.NAVBAR}>
+            <Link href={urls.id.NAVBAR}>
               <i className="ti-arrow-up"></i>
             </Link>
           </li>

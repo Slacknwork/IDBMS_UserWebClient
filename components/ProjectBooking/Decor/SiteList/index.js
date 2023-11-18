@@ -1,11 +1,10 @@
 import React from "react";
 import Link from "next/link";
 
-import url from "/constants/url";
+import urls from "/constants/urls";
 
-const SiteItem = ({ projectType }) => {
-  const siteDetailsUrl =
-    "/project/booking/" + projectType + "/site/1" + url.id.BOOKING_SECTION;
+const SiteItem = () => {
+  const siteDetailsUrl = urls.project.booking.decor.site.siteNo.getUri(1);
 
   return (
     <div className="container">
@@ -37,7 +36,7 @@ const SiteItem = ({ projectType }) => {
   );
 };
 
-const BookingSiteList = ({ projectType }) => {
+export default function SiteLis({ projectType }) {
   return (
     <div className="wpo-contact-form-area pb-0">
       <form className="contact-validation-active">
@@ -65,6 +64,4 @@ const BookingSiteList = ({ projectType }) => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteList;
+}
