@@ -11,6 +11,8 @@ export default {
       CONSTRUCTION: "/construction",
     },
     SITE: "/site",
+    FLOOR: "/floor",
+    ROOM: "/room",
     SUBMIT: "/submit",
   },
 };

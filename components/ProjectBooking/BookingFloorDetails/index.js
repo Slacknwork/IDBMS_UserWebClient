@@ -1,6 +1,8 @@
 import React from "react";
-
+import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
+
+import url from "/constants/url";
 
 const FloorDetailsForm = () => {
   return (
@@ -32,6 +34,8 @@ const FloorDetailsForm = () => {
 };
 
 const RoomTableItem = () => {
+  const RoomHref = `1${url.routes.ROOM}/1${url.id.BOOKING_SECTION}`;
+
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
@@ -42,13 +46,13 @@ const RoomTableItem = () => {
       <td className="align-middle">1,000,000 VND</td>
       <td className="align-middle m-0">
         <div className="d-flex">
-          <button
-            type="button"
+          <Link
+            href={RoomHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
             Details
-          </button>
+          </Link>
           <button
             type="button"
             className="theme-btn m-1"
