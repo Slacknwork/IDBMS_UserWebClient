@@ -1,11 +1,11 @@
-import React from "react";
-
 import { FaTrash } from "react-icons/fa";
+
+import SuggestionModal from "./SuggestionModal";
 
 const FloorDetailsForm = () => {
   return (
     <div className="row">
-      <div className="col col-lg-3 col-12 my-auto">
+      <div className="col col-lg-3 col-12">
         <h3>Room Information</h3>
       </div>
       <div className="col col-lg-3 col-12">
@@ -111,9 +111,9 @@ const RoomTable = () => {
   );
 };
 
-const BookingSiteDetails = () => {
+export default function RoomDetails() {
   return (
-    <div className="wpo-contact-form-area pb-0">
+    <div className="pb-0">
       <form className="contact-validation-active">
         <FloorDetailsForm></FloorDetailsForm>
         <div className="row">
@@ -121,7 +121,7 @@ const BookingSiteDetails = () => {
             <div className="d-flex justify-content-between">
               <h3 className="my-auto">Appliances</h3>
               <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
+                <SuggestionModal></SuggestionModal>
               </div>
             </div>
           </div>
@@ -134,6 +134,4 @@ const BookingSiteDetails = () => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteDetails;
+}

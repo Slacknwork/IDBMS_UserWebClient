@@ -38,7 +38,7 @@ const SiteItem = () => {
 
 export default function SiteLis({ projectType }) {
   return (
-    <div className="wpo-contact-form-area pb-0">
+    <div className="pb-0">
       <form className="contact-validation-active">
         <div className="row">
           <div className="col col-lg-12 col-12 mb-4">
