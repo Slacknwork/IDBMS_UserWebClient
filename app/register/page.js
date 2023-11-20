@@ -8,20 +8,33 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { FormControl, FormControlLabel, InputLabel, Radio, RadioGroup } from "@mui/material";
+import { Select } from "flowbite-react";
+import { MdOutlineRadioButtonChecked } from "react-icons/md";
 
 const SignUpPage = (props) => {
   const router = useRouter();
 
   const [value, setValue] = useState({
     email: "",
-    full_name: "",
+    name: "",
     password: "",
     confirm_password: "",
+    phone: "",
+    address: "",
+    language: "Vietnamese",
   });
 
   const changeHandler = (e) => {
-    setValue({ ...value, [e.target.name]: e.target.value });
-    validator.showMessages();
+    // setValue({ ...value, [e.target.name]: e.target.value });
+    // validator.showMessages();
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    setValue({ ...value, [fieldName]: fieldValue });
+
+    // Validate the specific field
+    validator.showMessageFor(fieldName);
   };
 
   const [validator] = React.useState(
@@ -29,6 +42,16 @@ const SignUpPage = (props) => {
       className: "errorMessage",
     })
   );
+
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const confirmMessage = () => {
+    if (value.password !== value.confirm_password) {
+      setConfirmPasswordError("Passwords must match!");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -58,10 +81,10 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Full Name"
-                value={value.full_name}
+                placeholder="Enter full name"
+                value={value.name}
                 variant="outlined"
-                name="full_name"
+                name="name"
                 label="Name"
                 InputLabelProps={{
                   shrink: true,
@@ -70,8 +93,8 @@ const SignUpPage = (props) => {
                 onChange={(e) => changeHandler(e)}
               />
               {validator.message(
-                "full name",
-                value.full_name,
+                "name",
+                value.name,
                 "required|alpha"
               )}
             </Grid>
@@ -79,11 +102,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="E-mail"
+                placeholder="Email"
                 value={value.email}
                 variant="outlined"
                 name="email"
-                label="E-mail"
+                label="Email"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -96,11 +119,12 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Password"
+                placeholder="Enter password"
                 value={value.password}
                 variant="outlined"
                 name="password"
                 label="Password"
+                type="password"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -113,11 +137,41 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Confirm Password"
-                value={value.password}
+                placeholder="Confirm your password"
+                value={value.confirm_password}
                 variant="outlined"
                 name="confirm_password"
                 label="Confirm Password"
+                type="password"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={
+                  (e) => {
+                    changeHandler(e);
+                    confirmMessage();
+                  }
+                }
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message(
+                "confirm_password",
+                value.confirm_password,
+                "required"
+              )}
+              {confirmPasswordError && (
+                <span className="errorMessage">{confirmPasswordError}</span>
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Enter address"
+                value={value.address}
+                variant="outlined"
+                name="address"
+                label="Address"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -125,11 +179,45 @@ const SignUpPage = (props) => {
                 onChange={(e) => changeHandler(e)}
               />
               {validator.message(
-                "confirm password",
-                value.confirm_password,
-                `in:${value.password}`
+                "address",
+                value.address,
+                "required"
               )}
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Enter phone"
+                value={value.phone}
+                variant="outlined"
+                name="phone"
+                label="Phone"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => changeHandler(e)}
+                onChange={(e) => changeHandler(e)}
+              />
+              {validator.message(
+                "phone",
+                value.phone,
+                "required|phone"
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              Language
+              <RadioGroup
+                row
+                value={value.language}
+                onChange={(e) => changeHandler(e)}
+                name="language"
+              >
+                <FormControlLabel value="Vietnamese" control={<Radio />} label="Vietnamese" sx={{ paddingRight: 5 }} />
+                <FormControlLabel value="English" control={<Radio />} label="English" sx={{ paddingRight: 5 }} />
+              </RadioGroup>
+            </Grid>
+
             <Grid item xs={12}>
               <Grid className="formFooter">
                 <Button
@@ -138,17 +226,6 @@ const SignUpPage = (props) => {
                   type="submit"
                 >
                   Sign Up
-                </Button>
-              </Grid>
-              <Grid className="loginWithSocial">
-                <Button className="facebook">
-                  <i className="fa fa-facebook"></i>
-                </Button>
-                <Button className="twitter">
-                  <i className="fa fa-twitter"></i>
-                </Button>
-                <Button className="linkedin">
-                  <i className="fa fa-linkedin"></i>
                 </Button>
               </Grid>
               <p className="noteHelp">

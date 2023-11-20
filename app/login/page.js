@@ -117,7 +117,9 @@ const LoginPage = (props) => {
                   }
                   label="Remember Me"
                 />
-                <Link href="/forgot-password">Forgot Password?</Link>
+                <Link href="/forgot-password" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  Forgot Password?
+                </Link>
               </Grid>
               <Grid className="formFooter">
                 <Button fullWidth className="cBtnTheme" type="submit">
@@ -125,19 +127,16 @@ const LoginPage = (props) => {
                 </Button>
               </Grid>
               <Grid className="loginWithSocial">
-                <Button className="facebook">
-                  <i className="fa fa-facebook"></i>
-                </Button>
-                <Button className="twitter">
-                  <i className="fa fa-twitter"></i>
-                </Button>
-                <Button className="linkedin">
-                  <i className="fa fa-linkedin"></i>
+                <p>- or -</p>
+              </Grid>
+              <Grid className="loginWithSocial">
+                <Button className="google" style={{ background: '#DB4437' }}>
+                  <i className="fa fa-google"></i>
                 </Button>
               </Grid>
               <p className="noteHelp">
                 Don't have an account?{" "}
-                <Link href="/register">Create free account</Link>
+                <Link href="/register">Register account</Link>
               </p>
             </Grid>
           </Grid>
