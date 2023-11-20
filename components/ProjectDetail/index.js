@@ -13,6 +13,7 @@ import classnames from "classnames";
 
 import ProjectOverview from "./ProjectOverview";
 import SiteList from "./SiteList";
+import ProjectTasks from "./ProjectTasks";
 
 const ProjectDetail = () => {
   const [activeTab, setActiveTab] = useState("1");
@@ -94,7 +95,7 @@ const ProjectDetail = () => {
             <TabPane tabId="2">
               <Row>
                 <Col sm="12">
-                  <p>Tasks</p>
+                  <ProjectTasks></ProjectTasks>
                 </Col>
               </Row>
             </TabPane>
