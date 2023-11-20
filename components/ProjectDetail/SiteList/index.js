@@ -8,7 +8,10 @@ const SiteItem = () => {
 
   return (
     <div className="container">
-      <div className="row shadow p-4 my-4 mx-1" style={{ height: "18rem" }}>
+      <div
+        className="row shadow p-4 my-4 mx-1"
+        style={{ height: "18rem", backgroundColor: "white" }}
+      >
         <div className="col-4 col-lg-3 my-auto">
           <div className="shop-img">
             <div style={{ width: "14rem", height: "14rem" }} />
@@ -38,27 +41,24 @@ const SiteItem = () => {
 
 export default function SiteList({ projectType }) {
   return (
-    <div className="pb-0">
+    <div className="container pb-0">
       <form className="contact-validation-active">
-        <div className="row">
-          <div className="col col-lg-12 col-12 mb-4">
-            <div className="d-flex justify-content-between">
+        <div className="row justify-content-center">
+          <div className="col col-lg-10 col-12 mb-4">
+            <div className="d-flex justify-content-between mb-4">
               <h3 className="my-auto">Project Sites</h3>
-              <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
-              </div>
             </div>
-          </div>
-          <div
-            style={{
-              height: "30rem",
-              overflowY: "scroll",
-            }}
-          >
-            <SiteItem projectType={projectType} />
-            <SiteItem projectType={projectType} />
-            <SiteItem projectType={projectType} />
-            <SiteItem projectType={projectType} />
+            <div
+              style={{
+                height: "30rem",
+                overflowY: "scroll",
+              }}
+            >
+              <SiteItem projectType={projectType} />
+              <SiteItem projectType={projectType} />
+              <SiteItem projectType={projectType} />
+              <SiteItem projectType={projectType} />
+            </div>
           </div>
         </div>
       </form>

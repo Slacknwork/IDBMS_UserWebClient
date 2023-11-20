@@ -1,165 +1,125 @@
+import React, { useState } from "react";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  Col,
+} from "reactstrap";
+
+import classnames from "classnames";
+
+import ProjectOverview from "./ProjectOverview";
+import SiteList from "./SiteList";
+
 const ProjectDetail = () => {
+  const [activeTab, setActiveTab] = useState("1");
+
+  const toggle = (tab) => {
+    if (activeTab !== tab) setActiveTab(tab);
+  };
+
   return (
-    <div className="wpo-project-single-area section-padding">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-10 col-12">
-            <div className="wpo-project-single-wrap">
-              <div className="wpo-project-single-item">
-                <div className="row">
-                  <div className="col-lg-7">
-                    <div className="wpo-project-single-title">
-                      <h3>Project Name</h3>
-                    </div>
-                    <p>Project Description</p>
-                    <p>
-                      Hac nibh fermentum nisi, platea condimentum cursus velit
-                      dui. Massa volutpat odio facilisis purus sit elementum.
-                      Non, sed velit dictum quam. Id risus pharetra est, at
-                      rhoncus, nec ullamcorper tincidunt. Id aliquet duis
-                      sollicitudin diam, elit sit Et nisi in libero facilisis
-                      sed est. Elit curabitur amet risus bibendum. Posuere et
-                      eget orci. sed velit dictum quam. Id risus pharetra est
-                    </p>
-                  </div>
-                  <div className="col-lg-5">
-                    <div className="wpo-project-single-content-des-right">
-                      <ul>
-                        <li>
-                          Location:<span>7 Lake Street,London</span>
-                        </li>
-                        <li>
-                          Lead Architect:<span>Harry Johnson</span>
-                        </li>
-                        <li>
-                          Project Type:<span>Decor</span>
-                        </li>
-                        <li>
-                          Start Date:<span>15 Apr 2022</span>
-                        </li>
-                        <li>
-                          Duration:<span>6 Month</span>
-                        </li>
-                        <li>
-                          Completion:<span>15 Apr 2022</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="wpo-project-single-main-img"></div>
-                <div className="wpo-project-single-item list-widget">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="wpo-project-single-title">
-                        <h3>Our Strategies</h3>
-                      </div>
-                      <p>
-                        Massa volutpat odio facilisis purus sit elementum. Non,
-                        sed velit dictum quam. Id risus pharetra est, at
-                        rhoncus, nec ullamcorper tincidunt. Id aliquet duis
-                        sollicitudin diam.
-                      </p>
-                      <ul>
-                        <li>Non saed velit dictum quam risus pharetra esta.</li>
-                        <li>
-                          Id risus pharetra est, at rhoncus, nec ullamcorper
-                          tincidunt.
-                        </li>
-                        <li>
-                          Hac nibh fermentum nisi, platea condimentum cursus.
-                        </li>
-                        <li>
-                          Massa volutpat odio facilisis purus sit elementum.
-                        </li>
-                        <li>Elit curabitur amet risus bibendum.</li>
-                      </ul>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="wpo-project-single-item-quote">
-                        <p>
-                          "Amazing looking theme and instantly turns your
-                          application into a great looking one. Really shows
-                          that pro_ fessionals built this theme up. Very happy
-                          with the way the theme looks ."
-                        </p>
-                        <span>
-                          Robert - <span>Yellow Theme</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="wpo-project-single-item">
-                  <div className="wpo-project-single-title">
-                    <h3>Our approach</h3>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Consequat suspendisse aenean tellus augue morbi risus. Sit
-                    morbi vitae morbi sed urna sed purus. Orci facilisi eros sed
-                    pellentesque. Risus id sed tortor sed scelerisque.
-                    Vestibulum elit elementum, magna id viverra non, velit.
-                    Pretium, eros, porttitor fusce auctor vitae id. Phasellus
-                    scelerisque nibh eleifend vel enim mauris purus. Rutrum vel
-                    sem adipiscing nisi vulputate molestie scelerisque molestie
-                    ultrices. Eu, fusce vulputate diam interdum morbi ac a.
-                  </p>
-                </div>
-                <div className="wpo-project-single-gallery">
-                  <div className="row mt-4">
-                    <div className="col-md-6 col-sm-6 col-12">
-                      <div className="wpo-p-details-img"></div>
-                    </div>
-                    <div className="col-md-6 col-sm-6 col-12">
-                      <div className="wpo-p-details-img"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="wpo-project-single-item list-widget">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="wpo-project-single-title">
-                        <h3>Resieved goals</h3>
-                      </div>
-                      <ul>
-                        <li>Non saed velit dictum quam risus pharetra esta.</li>
-                        <li>
-                          Id risus pharetra est, at rhoncus, nec ullamcorper
-                          tincidunt.
-                        </li>
-                        <li>
-                          Hac nibh fermentum nisi, platea condimentum cursus.
-                        </li>
-                        <li>
-                          Massa volutpat odio facilisis purus sit elementum.
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="col-lg-6 list-widget-s">
-                      <div className="wpo-project-single-title">
-                        <h3>Results</h3>
-                      </div>
-                      <ul>
-                        <li>
-                          Mauris dignissim blandit cursus imperdiet accumsan
-                          lorem.
-                        </li>
-                        <li>Nam id in non sed cras purus nunc et.</li>
-                        <li>
-                          Mauris orci, cursus nisl odio est adipiscing gravida
-                          magna eget.
-                        </li>
-                        <li>
-                          Quis mauris vel felis convallis nulla dignissim.
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="container wpo-shop-single-section">
+      <div className="row">
+        <div
+          className="col-12 product-info"
+          style={{ marginTop: "2rem", marginBottom: "2rem" }}
+        >
+          <Nav tabs>
+            <NavItem style={{ cursor: "pointer" }}>
+              <NavLink
+                className={classnames({ active: activeTab === "1" })}
+                onClick={() => {
+                  toggle("1");
+                }}
+              >
+                Overview
+              </NavLink>
+            </NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
+              <NavLink
+                className={classnames({ active: activeTab === "2" })}
+                onClick={() => {
+                  toggle("2");
+                }}
+              >
+                Tasks
+              </NavLink>
+            </NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
+              <NavLink
+                className={classnames({ active: activeTab === "3" })}
+                onClick={() => {
+                  toggle("3");
+                }}
+              >
+                Comments
+              </NavLink>
+            </NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
+              <NavLink
+                className={classnames({ active: activeTab === "4" })}
+                onClick={() => {
+                  toggle("4");
+                }}
+              >
+                Items
+              </NavLink>
+            </NavItem>
+            <NavItem style={{ cursor: "pointer" }}>
+              <NavLink
+                className={classnames({ active: activeTab === "5" })}
+                onClick={() => {
+                  toggle("5");
+                }}
+              >
+                Documents
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={activeTab}>
+            <TabPane tabId="1">
+              <Row className="my-3">
+                <Col sm="12">
+                  <ProjectOverview></ProjectOverview>
+                </Col>
+                <Col sm="12">
+                  <SiteList></SiteList>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="2">
+              <Row>
+                <Col sm="12">
+                  <p>Tasks</p>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="3">
+              <Row>
+                <Col sm="12">
+                  <p>Comments</p>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="4">
+              <Row>
+                <Col sm="12">
+                  <p>Items</p>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="5">
+              <Row>
+                <Col sm="12">
+                  <p>Documents</p>
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
         </div>
       </div>
     </div>
