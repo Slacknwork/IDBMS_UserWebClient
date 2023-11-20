@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import urls from "/constants/urls";
 
 function Navigation({ backUrl, backLabel, nextUrl, nextLabel }) {
-  const DEFAULT_BACK_LABEL = "Previous";
+  const DEFAULT_BACK_LABEL = "Back";
   const DEFAULT_NEXT_LABEL = "Next";
 
   return (
@@ -13,8 +13,12 @@ function Navigation({ backUrl, backLabel, nextUrl, nextLabel }) {
       className={`container d-flex ${nextUrl ? "justify-content-between" : ""}`}
     >
       {backUrl ? (
-        <div className="m-4 mr-auto">
-          <Link className="theme-btn-s2 rounded-2 px-4" href={backUrl}>
+        <div className="mr-auto">
+          <Link
+            className="theme-btn py-2"
+            href={backUrl}
+            style={{ width: "5rem" }}
+          >
             {backLabel || DEFAULT_BACK_LABEL}
           </Link>
         </div>
@@ -22,8 +26,12 @@ function Navigation({ backUrl, backLabel, nextUrl, nextLabel }) {
         <div />
       )}
       {nextUrl ? (
-        <div className="ml-auto m-4">
-          <Link className="theme-btn-s4 px-4" href={nextUrl}>
+        <div className="ml-auto">
+          <Link
+            className="theme-btn py-2"
+            href={nextUrl}
+            style={{ width: "5rem" }}
+          >
             {nextLabel || DEFAULT_NEXT_LABEL}
           </Link>
         </div>
@@ -68,23 +76,33 @@ export default function ProjectBooking({ children }) {
   }
 
   return (
-    <div>
-      <section
-        id="booking-section"
-        className="wpo-contact-pg-section section-padding"
-      >
-        <div className="container">
-          {children}
-          <div
-            className="d-flex justify-content-end mx-4 mt-4"
-            style={{ gap: "3rem" }}
+    <div className="container">
+      <div className="row">
+        <div className="col col-lg-9 col-12">
+          <section
+            id="booking-section"
+            className="wpo-contact-pg-section section-padding"
           >
-            <h4 className="my-auto">Area: 5000m2</h4>
-            <h4 className="my-auto">Total price: 50,000,000 VND</h4>
-          </div>
+            <div
+              className="wpo-contact-form-area"
+              style={{ marginBottom: "4rem" }}
+            >
+              <Navigation backUrl={backUrl} nextUrl={nextUrl}></Navigation>
+              <div className="mt-4">{children}</div>
+            </div>
+          </section>
         </div>
-      </section>
-      <Navigation backUrl={backUrl} nextUrl={nextUrl}></Navigation>
+        <div className="col col-lg-3 col-12">
+          <section className="section-padding">
+            <div className="shadow p-4" style={{ backgroundColor: "white" }}>
+              <div className="mb-4">
+                <p className="my-auto">Area: 5000m2</p>
+                <h5 className="my-auto">Total price: 50,000,000 VND</h5>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

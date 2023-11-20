@@ -7,9 +7,8 @@ import urls from "/constants/urls";
 const SiteDetailsForm = () => {
   return (
     <div className="row">
-      <div className="col col-lg-4 col-12 my-auto">
+      <div className="col col-lg-4 col-12">
         <h3>Site Information</h3>
-        <p>A site is required to have at least 1 floor</p>
       </div>
       <div className="col col-lg-4 col-12">
         <div className="form-field">
@@ -130,7 +129,7 @@ const FloorTable = () => {
 
 const BookingSiteDetails = () => {
   return (
-    <div className="wpo-contact-form-area pb-0">
+    <div className="pb-0">
       <form className="contact-validation-active">
         <SiteDetailsForm></SiteDetailsForm>
         <div className="row">

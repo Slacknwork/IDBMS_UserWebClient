@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BookingSubmission() {
   return (
-    <div className="wpo-contact-form-area pb-0">
+    <div className="pb-0">
       <form className="contact-validation-active">
         <div className="row">
           <div className="col col-12">

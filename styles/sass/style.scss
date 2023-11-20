@@ -151,6 +151,10 @@ Version:        1.0.0
 
 @import "page/_error-404";
 
+a, a:link, a:hover, a:visited, a:focus-visible, a:active {
+    text-decoration: none;
+}
+
 
 
 

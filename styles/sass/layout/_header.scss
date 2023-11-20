@@ -179,7 +179,7 @@
 	position: fixed;
 	left: 0;
 	top: -400px;
-	z-index: 9999;
+	z-index: 0;
 	opacity: 0;
 	visibility: hidden;
 	-webkit-transition: all 1s;
@@ -324,7 +324,7 @@
 
 @media (max-width: 991px) {
 	.wpo-site-header #navbar>ul {
-		z-index: 101;
+		z-index: 0;
 	}
 
 	.wpo-site-header #navbar ul a {
@@ -396,7 +396,7 @@
 	.wpo-site-header .navbar-header {
 		float: none;
 		position: relative;
-		z-index: 99;
+		z-index: 0;
 		text-align: center;
 	}
 
@@ -416,7 +416,7 @@
 .wpo-site-header .header-right {
 	display: flex;
 	justify-content: flex-end;
-	z-index: 999;
+	z-index: 0;
 	position: relative;
 	align-items: center;
 }
@@ -637,7 +637,7 @@
 	background: $white;
 	width: 320px;
 	height: 100%;
-	z-index: 100;
+	z-index: 0;
 	position: fixed;
 	right: -320px;
 	top: 0;
@@ -819,7 +819,7 @@
 		position: absolute;
 		left: 0;
 		top: 0;
-		z-index: 10;
+		z-index: 0;
 		-webkit-transition: all 0.3s;
 		-moz-transition: all 0.3s;
 		-o-transition: all 0.3s;
@@ -836,7 +836,7 @@
 	position: fixed;
 	left: 0;
 	top: 0;
-	z-index: 999;
+	z-index: 0;
 }
 
 .header-search-area h3 {
@@ -898,7 +898,7 @@
 	text-transform: uppercase;
 	color: #000;
 	letter-spacing: 2px;
-	z-index: 99;
+	z-index: 0;
 }
 
 .header-search-area .close-form button:focus {
@@ -962,7 +962,7 @@
 				padding: 25px;
 				left: 0;
 				top: 110%;
-				z-index: 10;
+				z-index: 0;
 				visibility: hidden;
 				opacity: 0;
 				@include transition-time(0.3s);
@@ -1146,7 +1146,7 @@
 			padding: 5px 10px;
 			outline: 0;
 			position: relative;
-			z-index: 20;
+			z-index: 0;
 
 			&:focus {
 				outline: none;
@@ -1178,7 +1178,7 @@
 			position: fixed;
 			left: -320px;
 			top: 0px;
-			z-index: 999999;
+			z-index: 0;
 			opacity: 0;
 			visibility: hidden;
 
@@ -1188,7 +1188,7 @@
 
 			>ul {
 				position: relative;
-				z-index: 101;
+				z-index: 0;
 			}
 
 			ul a {
@@ -1216,7 +1216,7 @@
 				position: absolute;
 				left: -41px;
 				top: 90px;
-				z-index: 20;
+				z-index: 0;
 
 				.ti-close {
 					position: relative;
@@ -1229,7 +1229,7 @@
 
 		.menu-close {
 			display: block;
-			z-index: 99;
+			z-index: 0;
 			background: none;
 			text-align: center;
 			color: $white;
@@ -1408,7 +1408,7 @@
 	left: 0;
 	top: 0;
 	width: 100%;
-	z-index: 99;
+	z-index: 0;
 	background: transparent;
 
 	.navigation {
@@ -1425,7 +1425,7 @@
 .wpo-header-style-2,
 .wpo-header-style-3,
 .wpo-header-style-4 {
-	z-index: 999;
+	z-index: 0;
 	background: $black-bg-color;
 	border-bottom: 1px solid #444449;
 
@@ -1487,7 +1487,7 @@
 
 	.wpo-site-header,
 	.wpo-header-style-2 {
-		z-index: 99999;
+		z-index: 0;
 	}
 }
 
@@ -1568,7 +1568,7 @@
 			background: #292932;
 			width: 420px;
 			height: 100%;
-			z-index: 100;
+			z-index: 0;
 			position: fixed;
 			right: -420px;
 			top: 0;
@@ -1728,7 +1728,7 @@
 
 .fixed-navbar {
 	position: relative;
-	z-index: 5555;
+	z-index: 2;
 }
 
 .fixed-navbar.active .wpo-site-header,
