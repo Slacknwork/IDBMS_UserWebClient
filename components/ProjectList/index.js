@@ -10,6 +10,9 @@ import {
   Col,
 } from "reactstrap";
 import classnames from "classnames";
+
+import urls from "/constants/urls";
+
 import api from "/api";
 
 const SubmitHandler = (e) => {
@@ -17,6 +20,8 @@ const SubmitHandler = (e) => {
 };
 
 const ProjectItem = (projectDetails) => {
+  const projectUrl = `${urls.project.id.getUri(1)}`;
+
   return (
     <div className="container">
       <div
@@ -43,12 +48,12 @@ const ProjectItem = (projectDetails) => {
           </div>
           <div className="mt-auto d-flex gap-3">
             <div>
-              <Link href="/project/booking" className="theme-btn px-4" replace>
+              <Link href={projectUrl} className="theme-btn px-4" replace>
                 Details
               </Link>
             </div>
             <div>
-              <Link href="/project/booking" className="theme-btn px-4" replace>
+              <Link href={projectUrl} className="theme-btn px-4" replace>
                 Payment
               </Link>
             </div>
@@ -59,7 +64,7 @@ const ProjectItem = (projectDetails) => {
   );
 };
 
-const ProjectList = () => {
+export default function ProjectList() {
   const [activeTab, setActiveTab] = useState("1");
 
   const toggle = (tab) => {
@@ -67,7 +72,7 @@ const ProjectList = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container wpo-shop-single-section">
       <div className="row" style={{ marginTop: "3rem" }}>
         <div className="col-12">
           <div
@@ -100,7 +105,7 @@ const ProjectList = () => {
       </div>
       <div className="row">
         <div
-          className="col-12"
+          className="col-12 product-info"
           style={{ marginTop: "2rem", marginBottom: "2rem" }}
         >
           <Nav tabs>
@@ -192,6 +197,4 @@ const ProjectList = () => {
       </div>
     </div>
   );
-};
-
-export default ProjectList;
+}
