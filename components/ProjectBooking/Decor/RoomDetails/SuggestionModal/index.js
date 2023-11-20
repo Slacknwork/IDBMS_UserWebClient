@@ -94,7 +94,7 @@ export default function SuggestionModal() {
         toggle={toggle}
         backdrop="static"
       >
-        <ModalHeader toggle={toggle}>Suggestion</ModalHeader>
+        <ModalHeader toggle={toggle}>Add Suggestion</ModalHeader>
         <ModalBody style={{ maxHeight: "30rem", overflowY: "scroll" }}>
           <section id="booking-section" className="wpo-contact-pg-section">
             <div className="wpo-contact-form-area-transparent mt-4">
@@ -120,6 +120,19 @@ export default function SuggestionModal() {
                         name="message"
                         placeholder="Message"
                       ></textarea>
+                    </div>
+                  </div>
+                  <div className="col col-lg-12 col-12">
+                    <div className="d-flex">
+                      <h6 className="mb-4">Selected Item</h6>
+                      <div
+                        style={{
+                          width: "5rem",
+                          height: "5rem",
+                          backgroundColor: "black",
+                        }}
+                      ></div>
+                      <p className="mx-4 my-auto">Item name</p>
                     </div>
                   </div>
                 </div>
