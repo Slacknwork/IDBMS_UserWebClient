@@ -1,21 +1,10 @@
 import React, { useState } from "react";
-import {
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  Col,
-} from "reactstrap";
+import { Nav, NavItem } from "reactstrap";
 
 import classnames from "classnames";
+import Link from "next/link";
 
-import ProjectOverview from "./ProjectOverview";
-import SiteList from "./SiteList";
-import ProjectTasks from "./ProjectTasks";
-
-const ProjectDetail = () => {
+export default function ProjectDetail({ children }) {
   const [activeTab, setActiveTab] = useState("1");
 
   const toggle = (tab) => {
@@ -31,100 +20,64 @@ const ProjectDetail = () => {
         >
           <Nav tabs>
             <NavItem style={{ cursor: "pointer" }}>
-              <NavLink
+              <Link
+                href={"/project/1"}
                 className={classnames({ active: activeTab === "1" })}
                 onClick={() => {
                   toggle("1");
                 }}
               >
                 Overview
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem style={{ cursor: "pointer" }}>
-              <NavLink
+              <Link
+                href={"/project/1/tasks"}
                 className={classnames({ active: activeTab === "2" })}
                 onClick={() => {
                   toggle("2");
                 }}
               >
                 Tasks
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem style={{ cursor: "pointer" }}>
-              <NavLink
+              <Link
+                href={"/project/1/comments"}
                 className={classnames({ active: activeTab === "3" })}
                 onClick={() => {
                   toggle("3");
                 }}
               >
                 Comments
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem style={{ cursor: "pointer" }}>
-              <NavLink
+              <Link
+                href={"/project/1/items"}
                 className={classnames({ active: activeTab === "4" })}
                 onClick={() => {
                   toggle("4");
                 }}
               >
                 Items
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem style={{ cursor: "pointer" }}>
-              <NavLink
+              <Link
+                href={"/project/1/documents"}
                 className={classnames({ active: activeTab === "5" })}
                 onClick={() => {
                   toggle("5");
                 }}
               >
                 Documents
-              </NavLink>
+              </Link>
             </NavItem>
           </Nav>
-          <TabContent activeTab={activeTab}>
-            <TabPane tabId="1">
-              <Row className="my-3">
-                <Col sm="12">
-                  <ProjectOverview></ProjectOverview>
-                </Col>
-                <Col sm="12">
-                  <SiteList></SiteList>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <Col sm="12">
-                  <ProjectTasks></ProjectTasks>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="3">
-              <Row>
-                <Col sm="12">
-                  <p>Comments</p>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="4">
-              <Row>
-                <Col sm="12">
-                  <p>Items</p>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="5">
-              <Row>
-                <Col sm="12">
-                  <p>Documents</p>
-                </Col>
-              </Row>
-            </TabPane>
-          </TabContent>
         </div>
+        {children}
       </div>
     </div>
   );
-};
-
-export default ProjectDetail;
+}

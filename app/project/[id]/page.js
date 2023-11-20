@@ -1,15 +1,14 @@
 "use client";
 
-import React, { Fragment } from "react";
-import PageTitle from "/components/PageTitle";
-import ProjectDetail from "/components/ProjectDetail";
+import ProjectOverview from "/components/ProjectDetail/Overview";
+import SiteList from "/components/ProjectDetail/SiteList";
 
-const ProjectSinglePage = ({ params }) => {
+const ProjectSinglePage = () => {
   return (
-    <Fragment>
-      <PageTitle pageTitle={params.id} pagesub={"Project"} />
-      <ProjectDetail></ProjectDetail>
-    </Fragment>
+    <div>
+      <ProjectOverview></ProjectOverview>
+      <SiteList></SiteList>
+    </div>
   );
 };
 export default ProjectSinglePage;
