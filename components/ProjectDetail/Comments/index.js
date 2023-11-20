@@ -1,17 +1,4 @@
-import React from "react";
-import Link from "next/link";
-import { FaTrash } from "react-icons/fa";
-
-import urls from "/constants/urls";
-
 const RoomTableItem = () => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
-
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
