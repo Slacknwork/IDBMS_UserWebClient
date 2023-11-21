@@ -63,6 +63,16 @@ export default {
           },
         },
       },
+      tasks: {
+        taskId: {
+          getUri: (id, taskId) =>
+            `/project/${id}/tasks/${taskId}#project-section`,
+          reports: {
+            getUri: (id, taskId) =>
+              `/project/${id}/tasks/${taskId}/reports#project-section`,
+          },
+        },
+      },
     },
   },
 };
