@@ -2,6 +2,7 @@ export default {
   id: {
     NAVBAR: "#navbar",
     BOOKING_SECTION: "#booking-section",
+    PROJECT_SECTION: "#project-section",
   },
   project: {
     getUri: () => `/project`,
@@ -34,6 +35,32 @@ export default {
         },
         submit: {
           getUri: () => `/project/booking/decor/submit#booking-section`,
+        },
+      },
+    },
+    id: {
+      getUri: (id) => `/project/${id}`,
+      site: {
+        getUri: (id) => `/project/${id}/site#project-section`,
+        siteNo: {
+          getUri: (id, siteId) =>
+            `/project/${id}/site/${siteId}#project-section`,
+          floor: {
+            getUri: (id, siteId) =>
+              `/project/${id}/site/${siteId}/floor#project-section`,
+            floorNo: {
+              getUri: (id, siteId, floorId) =>
+                `/project/${id}/site/${siteId}/floor/${floorId}#project-section`,
+              room: {
+                getUri: (id, siteId, floorId) =>
+                  `/project/${id}/site/${siteId}/floor/${floorId}/room#project-section`,
+                roomNo: {
+                  getUri: (id, siteId, floorId, roomId) =>
+                    `/project/${id}/site/${siteId}/floor/${floorId}/room/${roomId}#project-section`,
+                },
+              },
+            },
+          },
         },
       },
     },

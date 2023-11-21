@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "/public/images/logo-2.svg";
 import { HiUserCircle } from "react-icons/hi";
-import Link from "next/link";
+import { Link } from "/navigation";
 import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Projects from "../../api/project";

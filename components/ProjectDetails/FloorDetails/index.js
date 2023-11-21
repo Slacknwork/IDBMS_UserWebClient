@@ -33,12 +33,12 @@ const FloorDetailsForm = () => {
 };
 
 const RoomTableItem = () => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+  const RoomHref = urls.project.id.site.siteNo.floor.floorNo.room.roomNo.getUri(
+    1,
+    1,
+    1,
+    1
+  );
 
   return (
     <tr>

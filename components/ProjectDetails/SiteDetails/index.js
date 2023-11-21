@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "/navigation";
-import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
 
-const FloorDetailsForm = () => {
+const SiteDetailsForm = () => {
   return (
     <div className="row">
       <div className="col col-lg-4 col-12">
-        <h3>Floor Information</h3>
+        <h3>Site Information</h3>
       </div>
       <div className="col col-lg-4 col-12">
         <div className="form-field">
-          <label className="mb-1">Floor Name</label>
+          <label className="mb-1">Site Name</label>
           <input type="text" name="name" placeholder="Your Name" />
         </div>
       </div>
@@ -24,7 +23,7 @@ const FloorDetailsForm = () => {
       </div>
       <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <label className="mb-1">Floor Description</label>
+          <label className="mb-1">Site Description</label>
           <textarea type="text" name="message" placeholder="Message"></textarea>
         </div>
       </div>
@@ -32,20 +31,15 @@ const FloorDetailsForm = () => {
   );
 };
 
-const RoomTableItem = () => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+const FloorTableItem = () => {
+  const RoomHref = urls.project.id.site.siteNo.floor.floorNo.getUri(1, 1, 1);
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
         1
       </th>
-      <td className="align-middle">Room Name</td>
+      <td className="align-middle">Floor Name</td>
       <td className="align-middle">1000m2</td>
       <td className="align-middle">1,000,000 VND</td>
       <td className="align-middle m-0">
@@ -57,20 +51,13 @@ const RoomTableItem = () => {
           >
             Details
           </Link>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
         </div>
       </td>
     </tr>
   );
 };
 
-const RoomTable = () => {
+const FloorTable = () => {
   return (
     <div
       style={{
@@ -85,21 +72,23 @@ const RoomTable = () => {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Room No.
+              Floor No.
             </th>
             <th scope="col">Name</th>
-            <th scope="col">Area</th>
-            <th scope="col">Price</th>
+            <th scope="col">Total Area</th>
+            <th scope="col">Total Price</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
+          <FloorTableItem></FloorTableItem>
         </tbody>
       </table>
     </div>
@@ -110,20 +99,17 @@ const BookingSiteDetails = () => {
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
-        <FloorDetailsForm></FloorDetailsForm>
+        <SiteDetailsForm></SiteDetailsForm>
         <div className="row">
           <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Rooms</h3>
-              <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
-              </div>
+              <h3 className="my-auto">Floors</h3>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <RoomTable></RoomTable>
+            <FloorTable></FloorTable>
           </div>
         </div>
       </form>

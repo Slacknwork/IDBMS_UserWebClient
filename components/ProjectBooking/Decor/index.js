@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "/navigation";
 import { usePathname } from "next/navigation";
 
 import urls from "/constants/urls";
