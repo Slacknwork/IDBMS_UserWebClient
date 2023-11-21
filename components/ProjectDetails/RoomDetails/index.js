@@ -30,10 +30,20 @@ const FloorDetailsForm = () => {
           </select>
         </div>
       </div>
-      <div className="col col-lg-12 col-12">
+      <div className="col col-lg-6 col-12">
         <div className="form-field">
           <label className="mb-1">Room Description</label>
           <textarea type="text" name="message" placeholder="Message"></textarea>
+        </div>
+      </div>
+      <div className="col col-lg-6 col-12">
+        <div className="form-field">
+          <label className="mb-1">Price</label>
+          <input type="text" name="name" placeholder="Your Name" />
+        </div>
+        <div className="form-field">
+          <label className="mb-1">Tasks</label>
+          <input type="text" name="name" placeholder="Your Name" />
         </div>
       </div>
     </div>

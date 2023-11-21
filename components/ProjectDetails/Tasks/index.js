@@ -5,12 +5,7 @@ import { FaTrash } from "react-icons/fa";
 import urls from "/constants/urls";
 
 const RoomTableItem = () => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+  const RoomHref = urls.project.id.tasks.taskId.getUri(1, 1);
 
   return (
     <tr>

@@ -9,7 +9,7 @@ export default function ClientLayout({ children }) {
   const t = useTranslations("Project");
 
   return (
-    <div>
+    <div style={{ backgroundColor: "#f0f0f0" }}>
       <PageTitle pageTitle={t("Details")} pagesub={"Project"} />
       <ProjectDetail>{children}</ProjectDetail>
     </div>

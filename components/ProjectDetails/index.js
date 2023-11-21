@@ -12,8 +12,8 @@ export default function ProjectDetail({ children }) {
   };
 
   return (
-    <section id="project-section" className="wpo-contact-pg-section">
-      <div className="wpo-contact-form-area">
+    <section id="project-section" className="wpo-contact-pg-section my-4">
+      <div className="wpo-contact-form-area-transparent">
         <div className="container wpo-shop-single-section">
           <div className="row">
             <div
