@@ -214,7 +214,7 @@ const MobileMenu = () => {
             return (
               <ListItem
                 className={item.id === openId ? "active" : null}
-                key={item}
+                key={item.id}
               >
                 {item.submenu ? (
                   <Fragment>
@@ -241,7 +241,7 @@ const MobileMenu = () => {
                         <Fragment>
                           {item.submenu.map((submenu) => {
                             return (
-                              <ListItem key={submenu}>
+                              <ListItem key={submenu.id}>
                                 <Link
                                   onClick={ClickHandler}
                                   href={submenu.link}

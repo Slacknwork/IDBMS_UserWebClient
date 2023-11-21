@@ -1,10 +1,4 @@
-import { Link } from "/navigation";
-
-import urls from "/constants/urls";
-
 export default function TaskDetails() {
-  const reportsHref = urls.project.id.tasks.taskId.reports.getUri(1, 1);
-
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
@@ -50,22 +44,12 @@ export default function TaskDetails() {
           </div>
           <div className="col col-lg-6 col-12">
             <div className="form-field">
-              <label className="mb-1">Price</label>
+              <label className="mb-1">Progress</label>
               <input type="text" name="name" placeholder="Your Name" />
             </div>
             <div className="form-field">
-              <div className="d-flex">
-                <label className="my-auto">Reports</label>
-                <div className="d-flex">
-                  <Link
-                    href={reportsHref}
-                    className="theme-btn px-4 mx-4"
-                    replace
-                  >
-                    View Reports
-                  </Link>
-                </div>
-              </div>
+              <label className="mb-1">Price</label>
+              <input type="text" name="name" placeholder="Your Name" />
             </div>
           </div>
         </div>

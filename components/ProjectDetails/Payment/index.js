@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { Nav, NavItem } from "reactstrap";
 
@@ -12,7 +14,7 @@ export default function ProjectDetail({ children }) {
   };
 
   return (
-    <section id="project-section" className="wpo-contact-pg-section mt-4">
+    <section id="project-section" className="wpo-contact-pg-section">
       <div className="wpo-contact-form-area-transparent">
         <div className="container wpo-shop-single-section">
           <div className="row">
@@ -23,78 +25,40 @@ export default function ProjectDetail({ children }) {
               <Nav tabs>
                 <NavItem style={{ cursor: "pointer" }}>
                   <Link
-                    href={"/project/1"}
+                    href={"/project/1/payment"}
                     className={classnames({ active: activeTab === "1" })}
                     onClick={() => {
                       toggle("1");
                     }}
                   >
-                    Overview
+                    Stages
                   </Link>
                 </NavItem>
                 <NavItem style={{ cursor: "pointer" }}>
                   <Link
-                    href={"/project/1/tasks"}
+                    href={"/project/1/payment/transactions"}
                     className={classnames({ active: activeTab === "2" })}
                     onClick={() => {
                       toggle("2");
                     }}
                   >
-                    Tasks
+                    Transactions
                   </Link>
                 </NavItem>
                 <NavItem style={{ cursor: "pointer" }}>
                   <Link
-                    href={"/project/1/comments"}
+                    href={"/project/1/payment/warranty"}
                     className={classnames({ active: activeTab === "3" })}
                     onClick={() => {
                       toggle("3");
                     }}
                   >
-                    Comments
-                  </Link>
-                </NavItem>
-                <NavItem style={{ cursor: "pointer" }}>
-                  <Link
-                    href={"/project/1/items"}
-                    className={classnames({ active: activeTab === "4" })}
-                    onClick={() => {
-                      toggle("4");
-                    }}
-                  >
-                    Items
-                  </Link>
-                </NavItem>
-                <NavItem style={{ cursor: "pointer" }}>
-                  <Link
-                    href={"/project/1/documents"}
-                    className={classnames({ active: activeTab === "5" })}
-                    onClick={() => {
-                      toggle("5");
-                    }}
-                  >
-                    Documents
-                  </Link>
-                </NavItem>
-                <NavItem style={{ cursor: "pointer" }}>
-                  <Link
-                    href={"/project/1/payment"}
-                    className={classnames({ active: activeTab === "6" })}
-                    onClick={() => {
-                      toggle("6");
-                    }}
-                  >
-                    Payment
+                    Warranty
                   </Link>
                 </NavItem>
               </Nav>
             </div>
-            <div
-              className="shadow-lg pt-4 mb-4"
-              style={{ backgroundColor: "#fafafa" }}
-            >
-              {children}
-            </div>
+            {children}
           </div>
         </div>
       </div>

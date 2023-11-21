@@ -1,3 +1,5 @@
+"use client";
+
 export default function ProjectOverview() {
   return (
     <div className="wpo-project-single-area">

@@ -92,7 +92,7 @@ const Header = (props) => {
                             <h4 className="text-white">Our Latest Projects</h4>
                             <ul>
                               {Projects.slice(0, 6).map((project) => (
-                                <li key={project}>
+                                <li key={project.slug}>
                                   <Link
                                     href="/project/[slug]"
                                     as={`/project/${project.slug}`}
