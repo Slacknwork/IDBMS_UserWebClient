@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import getBookmarksByUserId from "../../api/bookmarkServices";
 import { useRef } from "react";
+import { getCommentsByProjectId } from "../../api/commentServices";
+import getInteriorItemCategories from "../../api/interiorItemCategoryServices";
 
 const APIPage = (props) => {
     const router = useRouter();
@@ -20,7 +22,12 @@ const APIPage = (props) => {
             initialized.current = true
             const fetchDataFromApi = async () => {
                 try {
-                    const data = await getBookmarksByUserId('7A2B1D40-1169-41BB-8062-06AD22F91744');
+                    // const data = await getBookmarksByUserId('7A2B1D40-1169-41BB-8062-06AD22F91744');
+
+                    // const data = await getCommentsByProjectId('ff090f51-e6e7-4854-8f3f-0402ee32c9f8');
+
+                    const data = await getInteriorItemCategories();
+
                     setValues(data.data);
                     console.log(data)
                 } catch (error) {
@@ -49,16 +56,16 @@ const APIPage = (props) => {
                             <TextField
                                 className="inputOutline"
                                 fullWidth
-                                placeholder={`user id ${index + 1}`}
-                                value={item.userId}
+                                placeholder={`id ${index + 1}`}
+                                value={item.id}
                                 variant="outlined"
-                                name={`uid_${index}`}
-                                label={`uid ${index + 1}`}
+                                name={`id_${index}`}
+                                label={`id ${index + 1}`}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
-                            {validator.message(`uid_${index}`, item.userId, "required")}
+                            {validator.message(`id_${index}`, item.id, "required")}
                         </Grid>
                     ))}
                 </Grid>
