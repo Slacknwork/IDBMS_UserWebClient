@@ -1,7 +1,7 @@
 "use client";
 
-import ProjectOverview from "/components/ProjectDetail/Overview";
-import SiteList from "/components/ProjectDetail/SiteList";
+import ProjectOverview from "/components/ProjectDetails/Overview";
+import SiteList from "/components/ProjectDetails/SiteList";
 
 const ProjectSinglePage = () => {
   return (

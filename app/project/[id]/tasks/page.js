@@ -1,4 +1,4 @@
-import Tasks from "/components/ProjectDetail/Tasks";
+import Tasks from "/components/ProjectDetails/Tasks";
 
 export default function ProjectTasks() {
   return <Tasks></Tasks>;

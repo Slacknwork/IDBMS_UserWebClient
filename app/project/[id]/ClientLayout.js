@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "/components/PageTitle";
-import ProjectDetail from "/components/ProjectDetail";
+import ProjectDetail from "/components/ProjectDetails";
 
 export default function ClientLayout({ children }) {
   return (

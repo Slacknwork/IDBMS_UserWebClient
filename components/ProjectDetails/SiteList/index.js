@@ -4,7 +4,7 @@ import Link from "next/link";
 import urls from "/constants/urls";
 
 const SiteItem = () => {
-  const siteDetailsUrl = urls.project.booking.decor.site.siteNo.getUri(1);
+  const siteDetailsUrl = urls.project.id.site.siteNo.getUri(1, 1);
 
   return (
     <div className="container">
