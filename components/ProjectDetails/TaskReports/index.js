@@ -20,6 +20,7 @@ const RoomTableItem = () => {
           >
             Details
           </button>
+          <SuggestionModal>Details</SuggestionModal>
           <button
             type="button"
             className="theme-btn m-1"
@@ -73,16 +74,6 @@ export default function RoomDetails() {
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
-        <div className="row">
-          <div className="col col-lg-12 col-12">
-            <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Reports</h3>
-              <div className="d-flex">
-                <SuggestionModal></SuggestionModal>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
             <RoomTable></RoomTable>

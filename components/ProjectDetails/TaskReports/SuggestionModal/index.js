@@ -76,7 +76,7 @@ const SuggestionTable = () => {
   );
 };
 
-export default function SuggestionModal() {
+export default function SuggestionModal({ children }) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -84,7 +84,7 @@ export default function SuggestionModal() {
   return (
     <div>
       <button type="button" className="theme-btn-s4 px-4 py-2" onClick={toggle}>
-        Add
+        {children}
       </button>
       <Modal
         isOpen={modal}

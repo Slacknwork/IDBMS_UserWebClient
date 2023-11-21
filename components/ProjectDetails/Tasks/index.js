@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "/navigation";
-import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
 
@@ -26,13 +25,13 @@ const RoomTableItem = () => {
           >
             Details
           </Link>
-          <button
-            type="button"
+          <Link
+            href={RoomHref}
             className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
+            style={{ width: "6rem", zIndex: 0 }}
           >
-            <FaTrash />
-          </button>
+            Comments
+          </Link>
         </div>
       </td>
     </tr>
@@ -83,14 +82,13 @@ export default function ProjectTasks() {
       <div className="row">
         <div className="col col-lg-6 col-12">
           <div className="blog-sidebar">
-            <div className="widget search-widget mb-4">
+            <div className="widget search-widget">
               <form>
-                <label className="mb-1">Task Name</label>
                 <div>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search Post.."
+                    placeholder="Search Task Name..."
                   />
                   <button type="submit">
                     <i className="ti-search"></i>
@@ -106,28 +104,26 @@ export default function ProjectTasks() {
               <div className="wpo-contact-form-area-transparent row">
                 <div className="col col-lg-6 col-12">
                   <div className="form-field">
-                    <label className="mb-1">Category</label>
                     <select
                       type="text"
                       name="subject"
                       className="rounded-2"
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", height: "55px" }}
                     >
-                      <option>Service</option>
+                      <option>Category</option>
                       <option>Architecture</option>
                     </select>
                   </div>
                 </div>
                 <div className="col col-lg-6 col-12">
                   <div className="form-field">
-                    <label className="mb-1">Status</label>
                     <select
                       type="text"
                       name="subject"
                       className="rounded-2"
-                      style={{ backgroundColor: "white" }}
+                      style={{ backgroundColor: "white", height: "55px" }}
                     >
-                      <option>Service</option>
+                      <option>Status</option>
                       <option>Architecture</option>
                     </select>
                   </div>
