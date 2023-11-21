@@ -8,6 +8,9 @@ import "/styles/sass/style.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { NextIntlClientProvider } from "next-intl";
+import { useMessages } from "next-intl";
+
 import ClientLayout from "./ClientLayout";
 
 export const metadata = {
@@ -16,7 +19,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params: { locale } }) {
+  const messages = useMessages();
+
   return (
     <html lang="en">
       <head>
@@ -33,7 +38,11 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <ClientLayout>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ClientLayout>
       </body>
     </html>
   );

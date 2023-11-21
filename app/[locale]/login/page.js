@@ -11,7 +11,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLoginState } from "../../store/reducers/user";
+import { setUserLoginState } from "/store/reducers/user";
 
 const LoginPage = (props) => {
   const router = useRouter();
@@ -117,7 +117,14 @@ const LoginPage = (props) => {
                   }
                   label="Remember Me"
                 />
-                <Link href="/forgot-password" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Link
+                  href="/forgot-password"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   Forgot Password?
                 </Link>
               </Grid>
@@ -130,7 +137,7 @@ const LoginPage = (props) => {
                 <p>- or -</p>
               </Grid>
               <Grid className="loginWithSocial">
-                <Button className="google" style={{ background: '#DB4437' }}>
+                <Button className="google" style={{ background: "#DB4437" }}>
                   <i className="fa fa-google"></i>
                 </Button>
               </Grid>

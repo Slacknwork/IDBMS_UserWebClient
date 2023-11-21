@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Nav, NavItem } from "reactstrap";
 
 import classnames from "classnames";
-import Link from "next/link";
+import { Link } from "/navigation";
 
 export default function ProjectDetail({ children }) {
   const [activeTab, setActiveTab] = useState("1");

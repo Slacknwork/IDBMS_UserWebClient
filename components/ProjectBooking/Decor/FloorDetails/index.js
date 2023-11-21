@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "/navigation";
 import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";

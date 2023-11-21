@@ -3,10 +3,14 @@
 import PageTitle from "/components/PageTitle";
 import ProjectDetail from "/components/ProjectDetails";
 
+import { useTranslations } from "next-intl";
+
 export default function ClientLayout({ children }) {
+  const t = useTranslations("Project");
+
   return (
     <div>
-      <PageTitle pageTitle={"Tasks"} pagesub={"Project"} />
+      <PageTitle pageTitle={t("Details")} pagesub={"Project"} />
       <ProjectDetail>{children}</ProjectDetail>
     </div>
   );
