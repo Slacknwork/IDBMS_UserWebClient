@@ -3,6 +3,8 @@ import { Link } from "/navigation";
 
 import urls from "/constants/urls";
 
+import Pagination from "/components/Pagination";
+
 const RoomTableItem = () => {
   const RoomHref = urls.project.id.tasks.taskId.getUri(1, 1);
 
@@ -136,6 +138,7 @@ export default function ProjectTasks() {
       <div className="row">
         <div className="col col-lg-12 col-12">
           <RoomTable></RoomTable>
+          <Pagination></Pagination>
         </div>
       </div>
     </div>
