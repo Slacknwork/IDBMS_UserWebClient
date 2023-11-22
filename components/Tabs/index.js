@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Nav, NavItem } from "reactstrap";
 
 import classnames from "classnames";
@@ -14,9 +15,13 @@ export default function Tabs({ uriPos, tabs }) {
 
   const [activeTab, setActiveTab] = useState(paths[uriPos]);
 
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
+  useEffect(() => {
+    const item = tabs.find((p) => {
+      return paths[uriPos] === p.path;
+    })?.path;
+    setActiveTab(item || "");
+  }, [paths]);
+
   return (
     <Nav tabs>
       {tabs.map((tab) => {
@@ -27,9 +32,6 @@ export default function Tabs({ uriPos, tabs }) {
               className={classnames({
                 active: activeTab === tab.path,
               })}
-              onClick={() => {
-                toggle(tab.path);
-              }}
             >
               {tab.label}
             </Link>

@@ -1,8 +1,8 @@
 export default {
   id: {
     NAVBAR: "#navbar",
-    BOOKING_SECTION: "#booking-section",
-    PROJECT_SECTION: "#project-section",
+    BOOKING_SECTION: "booking-section",
+    PROJECT_SECTION: "project-section",
   },
   project: {
     getUri: () => `/project`,

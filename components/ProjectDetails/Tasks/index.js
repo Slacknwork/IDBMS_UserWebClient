@@ -138,7 +138,10 @@ export default function ProjectTasks() {
       <div className="row">
         <div className="col col-lg-12 col-12">
           <RoomTable></RoomTable>
-          <Pagination></Pagination>
+          <Pagination
+            path={`tasks`}
+            sectionId={urls.id.PROJECT_SECTION}
+          ></Pagination>
         </div>
       </div>
     </div>

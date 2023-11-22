@@ -5,17 +5,19 @@ import { useSearchParams } from "next/navigation";
 
 export default function Pagination({
   pageCount = 5,
-  pageUri = "page",
+  pageQuery = "page",
   sectionId = "",
 }) {
   const searchParams = useSearchParams();
 
-  const currentPage = searchParams.get(pageUri)
-    ? searchParams.get(pageUri) - 1
+  const currentPage = searchParams.get(pageQuery)
+    ? searchParams.get(pageQuery) - 1
     : 0;
 
   function getHref(page) {
-    return { pathname: sectionId, query: { [pageUri]: page + 1 } };
+    return {
+      query: { [pageQuery]: page + 1 },
+    };
   }
 
   return (
@@ -23,7 +25,11 @@ export default function Pagination({
       <ul className="pg-pagination">
         {currentPage > 0 && (
           <li>
-            <Link href={getHref(currentPage - 1)} aria-label="Previous">
+            <Link
+              href={getHref(currentPage - 1)}
+              aria-label="Previous"
+              scroll={false}
+            >
               <i className="ti-angle-left"></i>
             </Link>
           </li>
@@ -31,13 +37,19 @@ export default function Pagination({
         {Array.from(Array(pageCount), (e, i) => {
           return (
             <li className={`${currentPage == i ? "active" : ""}`} key={i}>
-              <Link href={getHref(i)}>{i + 1}</Link>
+              <Link href={getHref(i)} scroll={false}>
+                {i + 1}
+              </Link>
             </li>
           );
         })}
         {currentPage < pageCount - 1 && (
           <li>
-            <Link href={getHref(currentPage + 1)} aria-label="Next">
+            <Link
+              href={getHref(currentPage + 1)}
+              aria-label="Next"
+              scroll={false}
+            >
               <i className="ti-angle-right"></i>
             </Link>
           </li>
