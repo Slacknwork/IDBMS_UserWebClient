@@ -10,7 +10,9 @@ export default function Pagination({
 }) {
   const searchParams = useSearchParams();
 
-  const currentPage = searchParams.get(pageUri) - 1 || 0;
+  const currentPage = searchParams.get(pageUri)
+    ? searchParams.get(pageUri) - 1
+    : 0;
 
   function getHref(page) {
     return { pathname: sectionId, query: { [pageUri]: page + 1 } };
