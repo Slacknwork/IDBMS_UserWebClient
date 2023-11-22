@@ -90,7 +90,7 @@ export default function ProjectDetail({ children }) {
               </Nav>
             </div>
             <div
-              className="shadow-lg pt-4 mb-4"
+              className="shadow-lg py-4 mb-4"
               style={{ backgroundColor: "#fafafa" }}
             >
               {children}
