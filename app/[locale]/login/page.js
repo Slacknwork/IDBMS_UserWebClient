@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLoginState } from "/store/reducers/user";
 

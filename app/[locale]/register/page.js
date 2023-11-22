@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { Link } from "/navigation";
 import { FormControl, FormControlLabel, InputLabel, Radio, RadioGroup } from "@mui/material";
 import { Select } from "flowbite-react";
 import { MdOutlineRadioButtonChecked } from "react-icons/md";
