@@ -86,12 +86,11 @@ export default function Documents() {
           <div className="blog-sidebar">
             <div className="widget search-widget mb-4">
               <form>
-                <label className="mb-1">Task Name</label>
                 <div>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Search Post.."
+                    placeholder="Search Document.."
                   />
                   <button type="submit">
                     <i className="ti-search"></i>
@@ -106,14 +105,13 @@ export default function Documents() {
             <form>
               <div className="wpo-contact-form-area-transparent row">
                 <div className="form-field">
-                  <label className="mb-1">Category</label>
                   <select
                     type="text"
                     name="subject"
                     className="rounded-2"
-                    style={{ backgroundColor: "white" }}
+                    style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    <option>Service</option>
+                    <option>Category</option>
                     <option>Architecture</option>
                   </select>
                 </div>
@@ -121,7 +119,7 @@ export default function Documents() {
             </form>
           </div>
         </div>
-        <div className="col col-lg-1 offset-lg-3 col-12 mt-0 mb-4 my-lg-4">
+        <div className="col col-lg-1 offset-lg-3 col-12">
           <Link className="theme-btn px-4" href="/project/1/items">
             Add
           </Link>

@@ -2,10 +2,14 @@ import React from "react";
 import { Link } from "/navigation";
 
 import urls from "/constants/urls";
+import OverviewBreadcrumb from "../Overview/Breadcrumb";
 
 const SiteDetailsForm = () => {
   return (
     <div className="row">
+      <div className="col col-lg-12 col-12">
+        <OverviewBreadcrumb id={1} siteId={1}></OverviewBreadcrumb>
+      </div>
       <div className="col col-lg-4 col-12">
         <h3>Site Information</h3>
       </div>
@@ -21,10 +25,36 @@ const SiteDetailsForm = () => {
           <input type="text" name="name" placeholder="Use purpose" />
         </div>
       </div>
-      <div className="col col-lg-12 col-12">
+      <div className="col col-lg-6 col-12">
         <div className="form-field">
-          <label className="mb-1">Site Description</label>
+          <label className="mb-1">Room Description</label>
           <textarea type="text" name="message" placeholder="Message"></textarea>
+        </div>
+      </div>
+      <div className="col col-lg-6 col-12">
+        <div className="row">
+          <div className="col col-lg-6 col-12">
+            <div className="form-field">
+              <label className="mb-1">Area</label>
+              <input type="text" name="message" placeholder="Message"></input>
+            </div>
+          </div>
+          <div className="col col-lg-6 col-12">
+            <div className="form-field">
+              <label className="mb-1">Price</label>
+              <input type="text" name="message" placeholder="Message"></input>
+            </div>
+          </div>
+        </div>
+        <div className="form-field">
+          <div className="d-flex gap-4">
+            <label className="my-auto">Tasks</label>
+            <div className="d-flex">
+              <Link href={`/project/1/tasks`} className="theme-btn px-4">
+                View Tasks
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

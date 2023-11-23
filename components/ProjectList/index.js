@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { Link } from "/navigation";
 import {
@@ -108,7 +110,7 @@ export default function ProjectList() {
           className="col-12 product-info"
           style={{ marginTop: "2rem", marginBottom: "2rem" }}
         >
-          <Nav tabs>
+          <Nav tabs={true}>
             <NavItem style={{ cursor: "pointer" }}>
               <NavLink
                 className={classnames({ active: activeTab === "1" })}
@@ -144,7 +146,7 @@ export default function ProjectList() {
             <TabPane tabId="1">
               <Row className="my-3">
                 {api().map((product) => (
-                  <Col sm="12" key={product}>
+                  <Col sm="12" key={product.id}>
                     <ProjectItem
                       projectDetails={product}
                       key={product}

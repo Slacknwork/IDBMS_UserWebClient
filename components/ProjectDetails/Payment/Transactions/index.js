@@ -6,7 +6,7 @@ import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
 
-const RoomTableItem = () => {
+const StageItem = () => {
   const RoomHref =
     urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
       1,
@@ -46,7 +46,7 @@ const RoomTableItem = () => {
   );
 };
 
-const RoomTable = () => {
+const StageTable = () => {
   return (
     <div
       style={{
@@ -76,17 +76,17 @@ const RoomTable = () => {
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          <StageItem></StageItem>
+          <StageItem></StageItem>
+          <StageItem></StageItem>
+          <StageItem></StageItem>
         </tbody>
       </table>
     </div>
   );
 };
 
-export default function ItemList() {
+export default function PaymentStages() {
   return (
     <div className="container">
       <div className="row">
@@ -135,7 +135,7 @@ export default function ItemList() {
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <RoomTable></RoomTable>
+          <StageTable></StageTable>
         </div>
       </div>
     </div>

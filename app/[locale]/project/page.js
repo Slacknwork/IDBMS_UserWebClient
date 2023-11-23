@@ -1,20 +1,14 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React from "react";
 import PageTitle from "/components/PageTitle";
 import ProjectList from "/components/ProjectList";
 
-const ProjectListPage = () => {
+export default function ProjectPage() {
   return (
-    <Fragment>
+    <div>
       <PageTitle pageTitle={"Project List"} pagesub={"Project List"} />
       <ProjectList></ProjectList>
-    </Fragment>
+    </div>
   );
-};
-
-const ProjectPage = () => {
-  return <ProjectListPage></ProjectListPage>;
-};
-
-export default ProjectPage;
+}

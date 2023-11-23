@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "/navigation";
 
 import urls from "/constants/urls";
 
@@ -16,7 +16,7 @@ const ProjectTypeSelect = (props) => {
               <i></i>
               <h2>Decor Project</h2>
               <p>Book Architects to make an Interior Decor Project</p>
-              <Link href={"/project/booking/decor" + urls.id.BOOKING_SECTION}>
+              <Link href={"/project/booking/decor#" + urls.id.BOOKING_SECTION}>
                 Book
               </Link>
             </div>
@@ -30,7 +30,9 @@ const ProjectTypeSelect = (props) => {
               <h2>Construction Project</h2>
               <p>Book IDT to build on an existing Design</p>
               <Link
-                href={"/project/booking/construction" + urls.id.BOOKING_SECTION}
+                href={
+                  "/project/booking/construction#" + urls.id.BOOKING_SECTION
+                }
               >
                 Book
               </Link>

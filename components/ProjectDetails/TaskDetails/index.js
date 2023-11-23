@@ -1,23 +1,10 @@
-"use client";
-
-import { Link } from "/navigation";
-import OverviewBreadcrumb from "../Overview/Breadcrumb";
-
-export default function RoomDetails() {
+export default function TaskDetails() {
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
         <div className="row">
-          <div className="col col-lg-12 col-12">
-            <OverviewBreadcrumb
-              id={1}
-              siteId={1}
-              floorId={1}
-              roomId={1}
-            ></OverviewBreadcrumb>
-          </div>
           <div className="col col-lg-3 col-12">
-            <h3>Room Information</h3>
+            <h3>Task Information</h3>
           </div>
           <div className="col col-lg-3 col-12">
             <div className="form-field">
@@ -56,37 +43,13 @@ export default function RoomDetails() {
             </div>
           </div>
           <div className="col col-lg-6 col-12">
-            <div className="row">
-              <div className="col col-lg-6 col-12">
-                <div className="form-field">
-                  <label className="mb-1">Area</label>
-                  <input
-                    type="text"
-                    name="message"
-                    placeholder="Message"
-                  ></input>
-                </div>
-              </div>
-              <div className="col col-lg-6 col-12">
-                <div className="form-field">
-                  <label className="mb-1">Price</label>
-                  <input
-                    type="text"
-                    name="message"
-                    placeholder="Message"
-                  ></input>
-                </div>
-              </div>
+            <div className="form-field">
+              <label className="mb-1">Progress</label>
+              <input type="text" name="name" placeholder="Your Name" />
             </div>
             <div className="form-field">
-              <div className="d-flex gap-4">
-                <label className="my-auto">Tasks</label>
-                <div className="d-flex">
-                  <Link href={`/project/1/tasks`} className="theme-btn px-4">
-                    View Tasks
-                  </Link>
-                </div>
-              </div>
+              <label className="mb-1">Price</label>
+              <input type="text" name="name" placeholder="Your Name" />
             </div>
           </div>
         </div>

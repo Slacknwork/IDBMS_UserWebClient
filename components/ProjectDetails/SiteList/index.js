@@ -7,10 +7,10 @@ const SiteItem = () => {
   const siteDetailsUrl = urls.project.id.site.siteNo.getUri(1, 1);
 
   return (
-    <div className="container">
+    <div className="container" style={{ height: "18rem" }}>
       <div
         className="row shadow p-4 my-4 mx-1"
-        style={{ height: "18rem", backgroundColor: "white" }}
+        style={{ backgroundColor: "white" }}
       >
         <div className="col-4 col-lg-3 my-auto">
           <div className="shop-img">

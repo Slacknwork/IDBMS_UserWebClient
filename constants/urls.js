@@ -1,8 +1,8 @@
 export default {
   id: {
     NAVBAR: "#navbar",
-    BOOKING_SECTION: "#booking-section",
-    PROJECT_SECTION: "#project-section",
+    BOOKING_SECTION: "booking-section",
+    PROJECT_SECTION: "project-section",
   },
   project: {
     getUri: () => `/project`,
@@ -60,6 +60,16 @@ export default {
                 },
               },
             },
+          },
+        },
+      },
+      tasks: {
+        taskId: {
+          getUri: (id, taskId) =>
+            `/project/${id}/tasks/${taskId}#project-section`,
+          reports: {
+            getUri: (id, taskId) =>
+              `/project/${id}/tasks/${taskId}/reports#project-section`,
           },
         },
       },

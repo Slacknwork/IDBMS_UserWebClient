@@ -1,12 +1,18 @@
+"use client";
+
 import React from "react";
 import { Link } from "/navigation";
-import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
+
+import OverviewBreadcrumb from "../Overview/Breadcrumb";
 
 const FloorDetailsForm = () => {
   return (
     <div className="row">
+      <div className="col col-lg-12 col-12">
+        <OverviewBreadcrumb id={1} siteId={1} floorId={1}></OverviewBreadcrumb>
+      </div>
       <div className="col col-lg-4 col-12">
         <h3>Floor Information</h3>
       </div>
@@ -22,10 +28,36 @@ const FloorDetailsForm = () => {
           <input type="text" name="name" placeholder="Use purpose" />
         </div>
       </div>
-      <div className="col col-lg-12 col-12">
+      <div className="col col-lg-6 col-12">
         <div className="form-field">
           <label className="mb-1">Floor Description</label>
           <textarea type="text" name="message" placeholder="Message"></textarea>
+        </div>
+      </div>
+      <div className="col col-lg-6 col-12">
+        <div className="row">
+          <div className="col col-lg-6 col-12">
+            <div className="form-field">
+              <label className="mb-1">Total area</label>
+              <input type="text" name="message" placeholder="Message"></input>
+            </div>
+          </div>
+          <div className="col col-lg-6 col-12">
+            <div className="form-field">
+              <label className="mb-1">Total price</label>
+              <input type="text" name="message" placeholder="Message"></input>
+            </div>
+          </div>
+        </div>
+        <div className="form-field">
+          <div className="d-flex gap-4">
+            <label className="my-auto">Tasks</label>
+            <div className="d-flex">
+              <Link href={`/project/1/tasks`} className="theme-btn px-4">
+                View Tasks
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,13 +89,6 @@ const RoomTableItem = () => {
           >
             Details
           </Link>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
         </div>
       </td>
     </tr>
@@ -106,20 +131,13 @@ const RoomTable = () => {
   );
 };
 
-const BookingSiteDetails = () => {
+export default function FloorDetails() {
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
         <FloorDetailsForm></FloorDetailsForm>
         <div className="row">
-          <div className="col col-lg-12 col-12">
-            <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Rooms</h3>
-              <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
-              </div>
-            </div>
-          </div>
+          <h3 className="my-auto">Rooms</h3>
         </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
@@ -129,6 +147,4 @@ const BookingSiteDetails = () => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteDetails;
+}
