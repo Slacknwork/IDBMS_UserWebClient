@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "/navigation";
 import {
   TabContent,
@@ -12,17 +12,16 @@ import {
   Col,
 } from "reactstrap";
 import classnames from "classnames";
+import { toast } from "react-toastify";
+import Image from "next/image";
 
 import urls from "/constants/urls";
 
-import { getParticipationByUserId } from "../../api/projectParticipationServices";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import decorIconImage from '/public/images/project-type/decor-icon-1.png'
-import consIconImage from '/public/images/project-type/construction-icon-1.png'
-import decorExpImage from '/public/images/project-type/decor-example-image.jpg'
-import Image from "next/image";
+import { getParticipationByUserId } from "/api/projectParticipationServices";
+
+const decorIconImageUrl = "/images/project-type/decor-icon-1.png";
+const consIconImageUrl = "/images/project-type/construction-icon-1.png";
+const decorExpImageUrl = "/images/project-type/decor-example-image.jpg";
 
 const SubmitHandler = (e) => {
   e.preventDefault();
@@ -30,7 +29,7 @@ const SubmitHandler = (e) => {
 
 const ProjectItem = (projectDetails) => {
   const projectUrl = `${urls.project.id.getUri(1)}`;
-  console.log(projectDetails)
+  console.log(projectDetails);
   const project = projectDetails.projectDetails;
   return (
     <div className="container">
@@ -40,16 +39,29 @@ const ProjectItem = (projectDetails) => {
       >
         <div className="col-lg-4 my-auto">
           <div className="shop-img">
-            <Image src="https://memeprod.s3.ap-northeast-1.amazonaws.com/user-template/905aee34215e8c8daa8227801d758865.png" alt="" width={0} height={0} style={{ width: '24rem', height: '24rem' }} />
+            <Image
+              src={decorIconImageUrl}
+              alt=""
+              width={0}
+              height={0}
+              style={{ width: "24rem", height: "24rem", objectFit: "cover" }}
+              unoptimized={true}
+            />
           </div>
         </div>
         <div className="col-lg-8 d-flex align-items-start justify-content-between">
           <div className="shop-info my-4">
             <h3 className="">{project && project.name}</h3>
             <div className="des">
-              <p style={{ textAlign: "justify" }}>Description: {project && project.description}</p>
+              <p style={{ textAlign: "justify" }}>
+                Description: {project && project.description}
+              </p>
               <p>Estimate Price: {project && project.estimatedPrice}</p>
-              <p>Created Date: {project && new Date(project.createdDate).toLocaleDateString('en-GB')}</p>
+              <p>
+                Created Date:{" "}
+                {project &&
+                  new Date(project.createdDate).toLocaleDateString("en-GB")}
+              </p>
             </div>
           </div>
           <div className="mt-auto d-flex gap-3">
@@ -73,7 +85,7 @@ export default function ProjectList() {
   };
 
   const [values, setValues] = useState([]);
-  const [userId, setUserId] = useState('A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF');
+  const [userId, setUserId] = useState("A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF");
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -167,13 +179,12 @@ export default function ProjectList() {
           <TabContent activeTab={activeTab}>
             <TabPane tabId="1">
               <Row className="my-3">
-                {values && values.map((item, index) => (
-                  <Col sm="12" key={index}>
-                    <ProjectItem
-                      projectDetails={item.project}
-                    ></ProjectItem>
-                  </Col>
-                ))}
+                {values &&
+                  values.map((item, index) => (
+                    <Col sm="12" key={index}>
+                      <ProjectItem projectDetails={item.project}></ProjectItem>
+                    </Col>
+                  ))}
                 <Col sm="12">
                   <div className="pagination-wrapper pagination-wrapper-center">
                     <ul className="pg-pagination">
