@@ -7,6 +7,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import InteriorItemCategories from "./Categories";
 import Pagination from "/components/Pagination";
+import { useRef } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { getAllInteriorItems } from "../../api/interiorItemServices";
+import Image from "next/image";
 
 function InteriorItemSearchBar() {
   return (
@@ -94,17 +100,27 @@ function InteriorItemFilter() {
   );
 }
 
-function InteriorItemSingle() {
+function InteriorItemSingle(itemDetails) {
+  const item = itemDetails.item;
   return (
     <div className="grid" style={{ backgroundColor: "white" }}>
-      <div className="img-holder">
-        <img src="" alt="" />
-      </div>
+
+      <Image
+        src="https://media.istockphoto.com/id/1334037436/photo/wooden-chair-isolated-on-white-with-clipping-path.jpg?s=612x612&w=0&k=20&c=ToZrdNt8mNvaPLEuMg9Pj6u-5etxNwcIUzVOIF088yM="
+        alt=""
+        width={0}
+        height={0}
+        style={{ width: "24rem", height: "24rem", objectFit: "cover" }}
+        unoptimized={true}
+      />
       <div className="details">
-        <h3>
-          <Link href="/interior/1">Product Title</Link>
+        <h3 style={{ height: "55px", overflowY: "auto" }}>
+          <Link href="/interior/1">{item && item.name}</Link>
         </h3>
-        <span>$1000</span>
+        <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+        {
+          // <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+        }
         <div className="add-to-cart">
           <button
             data-bs-toggle="tooltip"
@@ -119,20 +135,31 @@ function InteriorItemSingle() {
   );
 }
 
-function InteriorItemList() {
-  return (
-    <div>
-      <InteriorItemSingle></InteriorItemSingle>
-      <InteriorItemSingle></InteriorItemSingle>
-      <InteriorItemSingle></InteriorItemSingle>
-      <InteriorItemSingle></InteriorItemSingle>
-      <InteriorItemSingle></InteriorItemSingle>
-      <InteriorItemSingle></InteriorItemSingle>
-    </div>
-  );
-}
-
 export default function InteriorItems() {
+
+  const [values, setValues] = useState([]);
+  const [userId, setUserId] = useState("A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getAllInteriorItems();
+          console.log(data);
+          setValues(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, []);
+
   return (
     <section className="wpo-shop-section">
       <div className="container my-4">
@@ -143,7 +170,11 @@ export default function InteriorItems() {
           </div>
           <div className="col col-lg-9 col-12">
             <InteriorItemSearchBar></InteriorItemSearchBar>
-            <InteriorItemList></InteriorItemList>
+            <div>
+              {values && values.map((item, index) => (
+                <InteriorItemSingle key={index} item={item} />
+              ))}
+            </div>
             <Pagination></Pagination>
           </div>
         </div>
