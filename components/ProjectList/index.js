@@ -21,6 +21,7 @@ import { getParticipationByUserId } from "/api/projectParticipationServices";
 
 const decorIconImageUrl = "/images/project-type/decor-icon-1.png";
 const consIconImageUrl = "/images/project-type/construction-icon-1.png";
+const undefinedIconImageUrl = "/images/project-type/undefined-icon-1.png";
 
 const SubmitHandler = (e) => {
   e.preventDefault();
@@ -29,7 +30,8 @@ const SubmitHandler = (e) => {
 const ProjectItem = (projectDetails) => {
   const projectUrl = `${urls.project.id.getUri(1)}`;
   console.log(projectDetails);
-  const project = projectDetails.projectDetails;
+  const item = projectDetails.project;
+  console.log(item);
   return (
     <div className="container">
       <div
@@ -39,31 +41,35 @@ const ProjectItem = (projectDetails) => {
         <div className="col-lg-4 my-auto d-flex justify-content-center">
           <div className="shop-img">
             <Image
-              src={project.type === 0 ? decorIconImageUrl : consIconImageUrl}
+              src={item && item.projectCategory?.iconImageUrl}
               alt=""
               width={0}
               height={0}
-              style={{ width: "12rem", height: "12rem", objectFit: "cover" }}
+              style={{ width: "24rem", height: "24rem", objectFit: "cover" }}
               unoptimized={true}
             />
           </div>
         </div>
         <div className="col-lg-8 d-flex align-items-start justify-content-between">
           <div className="shop-info my-4">
-            <h3 className="">{project && project.name}</h3>
+            <h3 className="">{item && item.name}</h3>
             <div className="des">
               <p style={{ textAlign: "justify" }}>
-                Description: {project && project.description}
+                Description: {item && item.description}
               </p>
               <p>
-                {project && project.finalPrice
-                  ? `Final Price: ${project.finalPrice}`
-                  : `Estimate Price: ${project.estimatedPrice}`}
+                {item
+                  ? item.finalPrice
+                    ? `Final Price: ${item.finalPrice}`
+                    : item.estimatedPrice
+                      ? `Estimate Price: ${item.estimatedPrice}`
+                      : 'Price information not available'
+                  : 'Item information not available'}
               </p>
               <p>
                 Created Date:{" "}
-                {project &&
-                  new Date(project.createdDate).toLocaleDateString("en-GB")}
+                {item &&
+                  new Date(item.createdDate).toLocaleDateString("en-GB")}
               </p>
             </div>
           </div>
@@ -183,11 +189,9 @@ export default function ProjectList() {
             <TabPane tabId="1">
               <Row className="my-3">
                 {values &&
-                  values.map((item) => (
-                    <Col sm="12" key={item.id}>
-                      <ProjectItem
-                        projectDetails={item.project}
-                      ></ProjectItem>
+                  values.map((item, index) => (
+                    <Col sm="12" key={index}>
+                      <ProjectItem key={index} project={item.project} />
                     </Col>
                   ))}
                 <Col sm="12">
@@ -222,11 +226,9 @@ export default function ProjectList() {
                 {values &&
                   values
                     .filter((item) => item.project.type === 0)
-                    .map((item) => (
-                      <Col sm="12" key={item.id}>
-                        <ProjectItem
-                          projectDetails={item.project}
-                        ></ProjectItem>
+                    .map((item, index) => (
+                      <Col sm="12" key={index}>
+                        <ProjectItem key={index} project={item.project} />
                       </Col>
                     ))}
                 <Col sm="12">
@@ -261,11 +263,9 @@ export default function ProjectList() {
                 {values &&
                   values
                     .filter((item) => item.project.type === 1)
-                    .map((item) => (
-                      <Col sm="12" key={item.id}>
-                        <ProjectItem
-                          projectDetails={item.project}
-                        ></ProjectItem>
+                    .map((item, index) => (
+                      <Col sm="12" key={index}>
+                        <ProjectItem key={index} project={item.project} />
                       </Col>
                     ))}
                 <Col sm="12">

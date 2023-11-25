@@ -1,6 +1,36 @@
 "use client";
 
+import { useEffect } from "react";
+import { useState } from "react";
+import { useRef } from "react";
+import { toast } from "react-toastify";
+import { getProjectById } from "../../../api/projectServices";
+
 export default function ProjectOverview() {
+
+  const [item, setItem] = useState([]);
+  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getProjectById(projectId);
+          console.log(data);
+          setItem(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [projectId]);
+
   return (
     <div className="wpo-project-single-area">
       <div className="container">
@@ -8,30 +38,17 @@ export default function ProjectOverview() {
           <div className="col-lg-10 col-12">
             <div className="wpo-project-single-wrap">
               <div className="wpo-project-single-item">
-                <div className="row align-items-center">
+                <div className="row align-items-left" style={{ paddingTop: '30px' }}>
                   <div className="col-lg-7">
                     <div className="wpo-project-single-title">
-                      <h3>Project Name</h3>
+                      <h3>Project Name: {item && item.name} </h3>
                     </div>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Metus dis posuere amet tincidunt commodo, velit. Ipsum,
-                      hac nibh fermentum nisi, platea condimentum cursus velit
-                      dui. Massa volutpat odio facilisis purus sit elementum.
-                      Non, sed velit dictum quam. Id risus pharetra est, at
-                      rhoncus, nec ullamcorper tincidunt. Id aliquet duis
-                      sollicitudin diam, elit sit. Et nisi in libero facilisis
-                      sed est. Elit curabitur amet risus bibendum. Posuere et
-                      eget orci, tempor enim.
+                      Updated date: {item &&
+                        new Date(item.updatedDate).toLocaleDateString("en-GB")}
                     </p>
                     <p>
-                      Hac nibh fermentum nisi, platea condimentum cursus velit
-                      dui. Massa volutpat odio facilisis purus sit elementum.
-                      Non, sed velit dictum quam. Id risus pharetra est, at
-                      rhoncus, nec ullamcorper tincidunt. Id aliquet duis
-                      sollicitudin diam, elit sit Et nisi in libero facilisis
-                      sed est. Elit curabitur amet risus bibendum. Posuere et
-                      eget orci. sed velit dictum quam. Id risus pharetra est
+                      Description: {item && item.description}
                     </p>
                   </div>
                   <div className="col-lg-5">
@@ -41,25 +58,39 @@ export default function ProjectOverview() {
                     >
                       <ul>
                         <li>
-                          Location :<span>7 Lake Street,London</span>
+                          Company Name<span>{item && item.companyName}</span>
                         </li>
                         <li>
-                          Client :<span>wpOceans</span>
+                          Company Address<span>{item && item.companyAddress}</span>
                         </li>
                         <li>
-                          Architect :<span>Harry Johnson</span>
+                          {item && item.type === 0
+                            ? 'Lead Architect'
+                            : item && item.type === 1
+                              ? 'Construction Manager'
+                              : 'Not specified'}
+                          <span>
+                            {item &&
+                              item.projectParticipations &&
+                              item.projectParticipations
+                                .filter((participation) =>
+                                  (item.type === 0 && participation.role === 2) ||
+                                  (item.type === 1 && participation.role === 4))
+                                .map((lead) => lead.user?.name)
+                                .join(', ')}
+                          </span>
                         </li>
                         <li>
-                          Project Type :<span>Interior</span>
+                          Project Type<span>{item && item.type}</span>
                         </li>
                         <li>
-                          Duration :<span>6 Month</span>
+                          Language<span>{item && item.language}</span>
                         </li>
                         <li>
-                          Completion :<span>15 Apr 2022</span>
+                          Status<span>{item && item.status}</span>
                         </li>
                         <li>
-                          Share :<span>Architectural, Business</span>
+                          Advertisement Status<span>{item && item.advertisementStatus}</span>
                         </li>
                       </ul>
                     </div>
