@@ -4,31 +4,42 @@ import { Link } from "/navigation";
 import urls from "/constants/urls";
 
 import Pagination from "/components/Pagination";
+import { getProjectTasksByProjectId } from "../../../api/projectTaskServices";
+import { useRef } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-const RoomTableItem = () => {
-  const RoomHref = urls.project.id.tasks.taskId.getUri(1, 1);
+const TaskTableItem = (task) => {
+  const TaskHref = urls.project.id.tasks.taskId.getUri(1, 1);
+  console.log(task);
+  const item = task.task;
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
         1
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">Site 1 Room 1</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">doing</td>
+      <td className="align-middle">{item && item.name}</td>
+      <td className="align-middle" style={{ whiteSpace: 'pre-line' }}>
+        {item && item.room && `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
+      </td>
+      <td className="align-middle">{item && item.taskCategory?.name}</td>
+      <td className="align-middle">
+        {item && (item.unitUsed > item.unitInContract ? item.pricePerUnit * item.unitUsed : item.pricePerUnit * item.unitInContract)}
+      </td>
+      <td className="align-middle">{item && item.status}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
-            href={RoomHref}
+            href={TaskHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
             Details
           </Link>
           <Link
-            href={RoomHref}
+            href={TaskHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
@@ -40,7 +51,9 @@ const RoomTableItem = () => {
   );
 };
 
-const RoomTable = () => {
+const TaskTable = (listTask) => {
+  console.log(listTask)
+  const values = listTask.listTask;
   return (
     <div
       style={{
@@ -60,7 +73,7 @@ const RoomTable = () => {
             <th scope="col">Name</th>
             <th scope="col">Location</th>
             <th scope="col">Category</th>
-            <th scope="col">Price</th>
+            <th scope="col">Price (VND)</th>
             <th scope="col">Status</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
@@ -68,10 +81,10 @@ const RoomTable = () => {
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {values &&
+            values.map((item, index) => (
+              <TaskTableItem key={index} task={item} />
+            ))}
         </tbody>
       </table>
     </div>
@@ -79,6 +92,30 @@ const RoomTable = () => {
 };
 
 export default function ProjectTasks() {
+
+  const [values, setValues] = useState([]);
+  const [projectId, setProjectId] = useState("FF090F51-E6E7-4854-8F3F-0402EE32C9F8");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getProjectTasksByProjectId(projectId);
+          console.log(data);
+          setValues(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [projectId]);
+
   return (
     <div className="container">
       <div className="row">
@@ -137,7 +174,7 @@ export default function ProjectTasks() {
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <RoomTable></RoomTable>
+          {values && (<TaskTable listTask={values} />)}
           <Pagination
             path={`tasks`}
             sectionId={urls.id.PROJECT_SECTION}

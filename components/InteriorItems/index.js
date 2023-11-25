@@ -117,11 +117,8 @@ function InteriorItemSingle(itemDetails) {
         <h3 style={{ height: "55px", overflowY: "auto" }}>
           <Link href="/interior/1">{item && item.name}</Link>
         </h3>
-        <div>
+        <div className="price">
           <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-          {
-            // <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-          }
         </div>
         <div className="add-to-cart">
           <button
