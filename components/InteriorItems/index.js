@@ -118,7 +118,9 @@ function InteriorItemSingle(itemDetails) {
           <Link href="/interior/1">{item && item.name}</Link>
         </h3>
         <div className="price">
-          <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+          <span>
+            {item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN') + ' VND'}
+          </span>
         </div>
         <div className="add-to-cart">
           <button
