@@ -30,7 +30,8 @@ const SubmitHandler = (e) => {
 const ProjectItem = (projectDetails) => {
   const projectUrl = `${urls.project.id.getUri(1)}`;
   console.log(projectDetails);
-  const item = projectDetails.item;
+  const item = projectDetails.project;
+  console.log(item);
   return (
     <div className="container">
       <div
@@ -40,9 +41,7 @@ const ProjectItem = (projectDetails) => {
         <div className="col-lg-4 my-auto d-flex justify-content-center">
           <div className="shop-img">
             <Image
-              src={item.projectCategory &&
-                item.projectCategory.iconImageUrl
-              }
+              src={item && item.projectCategory?.iconImageUrl}
               alt=""
               width={0}
               height={0}
@@ -59,9 +58,13 @@ const ProjectItem = (projectDetails) => {
                 Description: {item && item.description}
               </p>
               <p>
-                {item && item.finalPrice
-                  ? `Final Price: ${item.finalPrice}`
-                  : `Estimate Price: ${item.estimatedPrice}`}
+                {item
+                  ? item.finalPrice
+                    ? `Final Price: ${item.finalPrice}`
+                    : item.estimatedPrice
+                      ? `Estimate Price: ${item.estimatedPrice}`
+                      : 'Price information not available'
+                  : 'Item information not available'}
               </p>
               <p>
                 Created Date:{" "}
@@ -188,7 +191,7 @@ export default function ProjectList() {
                 {values &&
                   values.map((item, index) => (
                     <Col sm="12" key={index}>
-                      <ProjectItem key={index} project={item.item} />
+                      <ProjectItem key={index} project={item.project} />
                     </Col>
                   ))}
                 <Col sm="12">
@@ -223,11 +226,9 @@ export default function ProjectList() {
                 {values &&
                   values
                     .filter((item) => item.project.type === 0)
-                    .map((item) => (
-                      <Col sm="12" key={item.id}>
-                        <ProjectItem
-                          projectDetails={item.project}
-                        ></ProjectItem>
+                    .map((item, index) => (
+                      <Col sm="12" key={index}>
+                        <ProjectItem key={index} project={item.project} />
                       </Col>
                     ))}
                 <Col sm="12">
@@ -262,11 +263,9 @@ export default function ProjectList() {
                 {values &&
                   values
                     .filter((item) => item.project.type === 1)
-                    .map((item) => (
-                      <Col sm="12" key={item.id}>
-                        <ProjectItem
-                          projectDetails={item.project}
-                        ></ProjectItem>
+                    .map((item, index) => (
+                      <Col sm="12" key={index}>
+                        <ProjectItem key={index} project={item.project} />
                       </Col>
                     ))}
                 <Col sm="12">

@@ -21,9 +21,10 @@ function Category(categoryDetails) {
               alt="Icon" />
           </div>
         </div>
-        <div className="col-9 d-flex align-items-center justify-content-center" style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-          <h2>{item && item.name}</h2>
+        <div className="col-9 d-flex align-items-center justify-content-center" style={{ display: "-webkit-box", WebkitBoxOrient: "vertical", overflow: "hidden", WebkitLineClamp: 2 }}>
+          <h2 style={{ fontSize: "25px" }}>{item && item.name}</h2>
         </div>
+
       </div>
     </div>
   );
@@ -59,7 +60,7 @@ export default function InteriorItemCategories() {
       <div className="container ">
         <div className="office-info p-0" style={{ marginBottom: "3rem" }}>
           <div className="row gx-5 gy-4">
-            {values && values.map((item, index) => (
+            {values && values.slice(0, 8).map((item, index) => (
               <Category key={index} item={item} />
             ))}
           </div>

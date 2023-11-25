@@ -117,10 +117,12 @@ function InteriorItemSingle(itemDetails) {
         <h3 style={{ height: "55px", overflowY: "auto" }}>
           <Link href="/interior/1">{item && item.name}</Link>
         </h3>
-        <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-        {
-          // <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-        }
+        <div>
+          <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+          {
+            // <span>{item && item.estimatePrice && item.estimatePrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+          }
+        </div>
         <div className="add-to-cart">
           <button
             data-bs-toggle="tooltip"
@@ -171,7 +173,7 @@ export default function InteriorItems() {
           <div className="col col-lg-9 col-12">
             <InteriorItemSearchBar></InteriorItemSearchBar>
             <div>
-              {values && values.map((item, index) => (
+              {values && values.slice(0, 9).map((item, index) => (
                 <InteriorItemSingle key={index} item={item} />
               ))}
             </div>
