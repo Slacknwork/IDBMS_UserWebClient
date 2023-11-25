@@ -1,4 +1,4 @@
 export default {
-    decor: "decor",
-    construction: "construction",
+    0: "decor",
+    1: "construction",
 };
