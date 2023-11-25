@@ -21,7 +21,6 @@ import { getParticipationByUserId } from "/api/projectParticipationServices";
 
 const decorIconImageUrl = "/images/project-type/decor-icon-1.png";
 const consIconImageUrl = "/images/project-type/construction-icon-1.png";
-const decorExpImageUrl = "/images/project-type/decor-example-image.jpg";
 
 const SubmitHandler = (e) => {
   e.preventDefault();
@@ -37,14 +36,14 @@ const ProjectItem = (projectDetails) => {
         className="row shadow p-4 my-3 mx-2"
         style={{ height: "28rem", backgroundColor: "white" }}
       >
-        <div className="col-lg-4 my-auto">
+        <div className="col-lg-4 my-auto d-flex justify-content-center">
           <div className="shop-img">
             <Image
-              src={decorIconImageUrl}
+              src={project.type === 0 ? decorIconImageUrl : consIconImageUrl}
               alt=""
               width={0}
               height={0}
-              style={{ width: "24rem", height: "24rem", objectFit: "cover" }}
+              style={{ width: "12rem", height: "12rem", objectFit: "cover" }}
               unoptimized={true}
             />
           </div>
@@ -56,7 +55,11 @@ const ProjectItem = (projectDetails) => {
               <p style={{ textAlign: "justify" }}>
                 Description: {project && project.description}
               </p>
-              <p>Estimate Price: {project && project.estimatedPrice}</p>
+              <p>
+                {project && project.finalPrice
+                  ? `Final Price: ${project.finalPrice}`
+                  : `Estimate Price: ${project.estimatedPrice}`}
+              </p>
               <p>
                 Created Date:{" "}
                 {project &&
@@ -180,9 +183,11 @@ export default function ProjectList() {
             <TabPane tabId="1">
               <Row className="my-3">
                 {values &&
-                  values.map((item, index) => (
-                    <Col sm="12" key={index}>
-                      <ProjectItem projectDetails={item.project}></ProjectItem>
+                  values.map((item) => (
+                    <Col sm="12" key={item.id}>
+                      <ProjectItem
+                        projectDetails={item.project}
+                      ></ProjectItem>
                     </Col>
                   ))}
                 <Col sm="12">
@@ -213,16 +218,80 @@ export default function ProjectList() {
               </Row>
             </TabPane>
             <TabPane tabId="2">
-              <Row>
+              <Row className="my-3">
+                {values &&
+                  values
+                    .filter((item) => item.project.type === 0)
+                    .map((item) => (
+                      <Col sm="12" key={item.id}>
+                        <ProjectItem
+                          projectDetails={item.project}
+                        ></ProjectItem>
+                      </Col>
+                    ))}
                 <Col sm="12">
-                  <p>Decor</p>
+                  <div className="pagination-wrapper pagination-wrapper-center">
+                    <ul className="pg-pagination">
+                      <li>
+                        <a href="#" aria-label="Previous">
+                          <i className="ti-angle-left"></i>
+                        </a>
+                      </li>
+                      <li className="active">
+                        <a href="#">1</a>
+                      </li>
+                      <li>
+                        <a href="#">2</a>
+                      </li>
+                      <li>
+                        <a href="#">3</a>
+                      </li>
+                      <li>
+                        <a href="#" aria-label="Next">
+                          <i className="ti-angle-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </Col>
               </Row>
             </TabPane>
             <TabPane tabId="3">
-              <Row>
+              <Row className="my-3">
+                {values &&
+                  values
+                    .filter((item) => item.project.type === 1)
+                    .map((item) => (
+                      <Col sm="12" key={item.id}>
+                        <ProjectItem
+                          projectDetails={item.project}
+                        ></ProjectItem>
+                      </Col>
+                    ))}
                 <Col sm="12">
-                  <p>Construction</p>
+                  <div className="pagination-wrapper pagination-wrapper-center">
+                    <ul className="pg-pagination">
+                      <li>
+                        <a href="#" aria-label="Previous">
+                          <i className="ti-angle-left"></i>
+                        </a>
+                      </li>
+                      <li className="active">
+                        <a href="#">1</a>
+                      </li>
+                      <li>
+                        <a href="#">2</a>
+                      </li>
+                      <li>
+                        <a href="#">3</a>
+                      </li>
+                      <li>
+                        <a href="#" aria-label="Next">
+                          <i className="ti-angle-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </Col>
               </Row>
             </TabPane>
