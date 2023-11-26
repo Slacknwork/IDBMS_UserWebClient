@@ -7,7 +7,7 @@ import ProjectTypeSelect from "/components/ProjectTypeSelect";
 import { useTranslations } from "next-intl";
 
 const ProjectBookingPage = () => {
-  const t = useTranslations("Project");
+  const t = useTranslations("BookingProject");
 
   return (
     <Fragment>
