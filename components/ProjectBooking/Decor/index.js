@@ -66,12 +66,12 @@ export default function ProjectBooking({ children }) {
     backUrl = urls.project.booking.decor.site.getUri();
   } else if (paths[paths.length - 2].includes(FLOOR)) {
     backUrl = urls.project.booking.decor.site.siteNo.getUri(
-      paths[paths.length - 1]
+      paths[paths.length - 3]
     );
   } else if (paths[paths.length - 2].includes(ROOM)) {
     backUrl = urls.project.booking.decor.site.siteNo.floor.floorNo.getUri(
-      paths[paths.length - 3],
-      paths[paths.length - 1]
+      paths[paths.length - 5],
+      paths[paths.length - 3]
     );
   }
 

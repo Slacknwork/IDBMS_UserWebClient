@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setDraftProjectBasicInfo } from "/store/reducers/draftProject";
+import { setBasicInfo } from "/store/reducers/draftProject";
 import { useState } from "react";
 
 function NameField() {
@@ -14,7 +14,7 @@ function NameField() {
     setValue(e.target.value);
   };
   const handleBlur = (e) => {
-    dispatch(setDraftProjectBasicInfo({ name: e.target.value }));
+    dispatch(setBasicInfo({ name: e.target.value }));
   };
 
   return (
@@ -41,7 +41,7 @@ function ProjectCategoryField() {
     setValue(e.target.value);
   };
   const handleBlur = (e) => {
-    dispatch(setDraftProjectBasicInfo({ projectCategoryId: e.target.value }));
+    dispatch(setBasicInfo({ projectCategoryId: e.target.value }));
   };
 
   return (
@@ -71,7 +71,7 @@ function DescriptionField() {
     setValue(e.target.value);
   };
   const handleBlur = (e) => {
-    dispatch(setDraftProjectBasicInfo({ description: e.target.value }));
+    dispatch(setBasicInfo({ description: e.target.value }));
   };
 
   return (
