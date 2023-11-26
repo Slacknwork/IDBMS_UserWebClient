@@ -6,7 +6,7 @@ import ProjectDetail from "/components/ProjectDetails";
 import { useTranslations } from "next-intl";
 
 export default function ClientLayout({ children }) {
-  const t = useTranslations("Project");
+  const t = useTranslations("ProjectDetails_Overview");
 
   return (
     <div style={{ backgroundColor: "#f0f0f0" }}>

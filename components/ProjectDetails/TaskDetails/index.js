@@ -1,4 +1,32 @@
+import { useEffect, useRef, useState } from "react";
+import { getProjectTaskById } from "../../../api/projectTaskServices";
+import { toast } from "react-toastify";
+
 export default function TaskDetails() {
+
+  const [item, setItem] = useState([]);
+  const [taskId, setTaskId] = useState("CEEA4FE0-9052-4C2F-B18C-03C222032E54");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getProjectTaskById(taskId);
+          console.log(data);
+          setItem(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [taskId]);
+
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
@@ -8,8 +36,8 @@ export default function TaskDetails() {
           </div>
           <div className="col col-lg-3 col-12">
             <div className="form-field">
-              <label className="mb-1">Room Name</label>
-              <input type="text" name="name" placeholder="Your Name" />
+              <label className="mb-1">Task Name</label>
+              <input type="text" name="name" placeholder="Your Name" value={item.name} />
             </div>
           </div>
           <div className="col col-lg-3 col-12">
@@ -20,7 +48,7 @@ export default function TaskDetails() {
           </div>
           <div className="col col-lg-3 col-12">
             <div className="form-field">
-              <label className="mb-1">Room Type</label>
+              <label className="mb-1">Task Type</label>
               <select type="text" name="subject">
                 <option>Service</option>
                 <option>Architecture</option>
@@ -34,7 +62,7 @@ export default function TaskDetails() {
           </div>
           <div className="col col-lg-6 col-12">
             <div className="form-field">
-              <label className="mb-1">Room Description</label>
+              <label className="mb-1">Task Description</label>
               <textarea
                 type="text"
                 name="message"

@@ -2,6 +2,7 @@
 
 import { Link } from "/navigation";
 import OverviewBreadcrumb from "../Overview/Breadcrumb";
+import SuggestionModal from "./SuggestionModal";
 
 export default function RoomDetails() {
   return (
@@ -85,6 +86,11 @@ export default function RoomDetails() {
                   <Link href={`/project/1/tasks`} className="theme-btn px-4">
                     View Tasks
                   </Link>
+                </div>
+              </div>
+              <div className="d-flex gap-15 justify-content-center align-items-center mt-2">
+                <div className="d-flex">
+                  <SuggestionModal>Add suggestion</SuggestionModal>
                 </div>
               </div>
             </div>
