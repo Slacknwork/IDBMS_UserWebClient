@@ -1,35 +1,56 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
 
 import urls from "/constants/urls";
 
 import Pagination from "/components/Pagination";
-import { getProjectTasksByProjectId } from "../../../api/projectTaskServices";
-import { useRef } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { getProjectTasksByProjectId } from "/api/projectTaskServices";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+import { styled } from "@mui/material/styles";
 
-const TaskTableItem = (task) => {
-  const TaskHref = urls.project.id.tasks.taskId.getUri(1, 1);
-  console.log(task);
-  const item = task.task;
-  const no = task.index;
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 20,
+  borderRadius: 5,
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#f6e166",
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 0,
+    backgroundColor: "#caad06",
+  },
+}));
 
+const TaskTableItem = ({ task, index }) => {
+  const params = useParams();
+  const TaskHref = urls.project.id.tasks.taskId.getUri(params.id, task.id);
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        {no}
+        {index}
       </th>
-      <td className="align-middle">{item && item.name}</td>
-      <td className="align-middle" style={{ whiteSpace: 'pre-line' }}>
-        {item && item.room && `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
+      <td className="align-middle">{task && task.name}</td>
+      <td className="align-middle" style={{ whiteSpace: "pre-line" }}>
+        {task &&
+          task.room &&
+          `${task.room.usePurpose} \n Tầng ${task.room.floor.floorNo} \n ${task.room.floor.site.name}`}
       </td>
-      <td className="align-middle">{item && item.taskCategory?.name}</td>
+      <td className="align-middle">{task && task.taskCategory?.name}</td>
       <td className="align-middle">
-        {item && (item.unitUsed > item.unitInContract ? item.pricePerUnit * item.unitUsed : item.pricePerUnit * item.unitInContract)}
+        {task &&
+          (task.unitUsed > task.unitInContract
+            ? task.pricePerUnit * task.unitUsed
+            : task.pricePerUnit * task.unitInContract)}
       </td>
-      <td className="align-middle">{item && item.status}</td>
+      <td className="align-middle">
+        <BorderLinearProgress
+          variant="determinate"
+          value={task && task.percentage}
+        ></BorderLinearProgress>
+      </td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
@@ -53,7 +74,6 @@ const TaskTableItem = (task) => {
 };
 
 const TaskTable = (listTask) => {
-  console.log(listTask)
   const values = listTask.listTask;
   return (
     <div
@@ -75,7 +95,9 @@ const TaskTable = (listTask) => {
             <th scope="col">Location</th>
             <th scope="col">Category</th>
             <th scope="col">Price (VND)</th>
-            <th scope="col">Status</th>
+            <th scope="col" style={{ width: "15rem" }}>
+              Status
+            </th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
             </th>
@@ -84,7 +106,7 @@ const TaskTable = (listTask) => {
         <tbody>
           {values &&
             values.map((item, index) => (
-              <TaskTableItem key={index} task={item} index={index + 1} />
+              <TaskTableItem key={item.id} task={item} index={index + 1} />
             ))}
         </tbody>
       </table>
@@ -93,9 +115,8 @@ const TaskTable = (listTask) => {
 };
 
 export default function ProjectTasks() {
-
+  const params = useParams();
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("FF090F51-E6E7-4854-8F3F-0402EE32C9F8");
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -104,7 +125,7 @@ export default function ProjectTasks() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getProjectTasksByProjectId(projectId);
+          const data = await getProjectTasksByProjectId(params.id);
           console.log(data);
           setValues(data);
           setLoading(false);
@@ -115,7 +136,7 @@ export default function ProjectTasks() {
       };
       fetchDataFromApi();
     }
-  }, [projectId]);
+  });
 
   return (
     <div className="container">
@@ -175,7 +196,7 @@ export default function ProjectTasks() {
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          {values && (<TaskTable listTask={values} />)}
+          {values && <TaskTable listTask={values} />}
           <Pagination
             path={`tasks`}
             sectionId={urls.id.PROJECT_SECTION}

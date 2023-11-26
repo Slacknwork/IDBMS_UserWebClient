@@ -2,15 +2,13 @@ import { FaTrash } from "react-icons/fa";
 import { getTaskReportsByProjectTaskId } from "../../../api/taskReportServices";
 import { toast } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
+import { useParams } from "next/navigation";
 
-
-const TaskReportTableItem = (object) => {
-  const item = object.item;
-  const no = object.index;
+const TaskReportTableItem = ({ item, index }) => {
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
-        {no}
+        {index}
       </th>
       <td className="align-middle">{item && item.name}</td>
       <td className="align-middle">{item && item.description}</td>
@@ -41,9 +39,8 @@ const TaskReportTableItem = (object) => {
   );
 };
 
-const TaskReportTable = (reportList) => {
-  console.log(reportList)
-  const values = reportList.reportList;
+const TaskReportTable = ({ reportList }) => {
+  console.log(reportList);
   return (
     <div
       style={{
@@ -71,9 +68,13 @@ const TaskReportTable = (reportList) => {
           </tr>
         </thead>
         <tbody>
-          {values &&
-            values.map((item, index) => (
-              <TaskReportTableItem key={index} item={item} index={index + 1} />
+          {reportList &&
+            reportList.map((item, index) => (
+              <TaskReportTableItem
+                key={item.id}
+                item={item}
+                index={index + 1}
+              />
             ))}
         </tbody>
       </table>
@@ -82,9 +83,8 @@ const TaskReportTable = (reportList) => {
 };
 
 export default function TaskReportDetails() {
-
+  const params = useParams();
   const [values, setValues] = useState([]);
-  const [taskId, setTaskId] = useState("CEEA4FE0-9052-4C2F-B18C-03C222032E54");
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -93,7 +93,7 @@ export default function TaskReportDetails() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getTaskReportsByProjectTaskId(taskId);
+          const data = await getTaskReportsByProjectTaskId(params.taskId);
           console.log(data);
           setValues(data);
           setLoading(false);
@@ -104,7 +104,7 @@ export default function TaskReportDetails() {
       };
       fetchDataFromApi();
     }
-  }, [taskId]);
+  });
 
   return (
     <div className="pb-0">
