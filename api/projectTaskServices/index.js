@@ -1,3 +1,17 @@
+const getProjectTaskById = async (taskId) => {
+    try {
+        const response = await fetch(
+            `https://localhost:7062/api/ProjectTasks/${taskId}`,
+            { cache: 'no-store' }
+        );
+        const projectTasks = await response.json();
+        return projectTasks;
+    } catch (error) {
+        console.error('Error fetching project tasks by ID:', error);
+        throw error;
+    }
+};
+
 const getProjectTasksByProjectId = async (projectId) => {
     try {
         const response = await fetch(
@@ -26,4 +40,4 @@ const getProjectTasksByPaymentStageId = async (paymentStageId) => {
     }
 };
 
-export { getProjectTasksByProjectId, getProjectTasksByPaymentStageId };
+export { getProjectTaskById, getProjectTasksByProjectId, getProjectTasksByPaymentStageId };

@@ -1,3 +1,17 @@
+const getSiteById = async (siteId) => {
+    try {
+        const response = await fetch(
+            `https://localhost:7062/api/Sites/${siteId}`,
+            { cache: 'no-store' }
+        );
+        const sites = await response.json();
+        return sites;
+    } catch (error) {
+        console.error('Error fetching site by ID:', error);
+        throw error;
+    }
+};
+
 const getSitesByProjectId = async (projectId) => {
     try {
         const response = await fetch(
@@ -26,4 +40,4 @@ const getSitesByUserId = async (userId) => {
     }
 };
 
-export { getSitesByProjectId, getSitesByUserId };
+export { getSiteById, getSitesByProjectId, getSitesByUserId };

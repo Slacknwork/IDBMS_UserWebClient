@@ -1,16 +1,24 @@
 import { FaTrash } from "react-icons/fa";
+import { getTaskReportsByProjectTaskId } from "../../../api/taskReportServices";
+import { toast } from "react-toastify";
+import { useEffect, useRef, useState } from "react";
 
-import SuggestionModal from "./SuggestionModal";
 
-const RoomTableItem = () => {
+const TaskReportTableItem = (object) => {
+  const item = object.item;
+  const no = object.index;
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+      <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
+        {no}
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{item && item.name}</td>
+      <td className="align-middle">{item && item.description}</td>
+      <td className="align-middle">{item && item.unitUsed}</td>
+      <td className="align-middle">{item && item.calculationUnit}</td>
+      <td className="align-middle">
+        {item && new Date(item.createdTime).toLocaleDateString("en-GB")}
+      </td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <button
@@ -20,7 +28,6 @@ const RoomTableItem = () => {
           >
             Details
           </button>
-          <SuggestionModal>Details</SuggestionModal>
           <button
             type="button"
             className="theme-btn m-1"
@@ -34,7 +41,9 @@ const RoomTableItem = () => {
   );
 };
 
-const RoomTable = () => {
+const TaskReportTable = (reportList) => {
+  console.log(reportList)
+  const values = reportList.reportList;
   return (
     <div
       style={{
@@ -48,35 +57,61 @@ const RoomTable = () => {
           style={{ position: "sticky", top: 0, zIndex: 1 }}
         >
           <tr>
-            <th scope="col" style={{ width: "6rem" }}>
-              Room No.
+            <th scope="col" style={{ width: "6rem", textAlign: "center" }}>
+              No.
             </th>
-            <th scope="col">Name</th>
-            <th scope="col">Area</th>
-            <th scope="col">Price</th>
+            <th scope="col">Task Report Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Unit Used</th>
+            <th scope="col">Calculation Unit</th>
+            <th scope="col">Created Time</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {values &&
+            values.map((item, index) => (
+              <TaskReportTableItem key={index} item={item} index={index + 1} />
+            ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-export default function RoomDetails() {
+export default function TaskReportDetails() {
+
+  const [values, setValues] = useState([]);
+  const [taskId, setTaskId] = useState("CEEA4FE0-9052-4C2F-B18C-03C222032E54");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getTaskReportsByProjectTaskId(taskId);
+          console.log(data);
+          setValues(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [taskId]);
+
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <RoomTable></RoomTable>
+            <TaskReportTable reportList={values} />
           </div>
         </div>
       </form>

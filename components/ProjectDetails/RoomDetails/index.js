@@ -2,8 +2,38 @@
 
 import { Link } from "/navigation";
 import OverviewBreadcrumb from "../Overview/Breadcrumb";
+import { getRoomById } from "../../../api/RoomServices";
+import SuggestionModal from "./SuggestionModal";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function RoomDetails() {
+
+  const [item, setItem] = useState([]);
+  const [roomId, setRoomId] = useState("15FD268A-85B9-45D3-9DB2-6E12F9ECF43A");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getRoomById(roomId);
+          console.log(data);
+          setItem(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [roomId]);
+
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
@@ -22,13 +52,13 @@ export default function RoomDetails() {
           <div className="col col-lg-3 col-12">
             <div className="form-field">
               <label className="mb-1">Room Name</label>
-              <input type="text" name="name" placeholder="Your Name" />
+              <input type="text" name="name" placeholder="Your Name" value={item.usePurpose} />
             </div>
           </div>
           <div className="col col-lg-3 col-12">
             <div className="form-field">
               <label className="mb-1">Use purpose</label>
-              <input type="text" name="name" placeholder="Use purpose" />
+              <input type="text" name="name" placeholder="Use purpose" value={item.usePurpose} />
             </div>
           </div>
           <div className="col col-lg-3 col-12">
@@ -85,6 +115,11 @@ export default function RoomDetails() {
                   <Link href={`/project/1/tasks`} className="theme-btn px-4">
                     View Tasks
                   </Link>
+                </div>
+              </div>
+              <div className="d-flex gap-15 justify-content-center align-items-center mt-2">
+                <div className="d-flex">
+                  <SuggestionModal>Add suggestion</SuggestionModal>
                 </div>
               </div>
             </div>
