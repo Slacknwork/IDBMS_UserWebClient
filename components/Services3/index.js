@@ -15,7 +15,7 @@ const ServiceSection3 = (props) => {
         <SectionTitle3 subTitle={"Our Services"} MainTitle={"What We Do"} />
         <div className="row align-items-center">
           {Services.slice(10, 14).map((service) => (
-            <div className="col-lg-4 col-md-6 col-12" key={service}>
+            <div className="col-lg-4 col-md-6 col-12" key={service.Id}>
               <div className="wpo-service-item">
                 <div className="wpo-service-img">
                   <Image src={service.sImg} alt="" />
