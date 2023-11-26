@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "/navigation";
+import { Link, useRouter } from "/navigation";
 import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
-import { editFloor } from "/store/reducers/draftProject";
+import { editFloor, addRoom } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
 
@@ -98,20 +98,23 @@ const FloorDetailsForm = () => {
   );
 };
 
-const RoomTableItem = () => {
+function RoomTableItem({ room, index }) {
+  const params = useParams();
+
   const RoomHref =
     urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
+      params.siteNo,
+      params.floorNo,
+      index
     );
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+        {index}
       </th>
-      <td className="align-middle">Room Name</td>
+      <td className="align-middle">{room.roomType}</td>
+      <td className="align-middle">{room.usePurpose}</td>
       <td className="align-middle">1000m2</td>
       <td className="align-middle">1,000,000 VND</td>
       <td className="align-middle m-0">
@@ -134,9 +137,14 @@ const RoomTableItem = () => {
       </td>
     </tr>
   );
-};
+}
 
-const RoomTable = () => {
+function RoomTable() {
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const rooms = draftProject.sites[params.siteNo].floors[params.floorNo].rooms;
+
   return (
     <div
       style={{
@@ -153,7 +161,8 @@ const RoomTable = () => {
             <th scope="col" style={{ width: "6rem" }}>
               Room No.
             </th>
-            <th scope="col">Name</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">Use purpose</th>
             <th scope="col">Area</th>
             <th scope="col">Price</th>
             <th scope="col" style={{ width: "15rem" }}>
@@ -162,17 +171,38 @@ const RoomTable = () => {
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {rooms.map((room, index) => (
+            <RoomTableItem
+              room={room}
+              index={index}
+              key={room.id}
+            ></RoomTableItem>
+          ))}
         </tbody>
       </table>
     </div>
   );
-};
+}
 
-const BookingSiteDetails = () => {
+export default function BookingFloorDetails() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftFloor = draftProject.sites[params.siteNo].floors[params.floorNo];
+
+  const handleAddRoomClick = () => {
+    dispatch(addRoom({ siteNo: params.siteNo, floorNo: params.floorNo }));
+    router.push(
+      urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
+        params.siteNo,
+        params.floorNo,
+        draftFloor.rooms.length
+      )
+    );
+  };
+
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
@@ -182,7 +212,13 @@ const BookingSiteDetails = () => {
             <div className="d-flex justify-content-between">
               <h3 className="my-auto">Rooms</h3>
               <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
+                <button
+                  type="button"
+                  className="theme-btn-s4 px-4 py-2"
+                  onClick={handleAddRoomClick}
+                >
+                  Add
+                </button>
               </div>
             </div>
           </div>
@@ -195,6 +231,4 @@ const BookingSiteDetails = () => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteDetails;
+}

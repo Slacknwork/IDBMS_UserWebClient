@@ -1,6 +1,175 @@
+"use client";
+
+import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
+import { useParams } from "next/navigation";
+
+import { useDispatch, useSelector } from "react-redux";
+import { editRoom } from "/store/reducers/draftProject";
 
 import SuggestionModal from "./SuggestionModal";
+
+function RoomUsePurposeField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftRoom =
+    draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+      params.roomNo
+    ];
+
+  const [value, setValue] = useState(draftRoom.usePurpose);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editRoom({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        roomNo: params.roomNo,
+        usePurpose: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Use purpose</label>
+      <input
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+  );
+}
+
+function RoomTypeField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftRoom =
+    draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+      params.roomNo
+    ];
+
+  const [value, setValue] = useState(draftRoom.roomType);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editRoom({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        roomNo: params.roomNo,
+        roomType: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Room Type</label>
+      <select
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      >
+        <option value={0}>Service</option>
+        <option value={1}>Architecture</option>
+        <option value={2}>The Rehearsal Dinner</option>
+      </select>
+    </div>
+  );
+}
+
+function RoomAreaField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftRoom =
+    draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+      params.roomNo
+    ];
+
+  const [value, setValue] = useState(draftRoom.area);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editRoom({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        roomNo: params.roomNo,
+        area: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Area</label>
+      <input
+        type="number"
+        placeholder="Room area"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+  );
+}
+
+function RoomDescriptionField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftRoom =
+    draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+      params.roomNo
+    ];
+
+  const [value, setValue] = useState(draftRoom.description);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editRoom({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        roomNo: params.roomNo,
+        description: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Room Description</label>
+      <textarea
+        type="text"
+        placeholder="Message"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      ></textarea>
+    </div>
+  );
+}
 
 const FloorDetailsForm = () => {
   return (
@@ -9,36 +178,16 @@ const FloorDetailsForm = () => {
         <h3>Room Information</h3>
       </div>
       <div className="col col-lg-3 col-12">
-        <div className="form-field">
-          <label className="mb-1">Room Name</label>
-          <input type="text" name="name" placeholder="Your Name" />
-        </div>
+        <RoomUsePurposeField></RoomUsePurposeField>
       </div>
       <div className="col col-lg-3 col-12">
-        <div className="form-field">
-          <label className="mb-1">Use purpose</label>
-          <input type="text" name="name" placeholder="Use purpose" />
-        </div>
+        <RoomTypeField></RoomTypeField>
       </div>
       <div className="col col-lg-3 col-12">
-        <div className="form-field">
-          <label className="mb-1">Room Type</label>
-          <select type="text" name="subject">
-            <option>Service</option>
-            <option>Architecture</option>
-            <option>The Rehearsal Dinner</option>
-            <option>The Afterparty</option>
-            <option>Videographers</option>
-            <option>Perfect Cake</option>
-            <option>All Of The Above</option>
-          </select>
-        </div>
+        <RoomAreaField></RoomAreaField>
       </div>
       <div className="col col-lg-12 col-12">
-        <div className="form-field">
-          <label className="mb-1">Room Description</label>
-          <textarea type="text" name="message" placeholder="Message"></textarea>
-        </div>
+        <RoomDescriptionField></RoomDescriptionField>
       </div>
     </div>
   );
