@@ -110,7 +110,7 @@ function RoomTableItem({ room, index }) {
 
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
+      <th scope="row" className="align-middle">
         {index}
       </th>
       <td className="align-middle">{room.roomType}</td>
@@ -159,7 +159,7 @@ function RoomTable() {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Room No.
+              No.
             </th>
             <th scope="col">Room Type</th>
             <th scope="col">Use purpose</th>

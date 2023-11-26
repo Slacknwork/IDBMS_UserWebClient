@@ -100,7 +100,9 @@ export default function ProjectBooking({ children }) {
           <section className="section-padding">
             <div className="shadow p-4" style={{ backgroundColor: "white" }}>
               <div className="mb-4">
-                <p className="my-auto">Area: {draftProject.totalArea}</p>
+                <p className="my-auto">
+                  Area: {draftProject.totalArea} m<sup>2</sup>
+                </p>
                 <h5 className="my-auto">
                   Total price: {draftProject.totalPrice} VND
                 </h5>

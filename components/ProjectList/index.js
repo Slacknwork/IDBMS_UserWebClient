@@ -28,10 +28,8 @@ const SubmitHandler = (e) => {
 };
 
 const ProjectItem = (projectDetails) => {
-  const projectUrl = `${urls.project.id.getUri(1)}`;
-  console.log(projectDetails);
   const item = projectDetails.project;
-  console.log(item);
+  const projectUrl = `${urls.project.id.getUri(item.id)}`;
   return (
     <div className="container">
       <div
@@ -62,14 +60,13 @@ const ProjectItem = (projectDetails) => {
                   ? item.finalPrice
                     ? `Final Price: ${item.finalPrice}`
                     : item.estimatedPrice
-                      ? `Estimate Price: ${item.estimatedPrice}`
-                      : 'Price information not available'
-                  : 'Item information not available'}
+                    ? `Estimate Price: ${item.estimatedPrice}`
+                    : "Price information not available"
+                  : "Item information not available"}
               </p>
               <p>
                 Created Date:{" "}
-                {item &&
-                  new Date(item.createdDate).toLocaleDateString("en-GB")}
+                {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
               </p>
             </div>
           </div>
@@ -104,7 +101,6 @@ export default function ProjectList() {
       const fetchDataFromApi = async () => {
         try {
           const data = await getParticipationByUserId(userId);
-          console.log(data);
           setValues(data);
           setLoading(false);
         } catch (error) {

@@ -5,11 +5,13 @@ import urls from "/constants/urls";
 import { getSitesByProjectId } from "../../../api/siteServices";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 const SiteItem = (details) => {
-  const siteDetailsUrl = urls.project.id.site.siteNo.getUri(1, 1);
+  const params = useParams();
   const item = details.site;
-  console.log(item)
+  const siteDetailsUrl = urls.project.id.site.siteNo.getUri(params.id, item.id);
+  console.log(item);
   return (
     <div className="container" style={{ height: "18rem" }}>
       <div
@@ -51,9 +53,9 @@ const SiteItem = (details) => {
 };
 
 export default function SiteList({ projectType }) {
-
+  const params = useParams();
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("8B84897A-5A93-429C-A5B0-B11AE7483DD3");
+  const [projectId, setProjectId] = useState(params.id);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 

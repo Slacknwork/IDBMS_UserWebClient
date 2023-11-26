@@ -1,55 +1,56 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
-
-import urls from "/constants/urls";
-import OverviewBreadcrumb from "../Overview/Breadcrumb";
-import { getSiteById } from "../../../api/siteServices";
 import { toast } from "react-toastify";
-import { useRef } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useParams } from "next/navigation";
 
-const SiteDetailsForm = (item) => {
-  console.log(item)
-  const site = item.site
+import { getProjectById } from "/api/projectServices";
+import urls from "/constants/urls";
+
+import OverviewBreadcrumb from "../Overview/Breadcrumb";
+import { getSiteById } from "/api/siteServices";
+
+const SiteDetailsForm = ({ site, project }) => {
   return (
     <div className="row">
       <div className="col col-lg-12 col-12">
-        <OverviewBreadcrumb id={1} siteId={1}></OverviewBreadcrumb>
+        <OverviewBreadcrumb
+          id={project.id}
+          name={project.name}
+          siteId={site.id}
+          siteName={site && site.name}
+        ></OverviewBreadcrumb>
       </div>
-      <div className="col col-lg-4 col-12">
-        <h3>Site Information</h3>
-      </div>
-      <div className="col col-lg-4 col-12">
+      <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <label className="mb-1">Site Name</label>
-          <input type="text" name="name" placeholder="Your Name" value={site && site.name} />
+          <h3>Site: {site.name}</h3>
         </div>
       </div>
-      <div className="col col-lg-4 col-12">
+      <div className="col col-lg-6 col-12">
         <div className="form-field">
           <label className="mb-1">Use purpose</label>
-          <input type="text" name="name" placeholder="Use purpose" />
+          <input type="text" value={site.usePurpose} disabled />
+        </div>
+      </div>
+      <div className="col col-lg-6 col-12">
+        <div className="form-field">
+          <label className="mb-1">Address</label>
+          <input type="text" value={site.address} disabled />
         </div>
       </div>
       <div className="col col-lg-6 col-12">
         <div className="form-field">
           <label className="mb-1">Room Description</label>
-          <textarea type="text" name="message" placeholder="Message"></textarea>
+          <textarea type="text" value={site.description} disabled></textarea>
         </div>
       </div>
       <div className="col col-lg-6 col-12">
         <div className="row">
           <div className="col col-lg-6 col-12">
             <div className="form-field">
-              <label className="mb-1">Area</label>
-              <input type="text" name="message" placeholder="Message"></input>
-            </div>
-          </div>
-          <div className="col col-lg-6 col-12">
-            <div className="form-field">
-              <label className="mb-1">Price</label>
-              <input type="text" name="message" placeholder="Message"></input>
+              <label className="mb-1">
+                Area in m<sup>2</sup>
+              </label>
+              <input type="text" value={site.area} disabled />
             </div>
           </div>
         </div>
@@ -68,23 +69,26 @@ const SiteDetailsForm = (item) => {
   );
 };
 
-const FloorTableItem = (object) => {
-  const RoomHref = urls.project.id.site.siteNo.floor.floorNo.getUri(1, 1, 1);
-  const item = object.item;
-  const no = object.index;
+function FloorTableItem({ floor, index }) {
+  const params = useParams();
+  const FloorHref = urls.project.id.site.siteNo.floor.floorNo.getUri(
+    params.id,
+    params.siteId,
+    floor.id
+  );
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
-        {item && item.floorNo}
+        {floor && floor.floorNo}
       </th>
-      <td className="align-middle">{item && item.description}</td>
-      <td className="align-middle">{item && item.usePurpose}</td>
-      <td className="align-middle">{item && item.area}</td>
+      <td className="align-middle">{floor && floor.description}</td>
+      <td className="align-middle">{floor && floor.usePurpose}</td>
+      <td className="align-middle">{floor && floor.area}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
-            href={RoomHref}
+            href={FloorHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
@@ -94,10 +98,10 @@ const FloorTableItem = (object) => {
       </td>
     </tr>
   );
-};
+}
 
 const FloorTable = (floorList) => {
-  console.log(floorList)
+  console.log(floorList);
   const values = floorList.floorList;
   return (
     <div
@@ -126,7 +130,7 @@ const FloorTable = (floorList) => {
         <tbody>
           {values &&
             values.map((item, index) => (
-              <FloorTableItem key={index} item={item} index={index + 1} />
+              <FloorTableItem key={item.id} floor={item} index={index + 1} />
             ))}
         </tbody>
       </table>
@@ -134,10 +138,10 @@ const FloorTable = (floorList) => {
   );
 };
 
-const BookingSiteDetails = () => {
-
+export default function ProjectSiteDetails() {
+  const params = useParams();
   const [item, setItem] = useState([]);
-  const [siteId, setSiteId] = useState("C83D510A-448C-4479-B35D-618BB17FA1BB");
+  const [project, setProject] = useState([]);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -146,9 +150,10 @@ const BookingSiteDetails = () => {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getSiteById(siteId);
-          console.log(data);
+          const data = await getSiteById(params.siteId);
+          const projectFetch = await getProjectById(params.id);
           setItem(data);
+          setProject(projectFetch);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -157,12 +162,12 @@ const BookingSiteDetails = () => {
       };
       fetchDataFromApi();
     }
-  }, [siteId]);
+  });
 
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
-        <SiteDetailsForm site={item} />
+        <SiteDetailsForm site={item} project={project} />
         <div className="row">
           <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
@@ -178,6 +183,4 @@ const BookingSiteDetails = () => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteDetails;
+}

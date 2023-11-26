@@ -146,7 +146,9 @@ function RoomAreaField() {
 
   return (
     <div className="form-field">
-      <label className="mb-1">Area</label>
+      <label className="mb-1">
+        Area in m<sup>2</sup>
+      </label>
       <input
         type="number"
         placeholder="Room area"
@@ -198,7 +200,7 @@ function RoomDescriptionField() {
   );
 }
 
-const FloorDetailsForm = () => {
+function RoomDetailsForm() {
   return (
     <div className="row">
       <div className="col col-lg-3 col-12">
@@ -218,7 +220,7 @@ const FloorDetailsForm = () => {
       </div>
     </div>
   );
-};
+}
 
 const RoomTableItem = () => {
   return (
@@ -266,7 +268,7 @@ const RoomTable = () => {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Room No.
+              No.
             </th>
             <th scope="col">Name</th>
             <th scope="col">Area</th>
@@ -291,11 +293,11 @@ export default function RoomDetails() {
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
-        <FloorDetailsForm></FloorDetailsForm>
+        <RoomDetailsForm></RoomDetailsForm>
         <div className="row">
           <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Appliances</h3>
+              <h3 className="my-auto">Suggestion</h3>
               <div className="d-flex">
                 <SuggestionModal></SuggestionModal>
               </div>
