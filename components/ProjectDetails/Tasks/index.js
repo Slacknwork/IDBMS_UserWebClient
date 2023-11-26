@@ -14,11 +14,12 @@ const TaskTableItem = (task) => {
   const TaskHref = urls.project.id.tasks.taskId.getUri(1, 1);
   console.log(task);
   const item = task.task;
+  const no = task.index;
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+        {no}
       </th>
       <td className="align-middle">{item && item.name}</td>
       <td className="align-middle" style={{ whiteSpace: 'pre-line' }}>
@@ -83,7 +84,7 @@ const TaskTable = (listTask) => {
         <tbody>
           {values &&
             values.map((item, index) => (
-              <TaskTableItem key={index} task={item} />
+              <TaskTableItem key={index} task={item} index={index + 1} />
             ))}
         </tbody>
       </table>

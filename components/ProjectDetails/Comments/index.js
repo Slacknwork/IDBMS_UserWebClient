@@ -1,18 +1,27 @@
-const RoomTableItem = () => {
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { getCommentsByProjectId } from "../../../api/commentServices";
+
+const CommentTableItem = (comment) => {
+  console.log(comment);
+  const item = comment.comment;
+  const no = comment.index;
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+        {no}
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">Site 1 Room 1</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{item && item.content}</td>
+      <td className="align-middle">{item && item.projectTask?.name}</td>
+      <td className="align-middle">{item && new Date(item.createdTime).toLocaleDateString("en-GB")}</td>
+      <td className="align-middle">{item && item.user?.name}</td>
     </tr>
   );
 };
 
-const RoomTable = () => {
+const CommentTable = (listComment) => {
+  console.log(listComment)
+  const values = listComment.listComment;
   return (
     <div
       style={{
@@ -36,10 +45,10 @@ const RoomTable = () => {
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {values &&
+            values.map((item, index) => (
+              <CommentTableItem key={index} comment={item} index={index + 1} />
+            ))}
         </tbody>
       </table>
     </div>
@@ -47,11 +56,35 @@ const RoomTable = () => {
 };
 
 export default function Comments() {
+
+  const [values, setValues] = useState([]);
+  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getCommentsByProjectId(projectId);
+          console.log(data);
+          setValues(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [projectId]);
+
   return (
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <RoomTable></RoomTable>
+          {values && (<CommentTable listComment={values} />)}
         </div>
       </div>
     </div>

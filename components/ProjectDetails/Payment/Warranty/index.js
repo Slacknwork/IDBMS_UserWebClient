@@ -5,13 +5,13 @@ import { Link } from "/navigation";
 import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
-import { getTransactionsByProjectId } from "../../../../api/transactionServices";
 import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { getWarrantyClaimsByProjectId } from "../../../../api/warrantyClaimServices";
 
-const TransactionItem = (object) => {
+const WarrantyItem = (object) => {
   const RoomHref =
     urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
       1,
@@ -50,7 +50,7 @@ const TransactionItem = (object) => {
   );
 };
 
-const TransactionTable = (transList) => {
+const WarrantyTable = (transList) => {
   console.log(transList)
   const values = transList.transList;
   return (
@@ -82,7 +82,7 @@ const TransactionTable = (transList) => {
         <tbody>
           {values &&
             values.map((item, index) => (
-              <TransactionItem key={index} item={item} index={index + 1} />
+              <WarrantyItem key={index} item={item} index={index + 1} />
             ))}
         </tbody>
       </table>
@@ -90,7 +90,7 @@ const TransactionTable = (transList) => {
   );
 };
 
-export default function Transactions() {
+export default function Warranties() {
 
   const [values, setValues] = useState([]);
   const [projectId, setProjectId] = useState("8B84897A-5A93-429C-A5B0-B11AE7483DD3");
@@ -102,7 +102,7 @@ export default function Transactions() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getTransactionsByProjectId(projectId);
+          const data = await getWarrantyClaimsByProjectId(projectId);
           console.log(data);
           setValues(data);
           setLoading(false);
@@ -163,7 +163,7 @@ export default function Transactions() {
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <TransactionTable transList={values} />
+          <WarrantyTable transList={values} />
         </div>
       </div>
     </div>
