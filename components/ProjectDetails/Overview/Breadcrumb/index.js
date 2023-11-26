@@ -38,30 +38,22 @@ export default function OverviewBreadcrumb({
       <ol>
         {id && (
           <li>
-            <Link href={breadcrumbHrefs.overviewHref}>
-              {name || `Project ID ${id}`}
-            </Link>
+            <Link href={breadcrumbHrefs.overviewHref}>{name || `Project`}</Link>
           </li>
         )}
         {siteId && (
           <li>
-            <Link href={breadcrumbHrefs.siteHref}>
-              {siteName || `Site ID ${siteId}`}
-            </Link>
+            <Link href={breadcrumbHrefs.siteHref}>{siteName || `Site`}</Link>
           </li>
         )}
         {floorId && (
           <li>
-            <Link href={breadcrumbHrefs.floorHref}>
-              {floorName || `Floor ID ${floorId}`}
-            </Link>
+            <Link href={breadcrumbHrefs.floorHref}>{floorName || `Floor`}</Link>
           </li>
         )}
         {roomId && (
           <li>
-            <Link href={breadcrumbHrefs.roomHref}>
-              {roomName || `Room ID ${roomId}`}
-            </Link>
+            <Link href={breadcrumbHrefs.roomHref}>{roomName || `Room`}</Link>
           </li>
         )}
       </ol>

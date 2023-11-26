@@ -9,61 +9,75 @@ import urls from "/constants/urls";
 import OverviewBreadcrumb from "../Overview/Breadcrumb";
 import { getSiteById } from "/api/siteServices";
 
-const SiteDetailsForm = ({ site, project }) => {
+const SiteDetailsForm = ({ site }) => {
+  const params = useParams();
   return (
     <div className="row">
       <div className="col col-lg-12 col-12">
         <OverviewBreadcrumb
-          id={project.id}
-          name={project.name}
+          id={params.id}
           siteId={site.id}
-          siteName={site && site.name}
         ></OverviewBreadcrumb>
       </div>
       <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <h3>Site: {site.name}</h3>
+          <h2>Site: {site.name}</h2>
         </div>
       </div>
-      <div className="col col-lg-6 col-12">
-        <div className="form-field">
-          <label className="mb-1">Use purpose</label>
-          <input type="text" value={site.usePurpose} disabled />
-        </div>
-      </div>
-      <div className="col col-lg-6 col-12">
-        <div className="form-field">
-          <label className="mb-1">Address</label>
-          <input type="text" value={site.address} disabled />
-        </div>
-      </div>
-      <div className="col col-lg-6 col-12">
-        <div className="form-field">
-          <label className="mb-1">Room Description</label>
-          <textarea type="text" value={site.description} disabled></textarea>
-        </div>
-      </div>
-      <div className="col col-lg-6 col-12">
-        <div className="row">
-          <div className="col col-lg-6 col-12">
-            <div className="form-field">
-              <label className="mb-1">
-                Area in m<sup>2</sup>
-              </label>
-              <input type="text" value={site.area} disabled />
-            </div>
-          </div>
-        </div>
-        <div className="form-field">
-          <div className="d-flex gap-4">
-            <label className="my-auto">Tasks</label>
-            <div className="d-flex">
-              <Link href={`/project/1/tasks`} className="theme-btn px-4">
-                View Tasks
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className="col col-lg-12 col-12">
+        <table>
+          <tbody>
+            <tr>
+              <td style={{ paddingRight: "2rem" }}>
+                <p style={{ fontWeight: 1000 }}>Use purpose:</p>
+              </td>
+              <td>
+                <p>{site.usePurpose}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ paddingRight: "2rem" }}>
+                <p style={{ fontWeight: 1000 }}>Address:</p>
+              </td>
+              <td>
+                <p>{site.address}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ paddingRight: "2rem" }}>
+                <p style={{ fontWeight: 1000 }}>
+                  Area in m<sup>2</sup>
+                </p>
+              </td>
+              <td>
+                <p>{site.area}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ paddingRight: "2rem" }}>
+                <p style={{ fontWeight: 1000 }}>Description:</p>
+              </td>
+              <td>
+                <p>{site.description}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ paddingRight: "2rem" }}>
+                <p style={{ fontWeight: 1000 }}>Tasks:</p>
+              </td>
+              <td className="d-flex">
+                <div className="d-flex">
+                  <Link
+                    href={`/project/1/tasks`}
+                    className="theme-btn px-4 py-2"
+                  >
+                    View Tasks
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
