@@ -177,8 +177,8 @@ function FloorTableItem({ floor, index }) {
         {index}
       </th>
       <td className="align-middle">{floor.usePurpose}</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{floor.totalArea}</td>
+      <td className="align-middle">{floor.totalPrice}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link

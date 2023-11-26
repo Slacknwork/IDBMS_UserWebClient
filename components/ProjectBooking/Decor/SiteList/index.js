@@ -25,13 +25,13 @@ const SiteItem = ({ site, index }) => {
             <div className="des">
               <p>Address: {site.address}</p>
               <p>Purpose: {site.usePurpose}</p>
-              <p>Total area: 1000m2</p>
-              <p>Total price: 10,000,000 VND</p>
+              <p>Total area: {site.totalArea}</p>
+              <p>Total price: {site.totalPrice}</p>
             </div>
           </div>
           <div className="mt-auto d-flex gap-3">
             <div>
-              <Link href={siteDetailsUrl} className="theme-btn px-4" replace>
+              <Link href={siteDetailsUrl} className="theme-btn px-4">
                 Details
               </Link>
             </div>

@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 
 import urls from "/constants/urls";
 
+import { useSelector } from "react-redux";
+
 function Navigation({ backUrl, backLabel, nextUrl, nextLabel }) {
   const DEFAULT_BACK_LABEL = "Back";
   const DEFAULT_NEXT_LABEL = "Next";
@@ -51,6 +53,8 @@ export default function ProjectBooking({ children }) {
 
   const paths = usePathname().split("/");
 
+  const draftProject = useSelector((state) => state.draftProject);
+
   let backUrl, nextUrl;
 
   if (paths[paths.length - 1].includes(DECOR)) {
@@ -96,8 +100,10 @@ export default function ProjectBooking({ children }) {
           <section className="section-padding">
             <div className="shadow p-4" style={{ backgroundColor: "white" }}>
               <div className="mb-4">
-                <p className="my-auto">Area: 5000m2</p>
-                <h5 className="my-auto">Total price: 50,000,000 VND</h5>
+                <p className="my-auto">Area: {draftProject.totalArea}</p>
+                <h5 className="my-auto">
+                  Total price: {draftProject.totalPrice} VND
+                </h5>
               </div>
             </div>
           </section>

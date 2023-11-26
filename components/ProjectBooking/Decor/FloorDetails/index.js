@@ -115,8 +115,8 @@ function RoomTableItem({ room, index }) {
       </th>
       <td className="align-middle">{room.roomType}</td>
       <td className="align-middle">{room.usePurpose}</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{room.area}</td>
+      <td className="align-middle">{room.area * room.pricePerArea}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link

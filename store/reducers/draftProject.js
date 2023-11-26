@@ -4,6 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   name: "",
   projectCategoryId: 0,
+  totalArea: 0,
+  totalPrice: 0,
   description: "",
   sites: [],
 };
@@ -25,6 +27,8 @@ export const draftProjectSlice = createSlice({
         usePurpose: "",
         address: "",
         description: "",
+        totalArea: 0,
+        totalPrice: 0,
         floors: [],
       });
     },
@@ -47,6 +51,8 @@ export const draftProjectSlice = createSlice({
         id: uniqueId(),
         usePurpose: "",
         description: "",
+        totalArea: 0,
+        totalPrice: 0,
         rooms: [],
       });
     },
@@ -77,6 +83,7 @@ export const draftProjectSlice = createSlice({
         usePurpose: "",
         description: "",
         area: 0,
+        pricePerArea: 0,
         suggestions: [],
       });
     },
@@ -85,21 +92,46 @@ export const draftProjectSlice = createSlice({
       const floorNo = actions.payload.floorNo;
       const roomNo = actions.payload.roomNo;
 
-      state.sites[siteNo].floors[floorNo].rooms[roomNo].roomType =
-        actions.payload.roomType ||
-        state.sites[siteNo].floors[floorNo].rooms[roomNo].roomType;
+      const site = state.sites[siteNo];
+      const floor = state.sites[siteNo].floors[floorNo];
+      const room = state.sites[siteNo].floors[floorNo].rooms[roomNo];
 
-      state.sites[siteNo].floors[floorNo].rooms[roomNo].usePurpose =
-        actions.payload.usePurpose ||
-        state.sites[siteNo].floors[floorNo].rooms[roomNo].usePurpose;
+      room.roomType = actions.payload.roomType || room.roomType;
 
-      state.sites[siteNo].floors[floorNo].rooms[roomNo].description =
-        actions.payload.description ||
-        state.sites[siteNo].floors[floorNo].rooms[roomNo].description;
+      room.usePurpose = actions.payload.usePurpose || room.usePurpose;
 
-      state.sites[siteNo].floors[floorNo].rooms[roomNo].area =
-        actions.payload.area ||
-        state.sites[siteNo].floors[floorNo].rooms[roomNo].area;
+      room.description = actions.payload.description || room.description;
+
+      room.area = actions.payload.area || room.area;
+
+      room.pricePerArea = actions.payload.pricePerArea || room.pricePerArea;
+
+      floor.totalArea = floor.rooms.reduce(
+        (acc, room) => acc + Number(room.area),
+        0
+      );
+      floor.totalPrice = floor.rooms.reduce(
+        (acc, room) => acc + room.pricePerArea * room.area,
+        0
+      );
+
+      site.totalArea = site.floors.reduce(
+        (acc, floor) => acc + floor.totalArea,
+        0
+      );
+      site.totalPrice = site.floors.reduce(
+        (acc, floor) => acc + floor.totalPrice,
+        0
+      );
+
+      state.totalArea = state.sites.reduce(
+        (acc, site) => acc + site.totalArea,
+        0
+      );
+      state.totalPrice = state.sites.reduce(
+        (acc, site) => acc + site.totalPrice,
+        0
+      );
     },
     deleteRoom(state, actions) {
       const siteNo = actions.payload.siteNo;

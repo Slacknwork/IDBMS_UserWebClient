@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { editRoom } from "/store/reducers/draftProject";
+
+import { getAllRoomTypes } from "/api/roomTypeServices";
 
 import SuggestionModal from "./SuggestionModal";
 
@@ -59,6 +61,26 @@ function RoomTypeField() {
     ];
 
   const [value, setValue] = useState(draftRoom.roomType);
+  const [roomTypes, setRoomTypes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getAllRoomTypes();
+          setRoomTypes(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, []);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -69,7 +91,10 @@ function RoomTypeField() {
         siteNo: params.siteNo,
         floorNo: params.floorNo,
         roomNo: params.roomNo,
-        roomType: e.target.value,
+        roomType: Number(e.target.value),
+        pricePerArea: roomTypes.find(
+          (roomType) => roomType.id === Number(e.target.value)
+        ).pricePerArea,
       })
     );
   };
@@ -83,9 +108,11 @@ function RoomTypeField() {
         onChange={handleChange}
         onBlur={handleBlur}
       >
-        <option value={0}>Service</option>
-        <option value={1}>Architecture</option>
-        <option value={2}>The Rehearsal Dinner</option>
+        {roomTypes.map((roomType) => (
+          <option key={roomType.id} value={roomType.id}>
+            {roomType.name}
+          </option>
+        ))}
       </select>
     </div>
   );
@@ -112,7 +139,7 @@ function RoomAreaField() {
         siteNo: params.siteNo,
         floorNo: params.floorNo,
         roomNo: params.roomNo,
-        area: e.target.value,
+        area: Number(e.target.value),
       })
     );
   };
