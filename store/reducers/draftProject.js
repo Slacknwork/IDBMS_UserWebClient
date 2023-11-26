@@ -67,6 +67,47 @@ export const draftProjectSlice = createSlice({
         1
       );
     },
+    addRoom(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+
+      state.sites[siteNo].floors[floorNo].rooms.push({
+        id: uniqueId(),
+        roomType: 0,
+        usePurpose: "",
+        description: "",
+        area: 0,
+        suggestions: [],
+      });
+    },
+    editRoom(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+      const roomNo = actions.payload.roomNo;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].roomType =
+        actions.payload.roomType ||
+        state.sites[siteNo].floors[floorNo].rooms[roomNo].roomType;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].usePurpose =
+        actions.payload.usePurpose ||
+        state.sites[siteNo].floors[floorNo].rooms[roomNo].usePurpose;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].description =
+        actions.payload.description ||
+        state.sites[siteNo].floors[floorNo].rooms[roomNo].description;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].area =
+        actions.payload.area ||
+        state.sites[siteNo].floors[floorNo].rooms[roomNo].area;
+    },
+    deleteRoom(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+      const roomNo = actions.payload.roomNo;
+
+      state.sites[siteNo].floors[floorNo].rooms.splice(roomNo);
+    },
   },
 });
 
@@ -78,6 +119,9 @@ export const {
   addFloor,
   editFloor,
   deleteFloor,
+  addRoom,
+  editRoom,
+  deleteRoom,
 } = draftProjectSlice.actions;
 
 export default draftProjectSlice.reducer;
