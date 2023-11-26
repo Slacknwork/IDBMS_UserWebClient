@@ -1,33 +1,49 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "/navigation";
 import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
+import { toast } from "react-toastify";
+import { getProjectTasksByProjectId } from "../../../api/projectTaskServices";
+import Image from "next/image";
 
-const RoomTableItem = () => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+const ItemTableItem = (object) => {
+  const ItemHref = urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(1, 1, 1);
+
+  const item = object.item;
+  const no = object.index;
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+        {no}
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">Site 1 Room 1</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">doing</td>
+      <td className="align-middle">
+        <div className="shop-img">
+          <Image
+            src={item && item.interiorItem?.imageUrl}
+            alt=""
+            width={0}
+            height={0}
+            style={{ width: "6rem", height: "6rem", objectFit: "cover" }}
+            unoptimized={true}
+          />
+        </div>
+      </td>
+      <td className="align-middle">{item && item.interiorItem?.name}</td>
+      <td className="align-middle" style={{ whiteSpace: 'pre-line' }}>
+        {item && item.room && `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
+      </td>
+      <td className="align-middle">
+        {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
+      </td>
+      <td className="align-middle">{item && item.status}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
-            href={RoomHref}
+            href={ItemHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
@@ -46,7 +62,9 @@ const RoomTableItem = () => {
   );
 };
 
-const RoomTable = () => {
+const ItemTable = (itemList) => {
+  console.log(itemList)
+  const values = itemList.itemList;
   return (
     <div
       style={{
@@ -69,17 +87,17 @@ const RoomTable = () => {
             <th scope="col">Item name</th>
             <th scope="col">Location</th>
             <th scope="col">Created Date</th>
-            <th scope="col">Updated Date</th>
+            <th scope="col">Task status</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {values &&
+            values.map((item, index) => (
+              <ItemTableItem key={index} item={item} index={index + 1} />
+            ))}
         </tbody>
       </table>
     </div>
@@ -87,55 +105,37 @@ const RoomTable = () => {
 };
 
 export default function ItemList() {
+
+  const [values, setValues] = useState([]);
+  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getProjectTasksByProjectId(projectId);
+          console.log(data);
+          const listTaskHasItem = data.filter(item => item.interiorItemId !== null);
+          console.log(listTaskHasItem)
+          setValues(listTaskHasItem);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [projectId]);
+
   return (
     <div className="container">
       <div className="row">
-        <div className="col col-lg-5 col-12">
-          <div className="blog-sidebar">
-            <div className="widget search-widget mb-4">
-              <form>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Item Name..."
-                  />
-                  <button type="submit">
-                    <i className="ti-search"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div className="col col-lg-3 col-12 my-auto">
-          <div className="wpo-contact-pg-section">
-            <form>
-              <div className="wpo-contact-form-area-transparent row">
-                <div className="form-field">
-                  <select
-                    type="text"
-                    name="subject"
-                    className="rounded-2"
-                    style={{ backgroundColor: "white", height: "55px" }}
-                  >
-                    <option>Category</option>
-                    <option>Architecture</option>
-                  </select>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="col col-lg-1 offset-lg-3 col-12">
-          <Link className="theme-btn px-4" href="/project/1/items">
-            Add
-          </Link>
-        </div>
-      </div>
-      <div className="row">
         <div className="col col-lg-12 col-12">
-          <RoomTable></RoomTable>
+          <ItemTable itemList={values} />
         </div>
       </div>
     </div>
