@@ -4,7 +4,7 @@ import React from "react";
 import { Link, useRouter } from "/navigation";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addDraftProjectSite } from "/store/reducers/draftProject";
+import { addSite } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
 
@@ -49,7 +49,7 @@ export default function SiteList() {
   const sites = draftProject.sites;
 
   function onAddSiteClick() {
-    dispatch(addDraftProjectSite());
+    dispatch(addSite());
     router.push(urls.project.booking.decor.site.siteNo.getUri(sites.length));
   }
 

@@ -12,13 +12,13 @@ export const draftProjectSlice = createSlice({
   name: "draftProject",
   initialState,
   reducers: {
-    setDraftProjectBasicInfo: (state, actions) => {
+    setBasicInfo: (state, actions) => {
       state.name = actions.payload.name || state.name;
       state.projectCategoryId =
         actions.payload.projectCategoryId || state.projectCategoryId;
       state.description = actions.payload.description || state.description;
     },
-    addDraftProjectSite(state) {
+    addSite(state) {
       state.sites.push({
         id: uniqueId(),
         name: "",
@@ -28,7 +28,7 @@ export const draftProjectSlice = createSlice({
         floors: [],
       });
     },
-    editDraftProjectSite(state, actions) {
+    editSite(state, actions) {
       const siteNo = actions.payload.siteNo;
       state.sites[siteNo].name =
         actions.payload.name || state.sites[siteNo].name;
@@ -39,16 +39,45 @@ export const draftProjectSlice = createSlice({
       state.sites[siteNo].description =
         actions.payload.description || state.sites[siteNo].description;
     },
-    deleteDraftProjectSite(state, actions) {
+    deleteSite(state, actions) {
       state.sites.splice(actions.payload.siteNo, 1);
+    },
+    addFloor(state, actions) {
+      state.sites[actions.payload.siteNo].floors.push({
+        id: uniqueId(),
+        usePurpose: "",
+        description: "",
+        rooms: [],
+      });
+    },
+    editFloor(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+
+      state.sites[siteNo].floors[floorNo].usePurpose =
+        actions.payload.usePurpose ||
+        state.sites[siteNo].floors[floorNo].usePurpose;
+      state.sites[siteNo].floors[floorNo].description =
+        actions.payload.description ||
+        state.sites[siteNo].floors[floorNo].description;
+    },
+    deleteFloor(state, actions) {
+      state.sites[actions.payload.siteNo].floors.splice(
+        actions.payload.floorNo,
+        1
+      );
     },
   },
 });
 
 export const {
-  setDraftProjectBasicInfo,
-  addDraftProjectSite,
-  editDraftProjectSite,
+  setBasicInfo,
+  addSite,
+  editSite,
+  deleteSite,
+  addFloor,
+  editFloor,
+  deleteFloor,
 } = draftProjectSlice.actions;
 
 export default draftProjectSlice.reducer;

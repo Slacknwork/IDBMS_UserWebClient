@@ -1,32 +1,98 @@
-import React from "react";
+"use client";
+
+import { useState } from "react";
 import { Link } from "/navigation";
 import { FaTrash } from "react-icons/fa";
+import { useParams } from "next/navigation";
+
+import { useDispatch, useSelector } from "react-redux";
+import { editFloor } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
+
+function FloorUsePurposeField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftFloor = draftProject.sites[params.siteNo].floors[params.floorNo];
+
+  const [value, setValue] = useState(draftFloor.usePurpose);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editFloor({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        usePurpose: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Use purpose</label>
+      <input
+        type="text"
+        placeholder="Enter floor use purpose"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+  );
+}
+
+function FloorDescriptionField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftFloor = draftProject.sites[params.siteNo].floors[params.floorNo];
+
+  const [value, setValue] = useState(draftFloor.description);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editFloor({
+        siteNo: params.siteNo,
+        floorNo: params.floorNo,
+        description: e.target.value,
+      })
+    );
+  };
+
+  return (
+    <div className="form-field">
+      <label className="mb-1">Floor description</label>
+      <textarea
+        type="text"
+        placeholder="Enter floor description"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </div>
+  );
+}
 
 const FloorDetailsForm = () => {
   return (
     <div className="row">
-      <div className="col col-lg-4 col-12">
+      <div className="col col-lg-6 col-12">
         <h3>Floor Information</h3>
       </div>
-      <div className="col col-lg-4 col-12">
-        <div className="form-field">
-          <label className="mb-1">Floor Name</label>
-          <input type="text" name="name" placeholder="Your Name" />
-        </div>
-      </div>
-      <div className="col col-lg-4 col-12">
-        <div className="form-field">
-          <label className="mb-1">Use purpose</label>
-          <input type="text" name="name" placeholder="Use purpose" />
-        </div>
+      <div className="col col-lg-6 col-12">
+        <FloorUsePurposeField></FloorUsePurposeField>
       </div>
       <div className="col col-lg-12 col-12">
-        <div className="form-field">
-          <label className="mb-1">Floor Description</label>
-          <textarea type="text" name="message" placeholder="Message"></textarea>
-        </div>
+        <FloorDescriptionField></FloorDescriptionField>
       </div>
     </div>
   );

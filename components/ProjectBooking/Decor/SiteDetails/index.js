@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "/navigation";
+import { Link, useRouter } from "/navigation";
 import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
-import { editDraftProjectSite } from "/store/reducers/draftProject";
+import { editSite, addFloor } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
 
@@ -23,9 +23,7 @@ function SiteNameField() {
     setValue(e.target.value);
   };
   const handleBlur = (e) => {
-    dispatch(
-      editDraftProjectSite({ siteNo: params.siteNo, name: e.target.value })
-    );
+    dispatch(editSite({ siteNo: params.siteNo, name: e.target.value }));
   };
 
   return (
@@ -56,7 +54,7 @@ function SiteUsePurposeField() {
   };
   const handleBlur = (e) => {
     dispatch(
-      editDraftProjectSite({
+      editSite({
         siteNo: params.siteNo,
         usePurpose: e.target.value,
       })
@@ -90,7 +88,7 @@ function SiteAddressField() {
   };
   const handleBlur = (e) => {
     dispatch(
-      editDraftProjectSite({
+      editSite({
         siteNo: params.siteNo,
         address: e.target.value,
       })
@@ -105,6 +103,40 @@ function SiteAddressField() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="Use purpose"
+      />
+    </div>
+  );
+}
+
+function SiteDescriptionField() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftSite = draftProject.sites[params.siteNo];
+
+  const [value, setValue] = useState(draftSite.description);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  const handleBlur = (e) => {
+    dispatch(
+      editSite({
+        siteNo: params.siteNo,
+        description: e.target.value,
+      })
+    );
+  };
+  return (
+    <div className="form-field">
+      <label className="mb-1">Site description</label>
+      <textarea
+        type="text"
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        placeholder="Site description"
       />
     </div>
   );
@@ -126,27 +158,25 @@ const SiteDetailsForm = () => {
         <SiteAddressField></SiteAddressField>
       </div>
       <div className="col col-lg-12 col-12">
-        <div className="form-field">
-          <label className="mb-1">Site Description</label>
-          <textarea type="text" name="message" placeholder="Message"></textarea>
-        </div>
+        <SiteDescriptionField></SiteDescriptionField>
       </div>
     </div>
   );
 };
 
-const FloorTableItem = () => {
+function FloorTableItem({ floor, index }) {
+  const params = useParams();
   const RoomHref = urls.project.booking.decor.site.siteNo.floor.floorNo.getUri(
-    1,
-    1
+    params.siteNo,
+    index
   );
 
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+        {index}
       </th>
-      <td className="align-middle">Floor Name</td>
+      <td className="align-middle">{floor.usePurpose}</td>
       <td className="align-middle">1000m2</td>
       <td className="align-middle">1,000,000 VND</td>
       <td className="align-middle m-0">
@@ -187,9 +217,14 @@ const FloorTableItem = () => {
       </td>
     </tr>
   );
-};
+}
 
 const FloorTable = () => {
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const floors = draftProject.sites[params.siteNo].floors;
+
   return (
     <div
       style={{
@@ -206,7 +241,7 @@ const FloorTable = () => {
             <th scope="col" style={{ width: "6rem" }}>
               Floor No.
             </th>
-            <th scope="col">Name</th>
+            <th scope="col">Use purpose</th>
             <th scope="col">Total Area</th>
             <th scope="col">Total Price</th>
             <th scope="col" style={{ width: "15rem" }}>
@@ -218,19 +253,36 @@ const FloorTable = () => {
           </tr>
         </thead>
         <tbody>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
-          <FloorTableItem></FloorTableItem>
+          {floors.map((floor, index) => (
+            <FloorTableItem
+              floor={floor}
+              index={index}
+              key={floor.id}
+            ></FloorTableItem>
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-const BookingSiteDetails = () => {
+export default function BookingSiteDetails() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftSite = draftProject.sites[params.siteNo];
+
+  const handleAddFloorClick = () => {
+    dispatch(addFloor({ siteNo: params.siteNo }));
+    router.push(
+      urls.project.booking.decor.site.siteNo.floor.floorNo.getUri(
+        params.siteNo,
+        draftSite.floors.length
+      )
+    );
+  };
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
@@ -240,7 +292,13 @@ const BookingSiteDetails = () => {
             <div className="d-flex justify-content-between">
               <h3 className="my-auto">Floors</h3>
               <div className="d-flex">
-                <button className="theme-btn-s4 px-4 py-2">Add</button>
+                <button
+                  type="button"
+                  onClick={handleAddFloorClick}
+                  className="theme-btn-s4 px-4 py-2"
+                >
+                  Add
+                </button>
               </div>
             </div>
           </div>
@@ -253,6 +311,4 @@ const BookingSiteDetails = () => {
       </form>
     </div>
   );
-};
-
-export default BookingSiteDetails;
+}
