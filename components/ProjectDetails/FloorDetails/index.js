@@ -6,8 +6,15 @@ import { Link } from "/navigation";
 import urls from "/constants/urls";
 
 import OverviewBreadcrumb from "../Overview/Breadcrumb";
+import { getFloorById } from "../../../api/FloorServices";
+import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-const FloorDetailsForm = () => {
+const FloorDetailsForm = (item) => {
+  console.log(item)
+  const floor = item.floor
   return (
     <div className="row">
       <div className="col col-lg-12 col-12">
@@ -19,7 +26,7 @@ const FloorDetailsForm = () => {
       <div className="col col-lg-4 col-12">
         <div className="form-field">
           <label className="mb-1">Floor Name</label>
-          <input type="text" name="name" placeholder="Your Name" />
+          <input type="text" name="name" placeholder="Your Name" value={floor && floor.floorNo} />
         </div>
       </div>
       <div className="col col-lg-4 col-12">
@@ -31,7 +38,7 @@ const FloorDetailsForm = () => {
       <div className="col col-lg-6 col-12">
         <div className="form-field">
           <label className="mb-1">Floor Description</label>
-          <textarea type="text" name="message" placeholder="Message"></textarea>
+          <textarea type="text" name="message" placeholder="Message" value={floor && floor.description}></textarea>
         </div>
       </div>
       <div className="col col-lg-6 col-12">
@@ -60,11 +67,11 @@ const FloorDetailsForm = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
-const RoomTableItem = () => {
+const RoomTableItem = (object) => {
   const RoomHref = urls.project.id.site.siteNo.floor.floorNo.room.roomNo.getUri(
     1,
     1,
@@ -72,14 +79,19 @@ const RoomTableItem = () => {
     1
   );
 
+  const item = object.item;
+  const no = object.index;
+
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+      <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
+        {no}
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{item && item.usePurpose}</td>
+      <td className="align-middle">{item && item.description}</td>
+      <td className="align-middle">{item && item.area}</td>
+      <td className="align-middle">{item && item.roomType?.name}</td>
+      <td className="align-middle">{item && (item.area * item.pricePerArea).toLocaleString('en-US')}</td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
@@ -95,7 +107,9 @@ const RoomTableItem = () => {
   );
 };
 
-const RoomTable = () => {
+const RoomTable = (roomList) => {
+  console.log(roomList)
+  const values = roomList.roomList;
   return (
     <div
       style={{
@@ -110,21 +124,23 @@ const RoomTable = () => {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Room No.
+              No.
             </th>
-            <th scope="col">Name</th>
+            <th scope="col">Use Purpose</th>
+            <th scope="col">Description</th>
             <th scope="col">Area</th>
-            <th scope="col">Price</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">Total Price (VND)</th>
             <th scope="col" style={{ width: "15rem" }}>
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          {values &&
+            values.map((item, index) => (
+              <RoomTableItem key={index} item={item} index={index + 1} />
+            ))}
         </tbody>
       </table>
     </div>
@@ -132,16 +148,40 @@ const RoomTable = () => {
 };
 
 export default function FloorDetails() {
+
+  const [item, setItem] = useState([]);
+  const [floorId, setFloorId] = useState("2A398774-E041-4C23-8D2E-8E6AEF6B3095");
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getFloorById(floorId);
+          console.log(data);
+          setItem(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  }, [floorId]);
+
   return (
     <div className="pb-0">
       <form className="contact-validation-active">
-        <FloorDetailsForm></FloorDetailsForm>
+        <FloorDetailsForm floor={item} />
         <div className="row">
           <h3 className="my-auto">Rooms</h3>
         </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <RoomTable></RoomTable>
+            <RoomTable roomList={item.rooms} />
           </div>
         </div>
       </form>
