@@ -173,12 +173,16 @@ function FloorTableItem({ floor, index }) {
 
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        {index}
+      <th scope="row" className="align-middle text-center">
+        {index + 1}
       </th>
       <td className="align-middle">{floor.usePurpose}</td>
-      <td className="align-middle">{floor.totalArea}</td>
-      <td className="align-middle">{floor.totalPrice}</td>
+      <td className="align-middle">
+        {floor.totalArea} m<sup>2</sup>
+      </td>
+      <td className="align-middle">
+        {floor.totalPrice.toLocaleString("vi-VN")} VND
+      </td>
       <td className="align-middle m-0">
         <div className="d-flex">
           <Link
@@ -239,12 +243,12 @@ const FloorTable = () => {
         >
           <tr>
             <th scope="col" style={{ width: "6rem" }}>
-              Floor No.
+              No.
             </th>
             <th scope="col">Use purpose</th>
             <th scope="col">Total Area</th>
             <th scope="col">Total Price</th>
-            <th scope="col" style={{ width: "15rem" }}>
+            <th scope="col" style={{ width: "12rem" }}>
               Actions
             </th>
             <th scope="col" style={{ width: "6rem" }}>

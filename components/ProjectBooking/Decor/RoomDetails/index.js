@@ -10,6 +10,7 @@ import { editRoom } from "/store/reducers/draftProject";
 import { getAllRoomTypes } from "/api/roomTypeServices";
 
 import SuggestionModal from "./SuggestionModal";
+import DeleteModal from "./DeleteModal";
 
 function RoomUsePurposeField() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function RoomUsePurposeField() {
       params.roomNo
     ];
 
-  const [value, setValue] = useState(draftRoom.usePurpose);
+  const [value, setValue] = useState(draftRoom?.usePurpose);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -60,7 +61,7 @@ function RoomTypeField() {
       params.roomNo
     ];
 
-  const [value, setValue] = useState(draftRoom.roomType);
+  const [value, setValue] = useState(draftRoom?.roomTypeId);
   const [roomTypes, setRoomTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
@@ -91,7 +92,10 @@ function RoomTypeField() {
         siteNo: params.siteNo,
         floorNo: params.floorNo,
         roomNo: params.roomNo,
-        roomType: Number(e.target.value),
+        roomTypeId: Number(e.target.value),
+        roomTypeName: roomTypes.find(
+          (roomType) => roomType.id === Number(e.target.value)
+        ).name,
         pricePerArea: roomTypes.find(
           (roomType) => roomType.id === Number(e.target.value)
         ).pricePerArea,
@@ -128,7 +132,7 @@ function RoomAreaField() {
       params.roomNo
     ];
 
-  const [value, setValue] = useState(draftRoom.area);
+  const [value, setValue] = useState(draftRoom?.area);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -170,7 +174,7 @@ function RoomDescriptionField() {
       params.roomNo
     ];
 
-  const [value, setValue] = useState(draftRoom.description);
+  const [value, setValue] = useState(draftRoom?.description);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -308,6 +312,9 @@ export default function RoomDetails() {
           <div className="col col-lg-12 col-12">
             <RoomTable></RoomTable>
           </div>
+        </div>
+        <div className="d-flex justify-content-end">
+          <DeleteModal></DeleteModal>
         </div>
       </form>
     </div>

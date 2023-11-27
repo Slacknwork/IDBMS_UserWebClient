@@ -100,7 +100,7 @@ const FloorDetailsForm = () => {
 
 function RoomTableItem({ room, index }) {
   const params = useParams();
-
+  console.log(room);
   const RoomHref =
     urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
       params.siteNo,
@@ -110,15 +110,19 @@ function RoomTableItem({ room, index }) {
 
   return (
     <tr>
-      <th scope="row" className="align-middle">
-        {index}
+      <th scope="row" className="align-middle text-center">
+        {index + 1}
       </th>
-      <td className="align-middle">{room.roomType}</td>
+      <td className="align-middle">{room.roomTypeName}</td>
       <td className="align-middle">{room.usePurpose}</td>
-      <td className="align-middle">{room.area}</td>
-      <td className="align-middle">{room.area * room.pricePerArea}</td>
+      <td className="align-middle">
+        {room.area} m<sup>2</sup>
+      </td>
+      <td className="align-middle">
+        {(room.area * room.pricePerArea).toLocaleString("vi-VN")} VND
+      </td>
       <td className="align-middle m-0">
-        <div className="d-flex">
+        <div className="d-flex justify-content-end">
           <Link
             href={RoomHref}
             className="theme-btn m-1"
@@ -126,13 +130,6 @@ function RoomTableItem({ room, index }) {
           >
             Details
           </Link>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
         </div>
       </td>
     </tr>
@@ -158,16 +155,14 @@ function RoomTable() {
           style={{ position: "sticky", top: 0, zIndex: 1 }}
         >
           <tr>
-            <th scope="col" style={{ width: "6rem" }}>
+            <th scope="col" style={{ width: "4rem" }}>
               No.
             </th>
             <th scope="col">Room Type</th>
             <th scope="col">Use purpose</th>
             <th scope="col">Area</th>
             <th scope="col">Price</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
+            <th scope="col" style={{ width: "12rem" }}></th>
           </tr>
         </thead>
         <tbody>

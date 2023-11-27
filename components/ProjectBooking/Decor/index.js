@@ -104,7 +104,8 @@ export default function ProjectBooking({ children }) {
                   Area: {draftProject.totalArea} m<sup>2</sup>
                 </p>
                 <h5 className="my-auto">
-                  Total price: {draftProject.totalPrice} VND
+                  Total price: {draftProject.totalPrice.toLocaleString("vi-VN")}{" "}
+                  VND
                 </h5>
               </div>
             </div>

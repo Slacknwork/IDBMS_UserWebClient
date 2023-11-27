@@ -29,7 +29,7 @@ const TaskTableItem = ({ task, index }) => {
   const TaskHref = urls.project.id.tasks.taskId.getUri(params.id, task.id);
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
+      <th scope="row" className="align-middle text-center">
         {index}
       </th>
       <td className="align-middle">{task && task.name}</td>

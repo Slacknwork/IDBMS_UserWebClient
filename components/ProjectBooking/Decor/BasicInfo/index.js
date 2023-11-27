@@ -1,8 +1,11 @@
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
+
+import { useState, useRef, useEffect } from "react";
+
+import { getAllProjectCategories } from "/api/projectCategoryServices";
 import { setBasicInfo } from "/store/reducers/draftProject";
-import { useState } from "react";
 
 function NameField() {
   const dispatch = useDispatch();
@@ -34,8 +37,27 @@ function NameField() {
 function ProjectCategoryField() {
   const dispatch = useDispatch();
   const draftProject = useSelector((state) => state.draftProject);
-
+  const [categories, setCategories] = useState([]);
   const [value, setValue] = useState(draftProject.projectCategoryId);
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getAllProjectCategories();
+          setCategories(data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  });
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -53,9 +75,11 @@ function ProjectCategoryField() {
         onChange={handleChange}
         onBlur={handleBlur}
       >
-        <option value={1}>Bank</option>
-        <option value={2}>Casino</option>
-        <option value={3}>Apartment</option>
+        {categories.map((category) => (
+          <option key={category.id} value={category.id}>
+            {category.name}
+          </option>
+        ))}
       </select>
     </div>
   );

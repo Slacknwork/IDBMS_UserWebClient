@@ -25,8 +25,10 @@ const SiteItem = ({ site, index }) => {
             <div className="des">
               <p>Address: {site.address}</p>
               <p>Purpose: {site.usePurpose}</p>
-              <p>Total area: {site.totalArea}</p>
-              <p>Total price: {site.totalPrice}</p>
+              <p>
+                Total area: {site.totalArea} m<sup>2</sup>
+              </p>
+              <p>Total price: {site.totalPrice.toLocaleString("vi-VN")} VND</p>
             </div>
           </div>
           <div className="mt-auto d-flex gap-3">

@@ -79,7 +79,8 @@ export const draftProjectSlice = createSlice({
 
       state.sites[siteNo].floors[floorNo].rooms.push({
         id: uniqueId(),
-        roomType: 0,
+        roomTypeId: 0,
+        roomTypeName: "",
         usePurpose: "",
         description: "",
         area: 0,
@@ -96,7 +97,9 @@ export const draftProjectSlice = createSlice({
       const floor = state.sites[siteNo].floors[floorNo];
       const room = state.sites[siteNo].floors[floorNo].rooms[roomNo];
 
-      room.roomType = actions.payload.roomType || room.roomType;
+      room.roomTypeId = actions.payload.roomTypeId || room.roomTypeId;
+
+      room.roomTypeName = actions.payload.roomTypeName || room.roomTypeName;
 
       room.usePurpose = actions.payload.usePurpose || room.usePurpose;
 
