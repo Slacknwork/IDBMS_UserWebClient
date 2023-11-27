@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { Link, useRouter } from "/navigation";
-import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { editFloor, addRoom } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
+
+import DeleteModal from "./DeleteModal";
 
 function FloorUsePurposeField() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function FloorUsePurposeField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftFloor = draftProject.sites[params.siteNo].floors[params.floorNo];
 
-  const [value, setValue] = useState(draftFloor.usePurpose);
+  const [value, setValue] = useState(draftFloor?.usePurpose);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -53,7 +54,7 @@ function FloorDescriptionField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftFloor = draftProject.sites[params.siteNo].floors[params.floorNo];
 
-  const [value, setValue] = useState(draftFloor.description);
+  const [value, setValue] = useState(draftFloor?.description);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -140,7 +141,7 @@ function RoomTable() {
   const params = useParams();
 
   const draftProject = useSelector((state) => state.draftProject);
-  const rooms = draftProject.sites[params.siteNo].floors[params.floorNo].rooms;
+  const rooms = draftProject.sites[params.siteNo].floors[params.floorNo]?.rooms;
 
   return (
     <div
@@ -166,7 +167,7 @@ function RoomTable() {
           </tr>
         </thead>
         <tbody>
-          {rooms.map((room, index) => (
+          {rooms?.map((room, index) => (
             <RoomTableItem
               room={room}
               index={index}
@@ -221,6 +222,11 @@ export default function BookingFloorDetails() {
         <div className="row">
           <div className="col col-lg-12 col-12">
             <RoomTable></RoomTable>
+          </div>
+        </div>
+        <div className="row">
+          <div className="d-flex justify-content-end">
+            <DeleteModal></DeleteModal>
           </div>
         </div>
       </form>

@@ -226,7 +226,7 @@ function RoomDetailsForm() {
   );
 }
 
-const RoomTableItem = () => {
+function SuggestionTableItem() {
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
@@ -255,9 +255,9 @@ const RoomTableItem = () => {
       </td>
     </tr>
   );
-};
+}
 
-const RoomTable = () => {
+function SuggestionTable() {
   return (
     <div
       style={{
@@ -283,15 +283,15 @@ const RoomTable = () => {
           </tr>
         </thead>
         <tbody>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
-          <RoomTableItem></RoomTableItem>
+          <SuggestionTableItem></SuggestionTableItem>
+          <SuggestionTableItem></SuggestionTableItem>
+          <SuggestionTableItem></SuggestionTableItem>
+          <SuggestionTableItem></SuggestionTableItem>
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default function RoomDetails() {
   return (
@@ -310,7 +310,7 @@ export default function RoomDetails() {
         </div>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <RoomTable></RoomTable>
+            <SuggestionTable></SuggestionTable>
           </div>
         </div>
         <div className="d-flex justify-content-end">

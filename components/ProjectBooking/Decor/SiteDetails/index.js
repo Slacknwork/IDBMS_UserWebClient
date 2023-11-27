@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { Link, useRouter } from "/navigation";
-import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { editSite, addFloor } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
+
+import DeleteModal from "./DeleteModal";
 
 function SiteNameField() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ function SiteNameField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftSite = draftProject.sites[params.siteNo];
 
-  const [value, setValue] = useState(draftSite.name);
+  const [value, setValue] = useState(draftSite?.name);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -47,7 +48,7 @@ function SiteUsePurposeField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftSite = draftProject.sites[params.siteNo];
 
-  const [value, setValue] = useState(draftSite.usePurpose);
+  const [value, setValue] = useState(draftSite?.usePurpose);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -81,7 +82,7 @@ function SiteAddressField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftSite = draftProject.sites[params.siteNo];
 
-  const [value, setValue] = useState(draftSite.address);
+  const [value, setValue] = useState(draftSite?.address);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -115,7 +116,7 @@ function SiteDescriptionField() {
   const draftProject = useSelector((state) => state.draftProject);
   const draftSite = draftProject.sites[params.siteNo];
 
-  const [value, setValue] = useState(draftSite.description);
+  const [value, setValue] = useState(draftSite?.description);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -184,7 +185,7 @@ function FloorTableItem({ floor, index }) {
         {floor.totalPrice.toLocaleString("vi-VN")} VND
       </td>
       <td className="align-middle m-0">
-        <div className="d-flex">
+        <div className="d-flex justify-content-end">
           <Link
             href={RoomHref}
             className="theme-btn m-1"
@@ -192,13 +193,6 @@ function FloorTableItem({ floor, index }) {
           >
             Details
           </Link>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
         </div>
       </td>
       <td className="align-middle m-0">
@@ -227,7 +221,7 @@ const FloorTable = () => {
   const params = useParams();
 
   const draftProject = useSelector((state) => state.draftProject);
-  const floors = draftProject.sites[params.siteNo].floors;
+  const floors = draftProject.sites[params.siteNo]?.floors;
 
   return (
     <div
@@ -248,16 +242,14 @@ const FloorTable = () => {
             <th scope="col">Use purpose</th>
             <th scope="col">Total Area</th>
             <th scope="col">Total Price</th>
-            <th scope="col" style={{ width: "12rem" }}>
-              Actions
-            </th>
+            <th scope="col"></th>
             <th scope="col" style={{ width: "6rem" }}>
               Move
             </th>
           </tr>
         </thead>
         <tbody>
-          {floors.map((floor, index) => (
+          {floors?.map((floor, index) => (
             <FloorTableItem
               floor={floor}
               index={index}
@@ -311,6 +303,9 @@ export default function BookingSiteDetails() {
           <div className="col col-lg-12 col-12">
             <FloorTable></FloorTable>
           </div>
+        </div>
+        <div className="d-flex justify-content-end">
+          <DeleteModal></DeleteModal>
         </div>
       </form>
     </div>

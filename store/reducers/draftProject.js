@@ -10,16 +10,55 @@ const initialState = {
   sites: [],
 };
 
+const calculate = (state, actions) => {
+  const siteNo = actions.payload.siteNo;
+  const floorNo = actions.payload.floorNo;
+
+  const site = state.sites[siteNo];
+  const floor = state.sites[siteNo]?.floors[floorNo];
+
+  if (floor) {
+    floor.totalArea = floor.rooms.reduce(
+      (acc, room) => acc + Number(room.area),
+      0
+    );
+    floor.totalPrice = floor.rooms.reduce(
+      (acc, room) => acc + room.pricePerArea * room.area,
+      0
+    );
+  }
+
+  if (site) {
+    site.totalArea = site.floors.reduce(
+      (acc, floor) => acc + floor.totalArea,
+      0
+    );
+    site.totalPrice = site.floors.reduce(
+      (acc, floor) => acc + floor.totalPrice,
+      0
+    );
+  }
+
+  state.totalArea = state.sites?.reduce((acc, site) => acc + site.totalArea, 0);
+  state.totalPrice = state.sites?.reduce(
+    (acc, site) => acc + site.totalPrice,
+    0
+  );
+};
+
 export const draftProjectSlice = createSlice({
   name: "draftProject",
   initialState,
   reducers: {
+    reset: () => initialState,
+
     setBasicInfo: (state, actions) => {
       state.name = actions.payload.name || state.name;
       state.projectCategoryId =
         actions.payload.projectCategoryId || state.projectCategoryId;
       state.description = actions.payload.description || state.description;
     },
+
     addSite(state) {
       state.sites.push({
         id: uniqueId(),
@@ -45,7 +84,9 @@ export const draftProjectSlice = createSlice({
     },
     deleteSite(state, actions) {
       state.sites.splice(actions.payload.siteNo, 1);
+      calculate(state, actions);
     },
+
     addFloor(state, actions) {
       state.sites[actions.payload.siteNo].floors.push({
         id: uniqueId(),
@@ -72,7 +113,9 @@ export const draftProjectSlice = createSlice({
         actions.payload.floorNo,
         1
       );
+      calculate(state, actions);
     },
+
     addRoom(state, actions) {
       const siteNo = actions.payload.siteNo;
       const floorNo = actions.payload.floorNo;
@@ -93,8 +136,6 @@ export const draftProjectSlice = createSlice({
       const floorNo = actions.payload.floorNo;
       const roomNo = actions.payload.roomNo;
 
-      const site = state.sites[siteNo];
-      const floor = state.sites[siteNo].floors[floorNo];
       const room = state.sites[siteNo].floors[floorNo].rooms[roomNo];
 
       room.roomTypeId = actions.payload.roomTypeId || room.roomTypeId;
@@ -109,32 +150,7 @@ export const draftProjectSlice = createSlice({
 
       room.pricePerArea = actions.payload.pricePerArea || room.pricePerArea;
 
-      floor.totalArea = floor.rooms.reduce(
-        (acc, room) => acc + Number(room.area),
-        0
-      );
-      floor.totalPrice = floor.rooms.reduce(
-        (acc, room) => acc + room.pricePerArea * room.area,
-        0
-      );
-
-      site.totalArea = site.floors.reduce(
-        (acc, floor) => acc + floor.totalArea,
-        0
-      );
-      site.totalPrice = site.floors.reduce(
-        (acc, floor) => acc + floor.totalPrice,
-        0
-      );
-
-      state.totalArea = state.sites.reduce(
-        (acc, site) => acc + site.totalArea,
-        0
-      );
-      state.totalPrice = state.sites.reduce(
-        (acc, site) => acc + site.totalPrice,
-        0
-      );
+      calculate(state, actions);
     },
     deleteRoom(state, actions) {
       const siteNo = actions.payload.siteNo;
@@ -142,6 +158,7 @@ export const draftProjectSlice = createSlice({
       const roomNo = actions.payload.roomNo;
 
       state.sites[siteNo].floors[floorNo].rooms.splice(roomNo);
+      calculate(state, actions);
     },
   },
 });

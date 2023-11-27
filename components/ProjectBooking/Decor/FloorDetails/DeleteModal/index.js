@@ -4,32 +4,27 @@ import React, { useState } from "react";
 import { useRouter } from "/navigation";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { useParams } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import urls from "/constants/urls";
 
-import { deleteRoom } from "/store/reducers/draftProject";
+import { deleteFloor } from "/store/reducers/draftProject";
 
-export default function SuggestionModal() {
+export default function DeleteModal() {
   const params = useParams();
   const router = useRouter();
+  const draftProject = useSelector((state) => state.draftProject);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
   const onDeleteClick = () => {
     setModal(!modal);
-    router.push(
-      urls.project.booking.decor.site.siteNo.floor.floorNo.getUri(
-        params.siteNo,
-        params.floorNo
-      )
-    );
+    router.push(urls.project.booking.decor.site.siteNo.getUri(params.siteNo));
     dispatch(
-      deleteRoom({
+      deleteFloor({
         siteNo: params.siteNo,
         floorNo: params.floorNo,
-        roomNo: params.roomNo,
       })
     );
   };
@@ -42,12 +37,13 @@ export default function SuggestionModal() {
         style={{ backgroundColor: "crimson" }}
         onClick={toggle}
       >
-        Delete room
+        Delete Floor
       </button>
       <Modal isOpen={modal} scrollable={false} centered={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Add Suggestion</ModalHeader>
+        <ModalHeader toggle={toggle}>Delete site</ModalHeader>
         <ModalBody style={{ maxHeight: "30rem", overflowY: "scroll" }}>
-          Delete this room?
+          Delete floor {Number(params.floorNo) + 1} of{" "}
+          {draftProject.sites[params.siteNo].name}?
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={toggle}>
