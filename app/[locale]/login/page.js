@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { Link } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserLoginState } from "/store/reducers/user";
+import { loginUser } from "../../../api/authenticationServices";
 
 const LoginPage = (props) => {
   const router = useRouter();
@@ -21,47 +22,61 @@ const LoginPage = (props) => {
   const user = useSelector((state) => state.user);
 
   const [value, setValue] = useState({
-    email: "user@gmail.com",
-    password: "123456",
-    remember: false,
+    email: "",
+    password: "",
+    // remember: false,
   });
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(value.email);
+
+    setEmailError(isEmailValid ? "" : "Invalid format for email address");
+
+    return isEmailValid;
+  };
+
+  const validatePassword = () => {
+    const isPasswordValid = value.password && value.password.trim() !== "";
+
+    setPasswordError(isPasswordValid ? "" : "Password is required");
+
+    return isPasswordValid;
+  };
 
   const changeHandler = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
-    validator.showMessages();
   };
 
-  const rememberHandler = () => {
-    setValue({ ...value, remember: !value.remember });
-  };
+  // const rememberHandler = () => {
+  //   setValue({ ...value, remember: !value.remember });
+  // };
 
-  const [validator] = React.useState(
-    new SimpleReactValidator({
-      className: "errorMessage",
-    })
-  );
-
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    dispatch(setUserLoginState(true));
-    if (validator.allValid()) {
-      setValue({
-        email: "",
-        password: "",
-        remember: false,
-      });
-      validator.hideMessages();
+    const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
 
-      const userRegex = /^user+.*/gm;
-      const email = value.email;
-
-      if (email.match(userRegex)) {
-        toast.success("You successfully Login on Arkio !");
-        router.push("/");
+    if (isEmailValid && isPasswordValid) {
+      try {
+        const response = await loginUser(value);
+        console.log(response);
+        if (response.data != null) {
+          toast.success("Login successfully!");
+          // dispatch(setUserLoginState(true));
+          // link
+        } else {
+          throw new Error("Login failed!");
+        }
+      } catch (error) {
+        console.error("Error login :", error);
+        toast.error("Error login!");
       }
     } else {
-      validator.showMessages();
-      toast.error("Empty field is not allowed!");
+      toast.error("Please fix the validation errors before submitting.");
     }
   };
   return (
@@ -83,10 +98,15 @@ const LoginPage = (props) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                onBlur={(e) => changeHandler(e)}
+                onBlur={(e) => {
+                  changeHandler(e);
+                  validateEmail();
+                }}
                 onChange={(e) => changeHandler(e)}
               />
-              {validator.message("email", value.email, "required|email")}
+              {emailError && (
+                <span className="errorMessage">{emailError}</span>
+              )}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -101,22 +121,27 @@ const LoginPage = (props) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                onBlur={(e) => changeHandler(e)}
+                onBlur={(e) => {
+                  changeHandler(e);
+                  validatePassword();
+                }}
                 onChange={(e) => changeHandler(e)}
               />
-              {validator.message("password", value.password, "required")}
+              {passwordError && (
+                <span className="errorMessage">{passwordError}</span>
+              )}
             </Grid>
             <Grid item xs={12}>
               <Grid className="formAction">
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={value.remember}
-                      onChange={rememberHandler}
-                    />
-                  }
-                  label="Remember Me"
-                />
+                {/* <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={value.remember}
+                    onChange={rememberHandler}
+                  />
+                }
+                label="Remember Me"
+              /> */}
                 <Link
                   href="/forgot-password"
                   style={{

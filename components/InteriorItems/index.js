@@ -115,9 +115,7 @@ function InteriorItemSingle(itemDetails) {
         </h3>
         <div className="price">
           <span>
-            {item &&
-              item.estimatePrice &&
-              item.estimatePrice.toLocaleString("vi-VN") + " VND"}
+            {item && item.estimatePrice && item.estimatePrice.toLocaleString('en-US') + ' VND'}
           </span>
         </div>
         <div className="add-to-cart">
