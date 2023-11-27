@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
-import { getProjectById } from "../../../api/projectServices";
+import { getProjectById } from "/api/projectServices";
+import { useParams } from "next/navigation";
 
 export default function ProjectOverview() {
-
+  const params = useParams();
   const [item, setItem] = useState([]);
-  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [projectId, setProjectId] = useState(params.id);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -38,18 +37,20 @@ export default function ProjectOverview() {
           <div className="col-lg-10 col-12">
             <div className="wpo-project-single-wrap">
               <div className="wpo-project-single-item">
-                <div className="row align-items-left" style={{ paddingTop: '30px' }}>
+                <div
+                  className="row align-items-left"
+                  style={{ paddingTop: "30px" }}
+                >
                   <div className="col-lg-7">
                     <div className="wpo-project-single-title">
                       <h3>Project Name: {item && item.name} </h3>
                     </div>
                     <p>
-                      Updated date: {item &&
+                      Updated date:{" "}
+                      {item &&
                         new Date(item.updatedDate).toLocaleDateString("en-GB")}
                     </p>
-                    <p>
-                      Description: {item && item.description}
-                    </p>
+                    <p>Description: {item && item.description}</p>
                   </div>
                   <div className="col-lg-5">
                     <div
@@ -61,23 +62,28 @@ export default function ProjectOverview() {
                           Company Name<span>{item && item.companyName}</span>
                         </li>
                         <li>
-                          Company Address<span>{item && item.companyAddress}</span>
+                          Company Address
+                          <span>{item && item.companyAddress}</span>
                         </li>
                         <li>
                           {item && item.type === 0
-                            ? 'Lead Architect'
+                            ? "Lead Architect"
                             : item && item.type === 1
-                              ? 'Construction Manager'
-                              : 'Not specified'}
+                            ? "Construction Manager"
+                            : "Not specified"}
                           <span>
                             {item &&
                               item.projectParticipations &&
                               item.projectParticipations
-                                .filter((participation) =>
-                                  (item.type === 0 && participation.role === 2) ||
-                                  (item.type === 1 && participation.role === 4))
+                                .filter(
+                                  (participation) =>
+                                    (item.type === 0 &&
+                                      participation.role === 2) ||
+                                    (item.type === 1 &&
+                                      participation.role === 4)
+                                )
                                 .map((lead) => lead.user?.name)
-                                .join(', ')}
+                                .join(", ")}
                           </span>
                         </li>
                         <li>
@@ -90,7 +96,8 @@ export default function ProjectOverview() {
                           Status<span>{item && item.status}</span>
                         </li>
                         <li>
-                          Advertisement Status<span>{item && item.advertisementStatus}</span>
+                          Advertisement Status
+                          <span>{item && item.advertisementStatus}</span>
                         </li>
                       </ul>
                     </div>

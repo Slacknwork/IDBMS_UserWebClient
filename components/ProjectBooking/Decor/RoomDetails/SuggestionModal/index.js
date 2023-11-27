@@ -1,90 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-
-import { FaTrash } from "react-icons/fa";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import { toast } from "react-toastify";
 
 import "./modal.css";
 
-const SuggestionTableItem = () => {
-  return (
-    <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
-      </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
-      <td className="align-middle">
-        <div className="d-flex">
-          <button
-            type="button"
-            className="theme-btn mx-1 py-1 align-content-center"
-            style={{ width: "5rem", zIndex: 0 }}
-          >
-            Details
-          </button>
-          <button
-            type="button"
-            className="theme-btn mx-1 pt-0 pb-1 align-content-center"
-            style={{
-              width: "2rem",
-              backgroundColor: "crimson",
-              zIndex: 0,
-            }}
-          >
-            <FaTrash />
-          </button>
-        </div>
-      </td>
-    </tr>
-  );
-};
+import { getAllInteriorItems } from "/api/interiorItemServices";
 
-const SuggestionTable = () => {
-  return (
-    <div
-      style={{
-        height: "25rem",
-        overflowY: "scroll",
-      }}
-    >
-      <table className="table table-striped table-hover">
-        <thead
-          className="shadow-sm"
-          style={{ position: "sticky", top: 0, zIndex: 1 }}
-        >
-          <tr>
-            <th scope="col" style={{ width: "6rem" }}>
-              Room No.
-            </th>
-            <th scope="col">Name</th>
-            <th scope="col">Area</th>
-            <th scope="col">Price</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
-        </tbody>
-      </table>
-    </div>
-  );
-};
+import { addTask, editTask, deleteTask } from "/store/reducers/draftProject";
 
-export default function SuggestionModal() {
+export default function SuggestionModal({ title, task, index, children }) {
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftTask = task
+    ? draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+        params.roomNo
+      ].tasks[index]
+    : null;
+
   const [modal, setModal] = useState(false);
 
+  const [name, setName] = useState(task ? draftTask.name : "");
+  const onNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const [unitInContract, setUnitInContract] = useState(
+    task ? draftTask.unitInContract : 0
+  );
+  const onUnitInContractChange = (e) => {
+    setUnitInContract(Number(e.target.value));
+  };
+  const [description, setDescription] = useState(
+    task ? draftTask.description : ""
+  );
+  const onDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const [interiorItems, setInteriorItems] = useState([]);
+  const [interiorItem, setInteriorItem] = useState({});
+
+  const [loading, setLoading] = useState(true);
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialized.current) {
+      initialized.current = true;
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await getAllInteriorItems();
+          setInteriorItems(data);
+          const interiorItemIndex = draftTask
+            ? data.findIndex(
+                (interiorItem) => interiorItem.id == draftTask.interiorItemId
+              )
+            : 0;
+          setInteriorItem(data[interiorItemIndex]);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.error("Error fetching data");
+        }
+      };
+      fetchDataFromApi();
+    }
+  });
+
   const toggle = () => setModal(!modal);
+  const onCreateTaskClick = () => {
+    if (task) {
+      dispatch(
+        editTask({
+          siteNo: params.siteNo,
+          floorNo: params.floorNo,
+          roomNo: params.roomNo,
+          taskNo: index,
+          name,
+          unitInContract,
+          description,
+          interiorItemId: interiorItem.id,
+          interiorItemName: interiorItem.name,
+          calculationUnit: interiorItem.calculationUnit,
+        })
+      );
+    } else {
+      dispatch(
+        addTask({
+          siteNo: params.siteNo,
+          floorNo: params.floorNo,
+          roomNo: params.roomNo,
+          name,
+          unitInContract,
+          description,
+          interiorItemId: interiorItem.id,
+          interiorItemName: interiorItem.name,
+          calculationUnit: interiorItem.calculationUnit,
+        })
+      );
+    }
+    toggle();
+  };
 
   return (
     <div>
       <button type="button" className="theme-btn-s4 px-4 py-2" onClick={toggle}>
-        Add
+        {children}
       </button>
       <Modal
         isOpen={modal}
@@ -94,22 +119,38 @@ export default function SuggestionModal() {
         toggle={toggle}
         backdrop="static"
       >
-        <ModalHeader toggle={toggle}>Add Suggestion</ModalHeader>
+        <ModalHeader toggle={toggle}>{title}</ModalHeader>
         <ModalBody style={{ maxHeight: "30rem", overflowY: "scroll" }}>
           <section id="booking-section" className="wpo-contact-pg-section">
             <div className="wpo-contact-form-area-transparent mt-4">
               <form className="contact-validation-active">
                 <div className="row">
+                  <div className="col col-lg-12 col-12 mb-2">
+                    <p>
+                      You can make a suggestion here, and select an Interior
+                      item if needed.
+                    </p>
+                  </div>
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
                       <label className="mb-1">Name</label>
-                      <input type="text" name="name" placeholder="Your Name" />
+                      <input
+                        type="text"
+                        placeholder="Task Name"
+                        value={name}
+                        onChange={onNameChange}
+                      />
                     </div>
                   </div>
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
-                      <label className="mb-1">Purpose</label>
-                      <input type="text" name="name" placeholder="Your Name" />
+                      <label className="mb-1">Quantity</label>
+                      <input
+                        type="number"
+                        placeholder="Quantity"
+                        value={unitInContract}
+                        onChange={onUnitInContractChange}
+                      />
                     </div>
                   </div>
                   <div className="col col-lg-12 col-12">
@@ -117,37 +158,59 @@ export default function SuggestionModal() {
                       <label className="mb-1">Description</label>
                       <textarea
                         type="text"
-                        name="message"
-                        placeholder="Message"
+                        placeholder="Description"
+                        value={description}
+                        onChange={onDescriptionChange}
                       ></textarea>
                     </div>
                   </div>
                   <div className="col col-lg-12 col-12">
                     <div className="d-flex">
-                      <h6 className="mb-4">Selected Item</h6>
-                      <div
-                        style={{
-                          width: "5rem",
-                          height: "5rem",
-                          backgroundColor: "black",
-                        }}
-                      ></div>
-                      <p className="mx-4 my-auto">Item name</p>
+                      <h6 className="my-auto">Selected Item</h6>
+                      <div className="mx-4 d-flex">
+                        <div
+                          style={{
+                            width: "5rem",
+                            height: "5rem",
+                            backgroundColor: "black",
+                          }}
+                        ></div>
+                        <Autocomplete
+                          size="small"
+                          value={interiorItem}
+                          options={interiorItems}
+                          onChange={(event, newValue) =>
+                            setInteriorItem(newValue)
+                          }
+                          getOptionLabel={(option) => option.name}
+                          sx={{ width: "25rem", mx: 2, my: "auto" }}
+                          renderInput={(params) => (
+                            <TextField
+                              key={params.id}
+                              {...params}
+                              label="Interior item"
+                            />
+                          )}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </form>
             </div>
-            <SuggestionTable></SuggestionTable>
           </section>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
+          <div className="d-flex">
+            <Button className=" theme-btn-s2 py-2 px-4" onClick={toggle}>
+              Cancel
+            </Button>
+          </div>
+          <div className="d-flex">
+            <Button className="theme-btn py-2 px-4" onClick={onCreateTaskClick}>
+              Create
+            </Button>
+          </div>
         </ModalFooter>
       </Modal>
     </div>
