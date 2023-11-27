@@ -10,7 +10,9 @@ import "./modal.css";
 
 import { getAllInteriorItems } from "/api/interiorItemServices";
 
-import { addTask, editTask, deleteTask } from "/store/reducers/draftProject";
+import { addTask, editTask } from "/store/reducers/draftProject";
+
+import DeleteModal from "./DeleteModal";
 
 export default function SuggestionModal({ title, task, index, children }) {
   const params = useParams();
@@ -183,7 +185,7 @@ export default function SuggestionModal({ title, task, index, children }) {
                             setInteriorItem(newValue)
                           }
                           getOptionLabel={(option) => option.name}
-                          sx={{ width: "25rem", mx: 2, my: "auto" }}
+                          sx={{ width: "30rem", mx: 2, my: "auto" }}
                           renderInput={(params) => (
                             <TextField
                               key={params.id}
@@ -196,6 +198,13 @@ export default function SuggestionModal({ title, task, index, children }) {
                     </div>
                   </div>
                 </div>
+                {task && (
+                  <div className="row">
+                    <div className="d-flex justify-content-end">
+                      <DeleteModal taskNo={index}></DeleteModal>
+                    </div>
+                  </div>
+                )}
               </form>
             </div>
           </section>
@@ -208,7 +217,7 @@ export default function SuggestionModal({ title, task, index, children }) {
           </div>
           <div className="d-flex">
             <Button className="theme-btn py-2 px-4" onClick={onCreateTaskClick}>
-              Create
+              {task ? `Edit` : `Create`}
             </Button>
           </div>
         </ModalFooter>

@@ -236,7 +236,9 @@ function SuggestionTableItem({ task, index }) {
       <td className="align-middle">{task.name}</td>
       <td className="align-middle">{task.interiorItemName}</td>
       <td className="align-middle">{calculationUnit[task.calculationUnit]}</td>
-      <td className="align-middle">{task.unitInContract}</td>
+      <td className="align-middle" style={{ textAlign: "right" }}>
+        {task.unitInContract}
+      </td>
       <td className="align-middle m-0">
         <div className="d-flex justify-content-end">
           <SuggestionModal title={`${task.name}`} task={task} index={index}>
@@ -276,8 +278,10 @@ function SuggestionTable() {
             <th scope="col">Name</th>
             <th scope="col">Interior Item</th>
             <th scope="col">Unit</th>
-            <th scope="col">Quantity</th>
-            <th scope="col" style={{ width: "12rem" }}></th>
+            <th scope="col" style={{ textAlign: "right" }}>
+              Quantity
+            </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>

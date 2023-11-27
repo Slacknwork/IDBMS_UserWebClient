@@ -3,10 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: "",
+  companyName: "",
+  companyAddress: "",
+  companyCode: "",
+  description: "",
   projectCategoryId: 0,
+  language: 0,
+  projectDesignId: 0,
+  estimateBusinessDay: 0,
+
   totalArea: 0,
   totalPrice: 0,
-  description: "",
   sites: [],
 };
 
@@ -54,9 +61,18 @@ export const draftProjectSlice = createSlice({
 
     setBasicInfo: (state, actions) => {
       state.name = actions.payload.name || state.name;
+      state.companyName = actions.payload.companyName || state.companyName;
+      state.companyAddress =
+        actions.payload.companyAddress || state.companyAddress;
+      state.companyCode = actions.payload.companyCode || state.companyCode;
       state.projectCategoryId =
         actions.payload.projectCategoryId || state.projectCategoryId;
       state.description = actions.payload.description || state.description;
+      state.language = actions.payload.language || state.language;
+      state.projectDesignId =
+        actions.payload.projectDesignId || state.projectDesignId;
+      state.estimateBusinessDay =
+        actions.payload.estimateBusinessDay || state.estimateBusinessDay;
     },
 
     addSite(state) {
