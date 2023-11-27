@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
-
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { editRoom } from "/store/reducers/draftProject";
 
@@ -82,7 +82,7 @@ function RoomTypeField() {
       };
       fetchDataFromApi();
     }
-  }, []);
+  });
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -252,7 +252,6 @@ function SuggestionTableItem({ task, index }) {
 
 function SuggestionTable() {
   const params = useParams();
-
   const draftProject = useSelector((state) => state.draftProject);
   const draftRoom =
     draftProject.sites[params.siteNo].floors[params.floorNo].rooms[

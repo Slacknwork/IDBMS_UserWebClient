@@ -12,6 +12,7 @@ const initialState = {
   projectDesignId: 0,
   estimateBusinessDay: 0,
 
+  projectDesigns: [],
   totalArea: 0,
   totalPrice: 0,
   sites: [],
@@ -51,6 +52,19 @@ const calculate = (state, actions) => {
     (acc, site) => acc + site.totalPrice,
     0
   );
+
+  state.projectDesignId = 0;
+  state.estimateBusinessDay = 0;
+
+  state.projectDesigns.forEach((design) => {
+    if (
+      state.totalPrice > design.minBudget &&
+      state.totalPrice <= design.maxBudget
+    ) {
+      state.projectDesignId = design.id;
+      state.estimateBusinessDay = design.estimateBusinessDay;
+    }
+  });
 };
 
 export const draftProjectSlice = createSlice({
@@ -73,6 +87,8 @@ export const draftProjectSlice = createSlice({
         actions.payload.projectDesignId || state.projectDesignId;
       state.estimateBusinessDay =
         actions.payload.estimateBusinessDay || state.estimateBusinessDay;
+      state.projectDesigns =
+        actions.payload.projectDesigns || state.projectDesigns;
     },
 
     addSite(state) {

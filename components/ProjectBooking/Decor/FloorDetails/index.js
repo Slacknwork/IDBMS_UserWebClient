@@ -101,7 +101,6 @@ const FloorDetailsForm = () => {
 
 function RoomTableItem({ room, index }) {
   const params = useParams();
-  console.log(room);
   const RoomHref =
     urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
       params.siteNo,

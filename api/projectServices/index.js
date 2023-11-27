@@ -14,19 +14,16 @@ const getProjectById = async (projectId) => {
 
 const createDecorProject = async (project) => {
   try {
-    const response = await fetch(
-      `https://localhost:7062/api/Projects/decor/${projectId}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(project),
-        cache: "no-store",
-      }
-    );
-    const project = await response.json();
-    return project;
+    console.log(project);
+    const response = await fetch(`https://localhost:7062/api/Projects/decor`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    });
+    const responseJson = await response.json();
+    return responseJson;
   } catch (error) {
     console.error("Error fetching project by ID:", error);
     throw error;

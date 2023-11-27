@@ -17,7 +17,6 @@ import DeleteModal from "./DeleteModal";
 export default function SuggestionModal({ title, task, index, children }) {
   const params = useParams();
   const dispatch = useDispatch();
-
   const draftProject = useSelector((state) => state.draftProject);
   const draftTask = task
     ? draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
