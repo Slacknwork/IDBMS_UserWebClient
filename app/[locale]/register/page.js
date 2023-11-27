@@ -2,21 +2,20 @@
 
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import SimpleReactValidator from "simple-react-validator";
 import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useRouter } from "next/navigation";
-import { Link } from "/navigation";
-import { FormControl, FormControlLabel, InputLabel, Radio, RadioGroup } from "@mui/material";
-import { MdOutlineRadioButtonChecked } from "react-icons/md";
-import DatePicker from 'react-datepicker'
-import { registerUser } from "../../../api/authenticationServices";
-import 'react-datepicker/dist/react-datepicker.css'
-
+import { Link, useRouter } from "/navigation";
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import DatePicker from "react-datepicker";
+import { registerUser } from "/api/authenticationServices";
+import { login } from "/store/reducers/user";
+import { useDispatch } from "react-redux";
+import "react-datepicker/dist/react-datepicker.css";
 
 const SignUpPage = (props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     email: "",
@@ -71,7 +70,7 @@ const SignUpPage = (props) => {
   };
 
   const handleDateChange = (date) => {
-    console.log(date)
+    console.log(date);
     setUser({
       ...user,
       dateOfBirth: date,
@@ -81,8 +80,19 @@ const SignUpPage = (props) => {
   const submitForm = async (e) => {
     e.preventDefault();
 
-    const nonNullableFields = ['email', 'name', 'password', 'phone', 'address', 'language'];
-    if (nonNullableFields.some((field) => user[field] === null || user[field] === "")) {
+    const nonNullableFields = [
+      "email",
+      "name",
+      "password",
+      "phone",
+      "address",
+      "language",
+    ];
+    if (
+      nonNullableFields.some(
+        (field) => user[field] === null || user[field] === ""
+      )
+    ) {
       toast.error("All fields must be filled out.");
     } else {
       const isEmailValid = validateEmail();
@@ -92,7 +102,9 @@ const SignUpPage = (props) => {
       if (isEmailValid && isPhoneValid && isPasswordConfirmed) {
         const formattedUser = {
           ...user,
-          dateOfBirth: user.dateOfBirth ? new Date(user.dateOfBirth).toISOString() : null,
+          dateOfBirth: user.dateOfBirth
+            ? new Date(user.dateOfBirth).toISOString()
+            : null,
           language: user.language ? parseInt(user.language) : null,
         };
 
@@ -102,7 +114,8 @@ const SignUpPage = (props) => {
           console.log(response);
           if (response.data != null) {
             toast.success("Registration successful!");
-            // link
+            dispatch(login(response.data));
+            router.push("/");
           } else {
             throw new Error("Registration failed");
           }
@@ -157,9 +170,7 @@ const SignUpPage = (props) => {
                 }}
                 onChange={(e) => changeHandler(e)}
               />
-              {emailError && (
-                <span className="errorMessage">{emailError}</span>
-              )}
+              {emailError && <span className="errorMessage">{emailError}</span>}
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -191,12 +202,10 @@ const SignUpPage = (props) => {
                 InputLabelProps={{
                   shrink: true,
                 }}
-                onBlur={
-                  (e) => {
-                    changeHandler(e);
-                    confirmMessage();
-                  }
-                }
+                onBlur={(e) => {
+                  changeHandler(e);
+                  confirmMessage();
+                }}
                 onChange={(e) => changeHandler(e)}
               />
               {confirmPasswordError && (
@@ -237,13 +246,14 @@ const SignUpPage = (props) => {
                 }}
                 onChange={(e) => changeHandler(e)}
               />
-              {phoneError && (
-                <span className="errorMessage">{phoneError}</span>
-              )}
+              {phoneError && <span className="errorMessage">{phoneError}</span>}
             </Grid>
             <Grid item xs={12}>
               <label>Date of Birth</label>
-              <DatePicker selected={user.dateOfBirth} onChange={(date) => handleDateChange(date)} />
+              <DatePicker
+                selected={user.dateOfBirth}
+                onChange={(date) => handleDateChange(date)}
+              />
             </Grid>
             <Grid item xs={12}>
               Language
@@ -253,8 +263,18 @@ const SignUpPage = (props) => {
                 onChange={(e) => changeHandler(e)}
                 name="language"
               >
-                <FormControlLabel value="0" control={<Radio />} label="English" sx={{ paddingRight: 5 }} />
-                <FormControlLabel value="1" control={<Radio />} label="Vietnamese" sx={{ paddingRight: 5 }} />
+                <FormControlLabel
+                  value="0"
+                  control={<Radio />}
+                  label="English"
+                  sx={{ paddingRight: 5 }}
+                />
+                <FormControlLabel
+                  value="1"
+                  control={<Radio />}
+                  label="Vietnamese"
+                  sx={{ paddingRight: 5 }}
+                />
               </RadioGroup>
             </Grid>
 

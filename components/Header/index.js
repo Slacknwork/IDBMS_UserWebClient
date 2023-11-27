@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Logo from "/public/images/logo-2.svg";
 import { HiUserCircle } from "react-icons/hi";
-import { Link } from "/navigation";
+import { Link, useRouter } from "/navigation";
 import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
-import Projects from "../../api/project";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "/store/reducers/user";
 
 const Header = (props) => {
   const router = useRouter();
@@ -17,10 +16,6 @@ const Header = (props) => {
 
   const openMenu = (state) => {
     user.loggedIn ? setMenuActive(state) : router.push("/login");
-  };
-
-  const SubmitHandler = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -86,66 +81,12 @@ const Header = (props) => {
                         >
                           <i className="ti-close"></i>
                         </button>
-                        <h3 className="text-white mb-4">{user.username}</h3>
-                        <div className="header-right-sec">
-                          <div className="project-widget widget">
-                            <h4 className="text-white">Our Latest Projects</h4>
-                            <ul>
-                              {Projects.slice(0, 6).map((project) => (
-                                <li key={project.slug}>
-                                  <Link
-                                    href="/project/[slug]"
-                                    as={`/project/${project.slug}`}
-                                  >
-                                    <Image src={project.pImg} alt="" />
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="widget wpo-contact-widget">
-                            <div className="widget-title">
-                              <h3>Contact Us</h3>
-                            </div>
-                            <div className="contact-ft">
-                              <ul>
-                                <li>
-                                  <i className="fi flaticon-location"></i>68D,
-                                  Belsion Town 2365 <br /> Fna city, LH 3656,
-                                  USA
-                                </li>
-                                <li>
-                                  <i className="fi flaticon-telephone"></i>+ 8
-                                  (123) 123 456 789 <br />+ 8 (123) 123 456 789
-                                </li>
-                                <li>
-                                  <i className="fi flaticon-email"></i>{" "}
-                                  arkio@gmail.com
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="widget newsletter-widget">
-                            <div className="widget-title">
-                              <h3>Newsletter</h3>
-                            </div>
-                            <form onSubmit={SubmitHandler}>
-                              <div className="input-1">
-                                <input
-                                  type="email"
-                                  className="form-control"
-                                  placeholder="Email Address *"
-                                  required=""
-                                />
-                                <div className="submit clearfix">
-                                  <button type="submit">
-                                    <i className="ti-email"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
+                        <h4 className="text-white mb-4">
+                          Welcome, {user.username}
+                        </h4>
+                        <Link onClick={() => dispatch(logout())} href="/login">
+                          Logout
+                        </Link>
                       </div>
                     </div>
                   </div>

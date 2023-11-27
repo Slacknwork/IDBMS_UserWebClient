@@ -2,21 +2,16 @@
 
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
-import SimpleReactValidator from "simple-react-validator";
 import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { useRouter } from "next/navigation";
-import { Link } from "/navigation";
+import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLoginState } from "/store/reducers/user";
-import { loginUser } from "../../../api/authenticationServices";
+import { login } from "/store/reducers/user";
+import { loginUser } from "/api/authenticationServices";
 
 const LoginPage = (props) => {
   const router = useRouter();
-
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -51,10 +46,6 @@ const LoginPage = (props) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  // const rememberHandler = () => {
-  //   setValue({ ...value, remember: !value.remember });
-  // };
-
   const submitForm = async (e) => {
     e.preventDefault();
     const isEmailValid = validateEmail();
@@ -66,8 +57,8 @@ const LoginPage = (props) => {
         console.log(response);
         if (response.data != null) {
           toast.success("Login successfully!");
-          // dispatch(setUserLoginState(true));
-          // link
+          dispatch(login(response.data));
+          router.push("/");
         } else {
           throw new Error("Login failed!");
         }
@@ -104,9 +95,7 @@ const LoginPage = (props) => {
                 }}
                 onChange={(e) => changeHandler(e)}
               />
-              {emailError && (
-                <span className="errorMessage">{emailError}</span>
-              )}
+              {emailError && <span className="errorMessage">{emailError}</span>}
             </Grid>
             <Grid item xs={12}>
               <TextField

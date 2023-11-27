@@ -14,6 +14,7 @@ import {
 import classnames from "classnames";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 import urls from "/constants/urls";
 
@@ -84,6 +85,7 @@ const ProjectItem = (projectDetails) => {
 };
 
 export default function ProjectList() {
+  const user = useSelector((state) => state.user);
   const [activeTab, setActiveTab] = useState("1");
 
   const toggle = (tab) => {
@@ -91,7 +93,7 @@ export default function ProjectList() {
   };
 
   const [values, setValues] = useState([]);
-  const [userId, setUserId] = useState("c2ea739f-0bc1-4d87-9dbf-3ff9182de2df");
+  const [userId, setUserId] = useState(user.id);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
