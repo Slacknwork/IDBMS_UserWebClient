@@ -128,7 +128,7 @@ export const draftProjectSlice = createSlice({
         description: "",
         area: 0,
         pricePerArea: 0,
-        suggestions: [],
+        tasks: [],
       });
     },
     editRoom(state, actions) {
@@ -139,15 +139,10 @@ export const draftProjectSlice = createSlice({
       const room = state.sites[siteNo].floors[floorNo].rooms[roomNo];
 
       room.roomTypeId = actions.payload.roomTypeId || room.roomTypeId;
-
       room.roomTypeName = actions.payload.roomTypeName || room.roomTypeName;
-
       room.usePurpose = actions.payload.usePurpose || room.usePurpose;
-
       room.description = actions.payload.description || room.description;
-
       room.area = actions.payload.area || room.area;
-
       room.pricePerArea = actions.payload.pricePerArea || room.pricePerArea;
 
       calculate(state, actions);
@@ -159,6 +154,50 @@ export const draftProjectSlice = createSlice({
 
       state.sites[siteNo].floors[floorNo].rooms.splice(roomNo);
       calculate(state, actions);
+    },
+
+    addTask(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+      const roomNo = actions.payload.roomNo;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].tasks.push({
+        id: uniqueId(),
+        name: actions.payload.name || "",
+        description: actions.payload.description || "",
+        interiorItemId: actions.payload.interiorItemId || "",
+        interiorItemName: actions.payload.interiorItemName || "",
+        calculationUnit: actions.payload.calculationUnit || 0,
+        unitInContract: actions.payload.unitInContract || 0,
+      });
+    },
+    editTask(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+      const roomNo = actions.payload.roomNo;
+      const taskNo = actions.payload.taskNo;
+
+      const task =
+        state.sites[siteNo].floors[floorNo].rooms[roomNo].tasks[taskNo];
+
+      task.name = actions.payload.name || task.name;
+      task.description = actions.payload.description || task.description;
+      task.interiorItemId =
+        actions.payload.interiorItemId || task.interiorItemId;
+      task.interiorItemName =
+        actions.payload.interiorItemName || task.interiorItemName;
+      task.calculationUnit =
+        actions.payload.calculationUnit || task.calculationUnit;
+      task.unitInContract =
+        actions.payload.unitInContract || task.unitInContract;
+    },
+    deleteTask(state, actions) {
+      const siteNo = actions.payload.siteNo;
+      const floorNo = actions.payload.floorNo;
+      const roomNo = actions.payload.roomNo;
+      const taskNo = actions.payload.taskNo;
+
+      state.sites[siteNo].floors[floorNo].rooms[roomNo].tasks.splice(taskNo);
     },
   },
 });
@@ -174,6 +213,9 @@ export const {
   addRoom,
   editRoom,
   deleteRoom,
+  addTask,
+  editTask,
+  deleteTask,
 } = draftProjectSlice.actions;
 
 export default draftProjectSlice.reducer;

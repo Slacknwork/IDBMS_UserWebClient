@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { FaTrash } from "react-icons/fa";
 import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { editRoom } from "/store/reducers/draftProject";
+
+import calculationUnit from "/constants/enums/calculationUnit";
 
 import { getAllRoomTypes } from "/api/roomTypeServices";
 
@@ -226,31 +227,21 @@ function RoomDetailsForm() {
   );
 }
 
-function SuggestionTableItem() {
+function SuggestionTableItem({ task, index }) {
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right" }}>
-        1
+      <th scope="row" className="align-middle text-center">
+        {index + 1}
       </th>
-      <td className="align-middle">Room Name</td>
-      <td className="align-middle">1000m2</td>
-      <td className="align-middle">1,000,000 VND</td>
+      <td className="align-middle">{task.name}</td>
+      <td className="align-middle">{task.interiorItemName}</td>
+      <td className="align-middle">{calculationUnit[task.calculationUnit]}</td>
+      <td className="align-middle">{task.unitInContract}</td>
       <td className="align-middle m-0">
-        <div className="d-flex">
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "6rem", zIndex: 0 }}
-          >
+        <div className="d-flex justify-content-end">
+          <SuggestionModal title={`${task.name}`} task={task} index={index}>
             Details
-          </button>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
+          </SuggestionModal>
         </div>
       </td>
     </tr>
@@ -258,6 +249,14 @@ function SuggestionTableItem() {
 }
 
 function SuggestionTable() {
+  const params = useParams();
+
+  const draftProject = useSelector((state) => state.draftProject);
+  const draftRoom =
+    draftProject.sites[params.siteNo].floors[params.floorNo].rooms[
+      params.roomNo
+    ];
+
   return (
     <div
       style={{
@@ -271,22 +270,24 @@ function SuggestionTable() {
           style={{ position: "sticky", top: 0, zIndex: 1 }}
         >
           <tr>
-            <th scope="col" style={{ width: "6rem" }}>
+            <th scope="col" style={{ width: "4rem" }}>
               No.
             </th>
             <th scope="col">Name</th>
-            <th scope="col">Area</th>
-            <th scope="col">Price</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
+            <th scope="col">Interior Item</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Quantity</th>
+            <th scope="col" style={{ width: "12rem" }}></th>
           </tr>
         </thead>
         <tbody>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
-          <SuggestionTableItem></SuggestionTableItem>
+          {draftRoom?.tasks?.map((task, index) => (
+            <SuggestionTableItem
+              key={task.id}
+              task={task}
+              index={index}
+            ></SuggestionTableItem>
+          ))}
         </tbody>
       </table>
     </div>
@@ -301,9 +302,11 @@ export default function RoomDetails() {
         <div className="row">
           <div className="col col-lg-12 col-12">
             <div className="d-flex justify-content-between">
-              <h3 className="my-auto">Suggestion</h3>
+              <h3 className="my-auto">Task Suggestions</h3>
               <div className="d-flex">
-                <SuggestionModal></SuggestionModal>
+                <SuggestionModal title={`Add Task Suggestion`}>
+                  Add
+                </SuggestionModal>
               </div>
             </div>
           </div>
