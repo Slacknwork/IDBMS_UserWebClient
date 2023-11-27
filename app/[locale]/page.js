@@ -16,7 +16,7 @@ import abimg from "/public/images/about6.png";
 const HomePage = () => {
   return (
     <div>
-      <Navbar Logo={Logo} hclass={"wpo-header-style-3"} />
+      <Navbar Logo={Logo} hclass={"wpo-header-style-2"} />
       <Hero5 />
       <About abClass={"wpo-about-area-s5"} abimg={abimg} />
       <ServiceSection3 />
