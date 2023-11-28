@@ -37,6 +37,16 @@ export default {
           getUri: () => `/project/booking/decor/submit#booking-section`,
         },
       },
+      construction: {
+        getUri: () => `/project/booking/construction#booking-section`,
+        resources: {
+          getUri: () =>
+            `/project/booking/construction/resources#booking-section`,
+        },
+        submit: {
+          getUri: () => `/project/booking/construction/submit#booking-section`,
+        },
+      },
     },
     id: {
       getUri: (id) => `/project/${id}`,

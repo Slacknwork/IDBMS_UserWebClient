@@ -11,7 +11,8 @@ const initialState = {
   language: 0,
   projectDesignId: 0,
   estimateBusinessDay: 0,
-
+  basedOnDecorProjectId: "",
+  documents: [],
   projectDesigns: [],
   totalArea: 0,
   totalPrice: 0,
@@ -89,6 +90,8 @@ export const draftProjectSlice = createSlice({
         actions.payload.estimateBusinessDay || state.estimateBusinessDay;
       state.projectDesigns =
         actions.payload.projectDesigns || state.projectDesigns;
+      state.basedOnDecorProjectId =
+        actions.payload.basedOnDecorProjectId || state.basedOnDecorProjectId;
     },
 
     addSite(state) {

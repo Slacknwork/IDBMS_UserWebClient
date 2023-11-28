@@ -48,38 +48,23 @@ function Navigation({ backUrl, backLabel, nextUrl, nextLabel }) {
 }
 
 export default function ProjectBooking({ children }) {
-  const DECOR = "decor";
-  const SUBMIT = "submit";
-  const SITE = "site";
-  const FLOOR = "floor";
-  const ROOM = "room";
+  const CONSTRUCTION = "construction";
+  const RESOURCES = "resources";
 
   const paths = usePathname().split("/");
 
   const dispatch = useDispatch();
-  const draftProject = useSelector((state) => state.draftProject);
 
   let backUrl, nextUrl;
 
-  if (paths[paths.length - 1].includes(DECOR)) {
+  if (paths[paths.length - 1].includes(CONSTRUCTION)) {
     backUrl = urls.project.booking.getUri();
-    nextUrl = urls.project.booking.decor.site.getUri();
-  } else if (paths[paths.length - 1].includes(SUBMIT)) {
-    backUrl = urls.project.booking.decor.site.getUri();
-  } else if (paths[paths.length - 1].includes(SITE)) {
-    backUrl = urls.project.booking.decor.getUri();
-    nextUrl = urls.project.booking.decor.submit.getUri();
-  } else if (paths[paths.length - 2].includes(SITE)) {
-    backUrl = urls.project.booking.decor.site.getUri();
-  } else if (paths[paths.length - 2].includes(FLOOR)) {
-    backUrl = urls.project.booking.decor.site.siteNo.getUri(
-      paths[paths.length - 3]
-    );
-  } else if (paths[paths.length - 2].includes(ROOM)) {
-    backUrl = urls.project.booking.decor.site.siteNo.floor.floorNo.getUri(
-      paths[paths.length - 5],
-      paths[paths.length - 3]
-    );
+    nextUrl = urls.project.booking.construction.resources.getUri();
+  } else if (paths[paths.length - 1].includes(RESOURCES)) {
+    backUrl = urls.project.booking.construction.getUri();
+    nextUrl = urls.project.booking.construction.submit.getUri();
+  } else {
+    backUrl = urls.project.booking.construction.resources.getUri();
   }
 
   const [loading, setLoading] = useState(true);
@@ -105,7 +90,7 @@ export default function ProjectBooking({ children }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col col-lg-9 col-12">
+        <div className="col col-lg-12 col-12">
           <section
             id="booking-section"
             className="wpo-contact-pg-section section-padding"
@@ -116,25 +101,6 @@ export default function ProjectBooking({ children }) {
             >
               <Navigation backUrl={backUrl} nextUrl={nextUrl}></Navigation>
               <div className="mt-4">{children}</div>
-            </div>
-          </section>
-        </div>
-        <div className="col col-lg-3 col-12">
-          <section className="section-padding">
-            <div className="shadow p-4" style={{ backgroundColor: "white" }}>
-              <div className="mb-4">
-                <p className="my-auto">
-                  Area: {draftProject.totalArea} m<sup>2</sup>
-                </p>
-                <p className="my-auto">
-                  Estimate Business Days: {draftProject.estimateBusinessDay}{" "}
-                  days
-                </p>
-                <h5 className="my-auto pt-4">
-                  Total price: {draftProject.totalPrice.toLocaleString("vi-VN")}{" "}
-                  VND
-                </h5>
-              </div>
             </div>
           </section>
         </div>

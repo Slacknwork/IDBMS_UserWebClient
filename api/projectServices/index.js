@@ -29,4 +29,24 @@ const createDecorProject = async (project) => {
   }
 };
 
+const createConstructionProject = async (project) => {
+  try {
+    const response = await fetch(
+      `https://localhost:7062/api/Projects/construction`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(project),
+      }
+    );
+    const responseJson = await response.json();
+    return responseJson;
+  } catch (error) {
+    console.error("Error fetching project by ID:", error);
+    throw error;
+  }
+};
+
 export { getProjectById, createDecorProject };

@@ -1,7 +1,7 @@
 "use client";
 
 import PageTitle from "/components/PageTitle";
-import DecorProjectBooking from "/components/ProjectBooking/Construction";
+import ConstructionProjectBooking from "/components/ProjectBooking/Construction";
 
 export default function ClientLayout({ children }) {
   return (
@@ -10,7 +10,7 @@ export default function ClientLayout({ children }) {
         pageTitle={"Construction Project Booking"}
         pagesub={"Construction Project Booking"}
       />
-      <DecorProjectBooking>{children}</DecorProjectBooking>
+      <ConstructionProjectBooking>{children}</ConstructionProjectBooking>
     </div>
   );
 }
