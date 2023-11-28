@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import Logo from "/public/images/logo-2.svg";
 import { HiUserCircle } from "react-icons/hi";
 import { Link, useRouter } from "/navigation";
 import Image from "next/image";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "/store/reducers/user";
+
+const Logo = "/images/idt-logo.jpg";
 
 const Header = (props) => {
   const router = useRouter();
@@ -31,8 +32,27 @@ const Header = (props) => {
               </div>
               <div className="col-lg-2 col-md-6 col-6">
                 <div className="navbar-header">
-                  <Link className="navbar-brand" href="/">
-                    <Image src={Logo} alt="" />
+                  <Link
+                    className="navbar-brand d-flex justify-content-between"
+                    href="/"
+                    style={{ width: 50, height: 50 }}
+                  >
+                    <Image
+                      src={Logo}
+                      alt=""
+                      className="p-2"
+                      layout="fill"
+                      objectFit="contain"
+                    />
+                    <h2
+                      style={{
+                        color: "white",
+                        marginLeft: "8.5rem",
+                        marginTop: "0.25rem",
+                      }}
+                    >
+                      idtco.com
+                    </h2>
                   </Link>
                 </div>
               </div>

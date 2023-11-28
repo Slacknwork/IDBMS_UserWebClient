@@ -32,7 +32,7 @@ export default function RoomDetails() {
   });
 
   return (
-    <div className="pb-0">
+    <div className="pb-0 container">
       <form className="contact-validation-active">
         <div className="row">
           <div className="col col-lg-12 col-12">
@@ -45,29 +45,21 @@ export default function RoomDetails() {
           </div>
           <div className="col col-lg-12 col-12">
             <div className="form-field">
-              <h2>Room</h2>
+              <h2>Room: {room.usePurpose}</h2>
             </div>
           </div>
-          <div className="col col-lg-12 col-12">
+          <div className="col col-lg-12 col-12 mt-4">
             <div className="col col-lg-12 col-12">
               <table>
                 <tbody>
                   <tr>
                     <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Use purpose:</p>
+                      <p style={{ fontWeight: 1000 }}>Area:</p>
                     </td>
                     <td>
-                      <p>{room.usePurpose}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>
-                        Area in m<sup>2</sup>:
+                      <p>
+                        {room.area} m<sup>2</sup>
                       </p>
-                    </td>
-                    <td>
-                      <p>{room.area}</p>
                     </td>
                   </tr>
                   <tr>
@@ -75,7 +67,11 @@ export default function RoomDetails() {
                       <p style={{ fontWeight: 1000 }}>Price:</p>
                     </td>
                     <td>
-                      <p>{room.pricePerArea * room.area}</p>
+                      <p>
+                        {(room.pricePerArea * room.area).toLocaleString(
+                          params.locale
+                        )}
+                      </p>
                     </td>
                   </tr>
                   <tr>

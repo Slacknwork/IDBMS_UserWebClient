@@ -14,7 +14,6 @@ const getProjectById = async (projectId) => {
 
 const createDecorProject = async (project) => {
   try {
-    console.log(project);
     const response = await fetch(`https://localhost:7062/api/Projects/decor`, {
       method: "POST",
       headers: {

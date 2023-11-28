@@ -23,7 +23,7 @@ const FloorDetailsForm = ({ floor }) => {
       </div>
       <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <h2>Floor no. {floor.floorNo}</h2>
+          <h2>Floor {floor.floorNo == 0 ? "G" : floor.floorNo}</h2>
         </div>
       </div>
       <div className="col col-lg-12 col-12">
@@ -81,12 +81,6 @@ const FloorDetailsForm = ({ floor }) => {
 
 const RoomTableItem = ({ item, index }) => {
   const params = useParams();
-  const RoomHref = urls.project.id.site.siteNo.floor.floorNo.room.roomNo.getUri(
-    params.id,
-    params.siteId,
-    params.floorId,
-    item.id
-  );
 
   return (
     <tr>
@@ -95,19 +89,21 @@ const RoomTableItem = ({ item, index }) => {
       </th>
       <td className="align-middle">{item && item.usePurpose}</td>
       <td className="align-middle">{item && item.description}</td>
-      <td className="align-middle">{item && item.area}</td>
+      <td className="align-middle">
+        {item && item.area} m<sup>2</sup>
+      </td>
       <td className="align-middle">{item && item.roomType?.name}</td>
       <td className="align-middle">
-        {item && (item.area * item.pricePerArea).toLocaleString("en-US")}
+        {item && (item.area * item.pricePerArea).toLocaleString(params.locale)}{" "}
+        VND
       </td>
       <td className="align-middle m-0">
-        <div className="d-flex">
-          <Link
-            href={RoomHref}
-            className="theme-btn m-1"
-            style={{ width: "6rem", zIndex: 0 }}
-          >
-            Details
+        <div className="d-flex justify-content-end">
+          <Link href={""} className="theme-btn m-1 px-2 py-2">
+            Tasks
+          </Link>
+          <Link href={""} className="theme-btn m-1 px-3 py-2">
+            Suggest
           </Link>
         </div>
       </td>
@@ -138,10 +134,8 @@ const RoomTable = (roomList) => {
             <th scope="col">Description</th>
             <th scope="col">Area</th>
             <th scope="col">Room Type</th>
-            <th scope="col">Total Price (VND)</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
+            <th scope="col">Total Price</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -180,10 +174,10 @@ export default function FloorDetails() {
   });
 
   return (
-    <div className="pb-0">
+    <div className="pb-0 container">
       <form className="contact-validation-active">
         <FloorDetailsForm floor={item} />
-        <div className="row">
+        <div className="row my-4">
           <h3 className="my-auto">Rooms</h3>
         </div>
         <div className="row">

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "/navigation";
 
 import urls from "/constants/urls";
-import { getSitesByProjectId } from "../../../api/siteServices";
+import { getSitesByProjectId } from "/api/siteServices";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -13,38 +13,39 @@ const SiteItem = (details) => {
   const siteDetailsUrl = urls.project.id.site.siteNo.getUri(params.id, item.id);
   console.log(item);
   return (
-    <div className="container" style={{ height: "18rem" }}>
+    <div className="col col-lg-6 col-12" style={{ height: "18rem" }}>
       <div
-        className="row shadow p-4 my-4 mx-1"
+        className="d-flex justify-content-between shadow p-4 my-4 mx-1"
         style={{ backgroundColor: "white" }}
       >
-        <div className="col-4 col-lg-3 my-auto">
-          <div className="shop-img">
+        <div className="d-flex">
+          <div
+            className="shop-img"
+            style={{ width: "10rem", height: "10rem", position: "relative" }}
+          >
             <Image
               src="https://cdn-icons-png.flaticon.com/512/7100/7100358.png"
               alt=""
-              width={0}
-              height={0}
-              style={{ width: "14rem", height: "14rem", objectFit: "cover" }}
-              unoptimized={true}
+              layout="fill"
+              objectFit="contain"
             />
           </div>
-        </div>
-        <div className="col-8 col-lg-9 d-flex align-items-start justify-content-between">
-          <div className="shop-info my-auto">
-            <h3 className="">Site name: {item && item.name}</h3>
-            <div className="des">
-              <p>Address: {item && item.address}</p>
-              <p>Use Purpose:{item && item.usePurpose} </p>
-              <p>Description: {item && item.description}</p>
+          <div className="d-flex mx-4 my-auto">
+            <div className="shop-info my-auto">
+              <h3>{item && item.name}</h3>
+              <p>
+                {item && item.usePurpose}
+                <br />
+                {item && item.address}
+              </p>
             </div>
           </div>
-          <div className="mt-auto d-flex gap-3">
-            <div>
-              <Link href={siteDetailsUrl} className="theme-btn px-4" replace>
-                Details
-              </Link>
-            </div>
+        </div>
+        <div className="mt-auto d-flex gap-3">
+          <div>
+            <Link href={siteDetailsUrl} className="theme-btn px-4" replace>
+              Details
+            </Link>
           </div>
         </div>
       </div>
@@ -52,7 +53,7 @@ const SiteItem = (details) => {
   );
 };
 
-export default function SiteList({ projectType }) {
+export default function SiteList() {
   const params = useParams();
   const [values, setValues] = useState([]);
   const [projectId, setProjectId] = useState(params.id);
@@ -65,7 +66,6 @@ export default function SiteList({ projectType }) {
       const fetchDataFromApi = async () => {
         try {
           const data = await getSitesByProjectId(projectId);
-          console.log(data);
           setValues(data);
           setLoading(false);
         } catch (error) {
@@ -78,27 +78,27 @@ export default function SiteList({ projectType }) {
   }, [projectId]);
 
   return (
-    <div className="container pb-0">
-      <form className="contact-validation-active">
-        <div className="row justify-content-center">
-          <div className="col col-lg-10 col-12 mb-4">
-            <div className="d-flex justify-content-between mb-4">
-              <h3 className="my-auto">Project Sites</h3>
-            </div>
-            <div
-              style={{
-                height: "30rem",
-                overflowY: "scroll",
-              }}
-            >
-              {values &&
-                values.map((item, index) => (
-                  <SiteItem key={index} site={item} />
-                ))}
-            </div>
+    <div className="container pb-0 mt-4">
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <div className="d-flex justify-content-between mb-4">
+            <h3 className="my-auto">Project Sites</h3>
           </div>
         </div>
-      </form>
+        <div className="col col-lg-12 col-12 mb-4">
+          <div
+            style={{
+              height: "30rem",
+              overflowY: "scroll",
+            }}
+          >
+            {values &&
+              values.map((item, index) => (
+                <SiteItem key={item.id} site={item} />
+              ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

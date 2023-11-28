@@ -21,63 +21,54 @@ const SiteDetailsForm = ({ site }) => {
       </div>
       <div className="col col-lg-12 col-12">
         <div className="form-field">
-          <h2>Site: {site.name}</h2>
+          <h2>{site.name}</h2>
         </div>
       </div>
       <div className="col col-lg-12 col-12">
-        <table>
-          <tbody>
-            <tr>
-              <td style={{ paddingRight: "2rem" }}>
-                <p style={{ fontWeight: 1000 }}>Use purpose:</p>
-              </td>
-              <td>
-                <p>{site.usePurpose}</p>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ paddingRight: "2rem" }}>
-                <p style={{ fontWeight: 1000 }}>Address:</p>
-              </td>
-              <td>
-                <p>{site.address}</p>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ paddingRight: "2rem" }}>
-                <p style={{ fontWeight: 1000 }}>
-                  Area in m<sup>2</sup>
-                </p>
-              </td>
-              <td>
-                <p>{site.area}</p>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ paddingRight: "2rem" }}>
-                <p style={{ fontWeight: 1000 }}>Description:</p>
-              </td>
-              <td>
-                <p>{site.description}</p>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ paddingRight: "2rem" }}>
-                <p style={{ fontWeight: 1000 }}>Tasks:</p>
-              </td>
-              <td className="d-flex">
-                <div className="d-flex">
-                  <Link
-                    href={`/project/1/tasks`}
-                    className="theme-btn px-4 py-2"
-                  >
-                    View Tasks
-                  </Link>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <tr>
+          <td style={{ paddingRight: "2rem" }}>
+            <p style={{ fontWeight: 1000 }}>Use purpose:</p>
+          </td>
+          <td>
+            <p>{site.usePurpose}</p>
+          </td>
+          <td style={{ paddingRight: "2rem" }}>
+            <p style={{ fontWeight: 1000 }}>Area:</p>
+          </td>
+          <td>
+            <p>
+              {site.area} m<sup>2</sup>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ paddingRight: "2rem" }}>
+            <p style={{ fontWeight: 1000 }}>Address:</p>
+          </td>
+          <td>
+            <p>{site.address}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ paddingRight: "2rem" }}>
+            <p style={{ fontWeight: 1000 }}>Description:</p>
+          </td>
+          <td>
+            <p>{site.description}</p>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ paddingRight: "2rem" }}>
+            <p style={{ fontWeight: 1000 }}>Tasks:</p>
+          </td>
+          <td className="d-flex">
+            <div className="d-flex">
+              <Link href={`/project/1/tasks`} className="theme-btn px-4 py-2">
+                View Tasks
+              </Link>
+            </div>
+          </td>
+        </tr>
       </div>
     </div>
   );
@@ -94,18 +85,16 @@ function FloorTableItem({ floor, index }) {
   return (
     <tr>
       <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
-        {floor && floor.floorNo}
+        {floor.floorNo == 0 ? "G" : floor.floorNo}
       </th>
       <td className="align-middle">{floor && floor.description}</td>
       <td className="align-middle">{floor && floor.usePurpose}</td>
-      <td className="align-middle">{floor && floor.area}</td>
+      <td className="align-middle">
+        {floor && floor.area} m<sup>2 </sup>
+      </td>
       <td className="align-middle m-0">
-        <div className="d-flex">
-          <Link
-            href={FloorHref}
-            className="theme-btn m-1"
-            style={{ width: "6rem", zIndex: 0 }}
-          >
+        <div className="d-flex justify-content-end">
+          <Link href={FloorHref} className="theme-btn m-1 py-2">
             Details
           </Link>
         </div>
@@ -130,15 +119,13 @@ const FloorTable = (floorList) => {
           style={{ position: "sticky", top: 0, zIndex: 1 }}
         >
           <tr>
-            <th scope="col" style={{ width: "6rem" }}>
-              Floor No
+            <th scope="col" style={{ width: "5rem" }}>
+              Floor
             </th>
             <th scope="col">Description</th>
             <th scope="col">Use Purpose</th>
             <th scope="col">Area</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -179,11 +166,11 @@ export default function ProjectSiteDetails() {
   });
 
   return (
-    <div className="pb-0">
+    <div className="pb-0 container">
       <form className="contact-validation-active">
         <SiteDetailsForm site={item} project={project} />
         <div className="row">
-          <div className="col col-lg-12 col-12">
+          <div className="col col-lg-12 col-12 my-4">
             <div className="d-flex justify-content-between">
               <h3 className="my-auto">Floors</h3>
             </div>

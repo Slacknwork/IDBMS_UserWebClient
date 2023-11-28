@@ -7,36 +7,52 @@ import { useSelector, useDispatch } from "react-redux";
 import { addSite } from "/store/reducers/draftProject";
 
 import urls from "/constants/urls";
+import Image from "next/image";
 
 const SiteItem = ({ site, index }) => {
   const siteDetailsUrl = urls.project.booking.decor.site.siteNo.getUri(index);
 
   return (
     <div className="container">
-      <div className="row shadow p-4 my-4 mx-1" style={{ height: "18rem" }}>
-        <div className="col-4 col-lg-3 my-auto">
-          <div className="shop-img">
-            <div style={{ width: "14rem", height: "14rem" }} />
+      <div
+        className="d-flex justify-content-between shadow p-4 my-4 mx-1"
+        style={{ minHeight: "18rem" }}
+      >
+        <div className="d-flex">
+          <div className="my-auto" style={{ marginRight: "1.25rem" }}>
+            <div
+              className="shop-img"
+              style={{ width: "14rem", height: "14rem", position: "relative" }}
+            >
+              <Image
+                src="https://cdn-icons-png.flaticon.com/512/7100/7100358.png"
+                alt=""
+                layout="fill"
+                objectFit="contain"
+              />
+            </div>
+          </div>
+          <div className="row d-flex justify-content-between">
+            <div className="shop-info my-auto">
+              <h3 className="">{site.name}</h3>
+              <div className="des">
+                <p>Address: {site.address}</p>
+                <p>Purpose: {site.usePurpose}</p>
+                <p>
+                  Total area: {site.totalArea} m<sup>2</sup>
+                </p>
+                <p>
+                  Total price: {site.totalPrice.toLocaleString("vi-VN")} VND
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="col-8 col-lg-9 d-flex align-items-start justify-content-between">
-          <div className="shop-info my-auto">
-            <h3 className="">{site.name}</h3>
-            <div className="des">
-              <p>Address: {site.address}</p>
-              <p>Purpose: {site.usePurpose}</p>
-              <p>
-                Total area: {site.totalArea} m<sup>2</sup>
-              </p>
-              <p>Total price: {site.totalPrice.toLocaleString("vi-VN")} VND</p>
-            </div>
-          </div>
-          <div className="mt-auto d-flex gap-3">
-            <div>
-              <Link href={siteDetailsUrl} className="theme-btn px-4">
-                Details
-              </Link>
-            </div>
+        <div className="mt-auto d-flex gap-3">
+          <div>
+            <Link href={siteDetailsUrl} className="theme-btn px-4">
+              Details
+            </Link>
           </div>
         </div>
       </div>

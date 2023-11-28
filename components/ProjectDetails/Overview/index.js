@@ -2,13 +2,20 @@
 
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
-import { getProjectById } from "/api/projectServices";
+import { Link } from "/navigation";
 import { useParams } from "next/navigation";
+
+import urls from "/constants/urls";
+import projectTypes from "/constants/enums/projectType";
+import projectStatus from "/constants/enums/projectStatus";
+
+import { getProjectById } from "/api/projectServices";
+
+import OverviewBreadcrumb from "./Breadcrumb";
 
 export default function ProjectOverview() {
   const params = useParams();
-  const [item, setItem] = useState([]);
-  const [projectId, setProjectId] = useState(params.id);
+  const [project, setProject] = useState({});
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -17,9 +24,9 @@ export default function ProjectOverview() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getProjectById(projectId);
+          const data = await getProjectById(params.id);
           console.log(data);
-          setItem(data);
+          setProject(data);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -28,84 +35,133 @@ export default function ProjectOverview() {
       };
       fetchDataFromApi();
     }
-  }, [projectId]);
+  });
 
   return (
-    <div className="wpo-project-single-area">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-10 col-12">
-            <div className="wpo-project-single-wrap">
-              <div className="wpo-project-single-item">
-                <div
-                  className="row align-items-left"
-                  style={{ paddingTop: "30px" }}
-                >
-                  <div className="col-lg-7">
-                    <div className="wpo-project-single-title">
-                      <h3>Project Name: {item && item.name} </h3>
-                    </div>
-                    <p>
-                      Updated date:{" "}
-                      {item &&
-                        new Date(item.updatedDate).toLocaleDateString("en-GB")}
-                    </p>
-                    <p>Description: {item && item.description}</p>
-                  </div>
-                  <div className="col-lg-5">
-                    <div
-                      className="wpo-project-single-content-des-right"
-                      style={{ backgroundColor: "white" }}
-                    >
-                      <ul>
-                        <li>
-                          Company Name<span>{item && item.companyName}</span>
-                        </li>
-                        <li>
-                          Company Address
-                          <span>{item && item.companyAddress}</span>
-                        </li>
-                        <li>
-                          {item && item.type === 0
-                            ? "Lead Architect"
-                            : item && item.type === 1
-                            ? "Construction Manager"
-                            : "Not specified"}
-                          <span>
-                            {item &&
-                              item.projectParticipations &&
-                              item.projectParticipations
-                                .filter(
-                                  (participation) =>
-                                    (item.type === 0 &&
-                                      participation.role === 2) ||
-                                    (item.type === 1 &&
-                                      participation.role === 4)
-                                )
-                                .map((lead) => lead.user?.name)
-                                .join(", ")}
-                          </span>
-                        </li>
-                        <li>
-                          Project Type<span>{item && item.type}</span>
-                        </li>
-                        <li>
-                          Language<span>{item && item.language}</span>
-                        </li>
-                        <li>
-                          Status<span>{item && item.status}</span>
-                        </li>
-                        <li>
-                          Advertisement Status
-                          <span>{item && item.advertisementStatus}</span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col col-lg-12 col-12">
+          <OverviewBreadcrumb id={params.id}></OverviewBreadcrumb>
+        </div>
+        <div className="col col-lg-12 col-12">
+          <div className="form-field">
+            <h2>
+              {projectTypes[project.type]}: {project.name}
+            </h2>
           </div>
+        </div>
+        <div className="col-lg-12 col-12 mt-4">
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Project Category:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>{project.projectCategory?.name}</p>
+            </td>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Company Name:</p>
+            </td>
+            <td colSpan={3} style={{ paddingRight: "1rem" }}>
+              <p>{project.companyName}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Created Date:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>
+                {new Date(project.createdDate).toLocaleDateString(
+                  params.locale
+                )}
+              </p>
+            </td>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Company Address:</p>
+            </td>
+            <td colSpan={3} style={{ paddingRight: "1rem" }}>
+              <p>{project.companyAddress}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Updated Date:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>
+                {new Date(project.updatedDate).toLocaleDateString(
+                  params.locale
+                )}
+              </p>
+            </td>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Company Code:</p>
+            </td>
+            <td colSpan={3} style={{ paddingRight: "1rem" }}>
+              <p>{project.companyCode}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Description:</p>
+            </td>
+            <td colSpan={5} style={{ paddingRight: "4rem" }}>
+              <p>{project.description}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Stage No.</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>{project.noStage || "N/A"}</p>
+            </td>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Stage name:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>{project.currentStageId || "N/A"}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Status:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>{projectStatus[project.status]}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Estimated Price:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>{project.estimatedPrice?.toLocaleString(params.locale)} VND</p>
+            </td>
+            <td style={{ paddingRight: "1rem" }}>
+              <p style={{ fontWeight: 1000 }}>Final Price:</p>
+            </td>
+            <td style={{ paddingRight: "4rem" }}>
+              <p>
+                {project.finalPrice?.toLocaleString(params.locale) || "N/A"}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style={{ paddingRight: "2rem" }}>
+              <p style={{ fontWeight: 1000 }}>Tasks:</p>
+            </td>
+            <td className="d-flex">
+              <div className="d-flex">
+                <Link
+                  href={urls.project.id.tasks.getUri(params.id)}
+                  className="theme-btn px-4 py-2"
+                >
+                  View Tasks
+                </Link>
+              </div>
+            </td>
+          </tr>
         </div>
       </div>
     </div>

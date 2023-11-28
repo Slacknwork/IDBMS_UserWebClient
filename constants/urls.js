@@ -64,6 +64,7 @@ export default {
         },
       },
       tasks: {
+        getUri: (id) => `/project/${id}/tasks#project-section`,
         taskId: {
           getUri: (id, taskId) =>
             `/project/${id}/tasks/${taskId}#project-section`,

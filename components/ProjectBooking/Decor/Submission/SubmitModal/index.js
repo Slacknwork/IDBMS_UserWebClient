@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { useSelector } from "react-redux";
-
+import { useRouter } from "/navigation";
 import { createDecorProject } from "/api/projectServices";
 
-const projectMapping = (draftProject) => {
+const projectMapping = (draftProject, userId) => {
   return {
     name: draftProject.name,
     companyName: draftProject.companyName,
@@ -18,7 +18,7 @@ const projectMapping = (draftProject) => {
     language: Number(draftProject.language),
     projectDesignId: Number(draftProject.projectDesignId),
     estimateBusinessDay: draftProject.estimateBusinessDay,
-    userId: "c2ea739f-0bc1-4d87-9dbf-3ff9182de2df",
+    userId: userId,
     sites: draftProject.sites.map((site) => ({
       name: site.name,
       description: site.description,
@@ -50,6 +50,8 @@ const projectMapping = (draftProject) => {
 };
 
 export default function DeleteModal({ children }) {
+  const router = useRouter();
+  const user = useSelector((state) => state.user);
   const draftProject = useSelector((state) => state.draftProject);
 
   const [modal, setModal] = useState(false);
@@ -58,11 +60,10 @@ export default function DeleteModal({ children }) {
   const onSubmitClick = () => {
     setModal(!modal);
 
-    const project = projectMapping(draftProject);
+    const project = projectMapping(draftProject, user.id);
     const postData = async () => {
       try {
         const response = await createDecorProject(project);
-        setLoading(false);
         return response;
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -70,6 +71,7 @@ export default function DeleteModal({ children }) {
       }
     };
     postData();
+    router.push("/project");
   };
 
   return (

@@ -1568,7 +1568,7 @@
 			background: #292932;
 			width: 420px;
 			height: 100%;
-			z-index: 0;
+			z-index: 50;
 			position: fixed;
 			right: -420px;
 			top: 0;
@@ -1595,6 +1595,7 @@
 			}
 
 			&.right-menu-active {
+				z-index: 50;
 				opacity: 1;
 				visibility: visible;
 				right: 0;

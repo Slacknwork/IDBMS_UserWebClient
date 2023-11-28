@@ -31,7 +31,7 @@ export default function ProjectDetail({ children }) {
   ];
 
   return (
-    <section id="project-section" className="wpo-contact-pg-section mt-4">
+    <section id="project-section" className="mt-4">
       <div className="wpo-contact-form-area-transparent">
         <div className="container wpo-shop-single-section">
           <div className="row">
