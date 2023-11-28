@@ -7,6 +7,7 @@ export default function Pagination({
   pageCount = 5,
   pageQuery = "page",
   sectionId = "",
+  onClick,
 }) {
   const searchParams = useSearchParams();
 
@@ -37,7 +38,7 @@ export default function Pagination({
         {Array.from(Array(pageCount), (e, i) => {
           return (
             <li className={`${currentPage == i ? "active" : ""}`} key={i}>
-              <Link href={getHref(i)} scroll={false}>
+              <Link href={getHref(i)} scroll={false} onClick={onClick}>
                 {i + 1}
               </Link>
             </li>

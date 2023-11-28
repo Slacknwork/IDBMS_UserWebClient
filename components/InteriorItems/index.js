@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { toast } from "react-toastify";
+
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Slider from "@mui/material/Slider";
@@ -7,9 +11,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import InteriorItemCategories from "./Categories";
 import Pagination from "/components/Pagination";
-import { toast } from "react-toastify";
-import { getAllInteriorItems } from "../../api/interiorItemServices";
-import Image from "next/image";
+
+import {
+  getInteriorItemPagination,
+  countAllInteriorItems,
+} from "/api/interiorItemServices";
+
+const pageQuery = "page";
+const pageSize = 6;
 
 function InteriorItemSearchBar() {
   return (
@@ -111,11 +120,13 @@ function InteriorItemSingle(itemDetails) {
       />
       <div className="details">
         <h3 style={{ height: "55px", overflowY: "auto" }}>
-          <Link href="/interior/1">{item && item.name}</Link>
+          <Link href="/interior/1">{item && item.Name}</Link>
         </h3>
         <div className="price">
           <span>
-            {item && item.estimatePrice && item.estimatePrice.toLocaleString('en-US') + ' VND'}
+            {item &&
+              item.EstimatePrice &&
+              item.EstimatePrice.toLocaleString("en-US") + " VND"}
           </span>
         </div>
         <div className="add-to-cart">
@@ -133,19 +144,26 @@ function InteriorItemSingle(itemDetails) {
 }
 
 export default function InteriorItems() {
+  const searchParams = useSearchParams();
+
   const [values, setValues] = useState([]);
-  const [userId, setUserId] = useState("A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF");
   const [loading, setLoading] = useState(true);
+  const [interiorItemCount, setInteriorItemCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(
+    Number(searchParams.get(pageQuery)) - 1
+  );
   const initialized = useRef(false);
 
-  useEffect(() => {
+  const getInteriorItemList = () => {
+    setCurrentPage(Number(searchParams.get(pageQuery)) - 1);
     if (!initialized.current) {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getAllInteriorItems();
-          console.log(data);
-          setValues(data);
+          const data = await getInteriorItemPagination(pageSize, currentPage);
+          const intCount = await countAllInteriorItems();
+          setValues(data.value);
+          setInteriorItemCount(intCount);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -154,7 +172,12 @@ export default function InteriorItems() {
       };
       fetchDataFromApi();
     }
-  }, []);
+    initialized.current = false;
+  };
+
+  useEffect(() => {
+    getInteriorItemList();
+  });
 
   return (
     <section className="wpo-shop-section">
@@ -168,13 +191,17 @@ export default function InteriorItems() {
             <InteriorItemSearchBar></InteriorItemSearchBar>
             <div>
               {values &&
-                values
-                  .slice(0, 9)
-                  .map((item, index) => (
-                    <InteriorItemSingle key={index} item={item} />
-                  ))}
+                values.map((item, index) => (
+                  <InteriorItemSingle key={item.id} item={item} />
+                ))}
             </div>
-            <Pagination></Pagination>
+            <Pagination
+              pageCount={Math.ceil(interiorItemCount / 6)}
+              pageQuery={pageQuery}
+              onClick={() => {
+                getInteriorItemList();
+              }}
+            ></Pagination>
           </div>
         </div>
       </div>
