@@ -1,7 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 import { createTransaction } from "/api/transactionServices";
@@ -12,10 +13,9 @@ import "./modal.css";
 
 const pendingTransactionStatus = 0;
 
-export default function SuggestionModal({ refreshTransactionList, children }) {
+export default function AddModal({ refreshTransactionList, children }) {
   const params = useParams();
   const user = useSelector((state) => state.user);
-
   const [modal, setModal] = useState(false);
 
   const [amount, setAmount] = useState(0);
@@ -36,7 +36,7 @@ export default function SuggestionModal({ refreshTransactionList, children }) {
   };
 
   const toggle = () => setModal(!modal);
-  const onCreateTransactionClick = () => {
+  const onCreateTransactionClick = async () => {
     toggle();
     const postData = async () => {
       try {
@@ -56,7 +56,8 @@ export default function SuggestionModal({ refreshTransactionList, children }) {
         console.log("Error: " + e);
       }
     };
-    postData();
+    await postData();
+    await refreshTransactionList();
   };
 
   return (

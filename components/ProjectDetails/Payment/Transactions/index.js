@@ -1,25 +1,32 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Link } from "/navigation";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
-import urls from "/constants/urls";
 import transactionType from "/constants/enums/transactionType";
 import transactionStatus from "/constants/enums/transactionStatus";
 
-import { getTransactionsByProjectId } from "/api/transactionServices";
+import {
+  getTransactionsByProjectIdPagination,
+  countTransactionsByProjectId,
+} from "/api/transactionServices";
+import { downloadFileFromUrl } from "/api/downloadServices";
 
 import AddModal from "./AddModal";
+import { useSelector } from "react-redux";
+
+import Pagination from "/components/Pagination";
+
+const pageSize = 5;
+const pageQuery = "page";
 
 const TransactionItem = (object) => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+  const params = useParams();
+  const user = useSelector((state) => state.user);
+  const onDownloadClick = (url) => {
+    downloadFileFromUrl(url, user.token);
+  };
   const item = object.item;
   const no = object.index;
 
@@ -29,24 +36,34 @@ const TransactionItem = (object) => {
         {no}
       </th>
       <td className="align-middle">
-        {item && item.amount && item.amount.toLocaleString("en-US")}
+        {item.Amount.toLocaleString(params.locale) ||
+          item.amount.toLocaleString(params.locale)}{" "}
+        VND
       </td>
-      <td className="align-middle">{item && transactionType[item.type]}</td>
-      <td className="align-middle">{item && item.note}</td>
       <td className="align-middle">
-        {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
+        {item && (transactionType[item.type] || item.Type)}
       </td>
-      <td className="align-middle">{item && transactionStatus[item.status]}</td>
+      <td className="align-middle">{item && item.Note}</td>
+      <td className="align-middle">
+        {item && new Date(item.CreatedDate).toLocaleDateString(params.locale)}
+      </td>
+      <td className="align-middle">
+        {item && (transactionStatus[item.status] || item.Status)}
+      </td>
       <td className="align-middle m-0">
-        <div className="d-flex justify-content-end">
-          <Link
-            href={RoomHref}
-            className="theme-btn m-1"
-            style={{ width: "10rem", zIndex: 0 }}
-          >
-            Download receipt
-          </Link>
-        </div>
+        {item && item.TransactionReceiptImageUrl ? (
+          <div className="d-flex justify-content-end">
+            <button
+              onClick={() => onDownloadClick(item.transactionReceiptImageUrl)}
+              className="theme-btn m-1"
+              style={{ zIndex: 0 }}
+            >
+              Download receipt
+            </button>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </td>
     </tr>
   );
@@ -55,12 +72,7 @@ const TransactionItem = (object) => {
 const TransactionTable = (transList) => {
   const values = transList.transList;
   return (
-    <div
-      style={{
-        maxHeight: "25rem",
-        overflowY: "scroll",
-      }}
-    >
+    <div style={{}}>
       <table className="table table-striped table-hover">
         <thead
           className="shadow-sm"
@@ -70,7 +82,7 @@ const TransactionTable = (transList) => {
             <th scope="col" style={{ width: "5rem", textAlign: "center" }}>
               No.
             </th>
-            <th scope="col">Amount (VND)</th>
+            <th scope="col">Amount</th>
             <th scope="col">Type</th>
             <th scope="col">Note</th>
             <th scope="col">Created Date</th>
@@ -91,32 +103,44 @@ const TransactionTable = (transList) => {
 
 export default function Transactions() {
   const params = useParams();
+  const searchParams = useSearchParams();
+
   const [values, setValues] = useState([]);
   // test project id "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
+  const [transactionCount, setTransactionCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(
+    searchParams.get(pageQuery) ? Number(searchParams.get(pageQuery)) - 1 : 0
+  );
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
-  async function getTransactions() {
+  const getTransactions = async () => {
     if (!initialized.current) {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getTransactionsByProjectId(params.id);
+          const data = await getTransactionsByProjectIdPagination(
+            params.id,
+            pageSize,
+            currentPage
+          );
+          const count = await countTransactionsByProjectId(params.id);
           initialized.current = false;
-          setValues(data);
+          setValues(data.value);
+          setTransactionCount(count);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error("Error fetching data");
         }
       };
-      fetchDataFromApi();
+      await fetchDataFromApi();
     }
-  }
+  };
 
   useEffect(() => {
     getTransactions();
-  });
+  }, [currentPage]);
 
   return (
     <div className="container">
@@ -181,15 +205,21 @@ export default function Transactions() {
           </div>
         </div>
         <div className="d-flex">
-          <AddModal>Create</AddModal>
+          <AddModal refreshTransactionList={getTransactions}>Create</AddModal>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <TransactionTable
-            refreshTransactionList={getTransactions}
-            transList={values}
-          />
+          <TransactionTable transList={values} />
+        </div>
+        <div className="col col-lg-12 col-12">
+          <Pagination
+            pageCount={Math.ceil(transactionCount / pageSize)}
+            pageQuery={pageQuery}
+            onClick={(i) => {
+              setCurrentPage(i);
+            }}
+          ></Pagination>
         </div>
       </div>
     </div>

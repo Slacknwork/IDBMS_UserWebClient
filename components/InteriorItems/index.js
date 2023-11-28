@@ -155,7 +155,6 @@ export default function InteriorItems() {
   const initialized = useRef(false);
 
   const getInteriorItemList = () => {
-    setCurrentPage(Number(searchParams.get(pageQuery)) - 1);
     if (!initialized.current) {
       initialized.current = true;
       const fetchDataFromApi = async () => {
@@ -177,7 +176,7 @@ export default function InteriorItems() {
 
   useEffect(() => {
     getInteriorItemList();
-  });
+  }, [currentPage]);
 
   return (
     <div className="container wpo-shop-section my-4">
@@ -197,8 +196,8 @@ export default function InteriorItems() {
           <Pagination
             pageCount={Math.ceil(interiorItemCount / 6)}
             pageQuery={pageQuery}
-            onClick={() => {
-              getInteriorItemList();
+            onClick={(i) => {
+              setCurrentPage(i);
             }}
           ></Pagination>
         </div>

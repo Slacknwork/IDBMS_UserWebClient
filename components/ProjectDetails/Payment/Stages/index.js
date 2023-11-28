@@ -49,7 +49,6 @@ const StageItem = (object) => {
 };
 
 const StageTable = (stageList) => {
-  console.log(stageList);
   const values = stageList.stageList;
   return (
     <div

@@ -38,7 +38,7 @@ export default function Pagination({
         {Array.from(Array(pageCount), (e, i) => {
           return (
             <li className={`${currentPage == i ? "active" : ""}`} key={i}>
-              <Link href={getHref(i)} scroll={false} onClick={onClick}>
+              <Link href={getHref(i)} scroll={false} onClick={() => onClick(i)}>
                 {i + 1}
               </Link>
             </li>

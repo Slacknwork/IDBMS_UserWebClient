@@ -26,6 +26,40 @@ const getTransactionsByProjectId = async (projectId) => {
   }
 };
 
+const countTransactionsByProjectId = async (projectId) => {
+  try {
+    const response = await fetch(
+      `https://localhost:7062/odata/Transactions/$count?$filter=ProjectId eq ${projectId}`,
+      { cache: "no-store" }
+    );
+    const transactions = await response.json();
+    return transactions;
+  } catch (error) {
+    console.error("Error fetching transactions by project ID:", error);
+    throw error;
+  }
+};
+
+const getTransactionsByProjectIdPagination = async (
+  projectId,
+  pageSize,
+  pageNo
+) => {
+  try {
+    const response = await fetch(
+      `https://localhost:7062/odata/Transactions?$filter=ProjectId eq ${projectId}&$top=${pageSize}&skip=${
+        pageNo * pageSize
+      }&$orderby=CreatedDate desc`,
+      { cache: "no-store" }
+    );
+    const transactions = await response.json();
+    return transactions;
+  } catch (error) {
+    console.error("Error fetching transactions by project ID:", error);
+    throw error;
+  }
+};
+
 const getTransactionsByUserId = async (userId) => {
   try {
     const response = await fetch(
@@ -52,6 +86,9 @@ const createTransaction = async (transaction, file) => {
   try {
     const response = await fetch(`https://localhost:7062/api/Transactions`, {
       method: "POST",
+      header: {
+        "Content-Type": `multipart/form-data`,
+      },
       body: formData,
     });
     if (!response.ok) {
@@ -71,6 +108,8 @@ const createTransaction = async (transaction, file) => {
 export {
   getTransactionById,
   getTransactionsByProjectId,
+  countTransactionsByProjectId,
+  getTransactionsByProjectIdPagination,
   getTransactionsByUserId,
   createTransaction,
 };
