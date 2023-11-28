@@ -74,6 +74,12 @@ export default {
           },
         },
       },
+      payment: {
+        getUri: (id) => `/project/${id}/payment#project-section`,
+        transactions: {
+          getUri: (id) => `/project/${id}/payment/transactions#project-section`,
+        },
+      },
     },
   },
 };

@@ -161,7 +161,7 @@ export default function ProjectTasks() {
         </div>
         <div className="col col-lg-12 col-12">
           <div className="form-field">
-            <h2>Tasks</h2>
+            <h1>Tasks</h1>
           </div>
         </div>
       </div>

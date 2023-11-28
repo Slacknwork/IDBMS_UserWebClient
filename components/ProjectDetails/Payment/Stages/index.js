@@ -1,29 +1,26 @@
 "use client";
 
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "/navigation";
+import { useParams } from "next/navigation";
+import { toast } from "react-toastify";
 import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import { toast } from "react-toastify";
-import { getPaymentStagesByProjectId } from "../../../../api/paymentStageServices";
+
+import { getPaymentStagesByProjectId } from "/api/paymentStageServices";
 
 const StageItem = (object) => {
-  const RoomHref =
-    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
-      1,
-      1,
-      1
-    );
+  const params = useParams();
+
   const item = object.item;
-  const no = object.index;
+  const TransactionHref = urls.project.id.payment.transactions.getUri(
+    params.id
+  );
 
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right", textAlign: "center" }}>
+      <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
         {item && item.stageNo}
       </th>
       <td className="align-middle">{item && item.name}</td>
@@ -34,28 +31,17 @@ const StageItem = (object) => {
       <td className="align-middle">
         {item && new Date(item.endTimePayment).toLocaleDateString("en-GB")}
       </td>
-      <td className="align-middle">
-        {item && item.isPrepaid ? 'Yes' : 'No'}
-      </td>
-      <td className="align-middle">
-        {item && item.isPaid ? 'Yes' : 'No'}
-      </td>
+      <td className="align-middle">{item && item.isPrepaid ? "Yes" : "No"}</td>
+      <td className="align-middle">{item && item.isPaid ? "Yes" : "No"}</td>
       <td className="align-middle m-0">
-        <div className="d-flex">
+        <div className="d-flex justify-content-end">
           <Link
-            href={RoomHref}
+            href={TransactionHref}
             className="theme-btn m-1"
             style={{ width: "6rem", zIndex: 0 }}
           >
-            Details
+            Pay
           </Link>
-          <button
-            type="button"
-            className="theme-btn m-1"
-            style={{ width: "3.5rem", backgroundColor: "crimson", zIndex: 0 }}
-          >
-            <FaTrash />
-          </button>
         </div>
       </td>
     </tr>
@@ -63,7 +49,7 @@ const StageItem = (object) => {
 };
 
 const StageTable = (stageList) => {
-  console.log(stageList)
+  console.log(stageList);
   const values = stageList.stageList;
   return (
     <div
@@ -79,25 +65,21 @@ const StageTable = (stageList) => {
         >
           <tr>
             <th scope="col" style={{ width: "7rem", textAlign: "center" }}>
-              Stage No
+              No.
             </th>
-            <th scope="col">
-              Name
-            </th>
+            <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Started Date</th>
             <th scope="col">End Time Payment</th>
             <th scope="col">Prepaid</th>
             <th scope="col">Paid</th>
-            <th scope="col" style={{ width: "10rem", textAlign: "center" }}>
-              Actions
-            </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {values &&
             values.map((item, index) => (
-              <StageItem key={index} item={item} index={index + 1} />
+              <StageItem key={item.id} item={item} index={index + 1} />
             ))}
         </tbody>
       </table>
@@ -106,9 +88,10 @@ const StageTable = (stageList) => {
 };
 
 export default function PaymentStages() {
+  const params = useParams();
 
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("8B84897A-5A93-429C-A5B0-B11AE7483DD3");
+  const [projectId, setProjectId] = useState(params.id);
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -133,46 +116,12 @@ export default function PaymentStages() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col col-lg-5 col-12">
-          <div className="blog-sidebar">
-            <div className="widget search-widget mb-4">
-              <form>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Item Name..."
-                  />
-                  <button type="submit">
-                    <i className="ti-search"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div className="col col-lg-3 col-12 my-auto">
-          <div className="wpo-contact-pg-section">
-            <form>
-              <div className="wpo-contact-form-area-transparent row">
-                <div className="form-field">
-                  <select
-                    type="text"
-                    name="subject"
-                    className="rounded-2"
-                    style={{ backgroundColor: "white", height: "55px" }}
-                  >
-                    <option>Category</option>
-                    <option>Architecture</option>
-                  </select>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className="row">
         <div className="col col-lg-12 col-12">
+          <div className="form-field">
+            <h1>Payment Stages</h1>
+          </div>
+        </div>
+        <div className="col col-lg-12 col-12 mt-2">
           <StageTable stageList={values} />
         </div>
       </div>

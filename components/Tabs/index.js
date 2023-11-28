@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Nav, NavItem } from "reactstrap";
+import { Nav, NavItem, NavLink } from "reactstrap";
 
 import classnames from "classnames";
 
-import { Link, usePathname } from "/navigation";
+import { usePathname, useRouter } from "/navigation";
 
 export default function Tabs({ uriPos, tabs }) {
+  const router = useRouter();
   const paths = usePathname().split("/");
   const urlBuild = paths.slice(0, uriPos).join("/");
 
@@ -27,14 +28,23 @@ export default function Tabs({ uriPos, tabs }) {
       {tabs.map((tab) => {
         return (
           <NavItem style={{ cursor: "pointer" }} key={tab.path}>
-            <Link
-              href={`${urlBuild}/${tab.path}`}
+            <NavLink
               className={classnames({
                 active: activeTab === tab.path,
               })}
+              onClick={() => {
+                router.push(`${urlBuild}/${tab.path}`);
+              }}
             >
-              {tab.label}
-            </Link>
+              <h5
+                style={{
+                  color: "black",
+                  fontWeight: 500,
+                }}
+              >
+                {tab.label}
+              </h5>
+            </NavLink>
           </NavItem>
         );
       })}

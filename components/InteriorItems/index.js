@@ -180,31 +180,29 @@ export default function InteriorItems() {
   });
 
   return (
-    <section className="wpo-shop-section">
-      <div className="container my-4">
-        <InteriorItemCategories></InteriorItemCategories>
-        <div className="row">
-          <div className="col col-lg-3 col-12">
-            <InteriorItemFilter></InteriorItemFilter>
+    <div className="container wpo-shop-single-section my-4">
+      <InteriorItemCategories></InteriorItemCategories>
+      <div className="row">
+        <div className="col col-lg-3 col-12">
+          <InteriorItemFilter></InteriorItemFilter>
+        </div>
+        <div className="col col-lg-9 col-12">
+          <InteriorItemSearchBar></InteriorItemSearchBar>
+          <div>
+            {values &&
+              values.map((item, index) => (
+                <InteriorItemSingle key={item.id} item={item} />
+              ))}
           </div>
-          <div className="col col-lg-9 col-12">
-            <InteriorItemSearchBar></InteriorItemSearchBar>
-            <div>
-              {values &&
-                values.map((item, index) => (
-                  <InteriorItemSingle key={item.id} item={item} />
-                ))}
-            </div>
-            <Pagination
-              pageCount={Math.ceil(interiorItemCount / 6)}
-              pageQuery={pageQuery}
-              onClick={() => {
-                getInteriorItemList();
-              }}
-            ></Pagination>
-          </div>
+          <Pagination
+            pageCount={Math.ceil(interiorItemCount / 6)}
+            pageQuery={pageQuery}
+            onClick={() => {
+              getInteriorItemList();
+            }}
+          ></Pagination>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

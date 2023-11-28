@@ -35,15 +35,12 @@ export default function ProjectDetail({ children }) {
       <div className="wpo-contact-form-area-transparent">
         <div className="container wpo-shop-single-section">
           <div className="row">
-            <div
-              className="col-12 product-info"
-              style={{ marginBottom: "2rem" }}
-            >
+            <div className="col-12 product-info p-0">
               <Tabs uriPos={3} tabs={tabs}></Tabs>
             </div>
             <div
               className="shadow-lg py-4 mb-4"
-              style={{ backgroundColor: "#fafafa" }}
+              style={{ backgroundColor: "white" }}
             >
               {children}
             </div>
