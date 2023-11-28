@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { useParams } from "next/navigation";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+
+import { createTransaction } from "/api/transactionServices";
 
 import transactionType from "/constants/enums/transactionType";
 
 import "./modal.css";
 
-export default function SuggestionModal({ children }) {
+const pendingTransactionStatus = 0;
+
+export default function SuggestionModal({ refreshTransactionList, children }) {
   const params = useParams();
+  const user = useSelector((state) => state.user);
 
   const [modal, setModal] = useState(false);
 
@@ -22,12 +28,35 @@ export default function SuggestionModal({ children }) {
   };
   const [note, setNote] = useState("");
   const onNoteChange = (e) => {
-    setNote(Number(e.target.value));
+    setNote(e.target.value);
+  };
+  const [file, setFile] = useState(null);
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const toggle = () => setModal(!modal);
   const onCreateTransactionClick = () => {
     toggle();
+    const postData = async () => {
+      try {
+        const response = await createTransaction(
+          {
+            type,
+            amount,
+            note,
+            userId: user.id,
+            projectId: params.id,
+            status: pendingTransactionStatus,
+          },
+          file
+        );
+        return response;
+      } catch (e) {
+        console.log("Error: " + e);
+      }
+    };
+    postData();
   };
 
   return (
@@ -81,7 +110,7 @@ export default function SuggestionModal({ children }) {
                           color: "black",
                         }}
                         value={type}
-                        amount={onTypeChange}
+                        onChange={onTypeChange}
                       >
                         <option disabled>Transaction Type</option>
                         {transactionType.map((type, index) => (
@@ -109,6 +138,7 @@ export default function SuggestionModal({ children }) {
                       <input
                         type="file"
                         placeholder="Choose Receipt Image..."
+                        onChange={onFileChange}
                       />
                     </div>
                   </div>

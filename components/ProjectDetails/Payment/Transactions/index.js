@@ -53,7 +53,6 @@ const TransactionItem = (object) => {
 };
 
 const TransactionTable = (transList) => {
-  console.log(transList);
   const values = transList.transList;
   return (
     <div
@@ -91,20 +90,19 @@ const TransactionTable = (transList) => {
 };
 
 export default function Transactions() {
+  const params = useParams();
   const [values, setValues] = useState([]);
   // test project id "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
-  useEffect(() => {
+  async function getTransactions() {
     if (!initialized.current) {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getTransactionsByProjectId(
-            "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
-          );
-          console.log(data);
+          const data = await getTransactionsByProjectId(params.id);
+          initialized.current = false;
           setValues(data);
           setLoading(false);
         } catch (error) {
@@ -114,6 +112,10 @@ export default function Transactions() {
       };
       fetchDataFromApi();
     }
+  }
+
+  useEffect(() => {
+    getTransactions();
   });
 
   return (
@@ -184,7 +186,10 @@ export default function Transactions() {
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <TransactionTable transList={values} />
+          <TransactionTable
+            refreshTransactionList={getTransactions}
+            transList={values}
+          />
         </div>
       </div>
     </div>
