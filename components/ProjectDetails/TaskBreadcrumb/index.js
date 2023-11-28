@@ -16,12 +16,14 @@ export default function OverviewBreadcrumb({ id, name, taskId, taskName }) {
       <ol>
         {id && (
           <li>
-            <Link href={breadcrumbHrefs.overviewHref}>{name || `Project`}</Link>
+            <Link href={breadcrumbHrefs.overviewHref}>{name || `Tasks`}</Link>
           </li>
         )}
         {taskId && (
           <li>
-            <Link href={breadcrumbHrefs.taskHref}>{taskName || `Task`}</Link>
+            <Link href={breadcrumbHrefs.taskHref}>
+              {taskName || `Task Details`}
+            </Link>
           </li>
         )}
       </ol>

@@ -1,16 +1,20 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
-
-import urls from "/constants/urls";
-
-import Pagination from "/components/Pagination";
-import { getProjectTasksByProjectId } from "/api/projectTaskServices";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import { styled } from "@mui/material/styles";
+
+import urls from "/constants/urls";
+import projectTaskStatus from "/constants/enums/projectTaskStatus";
+
+import { getProjectTasksByProjectId } from "/api/projectTaskServices";
+import { getAllTaskCategories } from "/api/taskCategoryServices";
+
+import Pagination from "/components/Pagination";
+import TaskBreadcrumb from "/components/ProjectDetails/TaskBreadcrumb";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -38,21 +42,36 @@ const TaskTableItem = ({ task, index }) => {
           task.room &&
           `${task.room.usePurpose} \n Tầng ${task.room.floor.floorNo} \n ${task.room.floor.site.name}`}
       </td>
-      <td className="align-middle">{task && task.taskCategory?.name}</td>
+      <td className="align-middle">
+        {task.taskCategory?.name || "Unclassified"}
+      </td>
       <td className="align-middle">
         {task &&
           (task.unitUsed > task.unitInContract
             ? task.pricePerUnit * task.unitUsed
-            : task.pricePerUnit * task.unitInContract)}
+            : task.pricePerUnit * task.unitInContract
+          ).toLocaleString(params.locale)}{" "}
+        VND
       </td>
-      <td className="align-middle">
+      <td className="align-middle" style={{ position: "relative" }}>
         <BorderLinearProgress
           variant="determinate"
           value={task && task.percentage}
         ></BorderLinearProgress>
+        <p
+          style={{
+            position: "absolute",
+            top: "34%",
+            left: "46%",
+            fontWeight: 600,
+            color: "white",
+          }}
+        >
+          {task.percentage}%
+        </p>
       </td>
       <td className="align-middle m-0">
-        <div className="d-flex">
+        <div className="d-flex justify-content-end">
           <Link
             href={TaskHref}
             className="theme-btn m-1"
@@ -76,47 +95,41 @@ const TaskTableItem = ({ task, index }) => {
 const TaskTable = (listTask) => {
   const values = listTask.listTask;
   return (
-    <div
-      style={{
-        height: "25rem",
-        overflowY: "scroll",
-      }}
-    >
-      <table className="table table-striped table-hover">
-        <thead
-          className="shadow-sm"
-          style={{ position: "sticky", top: 0, zIndex: 1 }}
-        >
-          <tr>
-            <th scope="col" style={{ width: "6rem" }}>
-              No.
-            </th>
-            <th scope="col">Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Category</th>
-            <th scope="col">Price (VND)</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Status
-            </th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {values &&
-            values.map((item, index) => (
-              <TaskTableItem key={item.id} task={item} index={index + 1} />
-            ))}
-        </tbody>
-      </table>
-    </div>
+    <table className="table table-striped table-hover">
+      <thead
+        className="shadow-sm"
+        style={{ position: "sticky", top: 0, zIndex: 1 }}
+      >
+        <tr>
+          <th scope="col" style={{ width: "6rem" }}>
+            No.
+          </th>
+          <th scope="col">Name</th>
+          <th scope="col">Location</th>
+          <th scope="col">Category</th>
+          <th scope="col">Price</th>
+          <th scope="col" style={{ width: "15rem" }}>
+            Status
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {values &&
+          values.map((item, index) => (
+            <TaskTableItem key={item.id} task={item} index={index + 1} />
+          ))}
+      </tbody>
+    </table>
   );
 };
 
 export default function ProjectTasks() {
   const params = useParams();
+
   const [values, setValues] = useState([]);
+  const [taskCategories, setTaskCategories] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -127,7 +140,9 @@ export default function ProjectTasks() {
         try {
           const data = await getProjectTasksByProjectId(params.id);
           console.log(data);
+          const categories = await getAllTaskCategories();
           setValues(data);
+          setTaskCategories(categories);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -141,6 +156,16 @@ export default function ProjectTasks() {
   return (
     <div className="container">
       <div className="row">
+        <div className="col col-lg-12 col-12">
+          <TaskBreadcrumb id={params.id}></TaskBreadcrumb>
+        </div>
+        <div className="col col-lg-12 col-12">
+          <div className="form-field">
+            <h2>Tasks</h2>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-4">
         <div className="col col-lg-6 col-12">
           <div className="blog-sidebar">
             <div className="widget search-widget">
@@ -171,8 +196,11 @@ export default function ProjectTasks() {
                       className="rounded-2"
                       style={{ backgroundColor: "white", height: "55px" }}
                     >
-                      <option>Category</option>
-                      <option>Architecture</option>
+                      {taskCategories.map((category) => (
+                        <option value={category.id} key={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -184,8 +212,11 @@ export default function ProjectTasks() {
                       className="rounded-2"
                       style={{ backgroundColor: "white", height: "55px" }}
                     >
-                      <option>Status</option>
-                      <option>Architecture</option>
+                      {projectTaskStatus.map((status, index) => (
+                        <option key={status} value={index}>
+                          {status}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -198,6 +229,7 @@ export default function ProjectTasks() {
         <div className="col col-lg-12 col-12">
           {values && <TaskTable listTask={values} />}
           <Pagination
+            pageCount={1}
             path={`tasks`}
             sectionId={urls.id.PROJECT_SECTION}
           ></Pagination>

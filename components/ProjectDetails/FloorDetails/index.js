@@ -40,12 +40,12 @@ const FloorDetailsForm = ({ floor }) => {
               </tr>
               <tr>
                 <td style={{ paddingRight: "2rem" }}>
-                  <p style={{ fontWeight: 1000 }}>
-                    Area in m<sup>2</sup>
-                  </p>
+                  <p style={{ fontWeight: 1000 }}>Area:</p>
                 </td>
                 <td>
-                  <p>{floor.area}</p>
+                  <p>
+                    {floor.area} m<sup>2</sup>
+                  </p>
                 </td>
               </tr>
               <tr>
