@@ -58,7 +58,7 @@ const LoginPage = (props) => {
         if (response.data != null) {
           toast.success("Login successfully!");
           dispatch(login(response.data));
-          router.push("/");
+          router.push("/project");
         } else {
           throw new Error("Login failed!");
         }

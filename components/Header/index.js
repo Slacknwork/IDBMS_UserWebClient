@@ -9,7 +9,7 @@ import { logout } from "/store/reducers/user";
 
 const Header = (props) => {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
 
   const user = useSelector((state) => state.user);

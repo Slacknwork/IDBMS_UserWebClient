@@ -27,10 +27,10 @@ const About = (props) => {
                 business goals go to the perfection
               </h5>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac enim
-                aliquam feugiat ullamcorper. Id risus mattis neque, ullamcorper.
-                Sed sit commodo vestibulum cras in cras. Nec proin scelerisque
-                quis nisl vitae, egestas non. Fringilla auctor.
+                We specialize in providing interior design services and interior
+                construction: Interior Construction of Banks, Offices, Houses,
+                Shops, Showrooms. With a team of experienced architects in the
+                profession, have implemented many domestic and foreign projects.
               </p>
               <div className="btns">
                 <Link
