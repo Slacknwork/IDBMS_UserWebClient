@@ -11,7 +11,10 @@ const getAllInteriorItems = async () => {
   }
 };
 
-const getInteriorItemPagination = async (pageSize, pageNo) => {
+const getInteriorItemPagination = async (pageSize = 6, pageNo = 0) => {
+  if (pageNo < 0) {
+    pageNo = 0;
+  }
   try {
     const response = await fetch(
       `https://localhost:7062/odata/InteriorItems?$top=${pageSize}&skip=${

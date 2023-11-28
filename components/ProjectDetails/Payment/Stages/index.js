@@ -54,7 +54,7 @@ const StageTable = (stageList) => {
   return (
     <div
       style={{
-        height: "25rem",
+        maxHeight: "25rem",
         overflowY: "scroll",
       }}
     >

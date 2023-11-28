@@ -88,7 +88,7 @@ export default function SiteList() {
         <div className="col col-lg-12 col-12 mb-4">
           <div
             style={{
-              height: "30rem",
+              maxHeight: "25rem",
               overflowY: "scroll",
             }}
           >

@@ -184,45 +184,43 @@ export default function ProjectTasks() {
             </div>
           </div>
         </div>
-        <div className="col col-lg-6 col-12">
-          <div className="wpo-contact-pg-section">
-            <form>
-              <div className="wpo-contact-form-area-transparent row">
-                <div className="col col-lg-6 col-12">
-                  <div className="form-field">
-                    <select
-                      type="text"
-                      name="subject"
-                      className="rounded-2"
-                      style={{ backgroundColor: "white", height: "55px" }}
-                    >
-                      {taskCategories.map((category) => (
-                        <option value={category.id} key={category.id}>
-                          {category.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="col col-lg-6 col-12">
-                  <div className="form-field">
-                    <select
-                      type="text"
-                      name="subject"
-                      className="rounded-2"
-                      style={{ backgroundColor: "white", height: "55px" }}
-                    >
-                      {projectTaskStatus.map((status, index) => (
-                        <option key={status} value={index}>
-                          {status}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+        <div className="col col-lg-6 col-12 wpo-contact-pg-section">
+          <form>
+            <div className="wpo-contact-form-area-transparent row">
+              <div className="col col-lg-6 col-12">
+                <div className="form-field shadow-sm">
+                  <select
+                    type="text"
+                    name="subject"
+                    className="rounded-2 "
+                    style={{ backgroundColor: "white", height: "55px" }}
+                  >
+                    {taskCategories.map((category) => (
+                      <option value={category.id} key={category.id}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
-            </form>
-          </div>
+              <div className="col col-lg-6 col-12">
+                <div className="form-field shadow-sm">
+                  <select
+                    type="text"
+                    name="subject"
+                    className="rounded-2"
+                    style={{ backgroundColor: "white", height: "55px" }}
+                  >
+                    {projectTaskStatus.map((status, index) => (
+                      <option key={status} value={index}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <div className="row">

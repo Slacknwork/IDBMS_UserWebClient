@@ -1,7 +1,7 @@
-export default {
-    0: "CashDeposit",
-    1: "BankDeposit",
-    2: "Warranty",
-    3: "Withdraw",
-    4: "StagePayment",
-};
+export default [
+  "Cash Deposit",
+  "Bank Deposit",
+  "Warranty",
+  "Withdraw",
+  "Stage Payment",
+];

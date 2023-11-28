@@ -117,7 +117,7 @@ const RoomTable = (roomList) => {
   return (
     <div
       style={{
-        height: "25rem",
+        maxHeight: "25rem",
         overflowY: "scroll",
       }}
     >

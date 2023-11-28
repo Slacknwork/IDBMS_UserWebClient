@@ -5,9 +5,9 @@ import { Link } from "/navigation";
 
 export default function OverviewBreadcrumb({ id, name, taskId, taskName }) {
   const breadcrumbHrefs = {
-    ...(id && { overviewHref: urls.project.id.getUri(id) }),
+    ...(id && { overviewHref: urls.project.id.tasks.getUri(id) }),
     ...(taskId && {
-      siteHref: urls.project.id.tasks.taskId.getUri(id, taskId),
+      taskHref: urls.project.id.tasks.taskId.getUri(id, taskId),
     }),
   };
 

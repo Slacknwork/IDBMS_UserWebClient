@@ -1,15 +1,17 @@
 "use client";
 
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "/navigation";
-import { FaTrash } from "react-icons/fa";
+import { useParams } from "next/navigation";
+import { toast } from "react-toastify";
 
 import urls from "/constants/urls";
-import { getTransactionsByProjectId } from "../../../../api/transactionServices";
-import { useState } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
+import transactionType from "/constants/enums/transactionType";
+import transactionStatus from "/constants/enums/transactionStatus";
+
+import { getTransactionsByProjectId } from "/api/transactionServices";
+
+import AddModal from "./AddModal";
 
 const TransactionItem = (object) => {
   const RoomHref =
@@ -23,20 +25,20 @@ const TransactionItem = (object) => {
 
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right", textAlign: "center" }}>
+      <th scope="row" className="align-middle" style={{ textAlign: "center" }}>
         {no}
       </th>
       <td className="align-middle">
-        {item && item.amount && item.amount.toLocaleString('en-US')}
+        {item && item.amount && item.amount.toLocaleString("en-US")}
       </td>
-      <td className="align-middle">{item && item.type}</td>
+      <td className="align-middle">{item && transactionType[item.type]}</td>
       <td className="align-middle">{item && item.note}</td>
       <td className="align-middle">
         {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
       </td>
-      <td className="align-middle">{item && item.status}</td>
+      <td className="align-middle">{item && transactionStatus[item.status]}</td>
       <td className="align-middle m-0">
-        <div className="d-flex">
+        <div className="d-flex justify-content-end">
           <Link
             href={RoomHref}
             className="theme-btn m-1"
@@ -46,17 +48,17 @@ const TransactionItem = (object) => {
           </Link>
         </div>
       </td>
-    </tr >
+    </tr>
   );
 };
 
 const TransactionTable = (transList) => {
-  console.log(transList)
+  console.log(transList);
   const values = transList.transList;
   return (
     <div
       style={{
-        height: "25rem",
+        maxHeight: "25rem",
         overflowY: "scroll",
       }}
     >
@@ -74,9 +76,7 @@ const TransactionTable = (transList) => {
             <th scope="col">Note</th>
             <th scope="col">Created Date</th>
             <th scope="col">Status</th>
-            <th scope="col" style={{ width: "15rem" }}>
-              Actions
-            </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -91,9 +91,8 @@ const TransactionTable = (transList) => {
 };
 
 export default function Transactions() {
-
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("8B84897A-5A93-429C-A5B0-B11AE7483DD3");
+  // test project id "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -102,7 +101,9 @@ export default function Transactions() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getTransactionsByProjectId(projectId);
+          const data = await getTransactionsByProjectId(
+            "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
+          );
           console.log(data);
           setValues(data);
           setLoading(false);
@@ -113,31 +114,20 @@ export default function Transactions() {
       };
       fetchDataFromApi();
     }
-  }, [projectId]);
+  });
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col col-lg-5 col-12">
-          <div className="blog-sidebar">
-            <div className="widget search-widget mb-4">
-              <form>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Item Name..."
-                  />
-                  <button type="submit">
-                    <i className="ti-search"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
+      <div className="row mb-2">
+        <div className="col col-lg-12 col-12">
+          <div className="form-field">
+            <h1>Transactions</h1>
           </div>
         </div>
-        <div className="col col-lg-3 col-12 my-auto">
-          <div className="wpo-contact-pg-section">
+      </div>
+      <div className="d-flex justify-content-between">
+        <div className="d-flex">
+          <div className="my-auto">
             <form>
               <div className="wpo-contact-form-area-transparent row">
                 <div className="form-field">
@@ -145,20 +135,51 @@ export default function Transactions() {
                     type="text"
                     name="subject"
                     className="rounded-2"
-                    style={{ backgroundColor: "white", height: "55px" }}
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      width: "15rem",
+                    }}
                   >
-                    <option>Category</option>
-                    <option>Architecture</option>
+                    <option value={-1}>Transaction Type</option>
+                    {transactionType.map((type, index) => (
+                      <option key={type} value={index}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className="my-auto">
+            <form>
+              <div className="row">
+                <div className="form-field">
+                  <select
+                    type="text"
+                    name="subject"
+                    className="rounded-2"
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      width: "15rem",
+                    }}
+                  >
+                    <option value={-1}>Transaction Status</option>
+                    {transactionStatus.map((type, index) => (
+                      <option key={type} value={index}>
+                        {type}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
             </form>
           </div>
         </div>
-        <div className="col col-lg-1 offset-lg-3 col-12">
-          <Link className="theme-btn px-4" href="/project/1/items">
-            Add
-          </Link>
+        <div className="d-flex">
+          <AddModal>Create</AddModal>
         </div>
       </div>
       <div className="row">

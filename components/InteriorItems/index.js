@@ -150,7 +150,7 @@ export default function InteriorItems() {
   const [loading, setLoading] = useState(true);
   const [interiorItemCount, setInteriorItemCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(
-    Number(searchParams.get(pageQuery)) - 1
+    searchParams.get(pageQuery) ? Number(searchParams.get(pageQuery)) - 1 : 0
   );
   const initialized = useRef(false);
 
@@ -180,7 +180,7 @@ export default function InteriorItems() {
   });
 
   return (
-    <div className="container wpo-shop-single-section my-4">
+    <div className="container wpo-shop-section my-4">
       <InteriorItemCategories></InteriorItemCategories>
       <div className="row">
         <div className="col col-lg-3 col-12">

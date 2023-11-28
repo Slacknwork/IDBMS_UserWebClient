@@ -107,14 +107,25 @@ export default function TaskReportDetails() {
   });
 
   return (
-    <div className="pb-0">
-      <form className="contact-validation-active">
-        <div className="row">
-          <div className="col col-lg-12 col-12">
-            <TaskReportTable reportList={values} />
+    <div className="pb-0 container">
+      {values && values.length > 0 ? (
+        <form className="contact-validation-active">
+          <div className="row">
+            <div className="col col-lg-12 col-12">
+              <TaskReportTable reportList={values} />
+            </div>
           </div>
+        </form>
+      ) : (
+        <div
+          style={{
+            marginTop: "2rem",
+            height: "5rem",
+          }}
+        >
+          <p>This task currently has no reports.</p>
         </div>
-      </form>
+      )}
     </div>
   );
 }

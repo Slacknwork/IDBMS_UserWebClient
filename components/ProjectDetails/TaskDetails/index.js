@@ -8,10 +8,12 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 
+import calculationUnit from "/constants/enums/calculationUnit";
 import { getProjectTaskById } from "/api/projectTaskServices";
+import TaskBreadcrumb from "/components/ProjectDetails/TaskBreadcrumb";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 20,
+  height: 30,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
     backgroundColor: "#f6e166",
@@ -47,92 +49,108 @@ export default function TaskDetails() {
   });
 
   return (
-    <div className="pb-0">
+    <div className="pb-0 container">
       <form className="contact-validation-active">
         <div className="row">
           <div className="col col-lg-12 col-12">
+            <TaskBreadcrumb
+              id={params.id}
+              taskId={item.id}
+              taskName={item.name}
+            ></TaskBreadcrumb>
+          </div>
+          <div className="col col-lg-12 col-12">
             <div className="form-field">
-              <h2>{item.name}</h2>
+              <h1>{item.name}</h1>
+            </div>
+            <div className="form-field">
+              <h4>{item.taskCategory?.name || "Unclassified"}</h4>
             </div>
           </div>
           <div className="col col-lg-12 col-12">
-            <div className="col col-lg-12 col-12">
-              <table>
-                <tbody>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Category:</p>
-                    </td>
-                    <td>
-                      <p>{item.taskCategory?.name}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Percentage done:</p>
-                    </td>
-                    <td>
-                      <BorderLinearProgress
-                        sx={{ mt: -1 }}
-                        variant="determinate"
-                        value={item.percentage}
-                      ></BorderLinearProgress>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Unit Price:</p>
-                    </td>
-                    <td>
-                      <p>{item.pricePerUnit}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Unit In Contract:</p>
-                    </td>
-                    <td>
-                      <p>{item.unitInContract}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Unit Used:</p>
-                    </td>
-                    <td>
-                      <p>{item.unitUsed}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Started:</p>
-                    </td>
-                    <td>
-                      <p>
-                        {new Date(item.startedDate).toLocaleDateString("vi-VN")}
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Ended:</p>
-                    </td>
-                    <td>
-                      <p>
-                        {new Date(item.endDate).toLocaleDateString("vi-VN")}
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style={{ paddingRight: "2rem" }}>
-                      <p style={{ fontWeight: 1000 }}>Description:</p>
-                    </td>
-                    <td>
-                      <p>{item.description}</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="form-field mt-2">
+              <p style={{ fontSize: 18 }}>{item.description}</p>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col col-lg-4 col-12">
+            <div className="form-field">
+              <h4>Progress</h4>
+            </div>
+            <div className="form-field">
+              <div style={{ position: "relative" }}>
+                <BorderLinearProgress
+                  sx={{ mt: 1 }}
+                  variant="determinate"
+                  value={item.percentage}
+                ></BorderLinearProgress>
+                <p
+                  style={{
+                    position: "absolute",
+                    top: "0%",
+                    left: "47%",
+                    fontWeight: 600,
+                    color: "white",
+                  }}
+                >
+                  {item.percentage}%
+                </p>
+                <tr>
+                  <td style={{ paddingRight: "1rem", paddingTop: "1rem" }}>
+                    <p style={{ fontWeight: 1000 }}>Started:</p>
+                  </td>
+                  <td style={{ paddingRight: "4rem" }}>
+                    <p>
+                      {new Date(item.startedDate).toLocaleDateString("vi-VN")}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ paddingRight: "1rem" }}>
+                    <p style={{ fontWeight: 1000 }}>Ended:</p>
+                  </td>
+                  <td>
+                    <p>{new Date(item.endDate).toLocaleDateString("vi-VN")}</p>
+                  </td>
+                </tr>
+              </div>
+            </div>
+          </div>
+          <div className="col offset-lg-1 col-lg-7 col-12">
+            <div className="form-field">
+              <h4>Pricing</h4>
+            </div>
+            <div className="form-field">
+              <tr>
+                <td style={{ paddingRight: "2rem" }}>
+                  <p style={{ fontWeight: 1000 }}>Unit Price:</p>
+                </td>
+                <td>
+                  <p>{item.pricePerUnit?.toLocaleString(params.locale)} VND</p>
+                </td>
+              </tr>
+              <tr>
+                <td style={{ paddingRight: "2rem" }}>
+                  <p style={{ fontWeight: 1000 }}>Unit In Contract:</p>
+                </td>
+                <td>
+                  <p>
+                    {item.unitInContract}{" "}
+                    {calculationUnit[item.calculationUnit]}
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td style={{ paddingRight: "2rem" }}>
+                  <p style={{ fontWeight: 1000 }}>Unit Used:</p>
+                </td>
+                <td>
+                  <p>
+                    {item.unitUsed} {calculationUnit[item.calculationUnit]}
+                  </p>
+                </td>
+              </tr>
             </div>
           </div>
         </div>
