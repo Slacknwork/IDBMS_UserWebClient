@@ -1,13 +1,13 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "/navigation";
 import { FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 import urls from "/constants/urls";
-import { getProjectDocumentsByProjectId } from "../../../api/projectDocumentServices";
-import { useState } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
+import { getProjectDocumentsByProjectId } from "/api/projectDocumentServices";
+
+import DocumentBreadcrumb from "./Breadcrumb";
 
 const DocumentTableItem = (object) => {
   const DocumentHref =
@@ -53,7 +53,7 @@ const DocumentTableItem = (object) => {
 };
 
 const DocumentTable = (docList) => {
-  console.log(docList)
+  console.log(docList);
   const values = docList.docList;
   return (
     <div
@@ -92,9 +92,9 @@ const DocumentTable = (docList) => {
 };
 
 export default function Documents() {
+  const params = useParams();
 
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -103,7 +103,7 @@ export default function Documents() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getProjectDocumentsByProjectId(projectId);
+          const data = await getProjectDocumentsByProjectId(params.id);
           console.log(data);
           setValues(data);
           setLoading(false);
@@ -114,59 +114,73 @@ export default function Documents() {
       };
       fetchDataFromApi();
     }
-  }, [projectId]);
+  }, []);
 
   return (
     <div className="container">
       <div className="row">
-        <div className="col col-lg-5 col-12">
-          <div className="blog-sidebar">
-            <div className="widget search-widget mb-4">
+        <div className="col col-lg-12 col-12">
+          <DocumentBreadcrumb id={params.id}></DocumentBreadcrumb>
+        </div>
+        <div className="col col-lg-12 col-12 mb-2">
+          <div className="form-field">
+            <h1>Documents</h1>
+          </div>
+        </div>
+      </div>
+      {values && values.length > 0 ? (
+        <div className="row">
+          <div className="col col-lg-5 col-12">
+            <div className="blog-sidebar">
+              <div className="widget search-widget mb-4">
+                <form>
+                  <div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search Document.."
+                    />
+                    <button type="submit">
+                      <i className="ti-search"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div className="col col-lg-3 col-12">
+            <div className="wpo-contact-pg-section">
               <form>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Document.."
-                  />
-                  <button type="submit">
-                    <i className="ti-search"></i>
-                  </button>
+                <div className="wpo-contact-form-area-transparent row">
+                  <div className="form-field">
+                    <select
+                      type="text"
+                      name="subject"
+                      className="rounded-2"
+                      style={{ backgroundColor: "white", height: "55px" }}
+                    >
+                      <option>Category</option>
+                      <option>Architecture</option>
+                    </select>
+                  </div>
                 </div>
               </form>
             </div>
           </div>
-        </div>
-        <div className="col col-lg-3 col-12">
-          <div className="wpo-contact-pg-section">
-            <form>
-              <div className="wpo-contact-form-area-transparent row">
-                <div className="form-field">
-                  <select
-                    type="text"
-                    name="subject"
-                    className="rounded-2"
-                    style={{ backgroundColor: "white", height: "55px" }}
-                  >
-                    <option>Category</option>
-                    <option>Architecture</option>
-                  </select>
-                </div>
-              </div>
-            </form>
+          <div className="col col-lg-1 offset-lg-3 col-12">
+            <Link className="theme-btn px-4" href="/project/1/items">
+              Add
+            </Link>
+          </div>
+          <div className="col col-lg-12 col-12">
+            <DocumentTable docList={values} />
           </div>
         </div>
-        <div className="col col-lg-1 offset-lg-3 col-12">
-          <Link className="theme-btn px-4" href="/project/1/items">
-            Add
-          </Link>
+      ) : (
+        <div className="row">
+          <p>This project currently has no documents!</p>
         </div>
-      </div>
-      <div className="row">
-        <div className="col col-lg-12 col-12">
-          <DocumentTable docList={values} />
-        </div>
-      </div>
+      )}
     </div>
   );
 }
