@@ -4,4 +4,5 @@ export default {
     2: "LeadArchitect",
     3: "Architect",
     4: "ConstructionManager",
+    5: "ProjectManager"
 };
