@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -7,9 +7,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import InteriorItemCategories from "./Categories";
 import Pagination from "/components/Pagination";
-import { useRef } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { getAllInteriorItems } from "../../api/interiorItemServices";
 import Image from "next/image";
@@ -104,7 +101,6 @@ function InteriorItemSingle(itemDetails) {
   const item = itemDetails.item;
   return (
     <div className="grid" style={{ backgroundColor: "white" }}>
-
       <Image
         src="https://media.istockphoto.com/id/1334037436/photo/wooden-chair-isolated-on-white-with-clipping-path.jpg?s=612x612&w=0&k=20&c=ToZrdNt8mNvaPLEuMg9Pj6u-5etxNwcIUzVOIF088yM="
         alt=""
@@ -137,7 +133,6 @@ function InteriorItemSingle(itemDetails) {
 }
 
 export default function InteriorItems() {
-
   const [values, setValues] = useState([]);
   const [userId, setUserId] = useState("A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF");
   const [loading, setLoading] = useState(true);
@@ -172,9 +167,12 @@ export default function InteriorItems() {
           <div className="col col-lg-9 col-12">
             <InteriorItemSearchBar></InteriorItemSearchBar>
             <div>
-              {values && values.slice(0, 9).map((item, index) => (
-                <InteriorItemSingle key={index} item={item} />
-              ))}
+              {values &&
+                values
+                  .slice(0, 9)
+                  .map((item, index) => (
+                    <InteriorItemSingle key={index} item={item} />
+                  ))}
             </div>
             <Pagination></Pagination>
           </div>
