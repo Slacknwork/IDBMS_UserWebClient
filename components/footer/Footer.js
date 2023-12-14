@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "/navigation";
-import Services from "../../api/service";
-import Projects from "../../api/project";
 import Image from "next/image";
+
+import Services from "/api/service";
+import Projects from "/api/project";
 
 const Footer = (props) => {
   return (
@@ -13,15 +14,24 @@ const Footer = (props) => {
             <div className="col col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
               <div className="widget about-widget">
                 <div className="logo widget-title">
-                  <Link className="logo" href="/">
-                    <img src="/images/logo-2.svg" alt="" />
+                  <Link
+                    className="logo d-flex"
+                    href="/"
+                    style={{
+                      width: "6rem",
+                      height: "6rem",
+                      position: "relative",
+                    }}
+                  >
+                    <Image src="/images/idt-logo.jpg" fill alt="" />
+                    <h2
+                      className="text-white my-auto"
+                      style={{ position: "relative", marginLeft: "6.75rem" }}
+                    >
+                      idtco.com
+                    </h2>
                   </Link>
                 </div>
-                <p>
-                  Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.
-                  Viverra laoreet ultrices donec placerat commodo elementum
-                  justo, consequat.
-                </p>
                 <ul>
                   <li>
                     <Link href="/">
@@ -106,24 +116,6 @@ const Footer = (props) => {
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="wpo-lower-footer">
-        <div className="container">
-          <div className="row">
-            <div className="col col-xs-12">
-              <ul>
-                <li>
-                  &copy; 2022 Arkio Template. Design By{" "}
-                  <Link href="/">wpOceans</Link>. All Rights Reserved.
-                </li>
-                <li>
-                  <Link href="/">Terms of use |</Link>{" "}
-                  <Link href="/">Privacy Environmental Policy</Link>
-                </li>
-              </ul>
             </div>
           </div>
         </div>

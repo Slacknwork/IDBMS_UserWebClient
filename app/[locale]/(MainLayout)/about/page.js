@@ -2,10 +2,10 @@
 
 import React, { Fragment } from "react";
 import PageTitle from "/components/PageTitle";
-import About from "/components/about/about";
+import About from "/components/about";
 import ProjectSection from "/components/Projects";
 import ServiceSection from "/components/Services";
-import Pricing from "/components/Pricing";
+import Pricing from "/components/Home/Pricing";
 import FunFact from "/components/FunFact/FunFact";
 import TeamSection from "/components/TeamSection";
 import Testimonial from "/components/Testimonial";

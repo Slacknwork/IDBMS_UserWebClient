@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
+import { toast } from "react-toastify";
 
 import { getAllRoomTypes } from "/api/roomTypeServices";
 
 import SectionTitle2 from "/components/Shared/SectionTitle2";
-import { toast } from "react-toastify";
 
 export default function Pricing() {
   const settings = {
@@ -58,6 +59,17 @@ export default function Pricing() {
                             <div className="pricing-thumb">
                               <span>{roomType.name}</span>
                             </div>
+                            <div>
+                              <Image
+                                className="mx-auto mt-4"
+                                src={roomType.imageUrl}
+                                alt={roomType.name}
+                                width={1000}
+                                height={1000}
+                                priority
+                                style={{ objectFit: "cover" }}
+                              ></Image>
+                            </div>
                             <div className="wpo-pricing-text">
                               <h2>
                                 {roomType.pricePerArea?.toLocaleString("vi-VN")}
@@ -70,7 +82,7 @@ export default function Pricing() {
                           </div>
                           <div
                             className="wpo-pricing-bottom"
-                            style={{ minHeight: "12rem" }}
+                            style={{ height: "10rem" }}
                           >
                             <div className="wpo-pricing-bottom-text">
                               <ul>
