@@ -35,23 +35,20 @@ export default function Pricing() {
   }, []);
 
   return (
-    <section
-      className="wpo-pricing-section-s2"
-      style={{ paddingBottom: "6rem" }}
-    >
+    <section className="wpo-pricing-section" style={{ marginBottom: "6rem" }}>
       <div className="container">
         <SectionTitle2
           subTitle={"Room types"}
           MainTitle={"Choose Your Room Type"}
           vText={"Pricing Plan"}
         />
-        <div className="wpo-project-area black-bg">
+        <div className="wpo-project-area">
           <div className="wpo-project-wrap project-active owl-carousel">
             <Slider {...settings}>
               {roomTypes &&
                 roomTypes.length > 0 &&
                 roomTypes.map((roomType) => (
-                  <div className="wpo-pricing-wrap px-3" key={roomType.id}>
+                  <div className="wpo-pricing-wrap px-3 my-4" key={roomType.id}>
                     <div className="row">
                       <div className="col col-lg-12 col-md-12 col-12">
                         <div className="wpo-pricing-item">
@@ -82,7 +79,7 @@ export default function Pricing() {
                           </div>
                           <div
                             className="wpo-pricing-bottom"
-                            style={{ height: "10rem" }}
+                            style={{ height: 150 }}
                           >
                             <div className="wpo-pricing-bottom-text">
                               <ul>

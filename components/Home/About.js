@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <div className="wpo-about-area section-padding wpo-about-area-s5">
+    <div className="wpo-about-area section-padding wpo-about-area">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-5 col-md-12 col-sm-12">
@@ -12,7 +12,7 @@ export default function About() {
                 src="/images/samples/home-about.jpeg"
                 fill
                 alt="logo"
-                style={{ objectFit: "cover", padding: "1.5rem" }}
+                style={{ objectFit: "cover", padding: "2.5rem" }}
               />
             </div>
           </div>

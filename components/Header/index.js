@@ -46,7 +46,6 @@ const Header = (props) => {
                     />
                     <h2
                       style={{
-                        color: "white",
                         marginLeft: "8.5rem",
                         marginTop: "0.25rem",
                       }}

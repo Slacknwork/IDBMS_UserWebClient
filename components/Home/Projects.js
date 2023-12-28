@@ -1,48 +1,66 @@
 "use client";
 
-import blogs from "/api/blogs";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import SectionTitle3 from "/components/shared/SectionTitle3";
+import Image from "next/image";
+import { toast } from "react-toastify";
+
+import SectionTitle2 from "/components/shared/SectionTitle2";
 import bShape1 from "/public/images/blog/Vector3.png";
 import bShape2 from "/public/images/blog/Vector4.png";
-import Image from "next/image";
+
+import projectTypeOptions from "/constants/enums/projectType";
+
+import { getAdvertisementProjects } from "/api/advertisementServices";
 
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+
+  const fetchProjects = async () => {
+    try {
+      const projectResponse = await getAdvertisementProjects({
+        page: 1,
+        pageSize: 3,
+      });
+      setProjects(projectResponse.list);
+    } catch (error) {
+      toast.error("Error loading projects!");
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
   return (
-    <section className="wpo-blog-section-s2 section-padding" id="blog">
+    <section className="wpo-blog-section section-padding" id="blog">
       <div className="container">
-        <SectionTitle3 subTitle={"Our Blog"} MainTitle={"Our Latest News"} />
+        <SectionTitle2 subTitle={"Projects"} MainTitle={"Our Projects"} />
         <div className="wpo-blog-items">
           <div className="row">
-            {blogs.slice(0, 3).map((blog, Bitem) => (
-              <div className="col col-lg-4 col-md-6 col-12" key={Bitem}>
-                <div className="wpo-blog-item">
+            {projects.map((project) => (
+              <div className="col col-lg-4 col-md-6 col-12" key={project.id}>
+                <div className="wpo-blog-item" style={{ height: 525 }}>
                   <div className="wpo-blog-img">
-                    <Image src={blog.screens} alt="" />
-                    <div className="thumb">{blog.thumb}</div>
+                    <Image src={project.representImageUrl} alt="" />
+                    <div className="thumb">
+                      {projectTypeOptions[project.type]}
+                    </div>
                   </div>
                   <div className="wpo-blog-content">
                     <ul>
-                      <li>{blog.create_at}</li>
                       <li>
-                        By{" "}
-                        <Link
-                          href="/blog-single/[slug]"
-                          as={`/blog-single/${blog.slug}`}
-                        >
-                          {blog.author}
-                        </Link>
+                        {new Date(project.createdDate).toLocaleDateString(
+                          "en-GB"
+                        )}
                       </li>
                     </ul>
                     <h2>
-                      <Link
-                        href="/blog-single/[slug]"
-                        as={`/blog-single/${blog.slug}`}
-                      >
-                        {blog.title}
+                      <Link href={`/project/${project.id}`}>
+                        {project.name}
                       </Link>
                     </h2>
-                    <p>{blog.description}</p>
+                    <p>{project.description}</p>
                   </div>
                 </div>
               </div>
