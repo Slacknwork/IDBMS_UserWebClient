@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function AboutProjects() {
+export default function About() {
   return (
-    <div className="wpo-about-area section-padding wpo-about-area-s5">
+    <div className="wpo-about-area section-padding wpo-about-area">
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-lg-7 col-md-12 col-sm-12">
+          <div className="col-lg-7 col-md-12 colsm-12">
             <div
               className="wpo-about-text"
               style={{ paddingRight: "10rem", paddingLeft: "3rem" }}
@@ -39,10 +39,10 @@ export default function AboutProjects() {
           <div className="col-lg-5 col-md-12 col-sm-12">
             <div className="wpo-about-img" style={{ height: 650 }}>
               <Image
-                src="/images/samples/about-projects.jpg"
+                src="/images/samples/home-about.jpeg"
                 fill
                 alt="logo"
-                style={{ objectFit: "cover", padding: "1.5rem" }}
+                style={{ objectFit: "cover", padding: "2.5rem" }}
               />
             </div>
           </div>

@@ -1,53 +1,43 @@
 import React from "react";
 import Link from "next/link";
 import abimg from "/public/images/samples/about-overview.jpg";
-import yearsOfExpBg from "/public/images/about-shape3.png";
+import abimg2 from "/public/images/samples/about-overview-2.png";
 import Image from "next/image";
+import VideoModal from "../ModalVideo/VideoModal";
 
-export default function Overview() {
+const About2 = (props) => {
+  const ClickHandler = () => {
+    window.scrollTo(10, 0);
+  };
   return (
-    <div className="wpo-about-area-s4 section-padding">
+    <div className="wpo-about-area-s2 section-padding">
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-12 col-sm-12">
             <div className="wpo-about-img">
-              <div style={{ height: 595, width: 500 }}>
+              <div className="wpo-about-img-left">
                 <Image
                   src={abimg}
-                  fill
-                  quality={100}
-                  priority
-                  unoptimized={true}
-                  alt="logo"
-                  style={{ objectFit: "cover", padding: "3rem" }}
+                  style={{ height: 460, width: 350, objectFit: "cover" }}
+                  unoptimized
+                  alt=""
                 />
-              </div>
-
-              <div className="wpo-about-img-text">
-                <h2>20+</h2>
-                <p>Years of Experience</p>
-                <div className="about-shape">
-                  <Image src={yearsOfExpBg} alt="" />
+                <div className="wpo-about-img-text">
+                  <h2>20+</h2>
+                  <p>Years of Experience</p>
                 </div>
               </div>
-              <div className="left-shape">
-                <div className="square-shape"></div>
-                <div className="shape-top">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div className="shape-left">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+              <div className="wpo-about-img-right">
+                <Image
+                  src={abimg2}
+                  style={{ height: 460, width: 350, objectFit: "cover" }}
+                  unoptimized
+                  alt=""
+                />
               </div>
             </div>
           </div>
-          <div className="col-xl-6 col-lg-6 col-md-12 colsm-12">
+          <div className="col-lg-6 col-md-12 colsm-12">
             <div className="wpo-about-text">
               <div className="wpo-about-title">
                 <span>About Us</span>
@@ -69,13 +59,20 @@ export default function Overview() {
                 European countries, will produce high quality products with
                 prestige. on the market.
               </p>
+              <div className="btns">
+                <ul>
+                  <li className="video-holder">
+                    <VideoModal />
+                  </li>
+                  <li className="video-text">Watch Our Video</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="invisible-title1">
-        <h2>About</h2>
-      </div>
     </div>
   );
-}
+};
+
+export default About2;

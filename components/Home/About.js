@@ -16,7 +16,7 @@ export default function About() {
               />
             </div>
           </div>
-          <div className="col-lg-7 col-md-12 colsm-12">
+          <div className="col-lg-7 col-md-12 col-sm-12">
             <div className="wpo-about-text">
               <div className="wpo-about-title">
                 <span>About Us</span>

@@ -3,6 +3,7 @@
 import PageTitle from "/components/Shared/PageTitle";
 import Overview from "/components/About/Overview";
 import Projects from "/components/About/Projects";
+import Contact from "/components/About/Contact";
 
 export default function AboutPage() {
   return (
@@ -10,6 +11,7 @@ export default function AboutPage() {
       <PageTitle pageTitle={"About Us"} pagesub={"About"} />
       <Overview />
       <Projects />
+      <Contact />
     </div>
   );
 }
