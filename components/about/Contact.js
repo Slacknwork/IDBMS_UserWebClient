@@ -1,42 +1,44 @@
-import React, { useState } from "react";
-import SimpleReactValidator from "simple-react-validator";
+import { useState } from "react";
+import { useParams } from "next/navigation";
 import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
-const ContactForm = () => {
-  const [forms, setForms] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    message: "",
+import { localeIndex } from "/constants/locales";
+
+import { createBookingRequest } from "/api/bookingRequestServices";
+
+export default function ContactForm() {
+  const params = useParams();
+
+  const [formData, setFormData] = useState({
+    language: localeIndex[params.locale],
+    contactName: "",
+    contactNameError: { hasError: false, label: "" },
+    contactEmail: "",
+    contactEmailError: { hasError: false, label: "" },
+    contactPhone: "",
+    contactPhoneError: { hasError: false, label: "" },
+    contactLocation: "",
+    contactLocationError: { hasError: false, label: "" },
+    note: "",
+    noteError: { hasError: false, label: "" },
   });
-  const [validator] = useState(
-    new SimpleReactValidator({
-      className: "errorMessage",
-    })
-  );
-  const changeHandler = (e) => {
-    setForms({ ...forms, [e.target.name]: e.target.value });
-    if (validator.allValid()) {
-      validator.hideMessages();
-    } else {
-      validator.showMessages();
-    }
+
+  const handleInputChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const submitHandler = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validator.allValid()) {
-      validator.hideMessages();
-      setForms({
-        name: "",
-        email: "",
-        subject: "",
-        phone: "",
-        message: "",
-      });
-    } else {
-      validator.showMessages();
+    try {
+      console.log(formData);
+      await createBookingRequest(formData);
+      toast.success("Gửi yêu cầu thành công!");
+    } catch (error) {
+      toast.error("Lỗi gửi yêu cầu!");
     }
   };
 
@@ -114,85 +116,64 @@ const ContactForm = () => {
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
                       <input
-                        value={forms.name}
+                        value={formData.name}
                         type="text"
-                        name="name"
-                        onBlur={(e) => changeHandler(e)}
-                        onChange={(e) => changeHandler(e)}
+                        name="contactName"
+                        onBlur={(e) => handleInputChange(e)}
+                        onChange={(e) => handleInputChange(e)}
                         placeholder="Your Name"
                       />
-                      {validator.message(
-                        "name",
-                        forms.name,
-                        "required|alpha_space"
-                      )}
                     </div>
                   </div>
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
                       <input
-                        value={forms.email}
+                        value={formData.email}
                         type="email"
-                        name="email"
-                        onBlur={(e) => changeHandler(e)}
-                        onChange={(e) => changeHandler(e)}
+                        name="contactEmail"
+                        onBlur={(e) => handleInputChange(e)}
+                        onChange={(e) => handleInputChange(e)}
                         placeholder="Your Email"
                       />
-                      {validator.message(
-                        "email",
-                        forms.email,
-                        "required|email"
-                      )}
                     </div>
                   </div>
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
                       <input
-                        value={forms.phone}
+                        value={formData.phone}
                         type="phone"
-                        name="phone"
-                        onBlur={(e) => changeHandler(e)}
-                        onChange={(e) => changeHandler(e)}
+                        name="contactPhone"
+                        onBlur={(e) => handleInputChange(e)}
+                        onChange={(e) => handleInputChange(e)}
                         placeholder="Your Phone"
                       />
-                      {validator.message(
-                        "phone",
-                        forms.phone,
-                        "required|phone"
-                      )}
                     </div>
                   </div>
                   <div className="col col-lg-6 col-12">
                     <div className="form-field">
                       <input
-                        value={forms.address}
+                        value={formData.address}
                         type="address"
-                        name="address"
-                        onBlur={(e) => changeHandler(e)}
-                        onChange={(e) => changeHandler(e)}
+                        name="contactLocation"
+                        onBlur={(e) => handleInputChange(e)}
+                        onChange={(e) => handleInputChange(e)}
                         placeholder="Your Address"
                       />
-                      {validator.message(
-                        "phone",
-                        forms.phone,
-                        "required|phone"
-                      )}
                     </div>
                   </div>
                   <div className="col col-lg-12 col-12">
                     <textarea
-                      onBlur={(e) => changeHandler(e)}
-                      onChange={(e) => changeHandler(e)}
-                      value={forms.message}
+                      onBlur={(e) => handleInputChange(e)}
+                      onChange={(e) => handleInputChange(e)}
+                      value={formData.note}
                       type="text"
-                      name="message"
+                      name="note"
                       placeholder="Message"
                     ></textarea>
-                    {validator.message("message", forms.message, "required")}
                   </div>
                 </div>
                 <div className="submit-area">
-                  <Button type="submit" sx={{ p: 0 }}>
+                  <Button onClick={handleSubmit} type="submit" sx={{ p: 0 }}>
                     <span className="theme-btn px-4">Submit Now</span>
                   </Button>
                 </div>
@@ -203,6 +184,4 @@ const ContactForm = () => {
       </div>
     </section>
   );
-};
-
-export default ContactForm;
+}
