@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import SimpleReactValidator from "simple-react-validator";
-import { Box, Grid } from "@mui/material";
-import Image from "next/image";
-import consImg from "/public/images/project-type/construction-icon-1.png";
-import decorImg from "/public/images/project-type/decor-icon-1.png";
+import { Button } from "@mui/material";
 
 const ContactForm = () => {
   const [forms, setForms] = useState({
     name: "",
     email: "",
-    projectType: 0,
     phone: "",
     address: "",
     message: "",
@@ -45,7 +41,10 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="wpo-contact-pg-section">
+    <section
+      className="wpo-contact-pg-section"
+      style={{ marginBottom: "8rem" }}
+    >
       <div className="container">
         <div className="row">
           <div className="col col-lg-10 offset-lg-1">
@@ -55,7 +54,7 @@ const ContactForm = () => {
             <div className="office-info">
               <div className="row">
                 <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
-                  <div className="office-info-item">
+                  <div className="office-info-item bg-white">
                     <div className="office-info-icon">
                       <div className="icon">
                         <i className="fi flaticon-location"></i>
@@ -70,7 +69,7 @@ const ContactForm = () => {
                   </div>
                 </div>
                 <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
-                  <div className="office-info-item">
+                  <div className="office-info-item bg-white">
                     <div className="office-info-icon">
                       <div className="icon">
                         <i className="fi flaticon-email"></i>
@@ -84,7 +83,7 @@ const ContactForm = () => {
                   </div>
                 </div>
                 <div className="col col-xl-4 col-lg-6 col-md-6 col-12">
-                  <div className="office-info-item">
+                  <div className="office-info-item bg-white">
                     <div className="office-info-icon">
                       <div className="icon">
                         <i className="fi flaticon-telephone"></i>
@@ -181,58 +180,6 @@ const ContactForm = () => {
                     </div>
                   </div>
                   <div className="col col-lg-12 col-12">
-                    <Grid
-                      container
-                      columnSpacing={3}
-                      sx={{ mb: 4 }}
-                      justifyContent="center"
-                    >
-                      <Grid item xs={12} lg={6}>
-                        <Box
-                          sx={{
-                            mx: "auto",
-                            width: "60%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            border: 1,
-                            borderColor: "gainsboro",
-                            pt: 2,
-                          }}
-                        >
-                          <Image
-                            src={decorImg}
-                            width={45}
-                            height={45}
-                            style={{ marginRight: "1rem" }}
-                          ></Image>
-                          <p>Decor</p>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12} lg={6}>
-                        <Box
-                          sx={{
-                            mx: "auto",
-                            width: "60%",
-                            display: "flex",
-                            justifyContent: "center",
-                            border: 1,
-                            borderColor: "gainsboro",
-                            pt: 2,
-                          }}
-                        >
-                          <Image
-                            src={consImg}
-                            width={45}
-                            height={45}
-                            style={{ marginRight: "1rem" }}
-                          ></Image>
-                          <p>Construction</p>
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </div>
-                  <div className="col col-lg-12 col-12">
                     <textarea
                       onBlur={(e) => changeHandler(e)}
                       onChange={(e) => changeHandler(e)}
@@ -245,9 +192,9 @@ const ContactForm = () => {
                   </div>
                 </div>
                 <div className="submit-area">
-                  <button type="submit" className="theme-btn">
-                    Submit Now
-                  </button>
+                  <Button type="submit" sx={{ p: 0 }}>
+                    <span className="theme-btn px-4">Submit Now</span>
+                  </Button>
                 </div>
               </form>
             </div>

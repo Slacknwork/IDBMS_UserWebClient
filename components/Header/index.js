@@ -48,9 +48,10 @@ const Header = (props) => {
                       style={{
                         marginLeft: "8.5rem",
                         marginTop: "0.25rem",
+                        whiteSpace: "nowrap",
                       }}
                     >
-                      idtco.com
+                      IDT Décor
                     </h2>
                   </Link>
                 </div>
@@ -86,7 +87,7 @@ const Header = (props) => {
                       <HiUserCircle
                         size={40}
                         title="User"
-                        style={{ cursor: "pointer", color: "white" }}
+                        style={{ cursor: "pointer" }}
                         onClick={() => openMenu(!menuActive)}
                       ></HiUserCircle>
                       <div

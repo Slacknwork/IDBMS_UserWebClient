@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import Navbar from "/components/Navbar";
 import Scrollbar from "/components/Scrollbar";
-import Footer from "/components/footer/Footer";
+import Footer from "/components/Footer";
 
 export default function ClientLayout({ children }) {
   return (

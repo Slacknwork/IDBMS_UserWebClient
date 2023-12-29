@@ -1,11 +1,30 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "/navigation";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
-import Services from "/api/service";
-import Projects from "/api/project";
+import { getAdvertisementProjects } from "/api/advertisementServices";
 
-const Footer = (props) => {
+export default function Footer(props) {
+  const [projects, setProjects] = useState([]);
+
+  const fetchProjects = async () => {
+    try {
+      const projectResponse = await getAdvertisementProjects({
+        page: 1,
+        pageSize: 6,
+      });
+      setProjects(projectResponse.list);
+    } catch (error) {
+      toast.error("Error loading projects!");
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   return (
     <footer className={`wpo-site-footer ${props.ftClass}`}>
       <div className="wpo-upper-footer">
@@ -26,9 +45,13 @@ const Footer = (props) => {
                     <Image src="/images/idt-logo.jpg" fill alt="" />
                     <h2
                       className="text-white my-auto"
-                      style={{ position: "relative", marginLeft: "6.75rem" }}
+                      style={{
+                        position: "relative",
+                        marginLeft: "6.75rem",
+                        whiteSpace: "nowrap",
+                      }}
                     >
-                      idtco.com
+                      IDT Décor
                     </h2>
                   </Link>
                 </div>
@@ -62,16 +85,12 @@ const Footer = (props) => {
                   <h3>Our Services</h3>
                 </div>
                 <ul>
-                  {Services.slice(0, 5).map((service, srv) => (
-                    <li key={srv}>
-                      <Link
-                        href="/service/[slug]"
-                        as={`/service/${service.slug}`}
-                      >
-                        {service.sTitle}
-                      </Link>
-                    </li>
-                  ))}
+                  <li>
+                    <Link href={`/about/decor`}>Decor</Link>
+                  </li>
+                  <li>
+                    <Link href={`/about/construction`}>Construction</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -83,15 +102,18 @@ const Footer = (props) => {
                 <div className="contact-ft">
                   <ul>
                     <li>
-                      <i className="fi flaticon-location"></i>68D, Belsion Town
-                      2365 <br /> Fna city, LH 3656, USA
+                      <i className="fi flaticon-location"></i>721 Phan Văn Trị
+                      Street
+                      <br />
+                      Ward 07, Gò Vấp District, HCMC
                     </li>
                     <li>
-                      <i className="fi flaticon-telephone"></i>+ 8 (123) 123 456
-                      789 <br />+ 8 (123) 123 456 789
+                      <i className="fi flaticon-telephone"></i>+84 983 802 117
+                      789 <br />
+                      +84 949 802 117
                     </li>
                     <li>
-                      <i className="fi flaticon-email"></i>arkio@gmail.com
+                      <i className="fi flaticon-email"></i>tuanidtco@gmail.com
                     </li>
                   </ul>
                 </div>
@@ -104,13 +126,20 @@ const Footer = (props) => {
                   <h3>Our Gallery</h3>
                 </div>
                 <ul className="d-flex">
-                  {Projects.slice(0, 6).map((project, srv) => (
-                    <li key={srv}>
-                      <Link
-                        href="/project/[slug]"
-                        as={`/project/${project.slug}`}
-                      >
-                        <Image src={project.pImg} alt="" />
+                  {projects.slice(0, 6).map((project) => (
+                    <li key={project.id}>
+                      <Link href="/project">
+                        <Image
+                          src={project.representImageUrl}
+                          width={640}
+                          height={470}
+                          style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            height: 81.36,
+                          }}
+                          alt=""
+                        />
                       </Link>
                     </li>
                   ))}
@@ -122,6 +151,4 @@ const Footer = (props) => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

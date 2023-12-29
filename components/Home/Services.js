@@ -12,7 +12,7 @@ export default function Services(props) {
         <SectionTitle2 subTitle={"Our Projects"} MainTitle={"What We Do"} />
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6 col-12">
-            <div className="wpo-service-item">
+            <div className="wpo-service-item bg-white">
               <div
                 className="wpo-service-img"
                 style={{
@@ -28,7 +28,7 @@ export default function Services(props) {
             </div>
           </div>
           <div className="col-lg-6 col-md-6 col-12">
-            <div className="wpo-service-item">
+            <div className="wpo-service-item bg-white">
               <div
                 className="wpo-service-img"
                 style={{

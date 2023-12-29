@@ -51,7 +51,7 @@ export default function Pricing() {
                   <div className="wpo-pricing-wrap px-3 my-4" key={roomType.id}>
                     <div className="row">
                       <div className="col col-lg-12 col-md-12 col-12">
-                        <div className="wpo-pricing-item">
+                        <div className="wpo-pricing-item bg-white">
                           <div className="wpo-pricing-top">
                             <div className="pricing-thumb">
                               <span>{roomType.name}</span>
