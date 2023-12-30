@@ -20,55 +20,20 @@ const getAdvertisementProjects = async ({
   }
 };
 
-const updateAdvertisementProjectDescription = async (id, request) => {
+const getAdvertisementProjectById = async (projectId = "") => {
   try {
     const response = await fetch(
-      `https://localhost:7062/api/AdvertisementProjects/${id}/advertisementDescription`,
+      `https://localhost:7062/api/AdvertisementProjects/${projectId}`,
       {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: `"${request}"`,
+        cache: "no-store",
       }
     );
-
-    if (!response.ok) {
-      throw new Error("Update failed");
-    }
-
-    return await response.json();
+    const project = await response.json();
+    return project.data;
   } catch (error) {
-    console.error("Error updating project:", error);
+    console.error("Error fetching projects:", error);
     throw error;
   }
 };
 
-const updateAdvertisementProjectStatus = async (id, status = "") => {
-  try {
-    const response = await fetch(
-      `https://localhost:7062/api/AdvertisementProjects/${id}/advertisementStatus?status=${status}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Update failed");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("Error updating project:", error);
-    throw error;
-  }
-};
-
-export {
-  getAdvertisementProjects,
-  updateAdvertisementProjectDescription,
-  updateAdvertisementProjectStatus,
-};
+export { getAdvertisementProjects, getAdvertisementProjectById };

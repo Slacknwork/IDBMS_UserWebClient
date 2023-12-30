@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "/navigation";
 import {
   TabContent,
@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 
 import urls from "/constants/urls";
 
-import { getParticipationByUserId } from "/api/projectParticipationServices";
+import { getParticipationsByUserId } from "/api/projectParticipationServices";
 
 import { TbHomeSearch } from "react-icons/tb";
 
@@ -43,29 +43,9 @@ function NoProjectView() {
               <div className="error-message">
                 <h3>No Projects!</h3>
                 <p>
-                  You currently do not have any projects. Book a project to
-                  start!
+                  You currently do not have any projects. Contact us to start a
+                  project!
                 </p>
-                <div className="row">
-                  <div className="col col-lg-12 col-12">
-                    <div className="d-flex justify-content-center">
-                      <div className="d-flex">
-                        <Link href="/project/booking" className="theme-btn">
-                          <h4
-                            className="pt-2 pb-1"
-                            style={{
-                              color: "white",
-                              paddingLeft: "6rem",
-                              paddingRight: "6rem",
-                            }}
-                          >
-                            Book Project
-                          </h4>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -144,26 +124,22 @@ export default function ProjectList() {
   };
 
   const [values, setValues] = useState([]);
-  const [userId, setUserId] = useState(user.id);
   const [loading, setLoading] = useState(true);
-  const initialized = useRef(false);
+
+  const fetchDataFromApi = async () => {
+    try {
+      const projects = await getParticipationsByUserId({ userId: user.id });
+      setValues(projects.list);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Error fetching data");
+    }
+  };
 
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      const fetchDataFromApi = async () => {
-        try {
-          const data = await getParticipationByUserId(userId);
-          setValues(data);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          toast.error("Error fetching data");
-        }
-      };
-      fetchDataFromApi();
-    }
-  }, [userId]);
+    fetchDataFromApi();
+  }, []);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-const SectionTitle2 = (props) => {
+export default function SectionTitleS2(props) {
   return (
     <div className="row">
       <div className="wpo-section-title-s2">
@@ -10,6 +10,4 @@ const SectionTitle2 = (props) => {
       </div>
     </div>
   );
-};
-
-export default SectionTitle2;
+}
