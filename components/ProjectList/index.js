@@ -1,290 +1,154 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "/navigation";
-import {
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Row,
-  Col,
-} from "reactstrap";
-import classnames from "classnames";
-import { toast } from "react-toastify";
-import Image from "next/image";
+import { useSearchParams, useParams } from "next/navigation";
 import { useSelector } from "react-redux";
-
-import urls from "/constants/urls";
+import Image from "next/image";
+import { toast } from "react-toastify";
 
 import { getParticipationsByUserId } from "/api/projectParticipationServices";
 
-import { TbHomeSearch } from "react-icons/tb";
+import projectStatusOptions from "/constants/enums/projectStatus";
 
-const decorIconImageUrl = "/images/project-type/decor-icon-1.png";
-const consIconImageUrl = "/images/project-type/construction-icon-1.png";
-const undefinedIconImageUrl = "/images/project-type/undefined-icon-1.png";
+export default function ProjectList() {
+  // CONSTANTS
 
-const SubmitHandler = (e) => {
-  e.preventDefault();
-};
+  // INIT
+  const user = useSelector((state) => state.user);
+  const [participations, setParticipations] = useState([]);
 
-function NoProjectView() {
+  // FETCH DATA
+  const fetchParticipations = async () => {
+    try {
+      const participations = await getParticipationsByUserId({
+        userId: user.id,
+      });
+      setParticipations(participations.list);
+    } catch (error) {
+      toast.error("Lỗi dữ liệu: Dự án tham gia!");
+    }
+  };
+
+  useEffect(() => {
+    fetchParticipations();
+  }, []);
+
   return (
-    <section className="error-404-section section-padding">
+    <section className="wpo-blog-pg-section section-padding">
       <div className="container">
-        <div className="row">
-          <div className="col col-xs-12">
-            <div className="content clearfix">
-              <div className="error">
-                <TbHomeSearch size={200} color="#0D0845" />
+        <div className="row" style={{ marginBottom: 0 }}>
+          <div className={`col col-lg-4 col-12`}>
+            <div className="blog-sidebar">
+              <div className="widget search-widget">
+                <form>
+                  <div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search Post.."
+                    />
+                    <button type="submit">
+                      <i className="ti-search"></i>
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div className="error-message">
-                <h3>No Projects!</h3>
+              <div className="widget category-widget">
+                <h3>Categories</h3>
+                <ul>
+                  {projectStatusOptions.map((status, index) => (
+                    <li key={status}>
+                      <Link href="/service/1">
+                        {status}
+                        <span>{index}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="wpo-contact-widget widget">
+                <h2>
+                  How We Can <br /> Help You!
+                </h2>
                 <p>
-                  You currently do not have any projects. Contact us to start a
-                  project!
+                  labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
+                  gravida. Risus commodo viverra maecenas accumsan lacus vel
+                  facilisis.{" "}
                 </p>
+                <Link href="/contact">Contact Us</Link>
               </div>
+            </div>
+          </div>
+          <div className={`col col-lg-8 col-12`}>
+            <div className="wpo-blog-content">
+              {participations &&
+                participations.map((participation) => (
+                  <div
+                    className="row post"
+                    style={{
+                      borderBottom: "1px solid lightgrey",
+                    }}
+                    key={participation.id}
+                  >
+                    <div className="col-12 col-lg-4 my-auto">
+                      <Image
+                        src="/images/project-type/undefined-icon-1.png"
+                        width={500}
+                        height={500}
+                        className="p-5"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                        alt=""
+                      />
+                    </div>
+                    <div className="col-12 col-lg-8 flex-col align-content-between">
+                      <div>
+                        <div className="entry-meta">
+                          <ul>
+                            <li>
+                              <i className="fi ti-user"></i> By{" "}
+                              <Link href="/">aaa</Link>{" "}
+                            </li>
+                            <li>
+                              <i className="fi flaticon-calendar"></i>{" "}
+                              {new Date(
+                                participation.project?.createdDate
+                              ).toLocaleDateString("en-GB")}
+                            </li>
+                          </ul>
+                        </div>
+                        <div className="entry-details">
+                          <h3>
+                            <Link
+                              href={`/project/${participation.project?.id}`}
+                            >
+                              {participation.project?.name}
+                            </Link>
+                          </h3>
+                          <p>
+                            {participation.project?.description ||
+                              "No description"}
+                          </p>
+                        </div>
+                      </div>
+
+                      <Link
+                        className="d-flex justify-content-end align-items-end"
+                        href={`/project/${participation.project?.id}`}
+                      >
+                        <div className="d-flex">
+                          <div className="theme-btn px-4">Details</div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-const ProjectItem = (projectDetails) => {
-  const item = projectDetails.project;
-  const projectUrl = `${urls.project.id.getUri(item.id)}`;
-  return (
-    <div className="container hover:scale-105">
-      <div
-        className="row shadow p-4 my-3 mx-2"
-        style={{ height: "28rem", backgroundColor: "white" }}
-      >
-        <div className="col-lg-4 my-auto d-flex justify-content-center">
-          <div className="shop-img">
-            <Image
-              src={item && item.projectCategory?.iconImageUrl}
-              alt=""
-              width={0}
-              height={0}
-              style={{ width: "24rem", height: "24rem", objectFit: "cover" }}
-              unoptimized={true}
-            />
-          </div>
-        </div>
-        <div className="col-lg-8 d-flex align-items-start justify-content-between">
-          <div className="shop-info my-4">
-            <h3 className="">{item && item.name}</h3>
-            <div className="des">
-              <p style={{ textAlign: "justify" }}>
-                Description: {item && item.description}
-              </p>
-              <p>
-                {item
-                  ? item.finalPrice
-                    ? `Final Price: ${item.finalPrice.toLocaleString(
-                        "vi-VN"
-                      )} VND`
-                    : item.estimatedPrice
-                    ? `Estimate Price: ${item.estimatedPrice.toLocaleString(
-                        "vi-VN"
-                      )} VND`
-                    : "Price information not available"
-                  : "Item information not available"}
-              </p>
-              <p>
-                Created Date:{" "}
-                {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
-              </p>
-            </div>
-          </div>
-          <div className="mt-auto d-flex gap-3">
-            <div>
-              <Link href={projectUrl} className="theme-btn px-4">
-                Details
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function ProjectList() {
-  const user = useSelector((state) => state.user);
-  const [activeTab, setActiveTab] = useState("1");
-
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
-  };
-
-  const [values, setValues] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchDataFromApi = async () => {
-    try {
-      const projects = await getParticipationsByUserId({ userId: user.id });
-      setValues(projects.list);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      toast.error("Error fetching data");
-    }
-  };
-
-  useEffect(() => {
-    fetchDataFromApi();
-  }, []);
-
-  return (
-    <div>
-      {values && values.length > 0 ? (
-        <div className="container wpo-shop-single-section">
-          <div className="row">
-            <div
-              className="col-12 col-lg-12 product-info"
-              style={{ marginTop: "2rem", marginBottom: "2rem" }}
-            >
-              <div className="row">
-                <div className="col col-lg-8 col-12">
-                  <Nav tabs={true}>
-                    <NavItem style={{ cursor: "pointer" }}>
-                      <NavLink
-                        className={classnames({ active: activeTab === "1" })}
-                        onClick={() => {
-                          toggle("1");
-                        }}
-                      >
-                        <h4
-                          style={{
-                            color: "black",
-                            fontWeight: 600,
-                          }}
-                        >
-                          In progress
-                        </h4>
-                      </NavLink>
-                    </NavItem>
-                    <NavItem style={{ cursor: "pointer" }}>
-                      <NavLink
-                        className={classnames({ active: activeTab === "2" })}
-                        onClick={() => {
-                          toggle("2");
-                        }}
-                      >
-                        <h4
-                          style={{
-                            color: "black",
-                            fontWeight: 600,
-                          }}
-                        >
-                          Completed
-                        </h4>
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                </div>
-                <div className="col col-12 col-lg-4 my-auto">
-                  <div className="d-flex justify-content-end">
-                    <div className="d-flex">
-                      <Link
-                        href="/project/booking"
-                        className="theme-btn"
-                        style={{
-                          paddingLeft: "6rem",
-                          paddingRight: "6rem",
-                          paddingTop: "1.25rem",
-                          paddingBottom: "1.25rem",
-                        }}
-                      >
-                        Book Project
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <TabContent activeTab={activeTab}>
-                <TabPane tabId="1">
-                  <Row className="my-3">
-                    {values &&
-                      values.map((item, index) => (
-                        <Col sm="12" key={item.project.id}>
-                          <ProjectItem project={item.project} />
-                        </Col>
-                      ))}
-                  </Row>
-                </TabPane>
-                <TabPane tabId="2">
-                  <div
-                    className="row"
-                    style={{ marginLeft: "8rem", marginRight: "8rem" }}
-                  >
-                    <div className="col col-9 blog-sidebar">
-                      <div className="widget search-widget">
-                        <form onSubmit={SubmitHandler}>
-                          <div className="">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Search Post.."
-                            />
-                            <button type="submit">
-                              <i className="ti-search"></i>
-                            </button>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                  <Row className="my-3">
-                    {values &&
-                      values
-                        .filter((item) => item.project.type === 0)
-                        .map((item, index) => (
-                          <Col sm="12" key={index}>
-                            <ProjectItem key={index} project={item.project} />
-                          </Col>
-                        ))}
-                    <Col sm="12">
-                      <div className="pagination-wrapper pagination-wrapper-center">
-                        <ul className="pg-pagination">
-                          <li>
-                            <a href="#" aria-label="Previous">
-                              <i className="ti-angle-left"></i>
-                            </a>
-                          </li>
-                          <li className="active">
-                            <a href="#">1</a>
-                          </li>
-                          <li>
-                            <a href="#">2</a>
-                          </li>
-                          <li>
-                            <a href="#">3</a>
-                          </li>
-                          <li>
-                            <a href="#" aria-label="Next">
-                              <i className="ti-angle-right"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </Col>
-                  </Row>
-                </TabPane>
-              </TabContent>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <NoProjectView></NoProjectView>
-      )}
-    </div>
   );
 }

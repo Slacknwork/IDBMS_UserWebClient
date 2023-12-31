@@ -11,7 +11,7 @@ export default function ClientLayout({ children }) {
   return (
     <div>
       <Navbar hclass={"wpo-header-style"} />
-      <div style={{ backgroundColor: "#f0f0f0" }}>{children}</div>
+      <div style={{ backgroundColor: "#ffffff" }}>{children}</div>
       <Footer ftClass={"wpo-site-footer"} />
       <Scrollbar />
       <ToastContainer />
