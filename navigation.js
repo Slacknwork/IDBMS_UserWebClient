@@ -1,5 +1,5 @@
 import { createSharedPathnamesNavigation } from "next-intl/navigation";
-import localeConstants from "./constants/locales";
+import localeConstants from "/constants/locales";
 
 export const locales = [localeConstants.vi_VN, localeConstants.en_US];
 
