@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { toast } from "react-toastify";
 
-import { getAllRoomTypes } from "/api/roomTypeServices";
+import { getAllRoomTypes } from "/services/roomTypeServices";
 
 import SectionTitle2 from "/components/Shared/SectionTitle2";
 

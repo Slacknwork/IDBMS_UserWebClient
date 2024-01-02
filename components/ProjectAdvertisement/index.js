@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import projectTypeOptions from "/constants/enums/projectType";
 
-import { getAdvertisementProjects } from "/api/advertisementServices";
+import { getAdvertisementProjects } from "/services/advertisementServices";
 
 import SectionTitle2 from "/components/shared/SectionTitle2";
 

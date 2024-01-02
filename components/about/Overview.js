@@ -1,14 +1,11 @@
 import React from "react";
-import Link from "next/link";
+import { Link } from "/navigation";
 import abimg from "/public/images/samples/about-overview.jpg";
 import abimg2 from "/public/images/samples/about-overview-2.png";
 import Image from "next/image";
-import VideoModal from "../ModalVideo/VideoModal";
+import VideoModal from "/components/ModalVideo/VideoModal";
 
 const About2 = (props) => {
-  const ClickHandler = () => {
-    window.scrollTo(10, 0);
-  };
   return (
     <div className="wpo-about-area-s2 section-padding">
       <div className="container">

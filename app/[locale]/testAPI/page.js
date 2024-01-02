@@ -6,10 +6,10 @@ import SimpleReactValidator from "simple-react-validator";
 import TextField from "@mui/material/TextField";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import getBookmarksByUserId from "../../../api/bookmarkServices";
+import getBookmarksByUserId from "/services/bookmarkServices";
 import { useRef } from "react";
-import { getCommentsByProjectId } from "../../../api/commentServices";
-import getInteriorItemCategories from "../../../api/interiorItemCategoryServices";
+import { getCommentsByProjectId } from "/services/commentServices";
+import getInteriorItemCategories from "/services/interiorItemCategoryServices";
 
 const APIPage = (props) => {
   const router = useRouter();

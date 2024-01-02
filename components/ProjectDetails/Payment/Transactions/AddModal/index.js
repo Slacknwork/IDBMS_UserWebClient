@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { useSelector } from "react-redux";
 
-import { createTransaction } from "/api/transactionServices";
+import { createTransaction } from "/services/transactionServices";
 
 import transactionType from "/constants/enums/transactionType";
 

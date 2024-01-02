@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import { localeIndex } from "/constants/locales";
 
-import { createBookingRequest } from "/api/bookingRequestServices";
+import { createBookingRequest } from "/services/bookingRequestServices";
 
 export default function ContactForm() {
   const params = useParams();

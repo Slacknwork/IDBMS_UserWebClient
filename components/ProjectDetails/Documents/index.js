@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 
 import urls from "/constants/urls";
-import { getProjectDocumentsByProjectId } from "/api/projectDocumentServices";
+import { getProjectDocumentsByProjectId } from "/services/projectDocumentServices";
 
 import DocumentBreadcrumb from "./Breadcrumb";
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { getCommentsByProjectId } from "../../../api/commentServices";
+import { getCommentsByProjectId } from "/services/commentServices";
 
 const CommentTableItem = (comment) => {
   console.log(comment);
@@ -13,14 +13,16 @@ const CommentTableItem = (comment) => {
       </th>
       <td className="align-middle">{item && item.content}</td>
       <td className="align-middle">{item && item.projectTask?.name}</td>
-      <td className="align-middle">{item && new Date(item.createdTime).toLocaleDateString("en-GB")}</td>
+      <td className="align-middle">
+        {item && new Date(item.createdTime).toLocaleDateString("en-GB")}
+      </td>
       <td className="align-middle">{item && item.user?.name}</td>
     </tr>
   );
 };
 
 const CommentTable = (listComment) => {
-  console.log(listComment)
+  console.log(listComment);
   const values = listComment.listComment;
   return (
     <div
@@ -56,9 +58,10 @@ const CommentTable = (listComment) => {
 };
 
 export default function Comments() {
-
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [projectId, setProjectId] = useState(
+    "ff090f51-e6e7-4854-8f3f-0402ee32c9f8"
+  );
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -84,7 +87,7 @@ export default function Comments() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          {values && (<CommentTable listComment={values} />)}
+          {values && <CommentTable listComment={values} />}
         </div>
       </div>
     </div>

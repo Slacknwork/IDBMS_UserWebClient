@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "/store/reducers/user";
-import { loginUser } from "/api/authenticationServices";
+import { loginUser } from "/services/authenticationServices";
 
 const LoginPage = (props) => {
   const router = useRouter();

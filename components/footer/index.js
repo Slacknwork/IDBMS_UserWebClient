@@ -3,7 +3,7 @@ import { Link } from "/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-import { getAdvertisementProjects } from "/api/advertisementServices";
+import { getAdvertisementProjects } from "/services/advertisementServices";
 
 export default function Footer(props) {
   const [projects, setProjects] = useState([]);

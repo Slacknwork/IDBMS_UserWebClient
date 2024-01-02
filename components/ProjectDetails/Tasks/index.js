@@ -10,8 +10,8 @@ import { styled } from "@mui/material/styles";
 import urls from "/constants/urls";
 import projectTaskStatus from "/constants/enums/projectTaskStatus";
 
-import { getProjectTasksByProjectId } from "/api/projectTaskServices";
-import { getAllTaskCategories } from "/api/taskCategoryServices";
+import { getProjectTasksByProjectId } from "/services/projectTaskServices";
+import { getAllTaskCategories } from "/services/taskCategoryServices";
 
 import Pagination from "/components/Pagination";
 import TaskBreadcrumb from "/components/ProjectDetails/TaskBreadcrumb";

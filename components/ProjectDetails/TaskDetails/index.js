@@ -9,7 +9,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 
 import calculationUnit from "/constants/enums/calculationUnit";
-import { getProjectTaskById } from "/api/projectTaskServices";
+import { getProjectTaskById } from "/services/projectTaskServices";
 import TaskBreadcrumb from "/components/ProjectDetails/TaskBreadcrumb";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({

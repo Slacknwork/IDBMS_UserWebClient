@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { getWarrantyClaimsByProjectId } from "../../../../api/warrantyClaimServices";
+import { getWarrantyClaimsByProjectId } from "/services/warrantyClaimServices";
 
 const WarrantyItem = (object) => {
   const RoomHref =
@@ -23,11 +23,15 @@ const WarrantyItem = (object) => {
 
   return (
     <tr>
-      <th scope="row" className="align-middle" style={{ textAlign: "right", textAlign: "center" }}>
+      <th
+        scope="row"
+        className="align-middle"
+        style={{ textAlign: "right", textAlign: "center" }}
+      >
         {no}
       </th>
       <td className="align-middle">
-        {item && item.amount && item.amount.toLocaleString('en-US')}
+        {item && item.amount && item.amount.toLocaleString("en-US")}
       </td>
       <td className="align-middle">{item && item.type}</td>
       <td className="align-middle">{item && item.note}</td>
@@ -46,12 +50,12 @@ const WarrantyItem = (object) => {
           </Link>
         </div>
       </td>
-    </tr >
+    </tr>
   );
 };
 
 const WarrantyTable = (transList) => {
-  console.log(transList)
+  console.log(transList);
   const values = transList.transList;
   return (
     <div
@@ -91,9 +95,10 @@ const WarrantyTable = (transList) => {
 };
 
 export default function Warranties() {
-
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("8B84897A-5A93-429C-A5B0-B11AE7483DD3");
+  const [projectId, setProjectId] = useState(
+    "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
+  );
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 

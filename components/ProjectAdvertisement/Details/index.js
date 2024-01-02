@@ -3,7 +3,7 @@ import { Link } from "/navigation";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
-import { getAdvertisementProjectById } from "/api/advertisementServices";
+import { getAdvertisementProjectById } from "/services/advertisementServices";
 import { toast } from "react-toastify";
 
 export default function AdvertisementDetails() {

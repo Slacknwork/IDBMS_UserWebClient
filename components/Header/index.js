@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import { Link, useRouter } from "/navigation";
 import Image from "next/image";
-import MobileMenu from "../MobileMenu/MobileMenu";
 import { useSelector, useDispatch } from "react-redux";
+
 import { logout } from "/store/reducers/user";
+
+import MobileMenu from "/components/MobileMenu/MobileMenu";
 
 const Logo = "/images/idt-logo.jpg";
 

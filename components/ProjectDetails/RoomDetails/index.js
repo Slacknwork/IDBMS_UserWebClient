@@ -1,8 +1,8 @@
 "use client";
 
 import { Link } from "/navigation";
-import OverviewBreadcrumb from "../Overview/Breadcrumb";
-import { getRoomById } from "/api/RoomServices";
+import OverviewBreadcrumb from "./Breadcrumb";
+import { getRoomById } from "/services/RoomServices";
 import SuggestionModal from "./SuggestionModal";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";

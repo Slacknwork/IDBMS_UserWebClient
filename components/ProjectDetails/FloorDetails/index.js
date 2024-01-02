@@ -2,13 +2,12 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "/navigation";
-
-import urls from "/constants/urls";
-
-import OverviewBreadcrumb from "../Overview/Breadcrumb";
-import { getFloorById } from "/api/FloorServices";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
+
+import OverviewBreadcrumb from "./Breadcrumb";
+
+import { getFloorById } from "/services/FloorServices";
 
 const FloorDetailsForm = ({ floor }) => {
   const params = useParams();

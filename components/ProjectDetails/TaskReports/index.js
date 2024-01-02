@@ -1,5 +1,5 @@
 import { FaTrash } from "react-icons/fa";
-import { getTaskReportsByProjectTaskId } from "../../../api/taskReportServices";
+import { getTaskReportsByProjectTaskId } from "/services/taskReportServices";
 import { toast } from "react-toastify";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";

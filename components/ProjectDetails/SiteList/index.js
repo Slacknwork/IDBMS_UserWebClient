@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "/navigation";
 
 import urls from "/constants/urls";
-import { getSitesByProjectId } from "/api/siteServices";
+import { getSitesByProjectId } from "/services/siteServices";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import { useParams } from "next/navigation";

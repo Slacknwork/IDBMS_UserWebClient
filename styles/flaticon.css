@@ -1,14 +1,13 @@
 @font-face {
   font-family: "flaticon";
-  src: url("../fonts/flaticon.ttf?f292c07b15c77b4e938a4b83b18f04e8")
+  src: url("/fonts/flaticon.ttf?f292c07b15c77b4e938a4b83b18f04e8")
       format("truetype"),
-    url("../fonts/flaticon.woff?f292c07b15c77b4e938a4b83b18f04e8")
-      format("woff"),
-    url("../fonts/flaticon.woff2?f292c07b15c77b4e938a4b83b18f04e8")
+    url("/fonts/flaticon.woff?f292c07b15c77b4e938a4b83b18f04e8") format("woff"),
+    url("/fonts/flaticon.woff2?f292c07b15c77b4e938a4b83b18f04e8")
       format("woff2"),
-    url("../fonts/flaticon.eot?f292c07b15c77b4e938a4b83b18f04e8#iefix")
+    url("/fonts/flaticon.eot?f292c07b15c77b4e938a4b83b18f04e8#iefix")
       format("embedded-opentype"),
-    url("../fonts/flaticon.svg?f292c07b15c77b4e938a4b83b18f04e8#flaticon")
+    url("/fonts/flaticon.svg?f292c07b15c77b4e938a4b83b18f04e8#flaticon")
       format("svg");
 }
 

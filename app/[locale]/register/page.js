@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import DatePicker from "react-datepicker";
-import { registerUser } from "/api/authenticationServices";
+import { registerUser } from "/services/authenticationServices";
 import { login } from "/store/reducers/user";
 import { useDispatch } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";

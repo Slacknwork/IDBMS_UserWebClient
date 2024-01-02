@@ -6,11 +6,16 @@ import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
 import { toast } from "react-toastify";
-import { getProjectTasksByProjectId } from "../../../api/projectTaskServices";
+import { getProjectTasksByProjectId } from "/services/projectTaskServices";
 import Image from "next/image";
 
 const ItemTableItem = (object) => {
-  const ItemHref = urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(1, 1, 1);
+  const ItemHref =
+    urls.project.booking.decor.site.siteNo.floor.floorNo.room.roomNo.getUri(
+      1,
+      1,
+      1
+    );
 
   const item = object.item;
   const no = object.index;
@@ -33,8 +38,10 @@ const ItemTableItem = (object) => {
         </div>
       </td>
       <td className="align-middle">{item && item.interiorItem?.name}</td>
-      <td className="align-middle" style={{ whiteSpace: 'pre-line' }}>
-        {item && item.room && `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
+      <td className="align-middle" style={{ whiteSpace: "pre-line" }}>
+        {item &&
+          item.room &&
+          `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
       </td>
       <td className="align-middle">
         {item && new Date(item.createdDate).toLocaleDateString("en-GB")}
@@ -63,7 +70,7 @@ const ItemTableItem = (object) => {
 };
 
 const ItemTable = (itemList) => {
-  console.log(itemList)
+  console.log(itemList);
   const values = itemList.itemList;
   return (
     <div
@@ -105,9 +112,10 @@ const ItemTable = (itemList) => {
 };
 
 export default function ItemList() {
-
   const [values, setValues] = useState([]);
-  const [projectId, setProjectId] = useState("ff090f51-e6e7-4854-8f3f-0402ee32c9f8");
+  const [projectId, setProjectId] = useState(
+    "ff090f51-e6e7-4854-8f3f-0402ee32c9f8"
+  );
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
 
@@ -118,8 +126,10 @@ export default function ItemList() {
         try {
           const data = await getProjectTasksByProjectId(projectId);
           console.log(data);
-          const listTaskHasItem = data.filter(item => item.interiorItemId !== null);
-          console.log(listTaskHasItem)
+          const listTaskHasItem = data.filter(
+            (item) => item.interiorItemId !== null
+          );
+          console.log(listTaskHasItem);
           setValues(listTaskHasItem);
           setLoading(false);
         } catch (error) {

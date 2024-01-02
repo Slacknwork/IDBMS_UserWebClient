@@ -8,7 +8,7 @@ import { FaTrash } from "react-icons/fa";
 
 import urls from "/constants/urls";
 
-import { getPaymentStagesByProjectId } from "/api/paymentStageServices";
+import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 
 const StageItem = (object) => {
   const params = useParams();

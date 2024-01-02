@@ -11,7 +11,7 @@ import urls from "/constants/urls";
 import projectTypes from "/constants/enums/projectType";
 import projectStatus from "/constants/enums/projectStatus";
 
-import { getProjectById } from "/api/projectServices";
+import { getProjectById } from "/services/projectServices";
 
 import OverviewBreadcrumb from "./Breadcrumb";
 

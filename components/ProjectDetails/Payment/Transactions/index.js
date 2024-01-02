@@ -10,8 +10,7 @@ import transactionStatus from "/constants/enums/transactionStatus";
 import {
   getTransactionsByProjectIdPagination,
   countTransactionsByProjectId,
-} from "/api/transactionServices";
-import { downloadFileFromUrl } from "/api/downloadServices";
+} from "/services/transactionServices";
 
 import AddModal from "./AddModal";
 import { useSelector } from "react-redux";
@@ -53,11 +52,7 @@ const TransactionItem = (object) => {
       <td className="align-middle m-0">
         {item && item.TransactionReceiptImageUrl ? (
           <div className="d-flex justify-content-end">
-            <button
-              onClick={() => onDownloadClick(item.transactionReceiptImageUrl)}
-              className="theme-btn m-1"
-              style={{ zIndex: 0 }}
-            >
+            <button className="theme-btn m-1" style={{ zIndex: 0 }}>
               Download receipt
             </button>
           </div>
@@ -106,7 +101,7 @@ export default function Transactions() {
   const searchParams = useSearchParams();
 
   const [values, setValues] = useState([]);
-  // test project id "8B84897A-5A93-429C-A5B0-B11AE7483DD3"
+
   const [transactionCount, setTransactionCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(
     searchParams.get(pageQuery) ? Number(searchParams.get(pageQuery)) - 1 : 0

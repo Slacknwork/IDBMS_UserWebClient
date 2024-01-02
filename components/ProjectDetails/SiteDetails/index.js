@@ -3,11 +3,11 @@ import { Link } from "/navigation";
 import { toast } from "react-toastify";
 import { useParams } from "next/navigation";
 
-import { getProjectById } from "/api/projectServices";
+import { getProjectById } from "/services/projectServices";
 import urls from "/constants/urls";
 
-import OverviewBreadcrumb from "../Overview/Breadcrumb";
-import { getSiteById } from "/api/siteServices";
+import OverviewBreadcrumb from "./Breadcrumb";
+import { getSiteById } from "/services/siteServices";
 
 const SiteDetailsForm = ({ site }) => {
   const params = useParams();

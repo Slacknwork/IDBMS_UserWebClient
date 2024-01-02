@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import getInteriorItemCategories from "../../../api/interiorItemCategoryServices";
-import { useState } from "react";
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
+
+import getInteriorItemCategories from "/services/interiorItemCategoryServices";
 
 function Category(categoryDetails) {
   const item = categoryDetails.item;
@@ -21,7 +20,7 @@ function Category(categoryDetails) {
         <div className="col-3 d-flex align-items-center justify-content-center">
           <div className="icon">
             <img
-              src="https://logowik.com/content/uploads/images/chair5381.jpg"
+              src="https:/logowik.com/content/uploads/images/chair5381.jpg"
               style={{ objectFit: "cover", width: "5rem", height: "5rem" }}
               alt="Icon"
             />

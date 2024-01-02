@@ -11,7 +11,7 @@ import bShape2 from "/public/images/blog/Vector4.png";
 
 import projectTypeOptions from "/constants/enums/projectType";
 
-import { getAdvertisementProjects } from "/api/advertisementServices";
+import { getAdvertisementProjects } from "/services/advertisementServices";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);

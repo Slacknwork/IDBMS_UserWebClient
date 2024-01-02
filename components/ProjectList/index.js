@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-import { getParticipationsByUserId } from "/api/projectParticipationServices";
+import { getParticipationsByUserId } from "/services/projectParticipationServices";
 
 import projectStatusOptions from "/constants/enums/projectStatus";
 

@@ -15,7 +15,7 @@ import Pagination from "/components/Pagination";
 import {
   getInteriorItemPagination,
   countAllInteriorItems,
-} from "/api/interiorItemServices";
+} from "/services/interiorItemServices";
 
 const pageQuery = "page";
 const pageSize = 6;

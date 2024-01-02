@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import Link from "next/link";
-import Projects from "../../api/project";
+import Projects from "/services/project";
 import Image from "next/image";
 
 const ProjectSectionS4 = () => {
