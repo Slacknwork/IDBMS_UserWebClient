@@ -1,6 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import localeConstants from "/constants/locales";
-import { locales } from "./navigation";
+import { locales } from "/navigation";
 
 export default createMiddleware({
   defaultLocale: localeConstants.vi_VN,

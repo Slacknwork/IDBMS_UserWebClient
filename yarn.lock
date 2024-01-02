@@ -2145,14 +2145,14 @@ negotiator@^0.6.3:
   resolved "https://registry.npmjs.org/negotiator/-/negotiator-0.6.3.tgz"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
-next-intl@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/next-intl/-/next-intl-3.1.2.tgz"
-  integrity sha512-uVCklsWiYVHklIjhAn152cdmNW+nLll0nhbR4or47sj6t8I2Kd2JOsgoNuJi3XuTOoitdIdNFE+Vwyh56VzGOw==
+next-intl@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/next-intl/-/next-intl-3.4.0.tgz#7af748f90cafaa97c2e683366caaa1e783f5d374"
+  integrity sha512-pccnuQq6N6iyPi0Foiajp9JgZp99w7gRxHhBxmtBdjsCmrsik7QflKWq2a/US2kFP734JSsSoY98xK+acjozeQ==
   dependencies:
     "@formatjs/intl-localematcher" "^0.2.32"
     negotiator "^0.6.3"
-    use-intl "^3.1.2"
+    use-intl "^3.4.0"
 
 next@^14.0.3:
   version "14.0.3"
@@ -3188,10 +3188,10 @@ unbox-primitive@^1.0.2:
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
 
-use-intl@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/use-intl/-/use-intl-3.1.2.tgz"
-  integrity sha512-kUmAiYi/ZB2jk/CeRY/IVzp+DRzBkLk2SmeN3DqMf2N9h/oRTm6qlrYzlOCYWdYPpPOJ7rUM7JERiaWox9mIIQ==
+use-intl@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/use-intl/-/use-intl-3.4.0.tgz#dd9deee88f843e16e8fed0240f0ada88ef292225"
+  integrity sha512-vFwyAm9RDXjQN83wle9LjmE5PB/k0vOU0FetHffjr7/wLW8xlX2tAABxIyG1gy9eS5IYixAezvJXYr8g6fRIXA==
   dependencies:
     "@formatjs/ecma402-abstract" "^1.11.4"
     intl-messageformat "^9.3.18"

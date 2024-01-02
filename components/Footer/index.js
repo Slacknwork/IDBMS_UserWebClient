@@ -128,18 +128,20 @@ export default function Footer(props) {
                 <ul className="d-flex">
                   {projects.slice(0, 6).map((project) => (
                     <li key={project.id}>
-                      <Link href="/project">
-                        <Image
-                          src={project.representImageUrl}
-                          width={640}
-                          height={470}
-                          style={{
-                            objectFit: "cover",
-                            width: "100%",
-                            height: 81.36,
-                          }}
-                          alt=""
-                        />
+                      <Link href={`/project/demo/${project.id}`}>
+                        {project.representImageUrl && (
+                          <Image
+                            src={project.representImageUrl}
+                            width={640}
+                            height={470}
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              height: 81.36,
+                            }}
+                            alt=""
+                          />
+                        )}
                       </Link>
                     </li>
                   ))}

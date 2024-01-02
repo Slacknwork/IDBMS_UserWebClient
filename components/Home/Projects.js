@@ -32,8 +32,9 @@ export default function Projects() {
   useEffect(() => {
     fetchProjects();
   }, []);
+
   return (
-    <section className="wpo-blog-section section-padding" id="blog">
+    <section className="wpo-blog-section section-padding">
       <div className="container">
         <SectionTitle2 subTitle={"Projects"} MainTitle={"Our Projects"} />
         <div className="wpo-blog-items">
@@ -42,17 +43,19 @@ export default function Projects() {
               <div className="col col-lg-4 col-md-6 col-12" key={project.id}>
                 <div className="wpo-blog-item" style={{ height: 525 }}>
                   <div className="wpo-blog-img">
-                    <Image
-                      src={project.representImageUrl}
-                      width={500}
-                      height={500}
-                      style={{
-                        objectFit: "cover",
-                        width: "100%",
-                        height: "12rem",
-                      }}
-                      alt=""
-                    />
+                    {project.representImageUrl && (
+                      <Image
+                        src={project.representImageUrl}
+                        width={500}
+                        height={500}
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "12rem",
+                        }}
+                        alt=""
+                      />
+                    )}
                     <div className="thumb">
                       {projectTypeOptions[project.type]}
                     </div>
