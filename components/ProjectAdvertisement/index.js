@@ -6,7 +6,7 @@ import projectTypeOptions from "/constants/enums/projectType";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
 
-import SectionTitle2 from "/components/shared/SectionTitle2";
+import SectionTitle2 from "/components/Shared/SectionTitle2";
 
 export default function ProjectAdvertisement() {
   const [projects, setProjects] = useState([]);

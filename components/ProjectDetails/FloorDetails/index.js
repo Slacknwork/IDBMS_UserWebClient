@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 
 import OverviewBreadcrumb from "./Breadcrumb";
 
-import { getFloorById } from "/services/FloorServices";
+import { getFloorById } from "/services/floorServices";
 
 const FloorDetailsForm = ({ floor }) => {
   const params = useParams();

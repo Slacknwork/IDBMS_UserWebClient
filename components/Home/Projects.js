@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
-import SectionTitle2 from "/components/shared/SectionTitle2";
+import SectionTitle2 from "/components/Shared/SectionTitle2";
 import bShape1 from "/public/images/blog/Vector3.png";
 import bShape2 from "/public/images/blog/Vector4.png";
 

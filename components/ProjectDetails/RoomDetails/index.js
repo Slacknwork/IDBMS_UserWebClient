@@ -2,7 +2,7 @@
 
 import { Link } from "/navigation";
 import OverviewBreadcrumb from "./Breadcrumb";
-import { getRoomById } from "/services/RoomServices";
+import { getRoomById } from "/services/roomServices";
 import SuggestionModal from "./SuggestionModal";
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
