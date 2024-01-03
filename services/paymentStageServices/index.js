@@ -11,7 +11,7 @@ const getPaymentStagesByProjectId = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}?status=${status}&name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
@@ -34,7 +34,7 @@ const getPaymentStagesByProjectIdWithAllowedAction = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}/actions?status=${status}&name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
@@ -51,7 +51,7 @@ const getPaymentStagesByProjectIdWithAllowedAction = async ({
 
 const getPaymentStagesById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
       url,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
@@ -69,7 +69,7 @@ export default function Projects() {
                       </li>
                     </ul>
                     <h2>
-                      <Link href={`/project/${project.id}`}>
+                      <Link href={`/project/demo/${project.id}`}>
                         {project.name}
                       </Link>
                     </h2>

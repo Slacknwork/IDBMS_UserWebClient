@@ -10,15 +10,15 @@ const getAllPaymentStageDesigns = async ({
   pageNo = "",
 } = {}) => {
   try {
-      const token = store.getState().user?.token ?? "";
-      const url = `${endpoint}?name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}?name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error("Error fetching payment stage designs by project ID:", error);
     throw error;
@@ -27,15 +27,15 @@ const getAllPaymentStageDesigns = async ({
 
 const getPaymentStageDesignById = async (id) => {
   try {
-      const token = store.getState().user?.token ?? "";
-      const url = `${endpoint}/${id}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/${id}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error("Error fetching payment stage design by ID:", error);
     throw error;
@@ -49,31 +49,34 @@ const getAllPaymentStageDesignsByProjectDesignId = async ({
   pageNo = "",
 } = {}) => {
   try {
-      const token = store.getState().user?.token ?? "";
-      const url = `${endpoint}/project-design/${projectDesignId}?name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/project-design/${projectDesignId}?name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
-    console.error("Error fetching payment stage designs by project design ID:", error);
+    console.error(
+      "Error fetching payment stage designs by project design ID:",
+      error
+    );
     throw error;
   }
 };
 
 const createPaymentStageDesign = async (request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        contentType: "application/json",
-        token,
-        body: JSON.stringify(request),
+      url,
+      method: "POST",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {
@@ -84,14 +87,14 @@ const createPaymentStageDesign = async (request) => {
 
 const updatePaymentStageDesign = async (id, request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: JSON.stringify(request),
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {
@@ -102,13 +105,13 @@ const updatePaymentStageDesign = async (id, request) => {
 
 const deletePaymentStageDesign = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {

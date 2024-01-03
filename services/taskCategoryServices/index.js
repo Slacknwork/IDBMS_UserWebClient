@@ -7,16 +7,16 @@ const getAllTaskCategories = async ({
   type = "",
   name = "",
   pageSize = "",
-  pageNo= "",
+  pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}?type=${type}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -27,13 +27,13 @@ const getAllTaskCategories = async ({
 
 const getTaskCategoryById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -45,7 +45,7 @@ const getTaskCategoryById = async (id) => {
 const createTaskCategory = async (request) => {
   try {
     const formData = new FormData();
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
 
     Object.keys(request).forEach((key) => {
       if (!key.endsWith("Error")) {
@@ -55,11 +55,11 @@ const createTaskCategory = async (request) => {
 
     const url = `${endpoint}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating task category:", error);
@@ -70,7 +70,7 @@ const createTaskCategory = async (request) => {
 const updateTaskCategory = async (categoryId, request) => {
   try {
     const formData = new FormData();
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
 
     Object.keys(request).forEach((key) => {
       if (!key.endsWith("Error")) {
@@ -80,11 +80,11 @@ const updateTaskCategory = async (categoryId, request) => {
 
     const url = `${endpoint}/${categoryId}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: formData,
-      });
+      url,
+      method: "PUT",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error updating task category:", error);
@@ -94,13 +94,13 @@ const updateTaskCategory = async (categoryId, request) => {
 
 const deleteTaskCategory = async (categoryId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${categoryId}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {

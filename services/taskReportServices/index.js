@@ -9,13 +9,13 @@ const getAllTaskReports = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}?name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -31,13 +31,13 @@ const getTaskReportsByProjectTaskId = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project-task/${projectTaskId}?name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -48,7 +48,7 @@ const getTaskReportsByProjectTaskId = async ({
 
 const createTaskReport = async (projectId, request) => {
   const formData = new FormData();
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   const appendFormData = (data, prefix = "", suffix = "") => {
     for (const key in data) {
@@ -72,11 +72,11 @@ const createTaskReport = async (projectId, request) => {
   try {
     const url = `${endpoint}?projectId=${projectId}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating task report:", error);
@@ -86,14 +86,14 @@ const createTaskReport = async (projectId, request) => {
 
 const updateTaskReport = async (reportId, request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${reportId}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: JSON.stringify(request),
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {
@@ -104,13 +104,13 @@ const updateTaskReport = async (reportId, request) => {
 
 const deleteTaskReport = async (reportId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${reportId}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
@@ -121,13 +121,13 @@ const deleteTaskReport = async (reportId) => {
 
 const getTaskReportById = async (reportId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${reportId}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {

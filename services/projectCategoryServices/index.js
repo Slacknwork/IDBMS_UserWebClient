@@ -9,7 +9,7 @@ const getProjectCategories = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}?isHidden=${isHidden}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
@@ -26,7 +26,7 @@ const getProjectCategories = async ({
 
 const getProjectCategoryById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
       url,
@@ -43,7 +43,7 @@ const getProjectCategoryById = async (id) => {
 
 const createProjectCategory = async (request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const formData = new FormData();
 
     Object.keys(request).forEach((key) => {
@@ -51,15 +51,15 @@ const createProjectCategory = async (request) => {
         formData.append(key, request[key]);
       }
     });
-    console.log(formData)
+    console.log(formData);
 
     const url = `${endpoint}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching create project category:", error);
@@ -69,7 +69,7 @@ const createProjectCategory = async (request) => {
 
 const updateProjectCategory = async (id, request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const formData = new FormData();
 
     Object.keys(request).forEach((key) => {
@@ -80,11 +80,11 @@ const updateProjectCategory = async (id, request) => {
 
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: formData,
-      });
+      url,
+      method: "PUT",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching update project category:", error);
@@ -94,13 +94,13 @@ const updateProjectCategory = async (id, request) => {
 
 const updateProjectCategoryHiddenStatus = async (id, newHiddenStatus) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}/isHidden?isHidden=${newHiddenStatus}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {

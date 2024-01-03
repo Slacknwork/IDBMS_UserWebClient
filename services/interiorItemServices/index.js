@@ -11,7 +11,7 @@ const getAllInteriorItems = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}?itemCategoryId=${itemCategoryId}&status=${status}&codeOrName=${codeOrName}&itemType=${itemType}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
@@ -36,7 +36,7 @@ const getItemsByInteriorItemCategoryId = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/interior-item-category/${categoryId}?itemCategoryId=${itemCategoryId}&status=${status}&codeOrName=${codeOrName}&itemType=${itemType}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
@@ -54,7 +54,7 @@ const getItemsByInteriorItemCategoryId = async ({
 const createInteriorItem = async (request) => {
   try {
     const formData = new FormData();
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
 
     Object.keys(request).forEach((key) => {
       if (!key.endsWith("Error")) {
@@ -64,11 +64,11 @@ const createInteriorItem = async (request) => {
 
     const url = `${endpoint}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating interior item:", error);
@@ -79,7 +79,7 @@ const createInteriorItem = async (request) => {
 const updateInteriorItem = async (itemId, request) => {
   try {
     const formData = new FormData();
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
 
     Object.keys(request).forEach((key) => {
       if (!key.endsWith("Error")) {
@@ -89,11 +89,11 @@ const updateInteriorItem = async (itemId, request) => {
 
     const url = `${endpoint}/${itemId}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: formData,
-      });
+      url,
+      method: "PUT",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error updating interior item:", error);
@@ -103,13 +103,13 @@ const updateInteriorItem = async (itemId, request) => {
 
 const deleteInteriorItem = async (itemId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${itemId}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
@@ -120,13 +120,13 @@ const deleteInteriorItem = async (itemId) => {
 
 const updateInteriorItemStatus = async (itemId, newStatus) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${itemId}/status?status=${newStatus}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
@@ -137,7 +137,7 @@ const updateInteriorItemStatus = async (itemId, newStatus) => {
 
 const getInteriorItemById = async (itemId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${itemId}`;
     const response = await fetchData({
       url,

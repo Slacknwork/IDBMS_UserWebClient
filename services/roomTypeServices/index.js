@@ -11,7 +11,7 @@ const getAllRoomTypes = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const paramString = `isHidden=${isHidden}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const url = `${endpoint}?${paramString}`;
     const response = await fetchData({
@@ -29,7 +29,7 @@ const getAllRoomTypes = async ({
 
 const getRoomTypeById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
       url,
@@ -46,7 +46,7 @@ const getRoomTypeById = async (id) => {
 
 const createRoomType = async (request) => {
   console.log(request);
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
   const formData = new FormData();
 
   Object.keys(request).forEach((key) => {
@@ -74,7 +74,7 @@ const createRoomType = async (request) => {
 const updateRoomType = async (id, request) => {
   try {
     const formData = new FormData();
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
 
     Object.keys(request).forEach((key) => {
       if (!key.endsWith("Error")) {
@@ -98,7 +98,7 @@ const updateRoomType = async (id, request) => {
 
 const updateRoomTypeHiddenStatus = async (id, newHiddenStatus) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}/isHidden?isHidden=${newHiddenStatus}`;
     const response = await fetchData({
       url,

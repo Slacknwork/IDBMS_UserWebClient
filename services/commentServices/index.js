@@ -4,7 +4,7 @@ import { fetchData } from "/utils/api";
 const endpoint = "/Comments";
 const getAllComments = async () => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}`;
     const response = await fetchData({
       url,
@@ -21,15 +21,15 @@ const getAllComments = async () => {
 
 const getCommentsByProjectTaskId = async (projectTaskId) => {
   try {
-      const token = store.getState().user?.token ?? ""
-      const url = `${endpoint}/project-task/${projectTaskId}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/project-task/${projectTaskId}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error("Error fetching comments by project task ID:", error);
     throw error;
@@ -45,15 +45,15 @@ const getCommentsByProjectId = async ({
   pageSize = "",
 } = {}) => {
   try {
-      const token = store.getState().user?.token ?? ""
-      const url = `${endpoint}/project/${projectId}?content=${search}&type=${type}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/project/${projectId}?content=${search}&type=${type}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error("Error fetching comments by project ID:", error);
     throw error;
@@ -62,7 +62,7 @@ const getCommentsByProjectId = async ({
 
 const getCommentsById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
       url,
@@ -79,7 +79,7 @@ const getCommentsById = async (id) => {
 
 const createComment = async (request) => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const formData = new FormData();
 
     Object.keys(request).forEach((key) => {
@@ -89,11 +89,11 @@ const createComment = async (request) => {
     });
     const url = `${endpoint}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error creating comment:", error);
@@ -103,7 +103,7 @@ const createComment = async (request) => {
 
 const updateComment = async (commentId, request) => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const formData = new FormData();
 
     Object.keys(request).forEach((key) => {
@@ -114,11 +114,11 @@ const updateComment = async (commentId, request) => {
 
     const url = `${endpoint}/${commentId}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: formData,
-      });
+      url,
+      method: "PUT",
+      token,
+      body: formData,
+    });
     return response.data;
   } catch (error) {
     console.error("Error updating comment:", error);
@@ -128,13 +128,13 @@ const updateComment = async (commentId, request) => {
 
 const deleteComment = async (commentId) => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${commentId}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
@@ -145,14 +145,14 @@ const deleteComment = async (commentId) => {
 
 const updateCommentStatus = async (commentId, newStatus) => {
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${commentId}/status?status=${newStatus}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {

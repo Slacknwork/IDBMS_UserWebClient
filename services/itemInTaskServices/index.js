@@ -4,15 +4,15 @@ import { fetchData } from "/utils/api";
 const endpoint = "/ItemInTasks";
 const getItemInTaskById = async (itemId) => {
   try {
-      const token = store.getState().user?.token ?? "";
-      const url = `${endpoint}/${itemId}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/${itemId}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error(`Error fetching ItemInTask by ID ${itemId}:`, error);
     throw error;
@@ -28,17 +28,17 @@ const getItemInTasksByProjectId = async ({
   pageSize = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
 
-      const paramString = `itemCodeOrName=${search}&itemCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}`;
-      const url = `${endpoint}/project/${projectId}?${paramString}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const paramString = `itemCodeOrName=${search}&itemCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const url = `${endpoint}/project/${projectId}?${paramString}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error(
       `Error fetching ItemInTasks by Project ID ${projectId}:`,
@@ -57,15 +57,15 @@ const getItemInTasksByTaskId = async ({
   pageSize = "",
 } = {}) => {
   try {
-      const token = store.getState().user?.token ?? "";
-      const url = `${endpoint}/project-task/${taskId}?itemCodeOrName=${search}&itemCategoryId=${category}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
-      const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
-      });
-      return response.data;
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/project-task/${taskId}?itemCodeOrName=${search}&itemCategoryId=${category}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
   } catch (error) {
     console.error(`Error fetching ItemInTasks by Task ID ${taskId}:`, error);
     throw error;
@@ -74,7 +74,7 @@ const getItemInTasksByTaskId = async ({
 
 const createItemInTask = async (taskId, request) => {
   const formData = new FormData();
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   const appendFormData = (data, index = 0, prefix = "") => {
     for (const key in data) {
@@ -102,13 +102,12 @@ const createItemInTask = async (taskId, request) => {
   try {
     const url = `${endpoint}/project-task/${taskId}`;
     const response = await fetchData({
-        url,
-        method: "POST",
-        token,
-        body: formData,
-      });
+      url,
+      method: "POST",
+      token,
+      body: formData,
+    });
     return response.data;
-
   } catch (error) {
     console.error("Error creating ItemInTask:", error);
     throw error;
@@ -117,14 +116,14 @@ const createItemInTask = async (taskId, request) => {
 
 const updateItemInTaskQuantity = async (itemId, quantity) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${itemId}/quantity?quantity=${quantity}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -135,13 +134,13 @@ const updateItemInTaskQuantity = async (itemId, quantity) => {
 
 const deleteItemInTask = async (itemId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${itemId}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {

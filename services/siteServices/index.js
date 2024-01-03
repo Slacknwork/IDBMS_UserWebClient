@@ -10,13 +10,13 @@ const getSitesByProjectId = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}?nameOrAddress=${nameOrAddress}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -32,13 +32,13 @@ const getSitesByUserId = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/user/${userId}?nameOrAddress=${nameOrAddress}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -48,15 +48,15 @@ const getSitesByUserId = async ({
 };
 
 const getSiteById = async (id) => {
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   try {
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "GET",
-        token,
-        body: null,
+      url,
+      method: "GET",
+      token,
+      body: null,
     });
     return response.data;
   } catch (error) {
@@ -66,7 +66,7 @@ const getSiteById = async (id) => {
 };
 
 const getSites = async ({ search = "", page = "", pageSize = "" } = {}) => {
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   try {
     const url = `${endpoint}?nameOrAddress=${search}&pageSize=${pageSize}&pageNo=${page}`;
@@ -84,7 +84,7 @@ const getSites = async ({ search = "", page = "", pageSize = "" } = {}) => {
 };
 
 const createSite = async (request) => {
-  const token = store.getState().user?.token ?? ""
+  const token = store.getState().customer?.token ?? "";
 
   try {
     const url = `${endpoint}`;
@@ -104,17 +104,17 @@ const createSite = async (request) => {
 };
 
 const updateSite = async (id, request) => {
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: JSON.stringify(request),
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {
@@ -124,16 +124,16 @@ const updateSite = async (id, request) => {
 };
 
 const deleteSiteById = async (id) => {
-  const token = store.getState().user?.token ?? "";
+  const token = store.getState().customer?.token ?? "";
 
   try {
-    const token = store.getState().user?.token ?? ""
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "DELETE",
-        token,
-        body: null,
+      url,
+      method: "DELETE",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {

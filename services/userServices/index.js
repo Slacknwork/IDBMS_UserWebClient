@@ -17,7 +17,7 @@ const getAllUsers = async ({
   pageNo = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const paramString = `searchParam=${nameOrEmail}&status=${status}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const url = `${endpoint}?${paramString}`;
     const response = await fetchData({
@@ -73,7 +73,7 @@ const getUsersFilter = async (search, status, page, pageSize) => {
 // Fetch user by ID
 const getUserById = async (userId) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${userId}`;
     const response = await fetchData({
       url,
@@ -91,7 +91,7 @@ const getUserById = async (userId) => {
 // Create a new user
 const createUser = async (userData) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}`;
     const response = await fetchData({
       url,

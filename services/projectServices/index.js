@@ -12,7 +12,7 @@ const getProjectsBySiteId = async ({
   pageSize = "",
 } = {}) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/site/${siteId}?name=${search}&status=${status}&type=${type}&pageNo=${page}&pageSize=${pageSize}`;
     const response = await fetchData({
       url,
@@ -29,7 +29,7 @@ const getProjectsBySiteId = async ({
 
 const getProjectById = async (id) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
       url,
@@ -46,7 +46,7 @@ const getProjectById = async (id) => {
 
 const createProject = async (request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}`;
     const response = await fetchData({
       url,
@@ -64,14 +64,14 @@ const createProject = async (request) => {
 
 const updateProject = async (id, request) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        contentType: "application/json",
-        token,
-        body: JSON.stringify(request),
+      url,
+      method: "PUT",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {
@@ -82,13 +82,13 @@ const updateProject = async (id, request) => {
 
 const updateProjectStatus = async (id, status) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}/status?status=${status}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
@@ -99,13 +99,13 @@ const updateProjectStatus = async (id, status) => {
 
 const updateProjectAdvertisementStatus = async (id, status) => {
   try {
-    const token = store.getState().user?.token ?? "";
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${id}/isAdvertisement/${status}`;
     const response = await fetchData({
-        url,
-        method: "PUT",
-        token,
-        body: null,
+      url,
+      method: "PUT",
+      token,
+      body: null,
     });
     return response.message;
   } catch (error) {
