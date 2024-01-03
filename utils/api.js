@@ -17,9 +17,7 @@ export async function fetchData({
   });
   const data = await response.json();
   if (!response.ok) {
-    if (response.status === 401) {
-      window.location.href = "/login";
-    } else throw data.message;
+    throw data.message;
   }
   return data;
 }

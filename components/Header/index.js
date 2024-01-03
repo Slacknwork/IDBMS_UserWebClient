@@ -4,7 +4,7 @@ import { Link, useRouter } from "/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 
-import { logout } from "/store/reducers/user";
+import { logout } from "/store/reducers/customer";
 
 import MobileMenu from "/components/MobileMenu/MobileMenu";
 
@@ -15,7 +15,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
 
   const openMenu = (state) => {
     user.loggedIn ? setMenuActive(state) : router.push("/login");

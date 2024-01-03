@@ -7,11 +7,11 @@ import ProjectList from "/components/ProjectList";
 import ProjectAdvertisement from "/components/ProjectAdvertisement";
 
 export default function ProjectPage() {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
 
   return (
     <div>
-      {!user.loggedIn ? (
+      {!user || !user.loggedIn ? (
         <div>
           <PageTitle pageTitle={"Projects"} pagesub={"Projects"} />
           <ProjectAdvertisement></ProjectAdvertisement>

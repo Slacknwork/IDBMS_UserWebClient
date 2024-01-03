@@ -9,7 +9,7 @@ import { Link, useRouter } from "/navigation";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import DatePicker from "react-datepicker";
 import { registerUser } from "/services/authenticationServices";
-import { login } from "/store/reducers/user";
+import { login } from "/store/reducers/customer";
 import { useDispatch } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 

@@ -22,7 +22,7 @@ const pageQuery = "page";
 
 const TransactionItem = (object) => {
   const params = useParams();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
   const onDownloadClick = (url) => {
     downloadFileFromUrl(url, user.token);
   };

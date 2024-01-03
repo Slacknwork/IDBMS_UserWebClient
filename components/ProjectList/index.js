@@ -13,7 +13,7 @@ export default function ProjectList() {
   // CONSTANTS
 
   // INIT
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
   const [participations, setParticipations] = useState([]);
 
   // FETCH DATA

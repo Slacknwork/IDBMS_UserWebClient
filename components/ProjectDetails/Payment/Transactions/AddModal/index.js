@@ -15,7 +15,7 @@ const pendingTransactionStatus = 0;
 
 export default function AddModal({ refreshTransactionList, children }) {
   const params = useParams();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
   const [modal, setModal] = useState(false);
 
   const [amount, setAmount] = useState(0);

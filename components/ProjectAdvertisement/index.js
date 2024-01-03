@@ -42,18 +42,22 @@ export default function ProjectAdvertisement() {
                       <div className="grid" key={project.id}>
                         <div className="wpo-project-item">
                           <div className="wpo-project-img">
-                            <Image
-                              src={project.representImageUrl}
-                              width={500}
-                              height={500}
-                              unoptimized
-                              style={{
-                                objectFit: "cover",
-                                width: "100%",
-                                height: "20rem",
-                              }}
-                              alt=""
-                            />
+                            {project.representImageUrl ? (
+                              <Image
+                                src={project.representImageUrl}
+                                width={500}
+                                height={500}
+                                unoptimized
+                                style={{
+                                  objectFit: "cover",
+                                  width: "100%",
+                                  height: "20rem",
+                                }}
+                                alt=""
+                              />
+                            ) : (
+                              <div style={{ width: "100%", height: "20rem" }} />
+                            )}
                             <div className="left-border"></div>
                             <div className="right-border"></div>
                           </div>

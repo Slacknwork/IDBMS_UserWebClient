@@ -7,14 +7,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "/store/reducers/user";
+import { login } from "/store/reducers/customer";
 import { loginUser } from "/services/authenticationServices";
 
 const LoginPage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.customer);
 
   const [value, setValue] = useState({
     email: "",
