@@ -4,13 +4,13 @@ import { fetchData } from "/utils/api";
 const endpoint = "/ProjectParticipations";
 const getAllProjectParticipations = async ({
   role = "",
-  name = "",
+  search = "",
   pageSize = "",
   pageNo = "",
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}?role=${role}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
+    const url = `${endpoint}?role=${role}&name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
       url,
       method: "GET",
@@ -27,14 +27,14 @@ const getAllProjectParticipations = async ({
 const getParticipationsByUserId = async ({
   userId = "",
   role = "",
-  name = "",
+  search = "",
   pageSize = "",
   pageNo = "",
   status = "",
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/user/${userId}?role=${role}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}&status=${status}`;
+    const url = `${endpoint}/user/${userId}?role=${role}&projectName=${search}&pageSize=${pageSize}&pageNo=${pageNo}&projectStatus=${status}`;
     const response = await fetchData({
       url,
       method: "GET",

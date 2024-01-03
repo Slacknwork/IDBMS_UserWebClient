@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "/navigation";
+import { Link, useRouter } from "/navigation";
 import { useSearchParams, useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
 import { getParticipationsByUserId } from "/services/projectParticipationServices";
+import { getProjectStatusByUserId } from "/services/projectServices";
 
 import projectStatusOptions from "/constants/enums/projectStatus";
 
@@ -13,14 +14,51 @@ export default function ProjectList() {
   // CONSTANTS
 
   // INIT
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const user = useSelector((state) => state.customer);
-  const [participations, setParticipations] = useState([]);
+
+  // SEARCH
+  const searchQuery = "search";
+  const [search, setSearch] = useState(searchParams.get(searchQuery) ?? "");
+  const onSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+  const onSearchSubmit = (e) => {
+    e.preventDefault();
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+    search
+      ? searchParams.set(searchQuery, search)
+      : searchParams.delete(searchQuery);
+    url.search = searchParams.toString();
+    router.push(url.toString(), undefined, { scroll: false });
+  };
+
+  // FILTER BY STATUS
+  const statusQuery = "status";
+  const [status, setStatus] = useState(searchParams.get(statusQuery));
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+    status
+      ? searchParams.set(statusQuery, status)
+      : searchParams.delete(statusQuery);
+    url.search = searchParams.toString();
+    router.push(url.toString(), undefined, { scroll: false });
+  }, [status]);
 
   // FETCH DATA
+  const [participations, setParticipations] = useState([]);
+
   const fetchParticipations = async () => {
     try {
+      const search = searchParams.get(searchQuery) ?? "";
+      const status = searchParams.get(statusQuery) ?? "";
       const participations = await getParticipationsByUserId({
         userId: user.id,
+        search,
+        status,
       });
       setParticipations(participations.list);
     } catch (error) {
@@ -28,9 +66,19 @@ export default function ProjectList() {
     }
   };
 
+  const fetchProjectStatusCount = async () => {
+    try {
+      const projectStatusCount = await getProjectStatusByUserId({
+        userId: user.id,
+      });
+    } catch (error) {
+      toast.error("Lỗi dữ liệu: Trạng thái dự án!");
+    }
+  };
+
   useEffect(() => {
-    fetchParticipations();
-  }, []);
+    Promise.all([fetchProjectStatusCount(), fetchParticipations()]);
+  }, [searchParams]);
 
   return (
     <section className="wpo-blog-pg-section section-padding">
@@ -39,10 +87,12 @@ export default function ProjectList() {
           <div className={`col col-lg-4 col-12`}>
             <div className="blog-sidebar">
               <div className="widget search-widget">
-                <form>
+                <form onSubmit={onSearchSubmit}>
                   <div>
                     <input
                       type="text"
+                      value={search}
+                      onChange={onSearchChange}
                       className="form-control"
                       placeholder="Search Post.."
                     />
@@ -53,16 +103,25 @@ export default function ProjectList() {
                 </form>
               </div>
               <div className="widget category-widget">
-                <h3>Categories</h3>
+                <h3>Status</h3>
                 <ul>
-                  {projectStatusOptions.map((status, index) => (
-                    <li key={status}>
-                      <Link href="/service/1">
-                        {status}
-                        <span>{index}</span>
-                      </Link>
-                    </li>
-                  ))}
+                  <li>
+                    <a onClick={() => setStatus(0)}>
+                      All
+                      <span>0</span>
+                    </a>
+                  </li>
+                  {projectStatusOptions.map(
+                    (status, index) =>
+                      index > 1 && (
+                        <li key={status}>
+                          <a onClick={() => setStatus(index)}>
+                            {status}
+                            <span>{index}</span>
+                          </a>
+                        </li>
+                      )
+                  )}
                 </ul>
               </div>
               <div className="wpo-contact-widget widget">
@@ -70,9 +129,8 @@ export default function ProjectList() {
                   How We Can <br /> Help You!
                 </h2>
                 <p>
-                  labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
-                  gravida. Risus commodo viverra maecenas accumsan lacus vel
-                  facilisis.{" "}
+                  Leave us your information so we can contact and start up a
+                  project!
                 </p>
                 <Link href="/contact">Contact Us</Link>
               </div>
