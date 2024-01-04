@@ -94,7 +94,7 @@ export default function ProjectList() {
                       value={search}
                       onChange={onSearchChange}
                       className="form-control"
-                      placeholder="Search Post.."
+                      placeholder="Search Projects..."
                     />
                     <button type="submit">
                       <i className="ti-search"></i>

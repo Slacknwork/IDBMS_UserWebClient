@@ -9,6 +9,10 @@ export default function ProjectDetail({ children }) {
       label: "Overview",
     },
     {
+      path: "floors",
+      label: "Floors",
+    },
+    {
       path: "tasks",
       label: "Tasks",
     },

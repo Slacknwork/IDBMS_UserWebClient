@@ -126,11 +126,13 @@
                 list-style: none;
 
                 li{
+                    display: flex; 
                     padding: 7px 0;
                     padding-left: 35px;
                     position: relative;
-
+                    justify-content: space-between;
                     &:before{
+                        
                        position: absolute;
                        left: 0;
                        top: 50%;

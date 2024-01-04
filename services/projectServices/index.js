@@ -30,7 +30,7 @@ const getProjectsBySiteId = async ({
 const getProjectById = async (id) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${id}`;
+    const url = `${endpoint}/${id}?projectId=${id}`;
     const response = await fetchData({
       url,
       method: "GET",

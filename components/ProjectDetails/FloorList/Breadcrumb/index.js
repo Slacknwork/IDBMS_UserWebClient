@@ -6,8 +6,6 @@ import { Link } from "/navigation";
 export default function OverviewBreadcrumb({
   id,
   name,
-  siteId,
-  siteName,
   floorId,
   floorName,
   roomId,
@@ -15,7 +13,6 @@ export default function OverviewBreadcrumb({
 }) {
   const breadcrumbHrefs = {
     ...(id && { overviewHref: urls.project.id.getUri(id) }),
-    ...(siteId && { siteHref: urls.project.id.site.siteNo.getUri(id, siteId) }),
     ...(floorId && {
       floorHref: urls.project.id.site.siteNo.floor.floorNo.getUri(
         id,
@@ -39,11 +36,6 @@ export default function OverviewBreadcrumb({
         {id && (
           <li>
             <Link href={breadcrumbHrefs.overviewHref}>{name || `Project`}</Link>
-          </li>
-        )}
-        {siteId && (
-          <li>
-            <Link href={breadcrumbHrefs.siteHref}>{siteName || `Site`}</Link>
           </li>
         )}
         {floorId && (

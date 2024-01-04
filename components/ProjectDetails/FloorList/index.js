@@ -9,71 +9,6 @@ import urls from "/constants/urls";
 import OverviewBreadcrumb from "./Breadcrumb";
 import { getSiteById } from "/services/siteServices";
 
-const SiteDetailsForm = ({ site }) => {
-  const params = useParams();
-  return (
-    <div className="row">
-      <div className="col col-lg-12 col-12">
-        <OverviewBreadcrumb
-          id={params.id}
-          siteId={site.id}
-        ></OverviewBreadcrumb>
-      </div>
-      <div className="col col-lg-12 col-12">
-        <div className="form-field">
-          <h2>{site.name}</h2>
-        </div>
-      </div>
-      <div className="col col-lg-12 col-12">
-        <tr>
-          <td style={{ paddingRight: "2rem" }}>
-            <p style={{ fontWeight: 1000 }}>Use purpose:</p>
-          </td>
-          <td>
-            <p>{site.usePurpose}</p>
-          </td>
-          <td style={{ paddingRight: "2rem" }}>
-            <p style={{ fontWeight: 1000 }}>Area:</p>
-          </td>
-          <td>
-            <p>
-              {site.area} m<sup>2</sup>
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td style={{ paddingRight: "2rem" }}>
-            <p style={{ fontWeight: 1000 }}>Address:</p>
-          </td>
-          <td>
-            <p>{site.address}</p>
-          </td>
-        </tr>
-        <tr>
-          <td style={{ paddingRight: "2rem" }}>
-            <p style={{ fontWeight: 1000 }}>Description:</p>
-          </td>
-          <td>
-            <p>{site.description}</p>
-          </td>
-        </tr>
-        <tr>
-          <td style={{ paddingRight: "2rem" }}>
-            <p style={{ fontWeight: 1000 }}>Tasks:</p>
-          </td>
-          <td className="d-flex">
-            <div className="d-flex">
-              <Link href={`/project/1/tasks`} className="theme-btn px-4 py-2">
-                View Tasks
-              </Link>
-            </div>
-          </td>
-        </tr>
-      </div>
-    </div>
-  );
-};
-
 function FloorTableItem({ floor, index }) {
   const params = useParams();
   const FloorHref = urls.project.id.site.siteNo.floor.floorNo.getUri(
@@ -168,9 +103,11 @@ export default function ProjectSiteDetails() {
   return (
     <div className="pb-0 container">
       <form className="contact-validation-active">
-        <SiteDetailsForm site={item} project={project} />
         <div className="row">
-          <div className="col col-lg-12 col-12 my-4">
+          <div className="col col-lg-12 col-12">
+            <OverviewBreadcrumb id={params.id}></OverviewBreadcrumb>
+          </div>
+          <div className="col col-lg-12 col-12 mb-4">
             <div className="d-flex justify-content-between">
               <h3 className="my-auto">Floors</h3>
             </div>
