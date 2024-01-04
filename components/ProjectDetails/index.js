@@ -44,7 +44,7 @@ export default function ProjectDetail({ children }) {
             </div>
             <div
               className="shadow-lg py-4 mb-4"
-              style={{ backgroundColor: "white" }}
+              style={{ backgroundColor: "white", minHeight: "30rem" }}
             >
               {children}
             </div>

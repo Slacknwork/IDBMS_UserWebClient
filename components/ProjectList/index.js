@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useRouter } from "/navigation";
-import { useSearchParams, useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import Image from "next/image";
+import { CircularProgress, Stack } from "@mui/material";
 import { toast } from "react-toastify";
 
 import { getParticipationsByUserId } from "/services/projectParticipationServices";
 import { getProjectStatusByUserId } from "/services/projectServices";
 
 import projectStatusOptions from "/constants/enums/projectStatus";
+
+import Search from "/components/Shared/Search";
 
 export default function ProjectList() {
   // CONSTANTS
@@ -20,20 +23,6 @@ export default function ProjectList() {
 
   // SEARCH
   const searchQuery = "search";
-  const [search, setSearch] = useState(searchParams.get(searchQuery) ?? "");
-  const onSearchChange = (e) => {
-    setSearch(e.target.value);
-  };
-  const onSearchSubmit = (e) => {
-    e.preventDefault();
-    const url = new URL(window.location.href);
-    const searchParams = new URLSearchParams(url.search);
-    search
-      ? searchParams.set(searchQuery, search)
-      : searchParams.delete(searchQuery);
-    url.search = searchParams.toString();
-    router.push(url.toString(), undefined, { scroll: false });
-  };
 
   // FILTER BY STATUS
   const statusQuery = "status";
@@ -49,6 +38,7 @@ export default function ProjectList() {
   }, [status]);
 
   // FETCH DATA
+  const [loading, setLoading] = useState(true);
   const [participations, setParticipations] = useState([]);
 
   const fetchParticipations = async () => {
@@ -76,8 +66,14 @@ export default function ProjectList() {
     }
   };
 
-  useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
     Promise.all([fetchProjectStatusCount(), fetchParticipations()]);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
   }, [searchParams]);
 
   return (
@@ -86,21 +82,8 @@ export default function ProjectList() {
         <div className="row" style={{ marginBottom: 0 }}>
           <div className={`col col-lg-4 col-12`}>
             <div className="blog-sidebar">
-              <div className="widget search-widget">
-                <form onSubmit={onSearchSubmit}>
-                  <div>
-                    <input
-                      type="text"
-                      value={search}
-                      onChange={onSearchChange}
-                      className="form-control"
-                      placeholder="Search Projects..."
-                    />
-                    <button type="submit">
-                      <i className="ti-search"></i>
-                    </button>
-                  </div>
-                </form>
+              <div className="mb-5">
+                <Search placeholder="Search Project"></Search>
               </div>
               <div className="widget category-widget">
                 <h3>Status</h3>
@@ -138,7 +121,16 @@ export default function ProjectList() {
           </div>
           <div className={`col col-lg-8 col-12`}>
             <div className="wpo-blog-content">
-              {participations &&
+              {loading ? (
+                <Stack sx={{ height: "20rem" }}>
+                  <CircularProgress
+                    sx={{ m: "auto", color: "#CAAD06" }}
+                    size="4rem"
+                  ></CircularProgress>
+                </Stack>
+              ) : (
+                participations &&
+                participations.length > 0 &&
                 participations.map((participation) => (
                   <div
                     className="row post"
@@ -202,7 +194,8 @@ export default function ProjectList() {
                       </Link>
                     </div>
                   </div>
-                ))}
+                ))
+              )}
             </div>
           </div>
         </div>

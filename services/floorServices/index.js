@@ -12,7 +12,7 @@ const getFloorsByProjectId = async ({
     const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}?noOfFloor=${
       !isNaN(search) ? search : ""
-    }&usePurpose=${search}&pageNo=${page}&pageSize=${pageSize}`;
+    }&usePurpose=${search}&pageNo=${page}&pageSize=${pageSize}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",
