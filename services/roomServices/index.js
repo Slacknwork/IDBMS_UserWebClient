@@ -2,16 +2,17 @@ import { store } from "/store";
 import { fetchData } from "/utils/api";
 
 const endpoint = "/Rooms";
+
 const getRoomsByFloorId = async ({
   floorId = "",
+  projectId = "",
   search = "",
-  isHidden = false,
   page = "",
   pageSize = "",
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/floor/${floorId}?usePurpose=${search}&isHidden=${isHidden}&pageNo=${page}&pageSize=${pageSize}`;
+    const url = `${endpoint}/floor/${floorId}?usePurpose=${search}&pageNo=${page}&pageSize=${pageSize}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",

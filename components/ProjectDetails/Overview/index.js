@@ -35,19 +35,16 @@ export default function ProjectOverview() {
 
   return (
     <div className="wpo-project-single-area pt-4">
-      <div className="container">
+      <div className="container" style={{ height: "30rem" }}>
         {loading ? (
-          <Stack sx={{ height: "30rem" }}>
+          <Stack sx={{ height: "100%" }}>
             <CircularProgress
               sx={{ m: "auto", color: "#CAAD06" }}
               size="4rem"
             ></CircularProgress>
           </Stack>
         ) : (
-          <div
-            className="row justify-content-center"
-            style={{ minHeight: "30rem" }}
-          >
+          <div className="row justify-content-center">
             <div className="col-lg-11 col-12">
               <div className="wpo-project-single-wrap">
                 <div className="wpo-project-single-item">

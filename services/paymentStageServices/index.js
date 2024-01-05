@@ -12,7 +12,7 @@ const getPaymentStagesByProjectId = async ({
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/project/${projectId}?status=${status}&name=${search}&pageSize=${pageSize}&pageNo=${pageNo}`;
+    const url = `${endpoint}/project/${projectId}?status=${status}&name=${search}&pageSize=${pageSize}&pageNo=${pageNo}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",

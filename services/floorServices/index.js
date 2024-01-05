@@ -26,10 +26,10 @@ const getFloorsByProjectId = async ({
   }
 };
 
-const getFloorsById = async (floorId) => {
+const getFloorById = async ({ projectId = "", floorId = "" } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${floorId}`;
+    const url = `${endpoint}/${floorId}?projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",
@@ -43,63 +43,4 @@ const getFloorsById = async (floorId) => {
   }
 };
 
-const createFloor = async (request) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}`;
-    const response = await fetchData({
-      url,
-      method: "POST",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(request),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching create floor:", error);
-    throw error;
-  }
-};
-
-const updateFloor = async (id, request) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${id}`;
-    const response = await fetchData({
-      url,
-      method: "PUT",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(request),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching update floor:", error);
-    throw error;
-  }
-};
-
-const deleteFloorById = async (id) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${id}`;
-    const response = await fetchData({
-      url,
-      method: "DELETE",
-      token,
-      body: null,
-    });
-    return response.message;
-  } catch (error) {
-    console.error("Error fetching delete floor:", error);
-    throw error;
-  }
-};
-
-export {
-  getFloorsByProjectId,
-  getFloorsById,
-  createFloor,
-  updateFloor,
-  deleteFloorById,
-};
+export { getFloorsByProjectId, getFloorById };
