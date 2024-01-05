@@ -47,18 +47,16 @@ export default function ClientLayout({ children }) {
     <div style={{ backgroundColor: "#f0f0f0" }}>
       <PageTitle pageTitle={t("Details")} pagesub={"Project"} />
       <section id="project-section" className="mt-4">
-        <div className="wpo-contact-form-area-transparent">
-          <div className="container wpo-shop-single-section">
-            <div className="row">
-              <div className="col-12 product-info p-0">
-                <Tabs uriPos={3} tabs={tabs}></Tabs>
-              </div>
-              <div
-                className="shadow-lg py-4 mb-4"
-                style={{ backgroundColor: "white", minHeight: "30rem" }}
-              >
-                {children}
-              </div>
+        <div className="container wpo-shop-single-section">
+          <div className="row">
+            <div className="col-12 product-info p-0">
+              <Tabs uriPos={3} tabs={tabs}></Tabs>
+            </div>
+            <div
+              className="shadow-lg py-4 mb-4"
+              style={{ backgroundColor: "white", minHeight: "30rem" }}
+            >
+              {children}
             </div>
           </div>
         </div>

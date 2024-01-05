@@ -15,6 +15,7 @@ import { getAllTaskCategories } from "/services/taskCategoryServices";
 
 import Pagination from "/components/Pagination";
 import TaskBreadcrumb from "/components/ProjectDetails/TaskBreadcrumb";
+import Search from "/components/Shared/Search";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 20,
@@ -161,28 +162,13 @@ export default function ProjectTasks() {
         </div>
         <div className="col col-lg-12 col-12">
           <div className="form-field">
-            <h1>Tasks</h1>
+            <h3>Tasks</h3>
           </div>
         </div>
       </div>
       <div className="row mt-4">
-        <div className="col col-lg-6 col-12">
-          <div className="blog-sidebar">
-            <div className="widget search-widget">
-              <form>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search Task Name..."
-                  />
-                  <button type="submit">
-                    <i className="ti-search"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+        <div className="col col-lg-5 col-12">
+          <Search placeholder="Search Tasks"></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>

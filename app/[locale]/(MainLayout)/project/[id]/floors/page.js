@@ -10,10 +10,14 @@ import { getFloorsByProjectId } from "/services/floorServices";
 import { getProjectById } from "/services/projectServices";
 
 import Search from "/components/Shared/Search";
+import Pagination from "/components/Shared/Pagination";
 
 export default function FloorList() {
   // CONSTANTS
   const searchQuery = "search";
+  const pageQuery = "page";
+  const defaultPage = 1;
+  const defaultPageSize = 5;
 
   // INIT
   const params = useParams();
@@ -22,16 +26,23 @@ export default function FloorList() {
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [floors, setFloors] = useState([]);
+  const [count, setCount] = useState(0);
   const [project, setProject] = useState({});
 
   const fetchFloors = async () => {
     try {
       const search = searchParams.get(searchQuery) ?? "";
+      const page = searchParams.get(pageQuery) ?? defaultPage;
+      const pageSize = defaultPageSize;
+
       const floors = await getFloorsByProjectId({
         projectId: params.id,
         search,
+        page,
+        pageSize,
       });
       setFloors(floors.list);
+      setCount(floors.totalPage);
     } catch (error) {
       toast.error("Error: Floors");
     }
@@ -143,6 +154,9 @@ export default function FloorList() {
               </tbody>
             </table>
           )}
+        </div>
+        <div className="col col-12 col-lg-12">
+          <Pagination count={count}></Pagination>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "/navigation";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { Chip, CircularProgress, Stack } from "@mui/material";
 import { toast } from "react-toastify";
 import moment from "moment-timezone";
@@ -13,23 +13,37 @@ import stageStatusOptions, {
 
 import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 
+import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
 export default function PaymentStagesPage() {
+  // CONSTANTS
+  const pageQuery = "page";
+  const defaultPage = 1;
+  const defaultPageSize = 5;
+
   // INIT
   const params = useParams();
+  const searchParams = useSearchParams();
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [stages, setStages] = useState([]);
+  const [count, setCount] = useState(0);
 
   const fetchStages = async () => {
     try {
+      const page = searchParams.get(pageQuery) ?? 1;
+      const pageSize = defaultPageSize;
+
       const stages = await getPaymentStagesByProjectId({
         projectId: params.id,
+        page,
+        pageSize,
       });
+      setCount(stages.totalPage);
       setStages(stages.list);
     } catch (error) {
       toast.error("Error: Stages");
@@ -86,7 +100,7 @@ export default function PaymentStagesPage() {
                   <th scope="col" width="5%" style={{ textAlign: "center" }}>
                     No.
                   </th>
-                  <th scope="col" width="20%">
+                  <th scope="col" width="25%">
                     Name
                   </th>
                   <th scope="col" width="15%">
@@ -95,16 +109,15 @@ export default function PaymentStagesPage() {
                   <th scope="col" width="15%">
                     Incurred Total (VND)
                   </th>
-                  <th scope="col" width="12.5%" style={{ textAlign: "center" }}>
+                  <th scope="col" width="15%" style={{ textAlign: "center" }}>
                     Work time
                   </th>
-                  <th scope="col" width="12.5%">
+                  <th scope="col" width="15%">
                     Payment deadline
                   </th>
-                  <th scope="col" width="10%">
+                  <th scope="col" width="15%">
                     Status
                   </th>
-                  <th scope="col" width="10%"></th>
                 </tr>
               </thead>
               <tbody>
@@ -204,22 +217,14 @@ export default function PaymentStagesPage() {
                           }
                         ></Chip>
                       </td>
-                      <td className="align-middle m-0">
-                        <div className="d-flex justify-content-end">
-                          <Link
-                            href={`/project/${params.id}/stages/${stage.id}`}
-                            className="theme-btn py-2 mx-2"
-                            style={{ width: "6rem", zIndex: 0 }}
-                          >
-                            Details
-                          </Link>
-                        </div>
-                      </td>
                     </tr>
                   ))}
               </tbody>
             </table>
           )}
+        </div>
+        <div className="col col-12 col-lg-12">
+          <Pagination count={count}></Pagination>
         </div>
       </div>
     </div>

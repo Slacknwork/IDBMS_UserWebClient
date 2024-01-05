@@ -15,9 +15,9 @@ export default function Pagination({ query = "page", count = 0 }) {
   const changeSearchParams = (newPage) => {
     const url = new URL(window.location.href);
     const searchParams = new URLSearchParams(url.search);
-    searchParams.set(query, newPage + 1);
+    newPage ? searchParams.set(query, newPage + 1) : searchParams.delete(query);
     url.search = searchParams.toString();
-    router.push(url.toString(), undefined, { scroll: false });
+    router.push(url.toString(), { scroll: false });
   };
   const handleChangePage = (newPage) => {
     setPage(newPage);

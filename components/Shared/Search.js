@@ -18,7 +18,7 @@ export default function Search({ query = "search", placeholder }) {
     const searchParams = new URLSearchParams(url.search);
     search ? searchParams.set(query, search) : searchParams.delete(query);
     url.search = searchParams.toString();
-    router.push(url.toString(), undefined, { scroll: false });
+    router.push(url.toString(), { scroll: false });
   };
 
   return (
