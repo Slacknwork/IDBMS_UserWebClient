@@ -2,6 +2,7 @@ import { store } from "/store";
 import { fetchData } from "/utils/api";
 
 const endpoint = "/ProjectTasks";
+
 const getProjectTasksByProjectId = async ({
   projectId = "",
   search = "",
@@ -101,10 +102,28 @@ const getProjectTasksByPaymentStageId = async (paymentStageId) => {
   }
 };
 
+const getProjectTaskById = async (taskId, projectId = "") => {
+  try {
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/${taskId}`;
+    const response = await fetchData({
+      url: `${url}${projectId ? "?projectId=" + projectId : ""}`,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching project task by ID:", error);
+    throw error;
+  }
+};
+
 export {
   getProjectTasksByProjectId,
   getProjectTasksByPaymentStageId,
   getProjectTasksWithItemByProjectId,
   getProjectTasksWithItemByRoomId,
   getProjectTasksByRoomId,
+  getProjectTaskById,
 };

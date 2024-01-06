@@ -1,5 +1,6 @@
 "use client";
 
+import { Link } from "/navigation";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -36,8 +37,19 @@ export default function ProjectOverview() {
   }, []);
 
   return (
-    <div className="wpo-project-single-area pt-4">
+    <div className="wpo-project-single-area">
       <div className="container" style={{ minHeight: "35rem" }}>
+        <div className="row">
+          <div className="col col-lg-12 col-12">
+            <div className="wpo-breadcumb-wrap">
+              <ol>
+                <li>
+                  <Link href={`/project/${params.id}`}>{`Overview`}</Link>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
         {loading ? (
           <Stack sx={{ minHeight: "35rem" }}>
             <CircularProgress
@@ -47,7 +59,7 @@ export default function ProjectOverview() {
           </Stack>
         ) : (
           <div className="row justify-content-center">
-            <div className="col-lg-11 col-12">
+            <div className="col-lg-12 col-12">
               <div className="wpo-project-single-wrap">
                 <div className="wpo-project-single-item">
                   <div className="row">
@@ -70,7 +82,7 @@ export default function ProjectOverview() {
                         ></Chip>
                       </div>
                     </div>
-                    <div className="col-lg-7">
+                    <div className="col-lg-8">
                       <div className="wpo-project-single-item list-widget">
                         <p>{project?.description ?? "[Project Description]"}</p>
                         <div className="row">
@@ -187,10 +199,10 @@ export default function ProjectOverview() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-lg-5">
+                    <div className="col-lg-4">
                       <div
                         className="wpo-project-single-content-des-right"
-                        style={{ marginTop: "6rem" }}
+                        style={{ marginTop: "3rem" }}
                       >
                         <ul>
                           <li>
