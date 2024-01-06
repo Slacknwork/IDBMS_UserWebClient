@@ -16,7 +16,7 @@ const getProjectTasksByProjectId = async ({
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/project/${projectId}?codeOrName=${search}&includeStageIdFilter=${includeStageIdFilter}&stageId=${stageId}&includeRoomIdFilter=${includeRoomIdFilter}&roomId=${roomId}&taskCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const url = `${endpoint}/project/${projectId}?codeOrName=${search}&includeStageIdFilter=${includeStageIdFilter}&stageId=${stageId}&includeRoomIdFilter=${includeRoomIdFilter}&roomId=${roomId}&taskCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",
@@ -101,108 +101,10 @@ const getProjectTasksByPaymentStageId = async (paymentStageId) => {
   }
 };
 
-const createProjectTask = async (request) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}`;
-    const response = await fetchData({
-      url,
-      method: "POST",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(request),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error creating project task:", error);
-    throw error;
-  }
-};
-
-const getProjectTaskById = async (taskId) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${taskId}`;
-    const response = await fetchData({
-      url,
-      method: "GET",
-      token,
-      body: null,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching project task by ID:", error);
-    throw error;
-  }
-};
-
-const updateProjectTask = async (taskId, request) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${taskId}`;
-    const response = await fetchData({
-      url,
-      method: "PUT",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(request),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error updating project task:", error);
-    throw error;
-  }
-};
-
-const updateProjectTaskStatus = async (taskId, status) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${taskId}/status?status=${status}`;
-    const response = await fetchData({
-      url,
-      method: "PUT",
-      contentType: "application/json",
-      token,
-      body: null,
-    });
-    return response.message;
-  } catch (error) {
-    console.error("Error updating project task status:", error);
-    throw error;
-  }
-};
-
-const updateProjectTaskStage = async ({
-  projectId = "",
-  stageId = "",
-  tasks = [],
-} = {}) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/payment-stage/${stageId}?projectId=${projectId}`;
-    const response = await fetchData({
-      url,
-      method: "PUT",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(tasks),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error updating project task stage:", error);
-    throw error;
-  }
-};
-
 export {
   getProjectTasksByProjectId,
   getProjectTasksByPaymentStageId,
   getProjectTasksWithItemByProjectId,
   getProjectTasksWithItemByRoomId,
   getProjectTasksByRoomId,
-  createProjectTask,
-  getProjectTaskById,
-  updateProjectTask,
-  updateProjectTaskStatus,
-  updateProjectTaskStage,
 };

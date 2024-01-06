@@ -27,7 +27,6 @@ export default function FloorList() {
   const [loading, setLoading] = useState(true);
   const [floors, setFloors] = useState([]);
   const [count, setCount] = useState(0);
-  const [project, setProject] = useState({});
 
   const fetchFloors = async () => {
     try {
@@ -48,18 +47,9 @@ export default function FloorList() {
     }
   };
 
-  const fetchProject = async () => {
-    try {
-      const project = await getProjectById(params.id);
-      setProject(project);
-    } catch (error) {
-      toast.error("Error: Project");
-    }
-  };
-
   const fetchData = async () => {
     setLoading(true);
-    await Promise.all([fetchFloors(), fetchProject()]);
+    await Promise.all([fetchFloors()]);
     setLoading(false);
   };
 
@@ -74,9 +64,7 @@ export default function FloorList() {
           <div className="wpo-breadcumb-wrap">
             <ol>
               <li>
-                <Link href={`/project/${params.id}`}>
-                  {project.name || `Project`}
-                </Link>
+                <Link href={`/project/${params.id}/floors`}>{`Floors`}</Link>
               </li>
             </ol>
           </div>

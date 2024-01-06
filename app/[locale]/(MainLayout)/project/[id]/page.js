@@ -51,25 +51,27 @@ export default function ProjectOverview() {
               <div className="wpo-project-single-wrap">
                 <div className="wpo-project-single-item">
                   <div className="row">
+                    <div className="col-lg-12">
+                      <div className="wpo-project-single-title d-flex">
+                        <h3>{project?.name ?? "[Project Name]"} </h3>
+                        <Chip
+                          sx={{
+                            mx: 2,
+                            mt: "4px",
+                            backgroundColor: "#CAAD06",
+                            color: "white",
+                            fontWeight: 600,
+                            "& .MuiChip-label": {
+                              pt: "1px",
+                              fontSize: 16,
+                            },
+                          }}
+                          label={`${projectTypeOptions[project?.type]}`}
+                        ></Chip>
+                      </div>
+                    </div>
                     <div className="col-lg-7">
                       <div className="wpo-project-single-item list-widget">
-                        <div className="wpo-project-single-title d-flex">
-                          <h3>{project?.name ?? "[Project Name]"} </h3>
-                          <Chip
-                            sx={{
-                              mx: 2,
-                              mt: "4px",
-                              backgroundColor: "#CAAD06",
-                              color: "white",
-                              fontWeight: 600,
-                              "& .MuiChip-label": {
-                                pt: "1px",
-                                fontSize: 16,
-                              },
-                            }}
-                            label={`${projectTypeOptions[project?.type]}`}
-                          ></Chip>
-                        </div>
                         <p>{project?.description ?? "[Project Description]"}</p>
                         <div className="row">
                           <div className="col-lg-12 mb-4">

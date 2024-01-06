@@ -58,7 +58,7 @@ export default function PaymentStagesPage() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="container">
@@ -67,7 +67,7 @@ export default function PaymentStagesPage() {
           <div className="wpo-breadcumb-wrap">
             <ol>
               <li>
-                <Link href={`/project/${params.id}`}>{`Project`}</Link>
+                <Link href={`/project/${params.id}/stages`}>{`Stages`}</Link>
               </li>
             </ol>
           </div>
