@@ -95,7 +95,7 @@
             color: $white;
             margin: 0;
             position: relative;
-            font-family: $heading-font;
+            font-family: $base-font;
 
             @media (max-width: 991px) {
                 font-size: 20px;
@@ -107,7 +107,7 @@
     .about-widget {
         .logo{
 			font-size: 45px;
-			font-family: $heading-font;
+			font-family: $base-font;
 			color: $theme-primary-color;
             line-height: 40px;
 

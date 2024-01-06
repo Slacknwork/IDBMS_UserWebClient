@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 import { usePathname, useRouter } from "/navigation";
 
-export default function Tabs({ uriPos, tabs }) {
+export default function Tabs({ uriPos, tabs, vertical }) {
   const router = useRouter();
   const paths = usePathname().split("/");
   const urlBuild = paths.slice(0, uriPos).join("/");
@@ -24,7 +24,7 @@ export default function Tabs({ uriPos, tabs }) {
   }, [paths]);
 
   return (
-    <Nav tabs>
+    <Nav tabs vertical={vertical}>
       {tabs.map((tab) => {
         return (
           <NavItem style={{ cursor: "pointer" }} key={tab.path}>

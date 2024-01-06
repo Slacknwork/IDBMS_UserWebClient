@@ -479,7 +479,7 @@
             font-weight: 700;
             color: $text-color;
             margin: 0 0 0.2em;
-            font-family: $heading-font;
+            font-family: $base-font;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -500,7 +500,7 @@
             }
 
 			span{
-				font-family: $heading-font;
+				font-family: $base-font;
 			}
         }
     }
@@ -837,7 +837,7 @@
 			}
 			h2{
 				font-size: 30px;
-				font-family: $heading-font;
+				font-family: $base-font;
 				margin-bottom: 20px;
 				line-height: 36px;
 				font-weight: 600;

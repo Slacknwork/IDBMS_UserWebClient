@@ -170,14 +170,15 @@ export default function ProjectList() {
                           </ul>
                         </div>
                         <div className="entry-details">
-                          <h3>
+                          <h3 style={{ fontSize: 26 }}>
                             <Link
                               href={`/project/${participation.project?.id}`}
                             >
                               {participation.project?.name}
                             </Link>
                           </h3>
-                          <p>
+
+                          <p style={{ fontSize: 18 }}>
                             {participation.project?.description ||
                               "No description"}
                           </p>

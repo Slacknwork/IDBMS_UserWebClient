@@ -313,7 +313,7 @@
 
 		/*** tabs ***/
 		.nav-tabs {
-			font-family: $heading-font;
+			font-family: $base-font;
 			border: 0;
 
 			@include media-query(767px) {
@@ -357,11 +357,16 @@
 				width: 100%;
 				height: 3px;
                 background: $theme-primary-color;
-				border-radius: 4px;
 				content: "";
 				opacity: 0;
 				visibility: hidden;
 			}
+		}
+
+		.nav-tabs.flex-column a:before {
+			/* Additional styles for the :before pseudo-element in flex-column */
+			width: 3px;
+			height: 100%;
 		}
 
 		.nav-tabs a:hover,

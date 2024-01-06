@@ -23,7 +23,7 @@
 			margin: 0 0 1.3em;
 			position: relative;
 			text-transform: capitalize;
-			font-family: $heading-font;
+			font-family: $base-font;
 			padding-bottom: 20px;
 			font-weight: 700;
 
@@ -163,7 +163,7 @@
 		}
 
 		a {
-			font-family: $heading-font;
+			font-family: $base-font;
 			font-size: 14px;
 			font-size: calc-rem-value(14);
 			color: $heading-color;
