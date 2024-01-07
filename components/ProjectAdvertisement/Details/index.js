@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 export default function AdvertisementDetails() {
   // INIT
   const params = useParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
   const [project, setProject] = useState({});
@@ -39,7 +40,9 @@ export default function AdvertisementDetails() {
                       <h2>{project.name ?? ""}</h2>
                       <div
                         dangerouslySetInnerHTML={{
-                          __html: project?.advertisementDescription,
+                          __html: language === "english"
+                            ? project?.englishAdvertisementDescription ?? ""
+                            : project?.advertisementDescription ?? "",
                         }}
                       ></div>
                     </div>
