@@ -36,8 +36,16 @@ const tabs = [
     label: "Documents",
   },
   {
-    path: "payment",
-    label: "Payment",
+    path: "participations",
+    label: "Participations",
+  },
+  {
+    path: "transactions",
+    label: "Transactions",
+  },
+  {
+    path: "warranty",
+    label: "Warranty",
   },
 ];
 

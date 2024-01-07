@@ -29,6 +29,7 @@
 
 		li .page-btn,
 		li a {
+			border: 0;
 			cursor: pointer;
 			background-color: transparent;
 			width: 50px;
@@ -38,6 +39,7 @@
 			font-size: calc-rem-value(16);
 			font-weight: 600;
 			color: $dark-gray;
+			transition: all 0.2s;
 			background: transparentize($theme-primary-color, .9);
 			display: block;
 

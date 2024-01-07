@@ -20,7 +20,7 @@ import { getAllTaskCategories } from "/services/taskCategoryServices";
 import { getFloorsByProjectId } from "/services/floorServices";
 import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 
-import Pagination from "/components/Pagination";
+import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
 import NavButton from "/components/Shared/NavButton";
 
@@ -503,7 +503,7 @@ export default function ProjectTasks() {
             </div>
           </div>
 
-          <Pagination count={1}></Pagination>
+          <Pagination count={count}></Pagination>
         </div>
       </div>
     </div>
