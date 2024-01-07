@@ -37,7 +37,7 @@ export default function TaskLayout({ children }) {
             ></NavButton>
             <div className="wpo-shop-single-section">
               <div className="product-info">
-                <Tabs uriPos={6} tabs={tabs} vertical></Tabs>
+                <Tabs uriPos={5} tabs={tabs} vertical></Tabs>
               </div>
             </div>
           </div>
