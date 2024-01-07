@@ -8,21 +8,81 @@
   },
   "Home": {
     "Booking": "Dự án đặt phòng",
-    "Details": "Chi tiết dự án"
+    "Details": "Chi tiết dự án",
+    "HeroTitle": "Tạo ra ước mơ của bạn",
+    "HeroDescription": "Khách hàng rất quan trọng, khách hàng sẽ được khách hàng theo đuổi. Trong nguyên tố, họ chỉ sống khi họ sống.",
+    "About":"Về chúng tôi",
+    "AboutTitle":"Về thiết kế & trang trí nội thất của IDT",
+    "AboutDescription":"Chúng tôi chuyên cung cấp các dịch vụ thiết kế và thi công nội thất: Thi công nội thất Ngân hàng, Văn phòng, Nhà ở, Cửa hàng, Showroom. Với đội ngũ Kiến trúc sư giàu kinh nghiệm trong nghành nghề, đã thực hiện nhiều dự án trong và ngoài nước.",
+    "RoomTypes":"Loại phòng",
+    "RoomTypesText":"Chọn loại phòng của bạn",
+    "PricingPlan":"Gói giá",
+    "DaysOfWork":"ngày làm việc",
+    "Projects":"Dự án",
+    "OurProjects":"Dự án của chúng tôi",
+    "WhatWeDo":"Những việc chúng tôi làm",
+    "Decor":"Thiết kế nội thất",
+    "Construction":"Thi công",
+    "DiscoverMore": "Khám phá thêm"
   },
   "Header": {
     "Home": "Trang chủ",
     "About": "Về chúng tôi",
     "Projects": "Dự án",
-    "Interior": "Nội thất"
+    "Interior": "Nội thất",
+    "InteriorItem": "Đồ nội thất"
   },
   "Footer": {
     "OurServices": "Dịch vụ của chúng tôi",
     "Contact": "Liên hệ",
     "OurGallery": "Thư viện ảnh của chúng tôi",
-    "Details": "Chi tiết"
+    "Details": "Chi tiết",
+    "Address":"721 Phan Văn Trị, Phường 07, Quận Gò Vấp, HCM",
+    "Decor":"Thiết kế nội thất",
+    "Construction":"Thi công"
   },
-  "About": {},
+  "About": {
+    "AboutUs": "Về chúng tôi",
+    "YearsExp": "Năm Kinh Nghiệm",
+    "AboutUsTitle":"Giới thiệu về công ty IDT của chúng tôi",
+    "AboutUsSummarize":"Chuyên về thiết kế kiến trúc, thiết kế và thi công nội thất, xây dựng và cung cấp đồ nội thất.",
+    "AboutUsDescription":"Công ty IDT của chúng tôi là công ty chuyên nghiệp trong lĩnh vực thiết kế kiến trúc, trang trí nội thất, xây dựng. Được thành lập từ năm 2002 đến nay, công ty chúng tôi với bề dày kinh nghiệm lâu năm cùng đội ngũ kiến trúc sư, kỹ sư, công nhân, qua nhiều dự án trong và ngoài nước, chúng tôi công ty sẽ đáp ứng được yêu cầu của khách hàng. Mặt khác, công ty IDT còn đầu tư nhà xưởng rộng hơn 1000m2 tại Số 23 TX 48, Phường Thạnh Xuân, Quận 12, TPHCM với đầy đủ máy móc hiện đại nhập khẩu từ các nước Châu Âu sẽ cho ra những sản phẩm chất lượng cao, uy tín trên thị trường.",
+    "VideoText":"Hãy xem qua video của chúng tôi",
+    "AboutProject":"Dự án",
+    "AboutProjectTitle":"Về những dự án của IDT",
+    "AboutProjectSummarize":"Về những thiết kế và thi công nội thất mà công ty IDT chúng tôi đã thực hiện cho chủ đầu tư",
+    "AboutProjectDescription1":"Với hơn 17 năm kinh nghiệm thiết kế nội thất cho nhiều ngân hàng lớn nhỏ như Ngân hàng Quân đội MBbank, ngân hàng OCB, SCB, ngân hàng ANZ, ngân hàng Standar Charterd… IDT Decor tự hào là đơn vị đi đầu trong lĩnh vực thiết kế nội thất. Nội thất ngân hàng, giúp các đơn vị có không gian độc đáo, hiện đại, sang trọng và đảm bảo phong cách riêng của từng ngân hàng.",
+    "AboutProjectDescription2":"IDT là công ty thiết kế nội thất văn phòng chuyên nghiệp hàng đầu tại Việt Nam. Công ty được hiệp hội khách hàng bình chọn là một trong những đơn vị uy tín trong lĩnh vực tư vấn thiết kế và thi công nội thất văn phòng.",
+    "Contact":"Liên hệ với chúng tôi!",
+    "Address":"Địa chỉ",
+    "ContactAddress":"721 Phan Văn Trị, Phường 07, Quận Gò Vấp, HCM",
+    "Email":"Email",
+    "Call":"Gọi ngay",
+    "Question":"Cần đặt câu hỏi?",
+    "FunFact":"Một thực tế đã được chứng minh từ lâu là người đọc sẽ bị phân tâm bởi nội dung của một trang khi đang xem.",
+    "FormName":"Họ Tên",
+    "FormEmail":"Email",
+    "FormPhone":"Số điện thoại",
+    "FormAddress":"Địa chỉ",
+    "FormMessage":"Tin nhắn",
+    "FormSubmit":"Nộp ngay"
+  },
+  "InteriorItems": {
+    "Price": "Giá",
+    "Filter": "Lọc đồ",
+    "Cart": "Thêm vào giỏ hàng",
+    "Search": "Tìm đồ.."
+  },
+  "ProjectListPage": {
+    "Search": "Tìm dự án",
+    "Status": "Trạng thái",
+    "All": "Tất cả",
+    "ContactText1":"Chúng tôi có thể",
+    "ContactText2":"giúp bạn!",
+    "ContactText3":"Hãy để lại thông tin của bạn để chúng tôi có thể liên hệ và bắt đầu dự án!",
+    "ContactUs":"Liên hệ chúng tôi",
+    "Details":"Chi tiết"
+  },
   "Contact": {},
   "UserProfile": {
     "Name": "Tên",

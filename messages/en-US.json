@@ -8,21 +8,81 @@
   },
   "Home": {
     "Booking": "Booking Project",
-    "Details": "Project details"
+    "Details": "Project details",
+    "HeroTitle": "Creating Your Dream",
+    "HeroDescription": "The customer is very important, the customer will be followed by the customer. In the element, they live when they live.",
+    "About":"About Us",
+    "AboutTitle":"IDT Decor Design & Decoration",
+    "AboutDescription":"We specialize in providing interior design services and interior construction: Interior Construction of Banks, Offices, Houses, Shops, Showrooms. With a team of experienced architects in the profession, have implemented many domestic and foreign projects.",
+    "RoomTypes":"Room types",
+    "RoomTypesText":"Choose Your Room Type",
+    "PricingPlan":"Pricing Plan",
+    "DaysOfWork":"days of work",
+    "Projects":"Projects",
+    "OurProjects":"Our Projects",
+    "WhatWeDo":"What we do",
+    "Decor":"Decor",
+    "Construction":"Construction",
+    "DiscoverMore": "Discover More"
   },
   "Header": {
     "Home": "Home",
     "About": "About",
     "Projects": "Projects",
-    "Interior": "Interior"
+    "Interior": "Interior",
+    "InteriorItem": "Interior items"
   },
   "Footer": {
     "OurServices": "Our Services",
     "Contact": "Contact",
     "OurGallery": "Our Gallery",
-    "Details": "Details"
+    "Details": "Details",
+    "Address":"721 Phan Van Tri Street, Ward 07, Go Vap District, HCMC",
+    "Decor":"Decor",
+    "Construction":"Construction"
   },
-  "About": {},
+  "About": {
+    "AboutUs": "About Us",
+    "YearsExp": "Years of Experience",
+    "AboutUsTitle":"About our IDT studio",
+    "AboutUsSummarize":"Specializes in architectural design, interior design and construction, construction and supply of furniture.",
+    "AboutUsDescription":"Our company IDT is a professional company in the field of architectural design, interior decoration, construction.Founded in 2002 up to now, our company with a long experience with a team of architects, engineers, workers, through many domestic and foreign projects, our company will meet the requirements of customers. On the other hand, IDT company also invests in a factory of more than 1000 square meters at Town Street 48, Thanh Xuan Ward, District 12, with full modern machinery imported from European countries, will produce high quality products with prestige on the market.",
+    "VideoText":"Watch Our Video",
+    "AboutProject":"Projects",
+    "AboutProjectTitle":"IDT Projects",
+    "AboutProjectSummarize":"Interior design and construction that our IDT has implemented for investors",
+    "AboutProjectDescription1":"With more than 17 years of interior design experience with many large and small banks such as Military Bank MBbank, OCB bank, SCB, ANZ bank, Standar charterd bank … IDT Decor is proud to be a leader in the field of interior design. Bank interior, helping the units have a unique, modern, luxurious space and ensure the unique style of each bank.",
+    "AboutProjectDescription2":"IDT is the leading professional office interior design company in Vietnam. The company is voted by the customer association as one of the prestigious units in the field of office interior design consultancy and construction.",
+    "Contact":"Contact us!",
+    "Address":"Address",
+    "ContactAddress":"721 Phan Van Tri Street, Ward 07, Go Vap District, HCMC",
+    "Email":"Email Us",
+    "Call":"Call Now",
+    "Question":"Have Any Question?",
+    "FunFact":"It is a long established fact that a reader will be distracted by the content of a page when looking.",
+    "FormName":"Your Name",
+    "FormEmail":"Your Email",
+    "FormPhone":"Your Phone",
+    "FormAddress":"Your Address",
+    "FormMessage":"Message",
+    "FormSubmit":"Submit Now"
+  },
+  "InteriorItems": {
+    "Price": "Price",
+    "Filter": "Filter Items",
+    "Cart": "Add to cart",
+    "Search": "Search Item.."
+  },
+  "ProjectListPage": {
+    "Search": "Search Project",
+    "Status": "Status",
+    "All": "All",
+    "ContactText1":"How We Can",
+    "ContactText2":"Help You!",
+    "ContactText3":"Leave us your information so we can contact and start up a project!",
+    "ContactUs":"Contact Us",
+    "Details":"Details"
+  },
   "Contact": {},
   "UserProfile": {
     "Name": "Name",

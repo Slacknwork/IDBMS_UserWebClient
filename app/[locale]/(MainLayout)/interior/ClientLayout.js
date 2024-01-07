@@ -2,11 +2,14 @@
 
 import "react-toastify/dist/ReactToastify.css";
 import PageTitle from "/components/PageTitle";
+import { useTranslations } from "next-intl";
 
 export default function ClientLayout({ children }) {
+  const t = useTranslations("Header");
+
   return (
     <div>
-      <PageTitle pageTitle={"Interior items"} pagesub={"Interior"} />
+      <PageTitle pageTitle={t("InteriorItem")} pagesub={t("Interior")} />
       {children}
     </div>
   );

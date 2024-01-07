@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "/store/reducers/customer";
 
 import MobileMenu from "/components/MobileMenu/MobileMenu";
+import { useTranslations } from "next-intl";
 
 const Logo = "/images/idt-logo.jpg";
 
@@ -14,6 +15,7 @@ const Header = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
+  const t = useTranslations("Header");
 
   const user = useSelector((state) => state.customer);
 
@@ -68,16 +70,16 @@ const Header = (props) => {
                   </button>
                   <ul className="nav navbar-nav mb-2 mb-lg-0">
                     <li className="menu-item-has-children">
-                      <Link href="/">Home</Link>
+                      <Link href="/">{t("Home")}</Link>
                     </li>
                     <li>
-                      <Link href="/about">About</Link>
+                      <Link href="/about">{t("About")}</Link>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link href="/project">Projects</Link>
+                      <Link href="/project">{t("Projects")}</Link>
                     </li>
                     <li className="menu-item-has-children">
-                      <Link href="/interior">Interior</Link>
+                      <Link href="/interior">{t("Interior")}</Link>
                     </li>
                   </ul>
                 </div>

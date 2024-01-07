@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { getAllRoomTypes } from "/services/roomTypeServices";
 
 import SectionTitle2 from "/components/Shared/SectionTitle2";
+import { useTranslations } from "next-intl";
 
 export default function Pricing() {
   const settings = {
@@ -17,6 +18,7 @@ export default function Pricing() {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
+  const t = useTranslations("Home");
 
   const [roomTypes, setRoomTypes] = useState([]);
 
@@ -38,9 +40,9 @@ export default function Pricing() {
     <section className="wpo-pricing-section" style={{ marginBottom: "6rem" }}>
       <div className="container">
         <SectionTitle2
-          subTitle={"Room types"}
-          MainTitle={"Choose Your Room Type"}
-          vText={"Pricing Plan"}
+          subTitle={t("RoomTypes")}
+          MainTitle={t("RoomTypesText")}
+          vText={t("PricingPlan")}
         />
         <div className="wpo-project-area">
           <div className="wpo-project-wrap project-active owl-carousel">
@@ -73,7 +75,7 @@ export default function Pricing() {
                                 đ<span>/m²</span>
                               </h2>
                               <p>
-                                {roomType.estimateDayPerArea} days of work/m²
+                                {roomType.estimateDayPerArea} {t("DaysOfWork")}/m²
                               </p>
                             </div>
                           </div>

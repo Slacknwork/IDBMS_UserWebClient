@@ -12,9 +12,11 @@ import bShape2 from "/public/images/blog/Vector4.png";
 import projectTypeOptions from "/constants/enums/projectType";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
+import { useTranslations } from "next-intl";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const t = useTranslations("Home");
 
   const fetchProjects = async () => {
     try {
@@ -36,7 +38,7 @@ export default function Projects() {
   return (
     <section className="wpo-blog-section section-padding">
       <div className="container">
-        <SectionTitle2 subTitle={"Projects"} MainTitle={"Our Projects"} />
+        <SectionTitle2 subTitle={t("Projects")} MainTitle={t("OurProjects")} />
         <div className="wpo-blog-items">
           <div className="row">
             {projects.map((project) => (

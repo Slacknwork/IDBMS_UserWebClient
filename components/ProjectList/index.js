@@ -12,6 +12,7 @@ import { getProjectStatusByUserId } from "/services/projectServices";
 import projectStatusOptions from "/constants/enums/projectStatus";
 
 import Search from "/components/Shared/Search";
+import { useTranslations } from "next-intl";
 
 export default function ProjectList() {
   // CONSTANTS
@@ -20,6 +21,7 @@ export default function ProjectList() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const user = useSelector((state) => state.customer);
+  const t = useTranslations("ProjectListPage");
 
   // SEARCH
   const searchQuery = "search";
@@ -83,14 +85,14 @@ export default function ProjectList() {
           <div className={`col col-lg-4 col-12`}>
             <div className="blog-sidebar">
               <div className="mb-5">
-                <Search placeholder="Search Project"></Search>
+                <Search placeholder={t("Search")}></Search>
               </div>
               <div className="widget category-widget">
-                <h3>Status</h3>
+                <h3>{t("Status")}</h3>
                 <ul>
                   <li>
                     <a onClick={() => setStatus(0)}>
-                      All
+                    {t("All")}
                       <span>0</span>
                     </a>
                   </li>
@@ -109,13 +111,12 @@ export default function ProjectList() {
               </div>
               <div className="wpo-contact-widget widget">
                 <h2>
-                  How We Can <br /> Help You!
+                {t("ContactText1")} <br /> {t("ContactText2")}
                 </h2>
                 <p>
-                  Leave us your information so we can contact and start up a
-                  project!
+                {t("ContactText3")}
                 </p>
-                <Link href="/contact">Contact Us</Link>
+                <Link href="/contact">{t("ContactUs")}</Link>
               </div>
             </div>
           </div>
@@ -190,7 +191,7 @@ export default function ProjectList() {
                         href={`/project/${participation.project?.id}`}
                       >
                         <div className="d-flex">
-                          <div className="theme-btn px-4">Details</div>
+                          <div className="theme-btn px-4">{t("Details")}</div>
                         </div>
                       </Link>
                     </div>

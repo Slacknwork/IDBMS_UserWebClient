@@ -4,9 +4,11 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
+import { useTranslations } from "next-intl";
 
 export default function Footer(props) {
   const [projects, setProjects] = useState([]);
+  const t = useTranslations("Footer");
 
   const fetchProjects = async () => {
     try {
@@ -82,14 +84,14 @@ export default function Footer(props) {
             <div className="col col-xl-3  col-lg-4 col-md-6 col-sm-12 col-12">
               <div className="widget link-widget">
                 <div className="widget-title">
-                  <h3>Our Services</h3>
+                  <h3>{t("OurServices")}</h3>
                 </div>
                 <ul>
                   <li>
-                    <Link href={`/about/decor`}>Decor</Link>
+                    <Link href={`/about/decor`}>{t("Decor")}</Link>
                   </li>
                   <li>
-                    <Link href={`/about/construction`}>Construction</Link>
+                    <Link href={`/about/construction`}>{t("Construction")}</Link>
                   </li>
                 </ul>
               </div>
@@ -97,15 +99,12 @@ export default function Footer(props) {
             <div className="col col-xl-3  col-lg-4 col-md-6 col-sm-12 col-12">
               <div className="widget wpo-service-link-widget">
                 <div className="widget-title">
-                  <h3>Contact </h3>
+                  <h3>{t("Contact")} </h3>
                 </div>
                 <div className="contact-ft">
                   <ul>
                     <li>
-                      <i className="fi flaticon-location"></i>721 Phan Văn Trị
-                      Street
-                      <br />
-                      Ward 07, Gò Vấp District, HCMC
+                      <i className="fi flaticon-location"></i>{t("Address")} 
                     </li>
                     <li>
                       <i className="fi flaticon-telephone"></i>+84 983 802 117
@@ -123,7 +122,7 @@ export default function Footer(props) {
             <div className="col col-xl-3  col-lg-4 col-md-6 col-sm-12 col-12">
               <div className="widget instagram">
                 <div className="widget-title">
-                  <h3>Our Gallery</h3>
+                  <h3>{t("OurGallery")}</h3>
                 </div>
                 <ul className="d-flex">
                   {projects.slice(0, 6).map((project) => (

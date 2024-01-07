@@ -11,16 +11,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import InteriorItemCategories from "./Categories";
 import Pagination from "/components/Pagination";
+import { useTranslations } from "next-intl";
 
 import {
-  getInteriorItemPagination,
-  countAllInteriorItems,
+  getAllInteriorItems,
 } from "/services/interiorItemServices";
 
 const pageQuery = "page";
 const pageSize = 6;
 
 function InteriorItemSearchBar() {
+const t = useTranslations("InteriorItems");
+
   return (
     <div className="row">
       <div className="col col-lg-6 col-12">
@@ -31,7 +33,7 @@ function InteriorItemSearchBar() {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Search Document.."
+                  placeholder={t("Search")}
                 />
                 <button type="submit">
                   <i className="ti-search"></i>
@@ -91,15 +93,16 @@ function InteriorItemFilter() {
       },
     },
   });
+  const t = useTranslations("InteriorItems");
 
   return (
     <div className="shadow p-4" style={{ backgroundColor: "white" }}>
       <ThemeProvider theme={theme}>
-        <h4 className="mt-2">Filter Items</h4>
+        <h4 className="mt-2">{t("Filter")}</h4>
         <FormControlLabel control={<Checkbox />} label="Filter" />
         <FormControlLabel control={<Checkbox />} label="Filter" />
         <FormControlLabel control={<Checkbox />} label="Filter" />
-        <h6>Price</h6>
+        <h6>{t("Price")}</h6>
         <Slider getAriaLabel={() => "Price range"} valueLabelDisplay="auto" />
       </ThemeProvider>
     </div>
@@ -108,10 +111,12 @@ function InteriorItemFilter() {
 
 function InteriorItemSingle(itemDetails) {
   const item = itemDetails.item;
+  const t = useTranslations("InteriorItems");
+
   return (
     <div className="grid" style={{ backgroundColor: "white" }}>
       <Image
-        src="https://media.istockphoto.com/id/1334037436/photo/wooden-chair-isolated-on-white-with-clipping-path.jpg?s=612x612&w=0&k=20&c=ToZrdNt8mNvaPLEuMg9Pj6u-5etxNwcIUzVOIF088yM="
+        src={item.imageUrl ?? ""}
         alt=""
         width={0}
         height={0}
@@ -120,13 +125,13 @@ function InteriorItemSingle(itemDetails) {
       />
       <div className="details">
         <h3 style={{ height: "55px", overflowY: "auto" }}>
-          <Link href="/interior/1">{item && item.Name}</Link>
+          <Link href={`/interior/${item.id}`}>{item && item.name}</Link>
         </h3>
         <div className="price">
           <span>
             {item &&
-              item.EstimatePrice &&
-              item.EstimatePrice.toLocaleString("en-US") + " VND"}
+              item.estimatePrice &&
+              item.estimatePrice.toLocaleString("en-US") + " VND"}
           </span>
         </div>
         <div className="add-to-cart">
@@ -135,7 +140,7 @@ function InteriorItemSingle(itemDetails) {
             data-bs-html="true"
             title="Add to Cart"
           >
-            Add to cart
+            {t("Cart")}
           </button>
         </div>
       </div>
@@ -159,11 +164,11 @@ export default function InteriorItems() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getInteriorItemPagination(pageSize, currentPage);
-          const intCount = await countAllInteriorItems();
-          setValues(data.value);
-          setInteriorItemCount(intCount);
+          const data = await getAllInteriorItems(pageSize, currentPage);
+          setValues(data.list);
+          setInteriorItemCount(data.totalItem);
           setLoading(false);
+          console.log(data.list)
         } catch (error) {
           console.error("Error fetching data:", error);
           toast.error("Error fetching data");
@@ -188,8 +193,7 @@ export default function InteriorItems() {
         <div className="col col-lg-9 col-12">
           <InteriorItemSearchBar></InteriorItemSearchBar>
           <div>
-            {values &&
-              values.map((item, index) => (
+            { values.map((item) => (
                 <InteriorItemSingle key={item.id} item={item} />
               ))}
           </div>
