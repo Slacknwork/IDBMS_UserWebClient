@@ -76,7 +76,9 @@ export default function TaskLayout({ children }) {
                   <h6 style={{ color: "grey" }}>
                     {task?.code ?? "[Task Code]"}
                   </h6>
-                  <h3>{task?.name ?? "[Task Name]"}</h3>
+                  <h3 style={{ fontWeight: 700 }}>
+                    {task?.name ?? "[Task Name]"}
+                  </h3>
                 </div>
                 <div className="col col-lg-2 col-4 wpo-project-single-item list-widget">
                   <ul>

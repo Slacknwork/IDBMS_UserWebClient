@@ -1,6 +1,5 @@
 "use client";
 
-import { Link } from "/navigation";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -11,6 +10,8 @@ import projectTypeOptions from "/constants/enums/projectType";
 import projectStatusOptions from "/constants/enums/projectStatus";
 
 import { getProjectById } from "/services/projectServices";
+
+import NavButton from "/components/Shared/NavButton";
 
 export default function ProjectOverview() {
   // INIT
@@ -41,13 +42,7 @@ export default function ProjectOverview() {
       <div className="container" style={{ minHeight: "35rem" }}>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <div className="wpo-breadcumb-wrap">
-              <ol>
-                <li>
-                  <Link href={`/project/${params.id}`}>{`Overview`}</Link>
-                </li>
-              </ol>
-            </div>
+            <NavButton url={`/project`} label="Projects"></NavButton>
           </div>
         </div>
         {loading ? (
@@ -65,7 +60,9 @@ export default function ProjectOverview() {
                   <div className="row">
                     <div className="col-lg-12">
                       <div className="wpo-project-single-title d-flex">
-                        <h3>{project?.name ?? "[Project Name]"} </h3>
+                        <h3 style={{ fontWeight: 800 }}>
+                          {project?.name ?? "[Project Name]"}{" "}
+                        </h3>
                         <Chip
                           sx={{
                             mx: 2,

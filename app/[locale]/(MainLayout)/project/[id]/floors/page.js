@@ -7,10 +7,10 @@ import { useParams, useSearchParams } from "next/navigation";
 import { CircularProgress, Stack } from "@mui/material";
 
 import { getFloorsByProjectId } from "/services/floorServices";
-import { getProjectById } from "/services/projectServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
+import NavButton from "/components/Shared/NavButton";
 
 export default function FloorList() {
   // CONSTANTS
@@ -61,13 +61,7 @@ export default function FloorList() {
     <div className="pb-0 container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <div className="wpo-breadcumb-wrap">
-            <ol>
-              <li>
-                <Link href={`/project/${params.id}/floors`}>{`Floors`}</Link>
-              </li>
-            </ol>
-          </div>
+          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
