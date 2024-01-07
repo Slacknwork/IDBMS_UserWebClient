@@ -22,7 +22,10 @@
     "OurGallery": "Thư viện ảnh của chúng tôi",
     "Details": "Chi tiết"
   },
-  "About": {},
+  "About": {
+    "AboutUs": "Về chúng tôi",
+    "YearsExp": "Năm Kinh Nghiệm"
+  },
   "Contact": {},
   "UserProfile": {
     "Name": "Tên",

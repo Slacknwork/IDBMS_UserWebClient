@@ -4,8 +4,11 @@ import abimg from "/public/images/samples/about-overview.jpg";
 import abimg2 from "/public/images/samples/about-overview-2.png";
 import Image from "next/image";
 import VideoModal from "/components/ModalVideo/VideoModal";
+import { useTranslations } from "next-intl";
 
 const About2 = (props) => {
+  const t = useTranslations("About");
+
   return (
     <div className="wpo-about-area-s2 section-padding">
       <div className="container">
@@ -21,7 +24,7 @@ const About2 = (props) => {
                 />
                 <div className="wpo-about-img-text">
                   <h2>20+</h2>
-                  <p>Years of Experience</p>
+                  <p>{t("YearsExp")}</p>
                 </div>
               </div>
               <div className="wpo-about-img-right">

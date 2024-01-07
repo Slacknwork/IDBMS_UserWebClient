@@ -22,7 +22,10 @@
     "OurGallery": "Our Gallery",
     "Details": "Details"
   },
-  "About": {},
+  "About": {
+    "AboutUs": "About Us",
+    "YearsExp": "Years of Experience"
+  },
   "Contact": {},
   "UserProfile": {
     "Name": "Name",
