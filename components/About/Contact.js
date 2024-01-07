@@ -67,7 +67,7 @@ export default function ContactForm() {
                     <div className="office-info-text">
                       <h2>{t("Address")}</h2>
                       <p>
-                      {t("ContactAddress")}
+                        {t("ContactAddress")}
                       </p>
                     </div>
                   </div>
@@ -95,8 +95,8 @@ export default function ContactForm() {
                     </div>
                     <div className="office-info-text">
                       <h2>{t("Call")}</h2>
-                      <p>+84 983 802 117</p>
-                      <p>+84 949 802 117</p>
+                      <p>Mr. Tuấn: +84 983 802 117</p>
+                      <p>Mrs. Thúy: +84 949 802 117</p>
                     </div>
                   </div>
                 </div>
@@ -104,9 +104,9 @@ export default function ContactForm() {
             </div>
             <div className="wpo-contact-title">
               <h2>{t("Question")}</h2>
-              <p>
+              {/* <p>
               {t("FunFact")}
-              </p>
+              </p> */}
             </div>
             <div className="wpo-contact-form-area">
               <form
