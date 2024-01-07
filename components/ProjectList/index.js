@@ -159,7 +159,7 @@ export default function ProjectList() {
                         <div className="entry-meta">
                           <ul>
                             <li>
-                              <i className="fi ti-user"></i> By{" "}
+                              <i className="fi ti-user"></i> {t("By")}{" "}
                               <Link href="/">aaa</Link>{" "}
                             </li>
                             <li>
@@ -181,7 +181,7 @@ export default function ProjectList() {
 
                           <p style={{ fontSize: 18 }}>
                             {participation.project?.description ||
-                              "No description"}
+                              t("NoDescription")}
                           </p>
                         </div>
                       </div>

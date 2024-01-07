@@ -81,7 +81,9 @@
     "ContactText2":"giúp bạn!",
     "ContactText3":"Hãy để lại thông tin của bạn để chúng tôi có thể liên hệ và bắt đầu dự án!",
     "ContactUs":"Liên hệ chúng tôi",
-    "Details":"Chi tiết"
+    "Details":"Chi tiết",
+    "By": "Bởi",
+    "NoDescription": "Không có thông tin"
   },
   "Contact": {},
   "UserProfile": {
@@ -215,7 +217,18 @@
     "AdvertisementStatus": "Trạng thái quảng cáo",
     "AdminNote": "Ghi chú của quản trị viên"
   },
+  "ProjectDetails_Tab": {
+    "Overview": "Tổng quan",
+    "Floors": "Tầng",
+    "Stages":"Giai đoạn",
+    "Tasks": "Công việc",
+    "Comments":"Bình luận",
+    "Items":"Đồ dùng",
+    "Documents":"Tài liệu",
+    "Payment":"Thanh toán"
+  },
   "ProjectDetails_Overview": {
+    "Overview": "Tổng quan",
     "Booking": "Đặt chỗ Dự án",
     "Details": "Chi tiết Dự án",
     "Name": "Tên",
@@ -234,7 +247,16 @@
     "Language": "Ngôn ngữ",
     "Status": "Trạng thái",
     "AdvertisementStatus": "Trạng thái Quảng cáo",
-    "AdminNote": "Ghi chú của quản trị viên"
+    "AdminNote": "Ghi chú của quản trị viên",
+    "Category":"Phân loại",
+    "Created":"Được tạo",
+    "LastUpdated":"Lần cuối cập nhật",
+    "AmountPaid":"Số tiền đã thanh toán",
+    "TotalArea":"Tổng diện tích",
+    "EstimateWorkingDays":"Ước tính ngày làm việc",
+    "Site":"Địa điểm",
+    "Address":"Địa chỉ",
+    "Days":"ngày"
   },
   "ProjectDetails_Comment": {
     "Content": "Nội dung",
@@ -316,14 +338,20 @@
     "IsDeleted": "Đã xóa"
   },
   "ProjectDetails_Floor": {
+    "Floors": "Tầng",
     "Description": "Mô tả",
-    "": "",
-    "Details": "Chi tiết Tầng",
+    "SearchFloor": "Tìm tầng",
+    "Details": "Chi tiết tầng",
     "UsePurpose": "Mục đích sử dụng",
     "FloorNo": "Số tầng",
     "Area": "Diện tích",
     "SiteId": "ID Địa điểm",
-    "IsDeleted": "Đã xóa"
+    "IsDeleted": "Đã xóa",
+    "No":"STT",
+    "Rooms":"Phòng",
+    "RoomType":"Loại phòng",
+    "TotalPrice":"Tổng giá tiền",
+    "Tasks":"Công việc"
   },
   "ProjectDetails_Room": {
     "FloorId": "ID Tầng",

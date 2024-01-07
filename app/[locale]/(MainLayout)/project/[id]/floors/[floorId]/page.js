@@ -11,6 +11,7 @@ import { getRoomsByFloorId } from "/services/roomServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
+import { useTranslations } from "next-intl";
 
 export default function FloorDetails() {
   // CONSTANTS
@@ -28,6 +29,7 @@ export default function FloorDetails() {
   const [floor, setFloor] = useState({});
   const [rooms, setRooms] = useState([]);
   const [count, setCount] = useState(0);
+  const t = useTranslations("ProjectDetails_Floor");
 
   const fetchFloor = async () => {
     try {
@@ -90,7 +92,7 @@ export default function FloorDetails() {
           <div className="col col-lg-12 col-12">
             <div className="form-field">
               <h3>
-                Floor {floor.floorNo == 0 ? "G" : floor.floorNo}
+              {t("Floors")} {floor.floorNo == 0 ? "G" : floor.floorNo}
                 {` - ${floor.usePurpose}`}
               </h3>
             </div>
@@ -100,7 +102,7 @@ export default function FloorDetails() {
           </div>
         </div>
         <div className="row my-4">
-          <h3 className="my-auto">Rooms</h3>
+          <h3 className="my-auto">{t("Rooms")}</h3>
         </div>
         <div className="row">
           <div className="col col-lg-6 mb-4">
@@ -126,13 +128,13 @@ export default function FloorDetails() {
                   >
                     <tr>
                       <th scope="col" style={{ width: "6rem" }}>
-                        No.
+                      {t("No")}.
                       </th>
-                      <th scope="col">Use Purpose</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Area</th>
-                      <th scope="col">Room Type</th>
-                      <th scope="col">Total Price</th>
+                      <th scope="col">{t("UsePurpose")}</th>
+                      <th scope="col">{t("Description")}</th>
+                      <th scope="col">{t("Area")}</th>
+                      <th scope="col">{t("RoomType")}</th>
+                      <th scope="col">{t("TotalPrice")}</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -173,7 +175,7 @@ export default function FloorDetails() {
                                 href={""}
                                 className="theme-btn m-1 px-2 py-2"
                               >
-                                Tasks
+                                {t("Tasks")}
                               </Link>
                             </div>
                           </td>

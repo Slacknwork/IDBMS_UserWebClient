@@ -11,6 +11,7 @@ import { getProjectById } from "/services/projectServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
+import { useTranslations } from "next-intl";
 
 export default function FloorList() {
   // CONSTANTS
@@ -27,6 +28,7 @@ export default function FloorList() {
   const [loading, setLoading] = useState(true);
   const [floors, setFloors] = useState([]);
   const [count, setCount] = useState(0);
+  const t = useTranslations("ProjectDetails_Floor");
 
   const fetchFloors = async () => {
     try {
@@ -64,20 +66,20 @@ export default function FloorList() {
           <div className="wpo-breadcumb-wrap">
             <ol>
               <li>
-                <Link href={`/project/${params.id}/floors`}>{`Floors`}</Link>
+                <Link href={`/project/${params.id}/floors`}>{`Floor`}</Link>
               </li>
             </ol>
           </div>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
-            <h3 className="my-auto">Floors</h3>
+            <h3 className="my-auto">{t("Floors")}</h3>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-lg-6 mb-4">
-          <Search placeholder="Search Floor"></Search>
+          <Search placeholder={t("SearchFloor")}></Search>
         </div>
         <div className="col col-lg-12 col-12" style={{ height: "25rem" }}>
           {loading ? (
@@ -98,13 +100,13 @@ export default function FloorList() {
               >
                 <tr>
                   <th width="7.5%" scope="col" style={{ width: "5rem" }}>
-                    Floor
+                  {t("Floors")}
                   </th>
                   <th width="40%" scope="col">
-                    Use Purpose
+                  {t("UsePurpose")}
                   </th>
                   <th width="45%" scope="col">
-                    Description
+                  {t("Description")}
                   </th>
                   <th width="7.5%" scope="col"></th>
                 </tr>
@@ -133,7 +135,7 @@ export default function FloorList() {
                             href={`/project/${params.id}/floors/${floor.id}`}
                             className="theme-btn m-1 py-2"
                           >
-                            Details
+                            {t("Details")}
                           </Link>
                         </div>
                       </td>
