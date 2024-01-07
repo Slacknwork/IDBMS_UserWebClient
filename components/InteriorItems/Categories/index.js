@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 
-import getInteriorItemCategories from "/services/interiorItemCategoryServices";
+import {getAllInteriorItemCategories} from "/services/interiorItemCategoryServices";
 
 function Category(categoryDetails) {
   const item = categoryDetails.item;
@@ -17,17 +17,17 @@ function Category(categoryDetails) {
           overflow: "hidden",
         }}
       >
-        <div className="col-3 d-flex align-items-center justify-content-center">
+        <div className="col-6 d-flex align-items-center justify-content-center">
           <div className="icon">
             <img
-              src="https:/logowik.com/content/uploads/images/chair5381.jpg"
-              style={{ objectFit: "cover", width: "5rem", height: "5rem" }}
+              src={item && item.iconImageUrl}
+              style={{ objectFit: "cover", width: "7rem", height: "7rem" }}
               alt="Icon"
             />
           </div>
         </div>
         <div
-          className="col-9 d-flex align-items-center justify-content-center"
+          className="col-6 d-flex align-items-center justify-content-center"
           style={{
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
@@ -53,8 +53,8 @@ export default function InteriorItemCategories() {
       initialized.current = true;
       const fetchDataFromApi = async () => {
         try {
-          const data = await getInteriorItemCategories();
-          setValues(data);
+          const data = await getAllInteriorItemCategories();
+          setValues(data.list);
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);

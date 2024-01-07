@@ -6,9 +6,11 @@ import { toast } from "react-toastify";
 import { localeIndex } from "/constants/locales";
 
 import { createBookingRequest } from "/services/bookingRequestServices";
+import { useTranslations } from "next-intl";
 
 export default function ContactForm() {
   const params = useParams();
+  const t = useTranslations("About");
 
   const [formData, setFormData] = useState({
     language: localeIndex[params.locale],
@@ -51,7 +53,7 @@ export default function ContactForm() {
         <div className="row">
           <div className="col col-lg-10 offset-lg-1">
             <div className="wpo-contact-title">
-              <h2>Contact us!</h2>
+              <h2>{t("Contact")}</h2>
             </div>
             <div className="office-info">
               <div className="row">
@@ -63,9 +65,9 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div className="office-info-text">
-                      <h2>Address</h2>
+                      <h2>{t("Address")}</h2>
                       <p>
-                        721 Phan Van Tri Street, Ward 07, Go Vap District, HCMC
+                      {t("ContactAddress")}
                       </p>
                     </div>
                   </div>
@@ -78,7 +80,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div className="office-info-text">
-                      <h2>Email Us</h2>
+                      <h2>{t("Email")}</h2>
                       <p>idtco@gmail.com</p>
                       <p>tuanidtco@gmail.com</p>
                     </div>
@@ -92,7 +94,7 @@ export default function ContactForm() {
                       </div>
                     </div>
                     <div className="office-info-text">
-                      <h2>Call Now</h2>
+                      <h2>{t("Call")}</h2>
                       <p>+84 983 802 117</p>
                       <p>+84 949 802 117</p>
                     </div>
@@ -101,10 +103,9 @@ export default function ContactForm() {
               </div>
             </div>
             <div className="wpo-contact-title">
-              <h2>Have Any Question?</h2>
+              <h2>{t("Question")}</h2>
               <p>
-                It is a long established fact that a reader will be distracted
-                content of a page when looking.
+              {t("FunFact")}
               </p>
             </div>
             <div className="wpo-contact-form-area">
@@ -121,7 +122,7 @@ export default function ContactForm() {
                         name="contactName"
                         onBlur={(e) => handleInputChange(e)}
                         onChange={(e) => handleInputChange(e)}
-                        placeholder="Your Name"
+                        placeholder={t("FormName")}
                       />
                     </div>
                   </div>
@@ -133,7 +134,7 @@ export default function ContactForm() {
                         name="contactEmail"
                         onBlur={(e) => handleInputChange(e)}
                         onChange={(e) => handleInputChange(e)}
-                        placeholder="Your Email"
+                        placeholder={t("FormEmail")}
                       />
                     </div>
                   </div>
@@ -145,7 +146,7 @@ export default function ContactForm() {
                         name="contactPhone"
                         onBlur={(e) => handleInputChange(e)}
                         onChange={(e) => handleInputChange(e)}
-                        placeholder="Your Phone"
+                        placeholder={t("FormPhone")}
                       />
                     </div>
                   </div>
@@ -157,7 +158,7 @@ export default function ContactForm() {
                         name="contactLocation"
                         onBlur={(e) => handleInputChange(e)}
                         onChange={(e) => handleInputChange(e)}
-                        placeholder="Your Address"
+                        placeholder={t("FormAddress")}
                       />
                     </div>
                   </div>
@@ -168,13 +169,13 @@ export default function ContactForm() {
                       value={formData.note}
                       type="text"
                       name="note"
-                      placeholder="Message"
+                      placeholder={t("FormMessage")}
                     ></textarea>
                   </div>
                 </div>
                 <div className="submit-area">
                   <Button onClick={handleSubmit} type="submit" sx={{ p: 0 }}>
-                    <span className="theme-btn px-4">Submit Now</span>
+                    <span className="theme-btn px-4">{t("FormSubmit")}</span>
                   </Button>
                 </div>
               </form>

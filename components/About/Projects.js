@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function About() {
+  const t = useTranslations("About");
+
   return (
     <div className="wpo-about-area section-padding wpo-about-area">
       <div className="container">
@@ -12,27 +15,18 @@ export default function About() {
               style={{ paddingRight: "10rem", paddingLeft: "3rem" }}
             >
               <div className="wpo-about-title">
-                <span>Projects</span>
-                <h2>IDT Projects</h2>
+                <span>{t("AboutProject")}</span>
+                <h2>{t("AboutProjectTitle")}</h2>
               </div>
               <h5>
-                Interior design and construction that our IDT has implemented
-                for investors.
+              {t("AboutProjectSummarize")}
               </h5>
               <p>
-                With more than 17 years of interior design experience with many
-                large and small banks such as Military Bank MBbank, OCB bank,
-                SCB, ANZ bank, Standar charterd bank … IDT Decor is proud to be
-                a leader in the field of interior design. Bank interior, helping
-                the units have a unique, modern, luxurious space and ensure the
-                unique style of each bank.
+              {t("AboutProjectDescription1")}
               </p>
               <br />
               <p>
-                IDT is the leading professional office interior design company
-                in Vietnam. The company is voted by the customer association as
-                one of the prestigious units in the field of office interior
-                design consultancy and construction.
+              {t("AboutProjectDescription2")}
               </p>
             </div>
           </div>

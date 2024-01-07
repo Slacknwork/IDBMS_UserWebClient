@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Hero2 = (props) => {
   var settings = {
@@ -13,6 +14,7 @@ const Hero2 = (props) => {
     autoplaySpeed: 2500,
     fade: true,
   };
+  const t = useTranslations("Home");
 
   return (
     <section className="wpo-box-style">
@@ -30,18 +32,17 @@ const Hero2 = (props) => {
                   <div className="container-fluid">
                     <div className="slide-content">
                       <div className="slide-title">
-                        <h2>Creating Your Dream</h2>
+                        <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. In elementum, justo, habitant.
+                        {t("HeroDescription")}
                         </p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                          Discover More
+                        {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>
@@ -58,18 +59,17 @@ const Hero2 = (props) => {
                   <div className="container-fluid">
                     <div className="slide-content">
                       <div className="slide-title">
-                        <h2>Creating Your Dream</h2>
+                        <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. In elementum, justo, habitant.
+                        {t("HeroDescription")}
                         </p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                          Discover More
+                        {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>
@@ -86,18 +86,17 @@ const Hero2 = (props) => {
                   <div className="container-fluid">
                     <div className="slide-content">
                       <div className="slide-title">
-                        <h2>Creating Your Dream</h2>
+                        <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
                         <p>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. In elementum, justo, habitant.
+                        {t("HeroDescription")}
                         </p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                          Discover More
+                        {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>

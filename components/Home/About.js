@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function About() {
+  const t = useTranslations("Home");
+
   return (
     <div className="wpo-about-area section-padding wpo-about-area">
       <div className="container">
@@ -19,18 +22,15 @@ export default function About() {
           <div className="col-lg-7 col-md-12 col-sm-12">
             <div className="wpo-about-text">
               <div className="wpo-about-title">
-                <span>About Us</span>
-                <h2>IDT Decor Design & Decoration</h2>
+                <span>{t("About")}</span>
+                <h2>{t("AboutTitle")}</h2>
               </div>
               <p>
-                We specialize in providing interior design services and interior
-                construction: Interior Construction of Banks, Offices, Houses,
-                Shops, Showrooms. With a team of experienced architects in the
-                profession, have implemented many domestic and foreign projects.
+              {t("AboutDescription")}
               </p>
               <div className="btns">
                 <Link href="/about" className="theme-btn">
-                  Discover More
+                {t("DiscoverMore")}
                 </Link>
                 {/*<ul>
                   <li className="video-holder">

@@ -1,6 +1,9 @@
 import { Link } from "/navigation";
+import { useTranslations } from "next-intl";
 
 const PageTitle = (props) => {
+  const t = useTranslations("Header");
+
   return (
     <section className="wpo-page-title">
       <div className="container">
@@ -10,7 +13,7 @@ const PageTitle = (props) => {
               <h2>{props.pageTitle}</h2>
               <ol className="wpo-breadcumb-wrap">
                 <li>
-                  <Link href="/">Home</Link>
+                  <Link href="/">{t("Home")}</Link>
                 </li>
                 <li>
                   <span>{props.pagesub}</span>
