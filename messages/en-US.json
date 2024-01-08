@@ -231,6 +231,7 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Overview",
+    "Progress": "Progress",
     "Projects": "Projects",
     "Booking": "Project booking",
     "Details": "Project details",
@@ -244,6 +245,7 @@
     "UpdatedDate": "Updated Date",
     "NoStage": "No Stage",
     "EstimatedPrice": "Estimated Price",
+    "EstimatedDays": "Estimated Days",
     "FinalPrice": "Final Price",
     "TotalWarrantyPaid": "Total Warranty Paid",
     "CurrentStageId": "Current Stage Id",
@@ -259,7 +261,11 @@
     "EstimateWorkingDays": "Estimate working days",
     "Site": "Site",
     "Address": "Address",
-    "Days": "days"
+    "Days": "days",
+    "ContractedUnits":"Contracted units",
+    "UsedUnits":"Used units",
+    "Started":"Started",
+    "Ended":"Ended"
   },
   "ProjectDetails_Comment": {
     "Content": "Content",
@@ -276,7 +282,11 @@
   "ProjectDetails_Item": {
     "Code": "Code",
     "Name": "Name",
-    "Details": "Item Details",
+    "SearchItems": "Search Items...",
+    "Image": "Image",
+    "Category": "Category",
+    "Quantity": "Quantity",
+    "Details": "Details",
     "Length": "Length",
     "Width": "Width",
     "Height": "Height",
@@ -389,6 +399,8 @@
   "ProjectDetails_Task": {
     "Tasks": "Tasks",
     "SearchTasks": "Search Tasks",
+    "SwitchStage": "Switch to Stage view",
+    "SwitchFloorRoom": "Switch to Floor/Room view",
     "Code": "Code",
     "Name": "Name",
     "Details": "Details",
@@ -544,6 +556,7 @@
   },
   "Error": {
     "TaskCategoryError": "Fetch Data Error: Task Categories!",
+    "TasksError": "Fetch Data Error: Tasks!",
     "ParticipationsError": "Fetch Data Error: Participations!",
     "ProjectsError": "Fetch Data Error: Projects!",
     "FetchError": "Error loading data from the system",

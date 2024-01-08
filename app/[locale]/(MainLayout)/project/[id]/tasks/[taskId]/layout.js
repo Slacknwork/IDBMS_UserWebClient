@@ -7,25 +7,26 @@ moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
 import Tabs from "/components/Tabs";
 import NavButton from "/components/Shared/NavButton";
-
-const tabs = [
-  {
-    path: "",
-    label: "Overview",
-  },
-  {
-    path: "items",
-    label: "Items",
-  },
-  {
-    path: "comments",
-    label: "Comments",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function TaskLayout({ children }) {
   const params = useParams();
+  const t = useTranslations("ProjectDetails_Tab");
 
+  const tabs = [
+    {
+      path: "",
+      label: t("Overview"),
+    },
+    {
+      path: "items",
+      label: t("Items"),
+    },
+    {
+      path: "comments",
+      label: t("Comments"),
+    },
+  ];
   return (
     <div className="wpo-project-single-area">
       <div className="container">
@@ -33,7 +34,7 @@ export default function TaskLayout({ children }) {
           <div className="col col-lg-2 col-12">
             <NavButton
               url={`/project/${params.id}/tasks`}
-              label="Tasks"
+              label={t("Tasks")}
             ></NavButton>
             <div className="wpo-shop-single-section">
               <div className="product-info">

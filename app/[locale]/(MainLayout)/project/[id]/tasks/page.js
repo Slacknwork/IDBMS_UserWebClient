@@ -86,7 +86,7 @@ export default function ProjectTasks() {
   const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // VIEWMODE (STAGE / FLOOR & ROOMS)
-  const viewModeLabels = ["Switch to Stage view", "Switch to Floor/Room view"];
+  const viewModeLabels = [t("SwitchStage"), t("SwitchFloorRoom")];
   const [viewMode, setViewMode] = useState(
     searchParams.get(viewModeQuery)
       ? parseInt(searchParams.get(viewModeQuery))

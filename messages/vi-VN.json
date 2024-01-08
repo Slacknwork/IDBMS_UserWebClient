@@ -231,6 +231,7 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Tổng quan",
+    "Progress": "Tiến độ",
     "Projects": "Dự án",
     "Booking": "Đặt chỗ Dự án",
     "Details": "Chi tiết Dự án",
@@ -244,6 +245,7 @@
     "UpdatedDate": "Ngày cập nhật",
     "NoStage": "Số giai đoạn",
     "EstimatedPrice": "Giá ước tính",
+    "EstimatedDays": "Số ngày ước tính",
     "FinalPrice": "Giá cuối cùng",
     "TotalWarrantyPaid": "Tổng chi phí bảo hành đã thanh toán",
     "CurrentStageId": "ID Giai đoạn hiện tại",
@@ -259,7 +261,11 @@
     "EstimateWorkingDays": "Ước tính ngày làm việc",
     "Site": "Địa điểm",
     "Address": "Địa chỉ",
-    "Days": "ngày"
+    "Days": "ngày",
+    "ContractedUnits":"Đơn vị ký hợp đồng",
+    "UsedUnits":"Đơn vị đã sử dụng",
+    "Started":"Bắt đầu",
+    "Ended":"Kết thúc"
   },
   "ProjectDetails_Comment": {
     "Content": "Nội dung",
@@ -276,7 +282,11 @@
   "ProjectDetails_Item": {
     "Code": "Mã",
     "Name": "Tên",
-    "Details": "Chi tiết Vật phẩm",
+    "SearchItems": "Tìm đồ dùng...",
+    "Image": "Ảnh",
+    "Category": "Phân loại",
+    "Quantity": "Số lượng",
+    "Details": "Chi tiết",
     "Length": "Chiều dài",
     "Width": "Chiều rộng",
     "Height": "Chiều cao",
@@ -390,6 +400,8 @@
   "ProjectDetails_Task": {
     "Tasks": "Công việc",
     "SearchTasks": "Tìm công việc",
+    "SwitchStage": "Chuyển sang xem giai đoạn",
+    "SwitchFloorRoom": "Chuyển sang xem tầng/Phòng",
     "Code": "Mã",
     "Name": "Tên",
     "Details": "Chi tiết",
@@ -545,9 +557,10 @@
   },
   "Error": {
     "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
+    "TasksError": "Lỗi dữ liệu: Công việc!",
     "ParticipationsError": "Lỗi dữ liệu: Dự án tham gia!",
     "ProjectsError": "Lỗi dữ liệu: Dự án!",
     "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
-    "FetchDataError": "Error fetching data:"
+    "FetchDataError": "Lỗi nạp dữ liệu:"
   }
 }

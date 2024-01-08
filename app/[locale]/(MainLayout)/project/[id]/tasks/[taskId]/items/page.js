@@ -13,6 +13,7 @@ import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServ
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import projectTaskStatusOptions, { projectTaskStatusOptionsEnglish } from "/constants/enums/projectTaskStatus";
+import { useTranslations } from "next-intl";
 
 export default function ItemsPage() {
   // CONSTANTS
@@ -29,6 +30,8 @@ export default function ItemsPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
+  const t = useTranslations("ProjectDetails_Item");
+  const e = useTranslations("Error");
   const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
@@ -89,7 +92,7 @@ export default function ItemsPage() {
         setItemCategories(response.list);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu từ hệ thống");
+        toast.error(e("FetchError"));
       }
     };
     await Promise.all([fetchCategories()]);
@@ -108,7 +111,7 @@ export default function ItemsPage() {
     >
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search Items..."></Search>
+          <Search placeholder={t("SearchItems")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
@@ -165,13 +168,12 @@ export default function ItemsPage() {
           >
             <tr>
               <th scope="col" style={{ width: "12rem" }}>
-                Image
+              {t("Image")}
               </th>
-              <th scope="col">Name</th>
-              <th scope="col">Category</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">{t("Name")}</th>
+              <th scope="col">{t("Category")}</th>
+              <th scope="col">{t("Quantity")}</th>
               <th scope="col" style={{ width: "10rem" }}>
-                Actions
               </th>
             </tr>
           </thead>
@@ -229,7 +231,7 @@ export default function ItemsPage() {
                         className="theme-btn m-1"
                         style={{ width: "6rem", zIndex: 0 }}
                       >
-                        Details
+                        {t("Details")}
                       </Link>
                     </div>
                   </td>

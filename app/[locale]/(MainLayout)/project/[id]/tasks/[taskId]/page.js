@@ -14,10 +14,11 @@ import { styled } from "@mui/material/styles";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
-import projectTaskStatusOptions from "/constants/enums/projectTaskStatus";
+import projectTaskStatusOptions, {projectTaskStatusOptionsEnglish} from "/constants/enums/projectTaskStatus";
 import calculationUnitOptions from "/constants/enums/calculationUnit";
 
 import { getProjectTaskById } from "/services/projectTaskServices";
+import { useTranslations } from "next-intl";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 30,
@@ -34,6 +35,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 export default function TaskLayout({ children }) {
   // INIT
   const params = useParams();
+  const t = useTranslations("ProjectDetails_Overview");
+  const e = useTranslations("Error");
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
@@ -44,7 +48,7 @@ export default function TaskLayout({ children }) {
       const task = await getProjectTaskById(params.taskId, params.id);
       setTask(task);
     } catch (error) {
-      toast.error("Error: Task!");
+      toast.error(e("TasksError"));
     }
   };
 
@@ -82,7 +86,7 @@ export default function TaskLayout({ children }) {
                 </div>
                 <div className="col col-lg-2 col-4 wpo-project-single-item list-widget">
                   <ul>
-                    <li>Progress:</li>
+                    <li>{t("Progress")}:</li>
                   </ul>
                 </div>
                 <div className="col col-lg-4 col-8 position-relative">
@@ -106,22 +110,39 @@ export default function TaskLayout({ children }) {
                   <div className="wpo-project-single-item list-widget">
                     <div className="row">
                       <div className="col col-lg-12 col-12">
-                        <p>{task?.description ?? "[task Description]"}</p>
+                        <p>{task?.description ?? ""}</p>
                       </div>
                       <div className="col-lg-12 mb-4">
                         <div className="row gx-5">
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                                Category:{" "}
+                              {t("Category")}:{" "}
+                              
                                 <span style={{ fontWeight: 1000 }}>
-                                  {task?.taskCategory?.name}
+                                {
+                                (() => {
+                                  if (language === "english") {
+                                    return task?.taskCategory?.englishName;
+                                  } else if (language === "vietnamese") {
+                                    return task?.taskCategory?.name;
+                                  }
+                                  })()
+                                }
                                 </span>
                               </li>
                               <li>
-                                Status:{" "}
+                              {t("Status")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
-                                  {projectTaskStatusOptions[task?.status ?? 0]}
+                                {
+                                (() => {
+                                  if (language === "english") {
+                                    return projectTaskStatusOptionsEnglish[task?.status ?? 0];
+                                  } else if (language === "vietnamese") {
+                                    return projectTaskStatusOptions[task?.status ?? 0];
+                                  }
+                                  })()
+                                }
                                 </span>
                               </li>
                             </ul>
@@ -129,7 +150,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                                Created:{" "}
+                              {t("Created")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {new Date(
                                     task?.createdDate
@@ -137,7 +158,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                                Last Updated:{" "}
+                              {t("LastUpdated")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {new Date(
                                     task?.createdDate
@@ -153,7 +174,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                                Contracted units:{" "}
+                              {t("ContractedUnits")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.unitInContract}{" "}
                                   {
@@ -164,7 +185,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                                Used units:{" "}
+                              {t("UsedUnits")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.unitUsed}{" "}
                                   {
@@ -175,7 +196,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                                Total Warranty Paid:{" "}
+                              {t("TotalWarrantyPaid")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.totalWarrantyPaid
                                     ? `${task?.totalWarrantyPaid?.toLocaleString(
@@ -185,7 +206,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                                Amount Paid:{" "}
+                              {t("AmountPaid")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.amountPaid
                                     ? `${task?.amountPaid?.toLocaleString(
@@ -199,7 +220,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                                Started:{" "}
+                              {t("Started")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.startedDate
                                     ? moment(task.createdDate).format("L")
@@ -210,16 +231,16 @@ export default function TaskLayout({ children }) {
                                 <li>
                                   {task.endDate ? (
                                     <>
-                                      Ended:{" "}
+                                      {t("Ended")}:{" "}
                                       <span style={{ fontWeight: 1000 }}>
                                         {moment(task.endDate).format("L")}
                                       </span>
                                     </>
                                   ) : (
                                     <>
-                                      Estimated days:{" "}
+                                      {t("EstimatedDays")}:{" "}
                                       <span style={{ fontWeight: 1000 }}>
-                                        {task.estimatedBusinessDay} days
+                                        {task.estimatedBusinessDay} {t("Days")}
                                       </span>
                                     </>
                                   )}
@@ -239,14 +260,14 @@ export default function TaskLayout({ children }) {
                   >
                     <ul>
                       <li>
-                        Site: <span>{task?.site?.name ?? "[Site Name]"}</span>
+                      {t("Site")}: <span>{task?.site?.name ?? "N/A"}</span>
                       </li>
                       <li>
-                        Address:{" "}
-                        <span>{task?.site?.address ?? "[Site Address]"}</span>
+                      {t("Address")}:{" "}
+                        <span>{task?.site?.address ?? "N/A"}</span>
                       </li>
                       <li>
-                        Description:{" "}
+                      {t("Description")}:{" "}
                         <span>{task?.site?.description ?? "N/A"}</span>
                       </li>
                     </ul>
