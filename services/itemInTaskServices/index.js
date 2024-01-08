@@ -49,6 +49,7 @@ const getItemInTasksByProjectId = async ({
 };
 
 const getItemInTasksByTaskId = async ({
+  projectId = "",
   taskId = "",
   search = "",
   category = "",
@@ -60,7 +61,7 @@ const getItemInTasksByTaskId = async ({
     const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project-task/${taskId}?itemCodeOrName=${search}&itemCategoryId=${category}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "&projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,
