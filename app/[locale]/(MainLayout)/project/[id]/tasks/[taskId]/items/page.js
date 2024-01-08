@@ -8,60 +8,96 @@ import { CircularProgress, Stack } from "@mui/material";
 import Image from "next/image";
 
 import { getItemInTasksByTaskId } from "/services/itemInTaskServices";
+import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
+import projectTaskStatusOptions, { projectTaskStatusOptionsEnglish } from "/constants/enums/projectTaskStatus";
 
-export default function TaskItemPage() {
+export default function ItemsPage() {
   // CONSTANTS
   const searchQuery = "search";
   const pageQuery = "page";
-  const categoryQuery = "category";
+  const categoryQuery = "itemCategory";
+
+  const statusQuery = "taskStatus";
+
   const defaultPage = 1;
   const defaultPageSize = 5;
+  const pageSizeQuery = "size";
 
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
   const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
-  console.log(language)
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [count, setCount] = useState(0);
 
-  const fetchItems = async () => {
-    try {
-      const categoryId = searchParams.get(categoryQuery) ?? "";
-      const search = searchParams.get(searchQuery) ?? "";
-      const page = searchParams.get(pageQuery) ?? defaultPage;
-      const pageSize = defaultPageSize;
+  // FETCH DATA
+  const fetchDataFromApi = async () => {
+    const fetchItems = async () => {
+      const projectId = params.id;
+      const taskId = params.taskId;
+      const search = searchParams.get(searchQuery) || "";
+      const categoryId = searchParams.get(categoryQuery) || "";
+      const status = searchParams.get(statusQuery)
+        ? parseInt(searchParams.get(statusQuery))
+        : "";
+      const page = parseInt(searchParams.get(pageQuery)) || defaultPage;
+      const pageSize =
+        parseInt(searchParams.get(pageSizeQuery)) || defaultPageSize;
 
-      const items = await getItemInTasksByTaskId({
-        projectId: params.id,
-        taskId: params.taskId,
-        categoryId,
-        search,
-        page,
-        pageSize,
-      });
-      console.log(items)
-      setItems(items.list);
-      setCount(items.totalPage);
-    } catch (error) {
-      toast.error("Error: Items in Task!");
-    }
-  };
-
-  const fetchData = async () => {
-    setLoading(true);
+      try {
+        const response = await getItemInTasksByTaskId({
+          projectId,
+          taskId,
+          search,
+          categoryId,
+          status,
+          page,
+          pageSize,
+        });
+        console.log(response);
+        setItems(response?.list ?? []);
+        setCount(response?.totalPage ?? 0);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      }
+    };
     await Promise.all([fetchItems()]);
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
+    fetchDataFromApi();
+  }, [searchParams]);
+
+  // ITEM CATEGORIES
+  const [itemCategories, setItemCategories] = useState([]);
+
+  // FETCH OPTIONS
+  const fetchOptionsFromApi = async () => {
+    setLoading(true);
+    const fetchCategories = async () => {
+      try {
+        const response = await getAllInteriorItemCategories();
+        console.log(response);
+        setItemCategories(response.list);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      }
+    };
+    await Promise.all([fetchCategories()]);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchOptionsFromApi();
   }, []);
 
   return (
@@ -70,10 +106,47 @@ export default function TaskItemPage() {
         minHeight: "35rem",
       }}
     >
-      <h3>Items</h3>
       <div className="row">
-        <div className="col col-lg-6 col-12 my-4">
+        <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder="Search Items..."></Search>
+        </div>
+        <div className="col col-lg-6 col-12 wpo-contact-pg-section">
+          <form>
+            <div className="wpo-contact-form-area-transparent m-0 row">
+              <div className="col col-lg-6 col-12">
+                <div className="form-field shadow-sm">
+                  <select
+                    type="text"
+                    name="subject"
+                    className="rounded-2 "
+                    style={{ backgroundColor: "white", height: "55px" }}
+                  >
+                    {itemCategories.map((category) => (
+                      <option value={category.id} key={category.id}>
+                        {language === "english" ? category.englishName : category.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="col col-lg-6 col-12">
+                <div className="form-field shadow-sm">
+                  <select
+                    type="text"
+                    name="subject"
+                    className="rounded-2"
+                    style={{ backgroundColor: "white", height: "55px" }}
+                  >
+                    {projectTaskStatusOptions.map((status, index) => (
+                      <option key={status} value={index}>
+                        {language === "english" ? projectTaskStatusOptionsEnglish[index] : status}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -91,13 +164,13 @@ export default function TaskItemPage() {
             style={{ position: "sticky", top: 0, zIndex: 1 }}
           >
             <tr>
-              <th scope="col" style={{ width: "7rem" }}>
+              <th scope="col" style={{ width: "12rem" }}>
                 Image
               </th>
               <th scope="col">Name</th>
               <th scope="col">Category</th>
               <th scope="col">Quantity</th>
-              <th scope="col" style={{ width: "15rem" }}>
+              <th scope="col" style={{ width: "10rem" }}>
                 Actions
               </th>
             </tr>
@@ -165,6 +238,7 @@ export default function TaskItemPage() {
           </tbody>
         </table>
       )}
+      <Pagination count={count}></Pagination>
     </div>
   );
 }

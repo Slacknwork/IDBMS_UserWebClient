@@ -48,19 +48,17 @@ const getParticipationsByUserId = async ({
   }
 };
 
-const getParticipationsByProjectId = async ({
+const getProjectParticipationInProjectByUserView = async ({
   projectId,
-  search = "",
-  role = "",
-  page = "",
+  search,
   pageSize = "",
+  page = "",
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const paramString = `name=${search}&role=${role}&pageNo=${page}&pageSize=${pageSize}`;
-    const url = `${endpoint}/project/${projectId}?${paramString}`;
+    const url = `${endpoint}/user-view?pageSize=${pageSize}&pageNo=${page}&name=${search}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "&projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,
@@ -163,7 +161,7 @@ const deleteProjectParticipation = async (participationId) => {
 export {
   getAllProjectParticipations,
   getParticipationsByUserId,
-  getParticipationsByProjectId,
+  getProjectParticipationInProjectByUserView,
   getUsersByParticipationInProject,
   createProjectParticipation,
   createEmployees,

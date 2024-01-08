@@ -36,7 +36,7 @@ const getWarrantyClaimsByProjectId = async ({
     const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}?isCompanyCover=${isCompanyCover}&name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "&projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,
