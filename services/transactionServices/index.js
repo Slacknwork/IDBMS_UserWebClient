@@ -38,7 +38,7 @@ const getTransactionsByProjectId = async ({
     const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/project/${projectId}?payerName=${search}&type=${type}&status=${status}&pageSize=${pageSize}&pageNo=${pageNo}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "&projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,

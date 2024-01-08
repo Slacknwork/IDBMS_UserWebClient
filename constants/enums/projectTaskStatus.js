@@ -4,25 +4,24 @@ const projectTaskStatusOptions = [
     "Đang thực hiện",
     "Hoàn thành",
     "Hủy",
-  ];
-  
-  const projectTaskStatusIndex = {
+];
+
+const projectTaskStatusIndex = {
     Pending: 0,
     Confirmed: 1,
     Ongoing: 2,
     Done: 3,
     Cancelled: 4,
-  };
-  
-  const projectTaskStatusOptionsEnglish = [
+};
+
+const projectTaskStatusOptionsEnglish = [
     "Pending",
     "Confirmed",
     "Ongoing",
     "Done",
     "Cancelled",
-  ];
-  
-  export { projectTaskStatusIndex, projectTaskStatusOptionsEnglish };
-  
-  export default projectTaskStatusOptions;
-  
+];
+
+export { projectTaskStatusIndex, projectTaskStatusOptionsEnglish };
+
+export default projectTaskStatusOptions;

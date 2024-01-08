@@ -52,7 +52,7 @@ export default function InteriorItemsPage() {
       const pageNo = searchParams.get(pageQuery) ?? defaultPage;
       const pageSize = defaultPageSize;
 
-      const items = await getAllInteriorItems({ search, pageNo, pageSize });
+      const items = await getAllInteriorItems({ search, pageNo, pageSize, itemType: 0 });
       setItems(items.list);
       setCount(items.totalPage);
     } catch (error) {
