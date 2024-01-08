@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-import { Box, Card, CircularProgress, Grid, Stack, Typography } from "@mui/material";
+import { Box, Card, Chip, CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import { getProjectParticipationInProjectByUserView } from "/services/projectParticipationServices";
+import participationRole from "/constants/enums/participationRole";
 
 export default function ParticipationsPage() {
   // CONSTANTS
@@ -139,9 +140,7 @@ export default function ParticipationsPage() {
                     }
                   </td>
                   <td className="align-middle">
-                    {
-                      participation?.role
-                    }
+                    <Chip label={participationRole[participation.role]}></Chip>
                   </td>
                   <td className="align-middle"> xóa</td>
                 </tr>

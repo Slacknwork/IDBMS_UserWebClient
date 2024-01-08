@@ -14,7 +14,7 @@ import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import projectTaskStatusOptions, { projectTaskStatusOptionsEnglish } from "/constants/enums/projectTaskStatus";
 import { getDocumentsByProjectId } from "/services/projectDocumentServices";
-import projectDocumentCategories from "/constants/enums/projectDocumentCategory";
+import projectDocumentCategory from "/constants/enums/projectDocumentCategory";
 import moment from "moment-timezone";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
@@ -94,9 +94,9 @@ export default function DocumentsPage() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {/* {projectDocumentCategory.map((status, index) => (
-                      <option key={status} value={index}>
-                        {language === "english" ? projectTaskStatusOptionsEnglish[index] : status}
+                    {/* {projectDocumentCategory.map((category) => (
+                      <option value={category.id} key={category.id}>
+                        {category.name}
                       </option>
                     ))} */}
                   </select>
@@ -143,7 +143,7 @@ export default function DocumentsPage() {
                     {document?.description}
                   </td>
                   <td className="align-middle">
-                    {projectDocumentCategories[document?.category] ??
+                    {projectDocumentCategory[document?.category] ??
                       "Không xác định"}
                   </td>
                   <td className="align-middle">
