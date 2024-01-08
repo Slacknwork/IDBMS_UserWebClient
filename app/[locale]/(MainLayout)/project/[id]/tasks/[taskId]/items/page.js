@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { CircularProgress, Stack } from "@mui/material";
 import Image from "next/image";
 
-import { getItemInTasksByProjectId } from "/services/itemInTaskServices";
+import { getItemInTasksByTaskId } from "/services/itemInTaskServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
@@ -23,7 +23,9 @@ export default function TaskItemPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
+  console.log(language)
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
@@ -31,19 +33,20 @@ export default function TaskItemPage() {
 
   const fetchItems = async () => {
     try {
-      const projectId = params.id;
       const categoryId = searchParams.get(categoryQuery) ?? "";
       const search = searchParams.get(searchQuery) ?? "";
       const page = searchParams.get(pageQuery) ?? defaultPage;
       const pageSize = defaultPageSize;
 
-      const items = await getItemInTasksByProjectId({
-        projectId,
+      const items = await getItemInTasksByTaskId({
+        projectId: params.id,
+        taskId: params.taskId,
         categoryId,
         search,
         page,
         pageSize,
       });
+      console.log(items)
       setItems(items.list);
       setCount(items.totalPage);
     } catch (error) {
@@ -91,10 +94,9 @@ export default function TaskItemPage() {
               <th scope="col" style={{ width: "7rem" }}>
                 Image
               </th>
-              <th scope="col">Item name</th>
-              <th scope="col">Location</th>
-              <th scope="col">Created Date</th>
-              <th scope="col">Task status</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Quantity</th>
               <th scope="col" style={{ width: "15rem" }}>
                 Actions
               </th>
@@ -121,21 +123,32 @@ export default function TaskItemPage() {
                     </div>
                   </td>
                   <td className="align-middle">
-                    {item && item.interiorItem?.name}
-                  </td>
-                  <td
-                    className="align-middle"
-                    style={{ whiteSpace: "pre-line" }}
-                  >
-                    {item &&
-                      item.room &&
-                      `-${item.room.usePurpose} \n -Tầng ${item.room.floor.floorNo} \n -${item.room.floor.site.name}`}
+                    {
+                      (() => {
+                        if (language === "english") {
+                          return item?.interiorItem?.englishName;
+                        } else if (language === "vietnamese") {
+                          return item?.interiorItem?.name;
+                        } else {
+                          return '';
+                        }
+                      })()
+                    }
                   </td>
                   <td className="align-middle">
-                    {item &&
-                      new Date(item.createdDate).toLocaleDateString("en-GB")}
+                    {
+                      (() => {
+                        if (language === "english") {
+                          return item?.interiorItem?.interiorItemCategory?.englishName;
+                        } else if (language === "vietnamese") {
+                          return item?.interiorItem?.interiorItemCategory?.name;
+                        } else {
+                          return '';
+                        }
+                      })()
+                    }
                   </td>
-                  <td className="align-middle">{item && item.status}</td>
+                  <td className="align-middle">{item && item.quantity}</td>
                   <td className="align-middle m-0">
                     <div className="d-flex">
                       <Link
