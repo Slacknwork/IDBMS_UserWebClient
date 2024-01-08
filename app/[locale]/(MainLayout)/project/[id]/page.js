@@ -5,9 +5,11 @@ import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Chip, CircularProgress, Stack } from "@mui/material";
 
-import languageOptions from "/constants/enums/language";
+import languageOptions, {languageOptionsEnglish} from "/constants/enums/language";
 import projectTypeOptions from "/constants/enums/projectType";
+import {projectTypeOptionsEnglish} from "/constants/enums/projectType";
 import projectStatusOptions from "/constants/enums/projectStatus";
+import {projectStatusOptionsEnglish} from "/constants/enums/projectStatus";
 
 import { getProjectById } from "/services/projectServices";
 import { useTranslations } from "next-intl";
@@ -17,11 +19,13 @@ import NavButton from "/components/Shared/NavButton";
 export default function ProjectOverview() {
   // INIT
   const params = useParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [project, setProject] = useState({});
   const t = useTranslations("ProjectDetails_Overview");
+  const e = useTranslations("Error");
 
   const fetchProject = async () => {
     try {
@@ -29,7 +33,7 @@ export default function ProjectOverview() {
       const project = await getProjectById(params.id);
       setProject(project);
     } catch (error) {
-      toast.error("Lỗi dữ liệu: Dự án!");
+      toast.error(e("ProjectsError"));
     } finally {
       setLoading(false);
     }
@@ -44,7 +48,7 @@ export default function ProjectOverview() {
       <div className="container" style={{ minHeight: "35rem" }}>
         <div className="row">
           <div className="col col-lg-12 col-12">
-            <NavButton url={`/project`} label="Projects"></NavButton>
+            <NavButton url={`/project`} label={t("Projects")}></NavButton>
           </div>
         </div>
         {loading ? (
@@ -77,13 +81,28 @@ export default function ProjectOverview() {
                               fontSize: 16,
                             },
                           }}
-                          label={`${projectTypeOptions[project?.type]}`}
+                          label={
+                            (() => {
+                              if (language === "english") {
+                                return projectTypeOptionsEnglish[
+                                    project?.type
+                                  ]
+                                ;
+                              } else if (language === "vietnamese") {
+                                return projectTypeOptions[
+                                    project?.type
+                                  ]
+                              } else {
+                                return '';
+                              }
+                            })()
+                          }
                         ></Chip>
                       </div>
                     </div>
                     <div className="col-lg-8">
                       <div className="wpo-project-single-item list-widget">
-                        <p>{project?.description ?? "[Project Description]"}</p>
+                        <p>{project?.description ?? ""}</p>
                         <div className="row">
                           <div className="col-lg-12 mb-4">
                             <div className="row gx-5">
@@ -92,22 +111,49 @@ export default function ProjectOverview() {
                                   <li>
                                   {t("Category")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
-                                      {project?.projectCategory?.name}
+                                      {
+                                        (() => {
+                                        if (language === "english") {
+                                        return project?.projectCategory?.englishName;
+                                        } else if (language === "vietnamese") {
+                                        return project?.projectCategory?.name;
+                                        }
+                                        })()
+                                      }
                                     </span>
                                   </li>
                                   <li>
                                   {t("Language")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
-                                      {languageOptions[project?.language ?? 0]}
+                                      {
+                                        (() => {
+                                        if (language === "english") {
+                                        return languageOptionsEnglish[project?.language ?? 0];
+                                        } else if (language === "vietnamese") {
+                                        return languageOptions[project?.language ?? 0];
+                                        }
+                                        })()
+                                      }
                                     </span>
                                   </li>
                                   <li>
                                   {t("Status")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {
-                                        projectStatusOptions[
-                                          project?.status ?? 0
-                                        ]
+                                        (() => {
+                                          if (language === "english") {
+                                            return projectStatusOptionsEnglish[
+                                                project?.status ?? 0
+                                              ]
+                                            ;
+                                          } else if (language === "vietnamese") {
+                                            return projectStatusOptions[
+                                                project?.status ?? 0
+                                              ]
+                                          } else {
+                                            return '';
+                                          }
+                                        })()
                                       }
                                     </span>
                                   </li>
@@ -206,12 +252,12 @@ export default function ProjectOverview() {
                         <ul>
                           <li>
                           {t("Site")}:{" "}
-                            <span>{project?.site?.name ?? "[Site Name]"}</span>
+                            <span>{project?.site?.name ?? "N/A"}</span>
                           </li>
                           <li>
                           {t("Address")}:{" "}
                             <span>
-                              {project?.site?.address ?? "[Site Address]"}
+                              {project?.site?.address ?? "N/A"}
                             </span>
                           </li>
                           <li>

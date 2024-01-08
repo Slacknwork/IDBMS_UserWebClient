@@ -13,7 +13,7 @@ import moment from "moment-timezone";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
-import projectTaskStatusOptions from "/constants/enums/projectTaskStatus";
+import projectTaskStatusOptions, {projectTaskStatusOptionsEnglish} from "/constants/enums/projectTaskStatus";
 
 import { getProjectTasksByProjectId } from "/services/projectTaskServices";
 import { getAllTaskCategories } from "/services/taskCategoryServices";
@@ -83,6 +83,7 @@ export default function ProjectTasks() {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // VIEWMODE (STAGE / FLOOR & ROOMS)
   const viewModeLabels = ["Switch to Stage view", "Switch to Floor/Room view"];
@@ -303,11 +304,25 @@ export default function ProjectTasks() {
                     className="rounded-2 "
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {categories.map((category) => (
-                      <option value={category.id} key={category.id}>
-                        {category.name}
-                      </option>
-                    ))}
+                    { 
+                      (() => {
+                        if (language === "english") {
+                          return categories.map((category) => (
+                            <option value={category.id} key={category.id}>
+                              {category.englishName}
+                            </option>
+                          ));
+                        } else if (language === "vietnamese") {
+                          return categories.map((category) => (
+                            <option value={category.id} key={category.id}>
+                              {category.name}
+                            </option>
+                          ))
+                        } else {
+                          return '';
+                        }
+                      })()
+                    }
                   </select>
                 </div>
               </div>
@@ -319,11 +334,25 @@ export default function ProjectTasks() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {projectTaskStatusOptions.map((status, index) => (
-                      <option key={status} value={index}>
-                        {status}
-                      </option>
-                    ))}
+                    { 
+                      (() => {
+                        if (language === "english") {
+                          return projectTaskStatusOptionsEnglish.map((status, index) => (
+                            <option key={status} value={index}>
+                              {status}
+                            </option>
+                          ));
+                        } else if (language === "vietnamese") {
+                          return projectTaskStatusOptions.map((status, index) => (
+                            <option key={status} value={index}>
+                              {status}
+                            </option>
+                          ))
+                        } else {
+                          return '';
+                        }
+                      })()
+                    }
                   </select>
                 </div>
               </div>
@@ -481,7 +510,17 @@ export default function ProjectTasks() {
                           </p>
                         </td>
                         <td className="align-middle text-center">
-                          {projectTaskStatusOptions[task.status]}
+                        {
+                            (() => {
+                              if (language === "english") {
+                                return projectTaskStatusOptionsEnglish[task.status];
+                              } else if (language === "vietnamese") {
+                                return projectTaskStatusOptions[task.status];
+                              } else {
+                                return t("Unknown");
+                              }
+                            })()
+                          }
                         </td>
                         <td className="align-middle m-0">
                           <div className="d-flex justify-content-end">

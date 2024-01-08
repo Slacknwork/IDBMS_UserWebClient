@@ -231,6 +231,7 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Tổng quan",
+    "Projects": "Dự án",
     "Booking": "Đặt chỗ Dự án",
     "Details": "Chi tiết Dự án",
     "Name": "Tên",
@@ -420,9 +421,7 @@
     "Progress":"Tiến độ",
     "Undefined":"Không xác định",
     "Unclassified":"Chưa được phân loại",
-    "NoData":"không có dữ liệu",
-    "":"",
-    "":""
+    "NoData":"không có dữ liệu"
   },
   "ProjectDetails_TaskReport": {
     "Name": "Tên",
@@ -546,10 +545,9 @@
   },
   "Error": {
     "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
+    "ParticipationsError": "Lỗi dữ liệu: Dự án tham gia!",
+    "ProjectsError": "Lỗi dữ liệu: Dự án!",
     "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
-    "FetchDataError": "Error fetching data:",
-    "Document": "Document",
-    "TaskReportId": "Task Report",
-    "IsDeleted": "Is Deleted"
+    "FetchDataError": "Error fetching data:"
   }
 }

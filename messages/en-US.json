@@ -231,6 +231,7 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Overview",
+    "Projects": "Projects",
     "Booking": "Project booking",
     "Details": "Project details",
     "Name": "Name",
@@ -419,9 +420,7 @@
     "Progress":"Progress",
     "Undefined":"Undefined",
     "Unclassified":"Unclassified",
-    "NoData":"No data",
-    "":"",
-    "":""
+    "NoData":"No data"
   },
   "ProjectDetails_TaskReport": {
     "Name": "Name",
@@ -545,10 +544,9 @@
   },
   "Error": {
     "TaskCategoryError": "Fetch Data Error: Task Categories!",
+    "ParticipationsError": "Fetch Data Error: Participations!",
+    "ProjectsError": "Fetch Data Error: Projects!",
     "FetchError": "Error loading data from the system",
-    "FetchDataError": "Error fetching data:",
-    "Document": "Document",
-    "TaskReportId": "Task Report",
-    "IsDeleted": "Is Deleted"
+    "FetchDataError": "Error fetching data:"
   }
 }

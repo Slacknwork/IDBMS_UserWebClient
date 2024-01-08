@@ -1,8 +1,15 @@
-export default {
-    0: "ProductOwner",
-    1: "Viewer",
-    2: "LeadArchitect",
-    3: "Architect",
-    4: "ConstructionManager",
-    5: "ProjectManager"
+const participationRoleOptionsEnglish = ["ProductOwner", "ProjectManager", "Architect", "ConstructionManager", "Viewer"];
+
+const participationRoleOptions = [
+    "Chủ dự án",
+    "Quản lý dự án",
+    "Kĩ sư thiết kế",
+    "Kĩ sư công trình",
+    "Người xem",
+];
+
+export {
+    participationRoleOptionsEnglish,
 };
+export default participationRoleOptions;
+  

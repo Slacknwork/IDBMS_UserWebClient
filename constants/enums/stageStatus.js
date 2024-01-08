@@ -1,4 +1,4 @@
-const stageStatusOptions = ["Unopen", "Ongoing", "Suspended", "Done"];
+const stageStatusOptionsEnglish = ["Unopen", "Ongoing", "Suspended", "Done"];
 
 const stageStatusBackgroundChipColors = [
   "#EA526F",
@@ -9,7 +9,7 @@ const stageStatusBackgroundChipColors = [
 
 const stageStatusIndex = { Unopen: 0, Ongoing: 1, Suspended: 2, Done: 3 };
 
-const stageStatusOptionsVietnamese = [
+const stageStatusOptions= [
   "Chưa mở",
   "Đang hoạt động",
   "Tạm gián đoạn",
@@ -18,7 +18,7 @@ const stageStatusOptionsVietnamese = [
 
 export {
   stageStatusIndex,
-  stageStatusOptionsVietnamese,
+  stageStatusOptionsEnglish,
   stageStatusBackgroundChipColors,
 };
 

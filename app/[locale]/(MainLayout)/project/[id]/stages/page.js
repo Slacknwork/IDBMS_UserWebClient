@@ -8,6 +8,7 @@ import moment from "moment-timezone";
 
 import stageStatusOptions, {
   stageStatusBackgroundChipColors,
+  stageStatusOptionsEnglish,
 } from "/constants/enums/stageStatus";
 
 import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
@@ -28,6 +29,7 @@ export default function PaymentStagesPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
@@ -208,9 +210,22 @@ export default function PaymentStagesPage() {
                             },
                           }}
                           size="small"
-                          label={
-                            stageStatusOptions[stage?.status] ||
-                            t("Unknown")
+                          label=
+                          {
+                            (() => {
+                              if (language === "english") {
+                                return stageStatusOptionsEnglish[
+                                    stage?.status
+                                  ]
+                                ;
+                              } else if (language === "vietnamese") {
+                                return stageStatusOptions[
+                                    stage?.status
+                                  ]
+                              } else {
+                                return t("Unknown");
+                              }
+                            })()
                           }
                         ></Chip>
                       </td>

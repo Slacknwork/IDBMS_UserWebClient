@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useRouter } from "/navigation";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { CircularProgress, Stack } from "@mui/material";
@@ -10,6 +10,7 @@ import { getParticipationsByUserId } from "/services/projectParticipationService
 import { getProjectStatusByUserId } from "/services/projectServices";
 
 import projectStatusOptions from "/constants/enums/projectStatus";
+import {projectStatusOptionsEnglish} from "/constants/enums/projectStatus";
 
 import Search from "/components/Shared/Search";
 import { useTranslations } from "next-intl";
@@ -18,10 +19,13 @@ export default function ProjectList() {
   // CONSTANTS
 
   // INIT
+  const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
   const user = useSelector((state) => state.customer);
   const t = useTranslations("ProjectListPage");
+  const e = useTranslations("Error");
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // SEARCH
   const searchQuery = "search";
@@ -54,7 +58,7 @@ export default function ProjectList() {
       });
       setParticipations(participations.list);
     } catch (error) {
-      toast.error("Lỗi dữ liệu: Dự án tham gia!");
+      toast.error(e("ParticipationsError"));
     }
   };
 
@@ -75,6 +79,7 @@ export default function ProjectList() {
   };
 
   useEffect(() => {
+    console.log(projectStatusOptionsEnglish)
     fetchData();
   }, [searchParams]);
 
@@ -96,17 +101,38 @@ export default function ProjectList() {
                       <span>0</span>
                     </a>
                   </li>
-                  {projectStatusOptions.map(
-                    (status, index) =>
-                      index > 1 && (
-                        <li key={status}>
-                          <a onClick={() => setStatus(index)}>
-                            {status}
-                            <span>{index}</span>
-                          </a>
-                        </li>
-                      )
-                  )}
+                  { 
+                      (() => {
+                        if (language === "english") {
+                          return projectStatusOptionsEnglish.map(
+                            (status, index) =>
+                              index > 1 && (
+                                <li key={status}>
+                                  <a onClick={() => setStatus(index)}>
+                                    {status}
+                                    <span>{index}</span>
+                                  </a>
+                                </li>
+                              )
+                          );
+                        } else if (language === "vietnamese") {
+                          return projectStatusOptions.map(
+                            (status, index) =>
+                              index > 1 && (
+                                <li key={status}>
+                                  <a onClick={() => setStatus(index)}>
+                                    {status}
+                                    <span>{index}</span>
+                                  </a>
+                                </li>
+                              )
+                          )
+                        } else {
+                          return '';
+                        }
+                      })()
+                    }
+                  
                 </ul>
               </div>
               <div className="wpo-contact-widget widget">
