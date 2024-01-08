@@ -59,7 +59,7 @@ const getDocumentsByProjectId = async ({
     const paramString = `name=${search}&category=${categoryEnum}&pageNo=${page}&pageSize=${pageSize}`;
     const url = `${endpoint}/project/${projectId}?${paramString}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "&projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,
