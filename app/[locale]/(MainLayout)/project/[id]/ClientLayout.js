@@ -41,11 +41,19 @@ export default function ClientLayout({ children }) {
       label: tab("Documents"),
     },
     {
-      path: "payment",
-      label: tab("Payment"),
+      path: "participations",
+      label: tab("Participations"),
+    },
+    {
+      path: "transactions",
+      label: tab("Transactions"),
+    },
+    {
+      path: "warranty-claims",
+      label: tab("WarrantyClaims"),
     },
   ];
-  
+
   return (
     <div style={{ backgroundColor: "#f0f0f0" }}>
       <PageTitle pageTitle={t("Details")} pagesub={"Project"} />

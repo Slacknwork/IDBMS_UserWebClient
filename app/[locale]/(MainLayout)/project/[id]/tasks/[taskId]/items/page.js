@@ -31,19 +31,19 @@ export default function TaskItemPage() {
 
   const fetchItems = async () => {
     try {
-      const projectId = params.id;
       const categoryId = searchParams.get(categoryQuery) ?? "";
       const search = searchParams.get(searchQuery) ?? "";
       const page = searchParams.get(pageQuery) ?? defaultPage;
       const pageSize = defaultPageSize;
 
-      const items = await getItemInTasksByProjectId({
-        projectId,
+      const items = await getItemInTasksByTaskId({
+        taskId: params.taskId,
         categoryId,
         search,
         page,
         pageSize,
       });
+      console.log(items)
       setItems(items.list);
       setCount(items.totalPage);
     } catch (error) {
