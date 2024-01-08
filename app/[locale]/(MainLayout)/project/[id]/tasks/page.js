@@ -20,8 +20,9 @@ import { getAllTaskCategories } from "/services/taskCategoryServices";
 import { getFloorsByProjectId } from "/services/floorServices";
 import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 
-import Pagination from "/components/Pagination";
+import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
+import NavButton from "/components/Shared/NavButton";
 
 const theme = createTheme({
   components: {
@@ -265,13 +266,7 @@ export default function ProjectTasks() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <div className="wpo-breadcumb-wrap">
-            <ol>
-              <li>
-                <Link href={`/project/${params.id}/tasks`}>{`Tasks`}</Link>
-              </li>
-            </ol>
-          </div>
+          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
@@ -508,7 +503,7 @@ export default function ProjectTasks() {
             </div>
           </div>
 
-          <Pagination count={1}></Pagination>
+          <Pagination count={count}></Pagination>
         </div>
       </div>
     </div>

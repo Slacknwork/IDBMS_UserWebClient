@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { Chip, CircularProgress, Stack } from "@mui/material";
 import { toast } from "react-toastify";
@@ -15,6 +14,7 @@ import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 
 import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
+import NavButton from "/components/Shared/NavButton";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
@@ -64,13 +64,7 @@ export default function PaymentStagesPage() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <div className="wpo-breadcumb-wrap">
-            <ol>
-              <li>
-                <Link href={`/project/${params.id}/stages`}>{`Stages`}</Link>
-              </li>
-            </ol>
-          </div>
+          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">

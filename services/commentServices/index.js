@@ -19,10 +19,18 @@ const getAllComments = async () => {
   }
 };
 
-const getCommentsByProjectTaskId = async (projectTaskId) => {
+const getCommentsByProjectTaskId = async ({
+  taskId = "",
+  projectId = "",
+  type = "",
+  status = "",
+  search = "",
+  page = "",
+  pageSize = "",
+} = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/project-task/${projectTaskId}`;
+    const url = `${endpoint}/project-task/${taskId}?projectId=${projectId}&type=${type}&status=${status}&content=${search}&pageNo=${page}&pageSize=${pageSize}`;
     const response = await fetchData({
       url,
       method: "GET",
@@ -77,7 +85,7 @@ const getCommentsById = async (id) => {
   }
 };
 
-const createComment = async (request) => {
+const createComment = async (projectId, request) => {
   try {
     const token = store.getState().customer?.token ?? "";
     const formData = new FormData();
@@ -87,7 +95,7 @@ const createComment = async (request) => {
         formData.append(key, request[key]);
       }
     });
-    const url = `${endpoint}`;
+    const url = `${endpoint}?projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "POST",

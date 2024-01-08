@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "/navigation";
 import { useSearchParams } from "next/navigation";
@@ -19,8 +17,8 @@ export default function Pagination({ query = "page", count = 0 }) {
     url.search = searchParams.toString();
     router.push(url.toString(), { scroll: false });
   };
-  const handleChangePage = (newPage) => {
-    setPage(newPage);
+  const handleChangePage = (e, newPage) => {
+    e.preventDefault();
     changeSearchParams(newPage);
   };
 
@@ -33,23 +31,36 @@ export default function Pagination({ query = "page", count = 0 }) {
       <ul className="pg-pagination">
         {page > 0 && (
           <li>
-            <a onClick={() => handleChangePage(page - 1)} aria-label="Previous">
+            <button
+              className="page-btn"
+              onClick={(e) => handleChangePage(e, page - 1)}
+              aria-label="Previous"
+            >
               <i className="ti-angle-left"></i>
-            </a>
+            </button>
           </li>
         )}
         {Array.from(Array(count), (e, i) => {
           return (
-            <li className={`${page == i ? "active" : ""}`} key={i}>
-              <a onClick={() => handleChangePage(i)}>{i + 1}</a>
+            <li key={i}>
+              <button
+                className={`page-btn ${page == i ? "active" : ""}`}
+                onClick={(e) => handleChangePage(e, i)}
+              >
+                {i + 1}
+              </button>
             </li>
           );
         })}
         {page < count - 1 && (
           <li>
-            <a onClick={() => handleChangePage(page + 1)} aria-label="Next">
+            <button
+              className="page-btn"
+              onClick={(e) => handleChangePage(e, page + 1)}
+              aria-label="Next"
+            >
               <i className="ti-angle-right"></i>
-            </a>
+            </button>
           </li>
         )}
       </ul>

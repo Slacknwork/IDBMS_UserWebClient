@@ -6,8 +6,6 @@ import { useRouter } from "/navigation";
 import PageTitle from "/components/PageTitle";
 import Tabs from "/components/Tabs";
 
-
-
 export default function ClientLayout({ children }) {
   const router = useRouter();
   const t = useTranslations("ProjectDetails_Overview");

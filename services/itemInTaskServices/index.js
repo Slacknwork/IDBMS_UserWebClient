@@ -30,7 +30,7 @@ const getItemInTasksByProjectId = async ({
   try {
     const token = store.getState().customer?.token ?? "";
 
-    const paramString = `itemCodeOrName=${search}&itemCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const paramString = `itemCodeOrName=${search}&itemCategoryId=${categoryId}&taskStatus=${status}&pageNo=${page}&pageSize=${pageSize}&projectId=${projectId}`;
     const url = `${endpoint}/project/${projectId}?${paramString}`;
     const response = await fetchData({
       url,
