@@ -10,6 +10,7 @@ import projectTypeOptions from "/constants/enums/projectType";
 import projectStatusOptions from "/constants/enums/projectStatus";
 
 import { getProjectById } from "/services/projectServices";
+import { useTranslations } from "next-intl";
 
 import NavButton from "/components/Shared/NavButton";
 
@@ -20,6 +21,7 @@ export default function ProjectOverview() {
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [project, setProject] = useState({});
+  const t = useTranslations("ProjectDetails_Overview");
 
   const fetchProject = async () => {
     try {
@@ -88,19 +90,19 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                    Category:{" "}
+                                  {t("Category")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.projectCategory?.name}
                                     </span>
                                   </li>
                                   <li>
-                                    Language:{" "}
+                                  {t("Language")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {languageOptions[project?.language ?? 0]}
                                     </span>
                                   </li>
                                   <li>
-                                    Status:{" "}
+                                  {t("Status")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {
                                         projectStatusOptions[
@@ -114,7 +116,7 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                    Created:{" "}
+                                  {t("Created")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {new Date(
                                         project?.createdDate
@@ -122,7 +124,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                    Last Updated:{" "}
+                                  {t("LastUpdated")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {new Date(
                                         project?.createdDate
@@ -138,7 +140,7 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                    Estimated Price:{" "}
+                                  {t("EstimatedPrice")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.estimatedPrice?.toLocaleString(
                                         "vi-VN"
@@ -147,7 +149,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                    Final Price:{" "}
+                                  {t("FinalPrice")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.finalPrice?.toLocaleString(
                                         "vi-VN"
@@ -156,7 +158,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                    Total Warranty Paid:{" "}
+                                  {t("TotalWarrantyPaid")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.totalWarrantyPaid?.toLocaleString(
                                         "vi-VN"
@@ -165,7 +167,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                    Amount Paid:{" "}
+                                  {t("AmountPaid")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.amountPaid?.toLocaleString(
                                         "vi-VN"
@@ -178,15 +180,15 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                    Total area:{" "}
+                                  {t("TotalArea")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.area ?? 0} m<sup>2</sup>
                                     </span>
                                   </li>
                                   <li>
-                                    Estimate working days:{" "}
+                                  {t("EstimateWorkingDays")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
-                                      {project?.estimateBusinessDay ?? 0} days
+                                      {project?.estimateBusinessDay ?? 0} {t("Days")}
                                     </span>
                                   </li>
                                 </ul>
@@ -203,17 +205,17 @@ export default function ProjectOverview() {
                       >
                         <ul>
                           <li>
-                            Site:{" "}
+                          {t("Site")}:{" "}
                             <span>{project?.site?.name ?? "[Site Name]"}</span>
                           </li>
                           <li>
-                            Address:{" "}
+                          {t("Address")}:{" "}
                             <span>
                               {project?.site?.address ?? "[Site Address]"}
                             </span>
                           </li>
                           <li>
-                            Description:{" "}
+                          {t("Description")}:{" "}
                             <span>{project?.site?.description ?? "N/A"}</span>
                           </li>
                         </ul>

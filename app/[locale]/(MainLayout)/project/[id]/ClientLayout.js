@@ -6,53 +6,46 @@ import { useRouter } from "/navigation";
 import PageTitle from "/components/PageTitle";
 import Tabs from "/components/Tabs";
 
-const tabs = [
-  {
-    path: "",
-    label: "Overview",
-  },
-  {
-    path: "floors",
-    label: "Floors",
-  },
-  {
-    path: "stages",
-    label: "Stages",
-  },
-  {
-    path: "tasks",
-    label: "Tasks",
-  },
-  {
-    path: "comments",
-    label: "Comments",
-  },
-  {
-    path: "items",
-    label: "Items",
-  },
-  {
-    path: "documents",
-    label: "Documents",
-  },
-  {
-    path: "participations",
-    label: "Participations",
-  },
-  {
-    path: "transactions",
-    label: "Transactions",
-  },
-  {
-    path: "warranty",
-    label: "Warranty",
-  },
-];
-
 export default function ClientLayout({ children }) {
   const router = useRouter();
   const t = useTranslations("ProjectDetails_Overview");
+  const tab = useTranslations("ProjectDetails_Tab");
 
+  const tabs = [
+    {
+      path: "",
+      label: tab("Overview"),
+    },
+    {
+      path: "floors",
+      label: tab("Floors"),
+    },
+    {
+      path: "stages",
+      label: tab("Stages"),
+    },
+    {
+      path: "tasks",
+      label: tab("Tasks"),
+    },
+    {
+      path: "comments",
+      label: tab("Comments"),
+    },
+    {
+      path: "items",
+      label: tab("Items"),
+    },
+    {
+      path: "documents",
+      label: tab("Documents"),
+    },
+    {
+      path: "payment",
+      label: tab("Payment"),
+    },
+  ];
+  
   return (
     <div style={{ backgroundColor: "#f0f0f0" }}>
       <PageTitle pageTitle={t("Details")} pagesub={"Project"} />

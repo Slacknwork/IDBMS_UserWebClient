@@ -81,7 +81,10 @@
     "ContactText2":"Help You!",
     "ContactText3":"Leave us your information so we can contact and start up a project!",
     "ContactUs":"Contact Us",
-    "Details":"Details"
+    "Details":"Details",
+    "By": "By",
+    "NoDescription": "No description"
+
   },
   "Contact": {},
   "UserProfile": {
@@ -215,7 +218,18 @@
     "AdvertisementStatus": "Advertisement Status",
     "AdminNote": "Admin Note"
   },
+  "ProjectDetails_Tab": {
+    "Overview": "Overview",
+    "Floors": "Floors",
+    "Stages":"Stages",
+    "Tasks": "Tasks",
+    "Comments":"Comments",
+    "Items":"Items",
+    "Documents":"Documents",
+    "Payment":"Payment"
+  },
   "ProjectDetails_Overview": {
+    "Overview": "Overview",
     "Booking": "Project booking",
     "Details": "Project details",
     "Name": "Name",
@@ -234,7 +248,16 @@
     "Language": "Language",
     "Status": "Status",
     "AdvertisementStatus": "Advertisement Status",
-    "AdminNote": "Admin Note"
+    "AdminNote": "Admin Note",
+    "Category":"Category",
+    "Created":"Created",
+    "LastUpdated":"Last Updated",
+    "AmountPaid":"Amount Paid",
+    "TotalArea":"Total area",
+    "EstimateWorkingDays":"Estimate working days",
+    "Site":"Site",
+    "Address":"Address",
+    "Days":"days"
   },
   "ProjectDetails_Comment": {
     "Content": "Content",
@@ -316,14 +339,20 @@
     "IsDeleted": "Is Deleted"
   },
   "ProjectDetails_Floor": {
+    "Floors": "Floors",
     "Description": "Description",
-    "": "",
+    "SearchFloor": "Search Floor",
     "Details": "Floor Details",
     "UsePurpose": "Purpose of Use",
     "FloorNo": "No of Flooor",
     "Area": "Area",
     "SiteId": "Site Id",
-    "IsDeleted": "Is Deleted"
+    "IsDeleted": "Is Deleted",
+    "No":"No",
+    "Rooms":"Rooms",
+    "RoomType":"Room Type",
+    "TotalPrice":"Total Price",
+    "Tasks":"Tasks"
   },
   "ProjectDetails_Room": {
     "FloorId": "Floor Id",
