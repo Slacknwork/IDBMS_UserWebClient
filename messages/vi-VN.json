@@ -341,9 +341,10 @@
   },
   "ProjectDetails_Floor": {
     "Floors": "Tầng",
+    "Project": "Dự án",
     "Description": "Mô tả",
     "SearchFloor": "Tìm tầng",
-    "Details": "Chi tiết tầng",
+    "Details": "Chi tiết",
     "UsePurpose": "Mục đích sử dụng",
     "FloorNo": "Số tầng",
     "Area": "Diện tích",
@@ -353,9 +354,13 @@
     "Rooms": "Phòng",
     "RoomType": "Loại phòng",
     "TotalPrice": "Tổng giá tiền",
-    "Tasks": "Công việc"
+    "Tasks": "Công việc",
+    "NoDescription": "Không có thông tin"
+
   },
   "ProjectDetails_Room": {
+    "Rooms": "Phòng",
+    "SearchRooms": "Tìm phòng",
     "FloorId": "ID Tầng",
     "Details": "Chi tiết Phòng",
     "Description": "Mô tả",
@@ -365,10 +370,28 @@
     "RoomTypeId": "ID Loại phòng",
     "IsHidden": "Ẩn đi"
   },
+  "ProjectDetails_Stage": {
+    "Stages":"Giai đoạn",
+    "SearchStages":"Tìm giai đoạn",
+    "No": "STT",
+    "Name": "Tên",
+    "ContractTotal": "Tổng tiền hợp đồng",
+    "IncurredTotal": "Tổng tiền phát sinh",
+    "WorkTime": "Thời gian làm việc",
+    "PaymentDeadline": "Thời hạn thanh toán",
+    "Status": "Trạng thái",
+    "WarrantyPeriod": "Giai đoạn bảo hành",
+    "Paid": "Đã trả",
+    "Unpaid": "Chưa trả",
+    "Undefined":"Chưa xác định",
+    "Unknown":"Không xác định"
+  },
   "ProjectDetails_Task": {
+    "Tasks": "Công việc",
+    "SearchTasks": "Tìm công việc",
     "Code": "Mã",
     "Name": "Tên",
-    "Details": "Chi tiết Nhiệm vụ",
+    "Details": "Chi tiết",
     "Description": "Mô tả",
     "Percentage": "Phần trăm",
     "CalculationUnit": "Đơn vị tính",
@@ -388,7 +411,18 @@
     "InteriorItemId": "ID Vật phẩm Nội thất",
     "TaskDesignId": "ID Thiết kế Nhiệm vụ",
     "RoomId": "ID Phòng",
-    "Status": "Trạng thái"
+    "Status": "Trạng thái",
+    "No":"Số giai đoạn",
+    "NonArchitect":"Không phải kiến trúc",
+    "Category":"Phân loại",
+    "Price":"Giá tiền",
+    "StartDate":"Ngày bắt đầu",
+    "Progress":"Tiến độ",
+    "Undefined":"Không xác định",
+    "Unclassified":"Chưa được phân loại",
+    "NoData":"không có dữ liệu",
+    "":"",
+    "":""
   },
   "ProjectDetails_TaskReport": {
     "Name": "Tên",
@@ -509,5 +543,13 @@
     "Status": "Trạng thái",
     "AdvertisementStatus": "Trạng thái Quảng cáo",
     "AdminNote": "Ghi chú của quản trị viên"
+  },
+  "Error": {
+    "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
+    "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
+    "FetchDataError": "Error fetching data:",
+    "Document": "Document",
+    "TaskReportId": "Task Report",
+    "IsDeleted": "Is Deleted"
   }
 }

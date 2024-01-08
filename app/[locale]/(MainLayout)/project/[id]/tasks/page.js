@@ -23,6 +23,7 @@ import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
 import NavButton from "/components/Shared/NavButton";
+import { useTranslations } from "next-intl";
 
 const theme = createTheme({
   components: {
@@ -52,6 +53,10 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 export default function ProjectTasks() {
   // CONSTANTS
+  const e = useTranslations("Error");
+  const t = useTranslations("ProjectDetails_Task");
+  const o = useTranslations("ProjectDetails_Overview");
+
   const viewModeQuery = "viewMode";
   const defaultViewMode = 0;
 
@@ -213,7 +218,7 @@ export default function ProjectTasks() {
       const data = await await getAllTaskCategories({});
       setCategories(data.list);
     } catch (error) {
-      toast.error("Lỗi dữ liệu: Phân loại công việc!");
+      toast.error(e("TaskCategoryError"));
     }
   };
 
@@ -223,7 +228,7 @@ export default function ProjectTasks() {
       await Promise.all([fetchCategories(), fetchStages(), fetchFloors()]);
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      toast.error(e("FetchError"));
     } finally {
       setLoading(false);
     }
@@ -235,7 +240,7 @@ export default function ProjectTasks() {
       await fetchTasks();
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      toast.error(e("FetchError"));
     } finally {
       setTasksLoading(false);
     }
@@ -266,11 +271,11 @@ export default function ProjectTasks() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
+          <NavButton url={`/project/${params.id}`} label={o("Overview")}></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
-            <h3 className="my-auto">Tasks</h3>
+            <h3 className="my-auto">{t("Tasks")}</h3>
             <div className="d-flex">
               <button
                 disabled={tasksLoading}
@@ -285,7 +290,7 @@ export default function ProjectTasks() {
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search Tasks"></Search>
+          <Search placeholder={t("SearchTasks")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
@@ -335,7 +340,7 @@ export default function ProjectTasks() {
                 onChange={handleStageChange}
                 TabIndicatorProps={{ style: { backgroundColor: "#CAAD06" } }}
               >
-                <Tab label={<span>No Stage</span>} />
+                <Tab label={<span>{t("No")}</span>} />
                 {stages.map((stage) => (
                   <Tab key={stage.id} label={<span>{stage.name}</span>} />
                 ))}
@@ -346,7 +351,7 @@ export default function ProjectTasks() {
                 onChange={handleFloorChange}
                 TabIndicatorProps={{ style: { backgroundColor: "#CAAD06" } }}
               >
-                <Tab label={<span>Non-architect</span>} />
+                <Tab label={<span>{t("NonArchitect")}</span>} />
                 {floors.map((floor) => (
                   <Tab key={floor.id} label={<span>{floor.usePurpose}</span>} />
                 ))}
@@ -406,26 +411,26 @@ export default function ProjectTasks() {
                   >
                     <tr>
                       <th scope="col" width="22.5%">
-                        Name
+                      {t("Name")}
                       </th>
                       <th scope="col" width="12.5%">
-                        Category
+                      {t("Category")}
                       </th>
                       <th scope="col" width="12.5%">
-                        Price (VND)
+                      {t("Price")} (VND)
                       </th>
                       <th scope="col" width="12.5%">
-                        Start Date
+                      {t("StartDate")}
                       </th>
                       <th scope="col" width="17.5%">
-                        Progress
+                      {t("Progress")}
                       </th>
                       <th
                         scope="col"
                         width="12.5%"
                         style={{ textAlign: "center" }}
                       >
-                        Status
+                        {t("Status")}
                       </th>
                       <th scope="col" width="10%"></th>
                     </tr>
@@ -440,7 +445,7 @@ export default function ProjectTasks() {
                           <p style={{ margin: 0 }}>{task && task.name}</p>
                         </td>
                         <td className="align-middle">
-                          {task.taskCategory?.name || "Unclassified"}
+                          {task.taskCategory?.name || t("Unclassified")}
                         </td>
                         <td className="align-middle">
                           {task &&
@@ -452,7 +457,7 @@ export default function ProjectTasks() {
                         <td className="align-middle">
                           {task.startDate
                             ? moment(task.startDate).format("L")
-                            : "Chưa xác định"}
+                            : t("Undefined")}
                         </td>
                         <td
                           className="align-middle"
@@ -485,7 +490,7 @@ export default function ProjectTasks() {
                               className="theme-btn m-1 py-2"
                               style={{ zIndex: 0 }}
                             >
-                              Details
+                              {t("Details")}
                             </Link>
                           </div>
                         </td>
@@ -496,7 +501,7 @@ export default function ProjectTasks() {
               ) : (
                 <Stack sx={{ height: "100%" }}>
                   <p style={{ margin: "auto", textAlign: "center" }}>
-                    No data.
+                  {t("NoData")}.
                   </p>
                 </Stack>
               )}

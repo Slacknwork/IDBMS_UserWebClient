@@ -30,6 +30,7 @@ export default function FloorDetails() {
   const [rooms, setRooms] = useState([]);
   const [count, setCount] = useState(0);
   const t = useTranslations("ProjectDetails_Floor");
+  const r = useTranslations("ProjectDetails_Room");
 
   const fetchFloor = async () => {
     try {
@@ -81,10 +82,10 @@ export default function FloorDetails() {
             <div className="wpo-breadcumb-wrap">
               <ol>
                 <li>
-                  <Link href={`/project`}>{`Project`}</Link>
+                  <Link href={`/project`}>{t("Project")}</Link>
                 </li>
                 <li>
-                  <Link href={`/project/${params.id}/floors`}>{`Floor`}</Link>
+                  <Link href={`/project/${params.id}/floors`}>{t("Floors")}</Link>
                 </li>
               </ol>
             </div>
@@ -98,7 +99,7 @@ export default function FloorDetails() {
             </div>
           </div>
           <div className="col col-lg-12 col-12">
-            <p>{floor.description || "No description."}</p>
+            <p>{floor.description || t("NoDescription")}</p>
           </div>
         </div>
         <div className="row my-4">
@@ -106,7 +107,7 @@ export default function FloorDetails() {
         </div>
         <div className="row">
           <div className="col col-lg-6 mb-4">
-            <Search placeholder="Search Rooms"></Search>
+            <Search placeholder={r("SearchRooms")}></Search>
           </div>
           <div className="col col-lg-12 col-12">
             <div style={{ height: "25rem" }}>
