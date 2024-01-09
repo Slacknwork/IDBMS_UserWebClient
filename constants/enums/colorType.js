@@ -1,5 +1,12 @@
-export default {
-    0: "MixColor",
-    1: "SingleColor",
-    2: "CustomColor",
-};
+const colorTypeOptionsEnglish = ["MixColor", "SingleColor"];
+
+const colorTypeOptions = [
+    "Màu gộp",
+    "Màu đơn",
+  ];
+  
+  export {
+    colorTypeOptionsEnglish,
+  };
+  export default colorTypeOptions;
+  
