@@ -1,5 +1,12 @@
-export default {
-    0: "NotAllowed",
-    1: "Allowed",
-    2: "Public",
-};
+const projectAdvertisementStatusOptions = [
+    "Từ chối quảng cáo",
+    "Đồng ý quảng cáo",
+    "Đang công khai",
+  ];
+  
+  const advertisementStatusBackgroundChipColors = ["primary", "#FFBE6A", "#82D173"];
+  
+  export { advertisementStatusBackgroundChipColors }
+  
+  export default projectAdvertisementStatusOptions;
+  

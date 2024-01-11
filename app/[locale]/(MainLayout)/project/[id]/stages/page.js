@@ -8,6 +8,7 @@ import moment from "moment-timezone";
 
 import stageStatusOptions, {
   stageStatusBackgroundChipColors,
+  stageStatusOptionsEnglish,
 } from "/constants/enums/stageStatus";
 
 import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
@@ -15,6 +16,7 @@ import { getPaymentStagesByProjectId } from "/services/paymentStageServices";
 import Pagination from "/components/Shared/Pagination";
 import Search from "/components/Shared/Search";
 import NavButton from "/components/Shared/NavButton";
+import { useTranslations } from "next-intl";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
@@ -27,11 +29,14 @@ export default function PaymentStagesPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
+  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [stages, setStages] = useState([]);
   const [count, setCount] = useState(0);
+  const t = useTranslations("ProjectDetails_Stage");
+  const o = useTranslations("ProjectDetails_Overview");
 
   const fetchStages = async () => {
     try {
@@ -64,17 +69,17 @@ export default function PaymentStagesPage() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
+          <NavButton url={`/project/${params.id}`} label={o("Overview")}></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
-            <h3 className="my-auto">Stages</h3>
+            <h3 className="my-auto">{t("Stages")}</h3>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-lg-6 mb-4">
-          <Search placeholder="Search Stages"></Search>
+          <Search placeholder={t("SearchStages")}></Search>
         </div>
         <div className="col col-lg-12 col-12" style={{ minHeight: "25rem" }}>
           {loading ? (
@@ -92,25 +97,25 @@ export default function PaymentStagesPage() {
               >
                 <tr>
                   <th scope="col" width="5%" style={{ textAlign: "center" }}>
-                    No.
+                  {t("No")}.
                   </th>
                   <th scope="col" width="25%">
-                    Name
+                  {t("Name")}
                   </th>
                   <th scope="col" width="15%">
-                    Contract Total (VND)
+                  {t("ContractTotal")} (VND)
                   </th>
                   <th scope="col" width="15%">
-                    Incurred Total (VND)
+                  {t("IncurredTotal")} (VND)
                   </th>
                   <th scope="col" width="15%" style={{ textAlign: "center" }}>
-                    Work time
+                  {t("WorkTime")}
                   </th>
                   <th scope="col" width="15%">
-                    Payment deadline
+                  {t("PaymentDeadline")}
                   </th>
                   <th scope="col" width="15%">
-                    Status
+                  {t("Status")}
                   </th>
                 </tr>
               </thead>
@@ -131,7 +136,7 @@ export default function PaymentStagesPage() {
                         <br />
                         <span style={{ fontSize: 14 }}>
                           {stage?.isWarrantyStage
-                            ? "(Giai đoạn bảo hành)"
+                            ? `(${t("WarrantyPeriod")})`
                             : null}
                         </span>
                       </td>
@@ -143,8 +148,8 @@ export default function PaymentStagesPage() {
                           <br />
                           <span style={{ fontWeight: 800 }}>
                             {stage?.isContractAmountPaid
-                              ? "(Đã trả)"
-                              : "(Chưa trả)"}
+                              ? `(${t("Paid")})`
+                              : `(${t("Unpaid")})`}
                           </span>
                         </span>
                       </td>
@@ -162,9 +167,9 @@ export default function PaymentStagesPage() {
                           </span>
                           <br />
                           {stage?.isIncurredAmountPaid
-                            ? "(Đã trả)"
+                            ? `(${t("Paid")})`
                             : stage?.isContractAmountPaid
-                            ? "(Chưa trả)"
+                            ? `(${t("Unpaid")})`
                             : null}
                         </span>
                       </td>
@@ -188,7 +193,7 @@ export default function PaymentStagesPage() {
                       <td className="align-middle">
                         {stage.endTimePayment
                           ? moment(stage.endTimePayment).format("L")
-                          : "Chưa xác định"}
+                          : t("Undefined")}
                       </td>
                       <td className="align-middle">
                         <Chip
@@ -205,9 +210,22 @@ export default function PaymentStagesPage() {
                             },
                           }}
                           size="small"
-                          label={
-                            stageStatusOptions[stage?.status] ||
-                            "Không xác định"
+                          label=
+                          {
+                            (() => {
+                              if (language === "english") {
+                                return stageStatusOptionsEnglish[
+                                    stage?.status
+                                  ]
+                                ;
+                              } else if (language === "vietnamese") {
+                                return stageStatusOptions[
+                                    stage?.status
+                                  ]
+                              } else {
+                                return t("Unknown");
+                              }
+                            })()
                           }
                         ></Chip>
                       </td>

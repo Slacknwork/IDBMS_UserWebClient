@@ -231,6 +231,8 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Overview",
+    "Progress": "Progress",
+    "Projects": "Projects",
     "Booking": "Project booking",
     "Details": "Project details",
     "Name": "Name",
@@ -243,6 +245,7 @@
     "UpdatedDate": "Updated Date",
     "NoStage": "No Stage",
     "EstimatedPrice": "Estimated Price",
+    "EstimatedDays": "Estimated Days",
     "FinalPrice": "Final Price",
     "TotalWarrantyPaid": "Total Warranty Paid",
     "CurrentStageId": "Current Stage Id",
@@ -258,7 +261,11 @@
     "EstimateWorkingDays": "Estimate working days",
     "Site": "Site",
     "Address": "Address",
-    "Days": "days"
+    "Days": "days",
+    "ContractedUnits":"Contracted units",
+    "UsedUnits":"Used units",
+    "Started":"Started",
+    "Ended":"Ended"
   },
   "ProjectDetails_Comment": {
     "Content": "Content",
@@ -275,7 +282,11 @@
   "ProjectDetails_Item": {
     "Code": "Code",
     "Name": "Name",
-    "Details": "Item Details",
+    "SearchItems": "Search Items...",
+    "Image": "Image",
+    "Category": "Category",
+    "Quantity": "Quantity",
+    "Details": "Details",
     "Length": "Length",
     "Width": "Width",
     "Height": "Height",
@@ -341,9 +352,10 @@
   },
   "ProjectDetails_Floor": {
     "Floors": "Floors",
+    "Project": "Project",
     "Description": "Description",
     "SearchFloor": "Search Floor",
-    "Details": "Floor Details",
+    "Details": "Details",
     "UsePurpose": "Purpose of Use",
     "FloorNo": "No of Flooor",
     "Area": "Area",
@@ -353,9 +365,12 @@
     "Rooms": "Rooms",
     "RoomType": "Room Type",
     "TotalPrice": "Total Price",
-    "Tasks": "Tasks"
+    "Tasks": "Tasks",
+    "NoDescription": "No description"
   },
   "ProjectDetails_Room": {
+    "Rooms": "Rooms",
+    "SearchRooms": "Search Rooms",
     "FloorId": "Floor Id",
     "Details": "Room Details",
     "Description": "Description",
@@ -365,10 +380,30 @@
     "RoomTypeId": "Room Type Id",
     "IsHidden": "Is Hidden"
   },
+  "ProjectDetails_Stage": {
+    "Stages":"Stages",
+    "SearchStages":"Search Stages",
+    "No": "No",
+    "Name": "Name",
+    "ContractTotal": "Contract Total",
+    "IncurredTotal": "Incurred Total",
+    "WorkTime": "Work time",
+    "PaymentDeadline": "Payment deadline",
+    "Status": "Status",
+    "WarrantyPeriod": "Warranty period",
+    "Paid": "Paid",
+    "Unpaid": "Unpaid",
+    "Undefined":"Undefined",
+    "Unknown":"Unknown"
+  },
   "ProjectDetails_Task": {
+    "Tasks": "Tasks",
+    "SearchTasks": "Search Tasks",
+    "SwitchStage": "Switch to Stage view",
+    "SwitchFloorRoom": "Switch to Floor/Room view",
     "Code": "Code",
     "Name": "Name",
-    "Details": "Task Details",
+    "Details": "Details",
     "Description": "Description",
     "Percentage": "Percentage",
     "CalculationUnit": "Calculation Unit",
@@ -388,7 +423,16 @@
     "InteriorItemId": "Interior Item",
     "TaskDesignId": "Task Design",
     "RoomId": "Room",
-    "Status": "Status"
+    "Status": "Status",
+    "No":"No Stage",
+    "NonArchitect":"Non-architect",
+    "Category":"Category",
+    "Price":"Price",
+    "StartDate":"Start Date",
+    "Progress":"Progress",
+    "Undefined":"Undefined",
+    "Unclassified":"Unclassified",
+    "NoData":"No data"
   },
   "ProjectDetails_TaskReport": {
     "Name": "Name",
@@ -509,5 +553,13 @@
     "Status": "Status",
     "AdvertisementStatus": "Advertisement Status",
     "AdminNote": "Admin Note"
+  },
+  "Error": {
+    "TaskCategoryError": "Fetch Data Error: Task Categories!",
+    "TasksError": "Fetch Data Error: Tasks!",
+    "ParticipationsError": "Fetch Data Error: Participations!",
+    "ProjectsError": "Fetch Data Error: Projects!",
+    "FetchError": "Error loading data from the system",
+    "FetchDataError": "Error fetching data:"
   }
 }

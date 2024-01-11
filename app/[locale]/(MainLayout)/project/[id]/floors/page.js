@@ -29,6 +29,7 @@ export default function FloorList() {
   const [floors, setFloors] = useState([]);
   const [count, setCount] = useState(0);
   const t = useTranslations("ProjectDetails_Floor");
+  const o = useTranslations("ProjectDetails_Overview");
 
   const fetchFloors = async () => {
     try {
@@ -63,7 +64,7 @@ export default function FloorList() {
     <div className="pb-0 container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <NavButton url={`/project/${params.id}`} label="Overview"></NavButton>
+          <NavButton url={`/project/${params.id}`} label={o("Overview")}></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">

@@ -10,6 +10,7 @@ export default function ClientLayout({ children }) {
   const router = useRouter();
   const t = useTranslations("ProjectDetails_Overview");
   const tab = useTranslations("ProjectDetails_Tab");
+  const h = useTranslations("Header");
 
   const tabs = [
     {
@@ -56,7 +57,7 @@ export default function ClientLayout({ children }) {
 
   return (
     <div style={{ backgroundColor: "#f0f0f0" }}>
-      <PageTitle pageTitle={t("Details")} pagesub={"Project"} />
+      <PageTitle pageTitle={t("Details")} pagesub={h("Projects")} />
       <section id="project-section" className="mt-4">
         <div className="container wpo-shop-single-section">
           <div className="row">

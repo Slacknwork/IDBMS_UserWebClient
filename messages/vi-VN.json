@@ -231,6 +231,8 @@
   },
   "ProjectDetails_Overview": {
     "Overview": "Tổng quan",
+    "Progress": "Tiến độ",
+    "Projects": "Dự án",
     "Booking": "Đặt chỗ Dự án",
     "Details": "Chi tiết Dự án",
     "Name": "Tên",
@@ -243,6 +245,7 @@
     "UpdatedDate": "Ngày cập nhật",
     "NoStage": "Số giai đoạn",
     "EstimatedPrice": "Giá ước tính",
+    "EstimatedDays": "Số ngày ước tính",
     "FinalPrice": "Giá cuối cùng",
     "TotalWarrantyPaid": "Tổng chi phí bảo hành đã thanh toán",
     "CurrentStageId": "ID Giai đoạn hiện tại",
@@ -258,7 +261,11 @@
     "EstimateWorkingDays": "Ước tính ngày làm việc",
     "Site": "Địa điểm",
     "Address": "Địa chỉ",
-    "Days": "ngày"
+    "Days": "ngày",
+    "ContractedUnits":"Đơn vị ký hợp đồng",
+    "UsedUnits":"Đơn vị đã sử dụng",
+    "Started":"Bắt đầu",
+    "Ended":"Kết thúc"
   },
   "ProjectDetails_Comment": {
     "Content": "Nội dung",
@@ -275,7 +282,11 @@
   "ProjectDetails_Item": {
     "Code": "Mã",
     "Name": "Tên",
-    "Details": "Chi tiết Vật phẩm",
+    "SearchItems": "Tìm đồ dùng...",
+    "Image": "Ảnh",
+    "Category": "Phân loại",
+    "Quantity": "Số lượng",
+    "Details": "Chi tiết",
     "Length": "Chiều dài",
     "Width": "Chiều rộng",
     "Height": "Chiều cao",
@@ -341,9 +352,10 @@
   },
   "ProjectDetails_Floor": {
     "Floors": "Tầng",
+    "Project": "Dự án",
     "Description": "Mô tả",
     "SearchFloor": "Tìm tầng",
-    "Details": "Chi tiết tầng",
+    "Details": "Chi tiết",
     "UsePurpose": "Mục đích sử dụng",
     "FloorNo": "Số tầng",
     "Area": "Diện tích",
@@ -353,9 +365,13 @@
     "Rooms": "Phòng",
     "RoomType": "Loại phòng",
     "TotalPrice": "Tổng giá tiền",
-    "Tasks": "Công việc"
+    "Tasks": "Công việc",
+    "NoDescription": "Không có thông tin"
+
   },
   "ProjectDetails_Room": {
+    "Rooms": "Phòng",
+    "SearchRooms": "Tìm phòng",
     "FloorId": "ID Tầng",
     "Details": "Chi tiết Phòng",
     "Description": "Mô tả",
@@ -365,10 +381,30 @@
     "RoomTypeId": "ID Loại phòng",
     "IsHidden": "Ẩn đi"
   },
+  "ProjectDetails_Stage": {
+    "Stages":"Giai đoạn",
+    "SearchStages":"Tìm giai đoạn",
+    "No": "STT",
+    "Name": "Tên",
+    "ContractTotal": "Tổng tiền hợp đồng",
+    "IncurredTotal": "Tổng tiền phát sinh",
+    "WorkTime": "Thời gian làm việc",
+    "PaymentDeadline": "Thời hạn thanh toán",
+    "Status": "Trạng thái",
+    "WarrantyPeriod": "Giai đoạn bảo hành",
+    "Paid": "Đã trả",
+    "Unpaid": "Chưa trả",
+    "Undefined":"Chưa xác định",
+    "Unknown":"Không xác định"
+  },
   "ProjectDetails_Task": {
+    "Tasks": "Công việc",
+    "SearchTasks": "Tìm công việc",
+    "SwitchStage": "Chuyển sang xem giai đoạn",
+    "SwitchFloorRoom": "Chuyển sang xem tầng/Phòng",
     "Code": "Mã",
     "Name": "Tên",
-    "Details": "Chi tiết Nhiệm vụ",
+    "Details": "Chi tiết",
     "Description": "Mô tả",
     "Percentage": "Phần trăm",
     "CalculationUnit": "Đơn vị tính",
@@ -388,7 +424,16 @@
     "InteriorItemId": "ID Vật phẩm Nội thất",
     "TaskDesignId": "ID Thiết kế Nhiệm vụ",
     "RoomId": "ID Phòng",
-    "Status": "Trạng thái"
+    "Status": "Trạng thái",
+    "No":"Số giai đoạn",
+    "NonArchitect":"Không phải kiến trúc",
+    "Category":"Phân loại",
+    "Price":"Giá tiền",
+    "StartDate":"Ngày bắt đầu",
+    "Progress":"Tiến độ",
+    "Undefined":"Không xác định",
+    "Unclassified":"Chưa được phân loại",
+    "NoData":"không có dữ liệu"
   },
   "ProjectDetails_TaskReport": {
     "Name": "Tên",
@@ -509,5 +554,13 @@
     "Status": "Trạng thái",
     "AdvertisementStatus": "Trạng thái Quảng cáo",
     "AdminNote": "Ghi chú của quản trị viên"
+  },
+  "Error": {
+    "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
+    "TasksError": "Lỗi dữ liệu: Công việc!",
+    "ParticipationsError": "Lỗi dữ liệu: Dự án tham gia!",
+    "ProjectsError": "Lỗi dữ liệu: Dự án!",
+    "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
+    "FetchDataError": "Lỗi nạp dữ liệu:"
   }
 }
