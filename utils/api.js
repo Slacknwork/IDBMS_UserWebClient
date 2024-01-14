@@ -10,8 +10,8 @@ export async function fetchData({
     method,
     cache: "no-store",
     headers: {
-      ...(contentType ? { "Content-Type": contentType } : {}),
-      Authorization: `Bearer ${token}`,
+      ...(contentType && { "Content-Type": contentType }),
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
     body,
   });

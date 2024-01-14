@@ -9,8 +9,8 @@
   "Home": {
     "Booking": "Dự án đặt phòng",
     "Details": "Chi tiết dự án",
-    "HeroTitle": "Tạo ra ước mơ của bạn",
-    "HeroDescription": "Khách hàng rất quan trọng, khách hàng sẽ được khách hàng theo đuổi. Trong nguyên tố, họ chỉ sống khi họ sống.",
+    "HeroTitle": "Nội thất IDT",
+    "HeroDescription": "Chào mừng bạn đến với trang web của công ty Thiết kế & Trang trí Nội thất IDT!",
     "About": "Về chúng tôi",
     "AboutTitle": "Về thiết kế & trang trí nội thất của IDT",
     "AboutDescription": "Chúng tôi chuyên cung cấp các dịch vụ thiết kế và thi công nội thất: Thi công nội thất Ngân hàng, Văn phòng, Nhà ở, Cửa hàng, Showroom. Với đội ngũ Kiến trúc sư giàu kinh nghiệm trong nghành nghề, đã thực hiện nhiều dự án trong và ngoài nước.",
@@ -58,14 +58,14 @@
     "ContactAddress": "721 Phan Văn Trị, Phường 07, Quận Gò Vấp, HCM",
     "Email": "Email",
     "Call": "Gọi ngay",
-    "Question": "Cần đặt câu hỏi?",
-    "FunFact": "Một thực tế đã được chứng minh từ lâu là người đọc sẽ bị phân tâm bởi nội dung của một trang khi đang xem.",
+    "Question": "Yêu cầu dự án",
+    "FunFact": "Hãy để lại thông tin liên lạc cho chúng tôi nếu bạn cần thực hiện một dự án mới!",
     "FormName": "Họ Tên",
     "FormEmail": "Email",
     "FormPhone": "Số điện thoại",
     "FormAddress": "Địa chỉ",
     "FormMessage": "Tin nhắn",
-    "FormSubmit": "Nộp ngay"
+    "FormSubmit": "Gửi"
   },
   "InteriorItems": {
     "Price": "Giá",
@@ -262,10 +262,10 @@
     "Site": "Địa điểm",
     "Address": "Địa chỉ",
     "Days": "ngày",
-    "ContractedUnits":"Đơn vị ký hợp đồng",
-    "UsedUnits":"Đơn vị đã sử dụng",
-    "Started":"Bắt đầu",
-    "Ended":"Kết thúc"
+    "ContractedUnits": "Đơn vị ký hợp đồng",
+    "UsedUnits": "Đơn vị đã sử dụng",
+    "Started": "Bắt đầu",
+    "Ended": "Kết thúc"
   },
   "ProjectDetails_Comment": {
     "Content": "Nội dung",
@@ -367,7 +367,6 @@
     "TotalPrice": "Tổng giá tiền",
     "Tasks": "Công việc",
     "NoDescription": "Không có thông tin"
-
   },
   "ProjectDetails_Room": {
     "Rooms": "Phòng",
@@ -382,8 +381,8 @@
     "IsHidden": "Ẩn đi"
   },
   "ProjectDetails_Stage": {
-    "Stages":"Giai đoạn",
-    "SearchStages":"Tìm giai đoạn",
+    "Stages": "Giai đoạn",
+    "SearchStages": "Tìm giai đoạn",
     "No": "STT",
     "Name": "Tên",
     "ContractTotal": "Tổng tiền hợp đồng",
@@ -394,8 +393,8 @@
     "WarrantyPeriod": "Giai đoạn bảo hành",
     "Paid": "Đã trả",
     "Unpaid": "Chưa trả",
-    "Undefined":"Chưa xác định",
-    "Unknown":"Không xác định"
+    "Undefined": "Chưa xác định",
+    "Unknown": "Không xác định"
   },
   "ProjectDetails_Task": {
     "Tasks": "Công việc",
@@ -425,15 +424,15 @@
     "TaskDesignId": "ID Thiết kế Nhiệm vụ",
     "RoomId": "ID Phòng",
     "Status": "Trạng thái",
-    "No":"Số giai đoạn",
-    "NonArchitect":"Không phải kiến trúc",
-    "Category":"Phân loại",
-    "Price":"Giá tiền",
-    "StartDate":"Ngày bắt đầu",
-    "Progress":"Tiến độ",
-    "Undefined":"Không xác định",
-    "Unclassified":"Chưa được phân loại",
-    "NoData":"không có dữ liệu"
+    "No": "Số giai đoạn",
+    "NonArchitect": "Không phải kiến trúc",
+    "Category": "Phân loại",
+    "Price": "Giá tiền",
+    "StartDate": "Ngày bắt đầu",
+    "Progress": "Tiến độ",
+    "Undefined": "Không xác định",
+    "Unclassified": "Chưa được phân loại",
+    "NoData": "không có dữ liệu"
   },
   "ProjectDetails_TaskReport": {
     "Name": "Tên",
