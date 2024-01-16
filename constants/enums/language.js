@@ -8,9 +8,19 @@ const languageIndex = {
   English: 0,
   Vietnamese: 1,
 };
-const languageOptions = ["Tiếng Anh", "Tiếng Việt"];
+const languageLocaleIndex = {
+  "en-US": 0,
+  "vi-VN": 1,
+};
+const languageOptions = ["English", "Tiếng Việt"];
 const languageOptionsEnglish = ["English", "Vietnamese"];
 
-export { languageIndex, languageTypeChipColors, languageTypeChipImages, languageOptionsEnglish };
+export {
+  languageIndex,
+  languageTypeChipColors,
+  languageTypeChipImages,
+  languageOptionsEnglish,
+  languageLocaleIndex,
+};
 
 export default languageOptions;

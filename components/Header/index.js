@@ -1,27 +1,31 @@
 import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
-import { Link, useRouter } from "/navigation";
+import { Link, usePathname } from "/navigation";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useTranslations } from "next-intl";
 import { logout } from "/store/reducers/customer";
+import { Avatar, Chip } from "@mui/material";
+
+import locales from "/constants/locales";
+import languageOptions, {
+  languageTypeChipImages,
+  languageTypeChipColors,
+  languageLocaleIndex,
+} from "/constants/enums/language";
 
 import MobileMenu from "/components/MobileMenu/MobileMenu";
-import { useTranslations } from "next-intl";
 
 const Logo = "/images/idt-logo.jpg";
 
 const Header = (props) => {
-  const router = useRouter();
+  const params = useParams();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
   const t = useTranslations("Header");
-
   const user = useSelector((state) => state.customer);
-
-  const openMenu = (state) => {
-    user.loggedIn ? setMenuActive(state) : router.push("/login");
-  };
 
   return (
     <header id="header">
@@ -60,7 +64,7 @@ const Header = (props) => {
                   </Link>
                 </div>
               </div>
-              <div className="col-lg-9 col-md-1 col-1">
+              <div className="col-lg-8 col-md-1 col-1">
                 <div
                   id="navbar"
                   className="collapse navbar-collapse navigation-holder"
@@ -84,7 +88,38 @@ const Header = (props) => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-1 col-md-1 col-2">
+              <div className="col-lg-2 col-md-1 col-2 d-flex justify-content-end">
+                <Chip
+                  component={Link}
+                  href={pathname}
+                  locale={
+                    params.locale === locales.vi_VN
+                      ? locales.en_US
+                      : locales.vi_VN
+                  }
+                  avatar={
+                    <Avatar
+                      sx={{ width: 18, height: 18 }}
+                      src={
+                        languageTypeChipImages[
+                          languageLocaleIndex[params.locale]
+                        ]
+                      }
+                    />
+                  }
+                  variant="outlined"
+                  label={languageOptions[languageLocaleIndex[params.locale]]}
+                  color={
+                    languageTypeChipColors[languageLocaleIndex[params.locale]]
+                  }
+                  sx={{
+                    mr: 2,
+                    my: "auto",
+                    "& .MuiChip-label": {
+                      paddingTop: "1px",
+                    },
+                  }}
+                ></Chip>
                 <div className="header-right">
                   <div className="header-right-menu-wrapper">
                     <div className="header-right-menu">
