@@ -119,149 +119,112 @@ export default function TaskCommentsPage() {
   }, []);
 
   return (
-    <div className="review">
-      <div className="add-review-sec">
-        <h3 style={{ fontSize: 24 }}>Add a Comment</h3>
-        <div className="form-field">
-          <textarea
-            style={{ color: "black", height: "8rem" }}
-            name="comment"
-            value={comment}
-            onChange={onCommentChange}
-            placeholder="Your Comment..."
-          ></textarea>
-        </div>
-        <div className="form-submit d-flex justify-content-between">
-          <div className="d-flex">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="add-file-button border-0"
-            >
-              <FaPlus style={{ fontSize: 24 }} />
-            </button>
-            <Modal
-              centered={true}
-              isOpen={isModalOpen}
-              toggle={() => setIsModalOpen(false)}
-            >
-              <ModalHeader toggle={() => setIsModalOpen(false)}>
-                Upload File
-              </ModalHeader>
-              <ModalBody>
-                <div {...getRootProps()} style={dropzoneStyles}>
-                  <input {...getInputProps()} />
-                  <p>Drag & drop a file here, or click to select a file</p>
-                </div>
-              </ModalBody>
-            </Modal>
-            <input
-              type="file"
-              id="fileInput"
-              accept=".pdf, .doc, .docx, .txt" // Add the desired file formats
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-            />
-            <p className="my-auto mx-4">
-              {selectedFile ? selectedFile.name : "No file selected."}
-            </p>
-            <style jsx>{`
-              .add-file-button {
-                background-color: rgba(255, 255, 255, 1);
-                display: inline-block;
-                padding: 10px;
-                color: #caad06;
-                cursor: pointer;
-              }
-
-              .add-file-button:hover {
-                background-color: #f0f0f0;
-              }
-            `}</style>
-          </div>
-          <div className="d-flex">
-            <button
-              type="submit"
-              className="theme-btn px-4 py-2"
-              onClick={handleOpenConfirmModal}
-            >
-              Submit
-            </button>
-            <Modal
-              isOpen={isModalConfirmOpen}
-              toggle={handleCloseConfirmModal}
-              centered
-            >
-              <ModalHeader toggle={handleCloseConfirmModal}>
-                Confirm Submission
-              </ModalHeader>
-              <ModalBody>
-                <p>Are you sure you want to submit the comment?</p>
-              </ModalBody>
-              <ModalFooter>
-                <button
-                  className="theme-btn-s2 px-4 py-2"
-                  onClick={handleCloseConfirmModal}
-                >
-                  Cancel
-                </button>
+    <div className="container">
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <div className="review">
+            <div className="add-review-sec">
+              <h3 style={{ fontSize: 24 }}>Add a Comment</h3>
+              <div className="form-field">
+                <textarea
+                  style={{ color: "black", height: "8rem" }}
+                  name="comment"
+                  value={comment}
+                  onChange={onCommentChange}
+                  placeholder="Your Comment..."
+                ></textarea>
+              </div>
+              <div className="form-submit d-flex justify-content-end">
                 <div className="d-flex">
                   <button
-                    className="theme-btn px-4 py-2 rounded-0"
-                    onClick={handleSubmitComment}
+                    type="submit"
+                    className="theme-btn px-4 py-2"
+                    onClick={handleOpenConfirmModal}
                   >
                     Submit
                   </button>
-                </div>
-              </ModalFooter>
-            </Modal>
-          </div>
-        </div>
-      </div>
-      <div className="review-section mt-4" style={{ minHeight: "30rem" }}>
-        <h3>Comments</h3>
-        {loading ? (
-          <Stack sx={{ height: "30rem" }}>
-            <CircularProgress
-              sx={{ m: "auto", color: "#CAAD06" }}
-              size="4rem"
-            ></CircularProgress>
-          </Stack>
-        ) : comments && comments.length > 0 ? (
-          <ul>
-            <li>
-              <div className="review-content">
-                <div className="reviewer-say">
-                  <h3>
-                    Cobus Besten <span>June 7’2022</span>
-                  </h3>
-                  <p>
-                    Lorem is simply dummy text of the printing and typesetting
-                    industry. Lorem has been the industry's.
-                  </p>
+                  <Modal
+                    isOpen={isModalConfirmOpen}
+                    toggle={handleCloseConfirmModal}
+                    centered
+                  >
+                    <ModalHeader toggle={handleCloseConfirmModal}>
+                      Confirm Submission
+                    </ModalHeader>
+                    <ModalBody>
+                      <p>Are you sure you want to submit the comment?</p>
+                    </ModalBody>
+                    <ModalFooter>
+                      <button
+                        className="theme-btn-s2 px-4 py-2"
+                        onClick={handleCloseConfirmModal}
+                      >
+                        Cancel
+                      </button>
+                      <div className="d-flex">
+                        <button
+                          className="theme-btn px-4 py-2 rounded-0"
+                          onClick={handleSubmitComment}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </ModalFooter>
+                  </Modal>
                 </div>
               </div>
-              <ul>
-                <li>
-                  <div className="review-content">
-                    <div className="reviewer-say">
-                      <h3>
-                        James Koster <span>June 7 2022</span>
-                      </h3>
-                      <p>
-                        Lorem is simply dummy text of the printing and
-                        typesetting industry. Lorem has been the industry's.
-                      </p>
+            </div>
+            <div className="review-section mt-4" style={{ minHeight: "30rem" }}>
+              <h3>Comments</h3>
+              {loading ? (
+                <Stack sx={{ height: "30rem" }}>
+                  <CircularProgress
+                    sx={{ m: "auto", color: "#CAAD06" }}
+                    size="4rem"
+                  ></CircularProgress>
+                </Stack>
+              ) : comments && comments.length > 0 ? (
+                <ul>
+                  <li>
+                    <div className="review-content">
+                      <div className="reviewer-say">
+                        <h3>
+                          Cobus Besten <span>June 7’2022</span>
+                        </h3>
+                        <p>
+                          Lorem is simply dummy text of the printing and
+                          typesetting industry. Lorem has been the industry's.
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        ) : (
-          <Stack sx={{ height: "30rem" }}>
-            <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
-          </Stack>
-        )}
+                    <ul>
+                      <li>
+                        <div className="review-content">
+                          <div className="reviewer-say">
+                            <h3>
+                              James Koster <span>June 7 2022</span>
+                            </h3>
+                            <p>
+                              Lorem is simply dummy text of the printing and
+                              typesetting industry. Lorem has been the
+                              industry's.
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              ) : (
+                <Stack sx={{ height: "30rem" }}>
+                  <p style={{ margin: "auto", textAlign: "center" }}>
+                    No data.
+                  </p>
+                </Stack>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

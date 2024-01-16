@@ -19,6 +19,10 @@ export default function TaskLayout({ children }) {
       label: t("Overview"),
     },
     {
+      path: "reports",
+      label: "Reports",
+    },
+    {
       path: "items",
       label: t("Items"),
     },

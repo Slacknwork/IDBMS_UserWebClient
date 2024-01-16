@@ -14,7 +14,9 @@ import { styled } from "@mui/material/styles";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
-import projectTaskStatusOptions, {projectTaskStatusOptionsEnglish} from "/constants/enums/projectTaskStatus";
+import projectTaskStatusOptions, {
+  projectTaskStatusOptionsEnglish,
+} from "/constants/enums/projectTaskStatus";
 import calculationUnitOptions from "/constants/enums/calculationUnit";
 
 import { getProjectTaskById } from "/services/projectTaskServices";
@@ -37,7 +39,12 @@ export default function TaskLayout({ children }) {
   const params = useParams();
   const t = useTranslations("ProjectDetails_Overview");
   const e = useTranslations("Error");
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
@@ -106,7 +113,7 @@ export default function TaskLayout({ children }) {
                     {task.percentage}%
                   </p>
                 </div>
-                <div className="col-lg-8">
+                <div className="col-lg-12">
                   <div className="wpo-project-single-item list-widget">
                     <div className="row">
                       <div className="col col-lg-12 col-12">
@@ -117,32 +124,31 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                              {t("Category")}:{" "}
-                              
+                                {t("Category")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
-                                {
-                                (() => {
-                                  if (language === "english") {
-                                    return task?.taskCategory?.englishName;
-                                  } else if (language === "vietnamese") {
-                                    return task?.taskCategory?.name;
-                                  }
-                                  })()
-                                }
+                                  {(() => {
+                                    if (language === "english") {
+                                      return task?.taskCategory?.englishName;
+                                    } else if (language === "vietnamese") {
+                                      return task?.taskCategory?.name;
+                                    }
+                                  })()}
                                 </span>
                               </li>
                               <li>
-                              {t("Status")}:{" "}
+                                {t("Status")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
-                                {
-                                (() => {
-                                  if (language === "english") {
-                                    return projectTaskStatusOptionsEnglish[task?.status ?? 0];
-                                  } else if (language === "vietnamese") {
-                                    return projectTaskStatusOptions[task?.status ?? 0];
-                                  }
-                                  })()
-                                }
+                                  {(() => {
+                                    if (language === "english") {
+                                      return projectTaskStatusOptionsEnglish[
+                                        task?.status ?? 0
+                                      ];
+                                    } else if (language === "vietnamese") {
+                                      return projectTaskStatusOptions[
+                                        task?.status ?? 0
+                                      ];
+                                    }
+                                  })()}
                                 </span>
                               </li>
                             </ul>
@@ -150,7 +156,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                              {t("Created")}:{" "}
+                                {t("Created")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {new Date(
                                     task?.createdDate
@@ -158,7 +164,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                              {t("LastUpdated")}:{" "}
+                                {t("LastUpdated")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {new Date(
                                     task?.createdDate
@@ -174,7 +180,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                              {t("ContractedUnits")}:{" "}
+                                {t("ContractedUnits")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.unitInContract}{" "}
                                   {
@@ -185,7 +191,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                              {t("UsedUnits")}:{" "}
+                                {t("UsedUnits")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.unitUsed}{" "}
                                   {
@@ -196,7 +202,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                              {t("TotalWarrantyPaid")}:{" "}
+                                {t("TotalWarrantyPaid")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.totalWarrantyPaid
                                     ? `${task?.totalWarrantyPaid?.toLocaleString(
@@ -206,7 +212,7 @@ export default function TaskLayout({ children }) {
                                 </span>
                               </li>
                               <li>
-                              {t("AmountPaid")}:{" "}
+                                {t("AmountPaid")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.amountPaid
                                     ? `${task?.amountPaid?.toLocaleString(
@@ -220,7 +226,7 @@ export default function TaskLayout({ children }) {
                           <div className="col-lg-6">
                             <ul>
                               <li>
-                              {t("Started")}:{" "}
+                                {t("Started")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.startedDate
                                     ? moment(task.createdDate).format("L")
@@ -251,26 +257,6 @@ export default function TaskLayout({ children }) {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div
-                    className="wpo-project-single-content-des-right"
-                    style={{ marginTop: "3rem" }}
-                  >
-                    <ul>
-                      <li>
-                      {t("Site")}: <span>{task?.site?.name ?? "N/A"}</span>
-                      </li>
-                      <li>
-                      {t("Address")}:{" "}
-                        <span>{task?.site?.address ?? "N/A"}</span>
-                      </li>
-                      <li>
-                      {t("Description")}:{" "}
-                        <span>{task?.site?.description ?? "N/A"}</span>
-                      </li>
-                    </ul>
                   </div>
                 </div>
               </div>

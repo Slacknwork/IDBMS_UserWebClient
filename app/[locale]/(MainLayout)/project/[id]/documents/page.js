@@ -1,26 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { CircularProgress, Stack } from "@mui/material";
-import Image from "next/image";
+import moment from "moment-timezone";
+import { useTranslations } from "next-intl";
 
-import { getItemInTasksByProjectId } from "/services/itemInTaskServices";
-import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServices";
-
+import NavButton from "/components/Shared/NavButton";
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
-import projectTaskStatusOptions, { projectTaskStatusOptionsEnglish } from "/constants/enums/projectTaskStatus";
 import { getDocumentsByProjectId } from "/services/projectDocumentServices";
 import projectDocumentCategory from "/constants/enums/projectDocumentCategory";
-import moment from "moment-timezone";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
 export default function DocumentsPage() {
   // CONSTANTS
+  const o = useTranslations("ProjectDetails_Overview");
   const searchQuery = "search";
   const pageQuery = "page";
   const categoryQuery = "itemCategory";
@@ -32,7 +29,12 @@ export default function DocumentsPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
@@ -74,11 +76,18 @@ export default function DocumentsPage() {
   }, [searchParams]);
 
   return (
-    <div
-      style={{
-        minHeight: "35rem",
-      }}
-    >
+    <div className="container">
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
+        </div>
+        <div className="col col-lg-12 col-12 mb-4">
+          <h3 className="my-auto">Documents</h3>
+        </div>
+      </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder="Search Documents..."></Search>
@@ -136,12 +145,8 @@ export default function DocumentsPage() {
             {documents &&
               documents.map((document) => (
                 <tr key={document.id}>
-                  <td className="align-middle">
-                    {document?.name}
-                  </td>
-                  <td className="align-middle">
-                    {document?.description}
-                  </td>
+                  <td className="align-middle">{document?.name}</td>
+                  <td className="align-middle">{document?.description}</td>
                   <td className="align-middle">
                     {projectDocumentCategory[document?.category] ??
                       "Không xác định"}
@@ -151,9 +156,7 @@ export default function DocumentsPage() {
                       ? moment(document.createdDate).format("L")
                       : "Chưa xác định"}
                   </td>
-                  <td className="align-middle m-0">
-                    Tải
-                  </td>
+                  <td className="align-middle m-0">Tải</td>
                 </tr>
               ))}
           </tbody>

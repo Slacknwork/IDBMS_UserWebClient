@@ -26,13 +26,14 @@ const getAllTaskReports = async ({
 
 const getTaskReportsByProjectTaskId = async ({
   projectTaskId = "",
-  name = "",
+  projectId = "",
+  search = "",
   pageSize = "",
   pageNo = "",
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/project-task/${projectTaskId}?name=${name}&pageSize=${pageSize}&pageNo=${pageNo}`;
+    const url = `${endpoint}/project-task/${projectTaskId}?name=${search}&pageSize=${pageSize}&pageNo=${pageNo}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",

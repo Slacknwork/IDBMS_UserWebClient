@@ -85,7 +85,9 @@ export default function FloorDetails() {
                   <Link href={`/project`}>{t("Project")}</Link>
                 </li>
                 <li>
-                  <Link href={`/project/${params.id}/floors`}>{t("Floors")}</Link>
+                  <Link href={`/project/${params.id}/floors`}>
+                    {t("Floors")}
+                  </Link>
                 </li>
               </ol>
             </div>
@@ -93,7 +95,12 @@ export default function FloorDetails() {
           <div className="col col-lg-12 col-12">
             <div className="form-field">
               <h3>
-              {t("Floors")} {floor.floorNo == 0 ? "G" : floor.floorNo}
+                {t("Floors")}{" "}
+                {floor.floorNo == 0
+                  ? "G"
+                  : floor.floorNo < 0
+                  ? `B${-floor.floorNo}`
+                  : floor.floorNo}
                 {` - ${floor.usePurpose}`}
               </h3>
             </div>
@@ -129,7 +136,7 @@ export default function FloorDetails() {
                   >
                     <tr>
                       <th scope="col" style={{ width: "6rem" }}>
-                      {t("No")}.
+                        {t("No")}.
                       </th>
                       <th scope="col">{t("UsePurpose")}</th>
                       <th scope="col">{t("Description")}</th>

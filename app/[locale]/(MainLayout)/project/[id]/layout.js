@@ -2,7 +2,7 @@ import ClientLayout from "./ClientLayout";
 
 export const metadata = {
   title: {
-    default: "IDT - 1",
+    default: "IDT - Project Details",
   },
 };
 

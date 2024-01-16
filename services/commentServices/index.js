@@ -54,7 +54,7 @@ const getCommentsByProjectId = async ({
 } = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/project/${projectId}?content=${search}&type=${type}&status=${status}&pageNo=${page}&pageSize=${pageSize}`;
+    const url = `${endpoint}/project/${projectId}?content=${search}&type=${type}&status=${status}&pageNo=${page}&pageSize=${pageSize}&projectId=${projectId}`;
     const response = await fetchData({
       url,
       method: "GET",

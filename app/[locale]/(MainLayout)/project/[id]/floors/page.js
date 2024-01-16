@@ -64,7 +64,10 @@ export default function FloorList() {
     <div className="pb-0 container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <NavButton url={`/project/${params.id}`} label={o("Overview")}></NavButton>
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
@@ -95,13 +98,13 @@ export default function FloorList() {
               >
                 <tr>
                   <th width="7.5%" scope="col" style={{ width: "5rem" }}>
-                  {t("Floors")}
+                    {t("Floors")}
                   </th>
                   <th width="40%" scope="col">
-                  {t("UsePurpose")}
+                    {t("UsePurpose")}
                   </th>
                   <th width="45%" scope="col">
-                  {t("Description")}
+                    {t("Description")}
                   </th>
                   <th width="7.5%" scope="col"></th>
                 </tr>
@@ -116,7 +119,11 @@ export default function FloorList() {
                         className="align-middle"
                         style={{ textAlign: "center" }}
                       >
-                        {floor.floorNo == 0 ? "G" : floor.floorNo}
+                        {floor.floorNo == 0
+                          ? "G"
+                          : floor.floorNo < 0
+                          ? `B${-floor.floorNo}`
+                          : floor.floorNo}
                       </th>
                       <td className="align-middle">
                         {floor.usePurpose || "N/A"}
