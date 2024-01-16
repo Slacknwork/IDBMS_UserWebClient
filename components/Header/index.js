@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
-import { Link, usePathname } from "/navigation";
+import { Link, useRouter, usePathname } from "/navigation";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,11 +21,16 @@ const Logo = "/images/idt-logo.jpg";
 
 const Header = (props) => {
   const params = useParams();
+  const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
   const [menuActive, setMenuActive] = useState(false);
   const t = useTranslations("Header");
   const user = useSelector((state) => state.customer);
+
+  const openMenu = (state) => {
+    user.loggedIn ? setMenuActive(state) : router.push("/login");
+  };
 
   return (
     <header id="header">
