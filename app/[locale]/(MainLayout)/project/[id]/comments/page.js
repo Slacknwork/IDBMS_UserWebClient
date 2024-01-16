@@ -3,18 +3,26 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useSearchParams } from "next/navigation";
-import { CircularProgress, Stack } from "@mui/material";
+import { Avatar, CircularProgress, Stack } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import moment from "moment-timezone";
+import "moment/locale/vi";
 
 import { getCommentsByProjectId } from "/services/commentServices";
+
+import timezone from "/constants/timezone";
 
 import NavButton from "/components/Shared/NavButton";
 import Search from "/components/Shared/Search";
 
+import { getColorForAvatar, getAvatarContent } from "/utils/avatar";
+
 import "./style.css";
 
 export default function TaskCommentsPage() {
+  moment.tz.setDefault(timezone.momentDefault);
+  moment.locale(timezone.momentLocale);
   // CONSTANTS
   const o = useTranslations("ProjectDetails_Overview");
   const searchQuery = "search";
@@ -90,35 +98,104 @@ export default function TaskCommentsPage() {
                 </Stack>
               ) : comments && comments.length > 0 ? (
                 <ul>
-                  <li>
-                    <div className="review-content">
-                      <div className="reviewer-say">
-                        <h3>
-                          Cobus Besten <span>June 7’2022</span>
-                        </h3>
-                        <p>
-                          Lorem is simply dummy text of the printing and
-                          typesetting industry. Lorem has been the industry's.
-                        </p>
-                      </div>
-                    </div>
-                    <ul>
-                      <li>
-                        <div className="review-content">
-                          <div className="reviewer-say">
-                            <h3>
-                              James Koster <span>June 7 2022</span>
+                  {comments.map((comment) => (
+                    <li key={comment.id}>
+                      <div
+                        className="review-content d-flex"
+                        style={{ padding: 0 }}
+                      >
+                        <div
+                          className="d-flex"
+                          style={{ width: "75%", padding: "2rem" }}
+                        >
+                          <div style={{ width: "5%" }}>
+                            <Avatar
+                              sx={{
+                                m: "auto",
+                                bgcolor: getColorForAvatar(comment?.user?.name),
+                                width: 50,
+                                height: 50,
+                              }}
+                              alt={comment?.user?.name}
+                            >
+                              <h6
+                                className="my-auto"
+                                style={{ color: "white" }}
+                              >
+                                {getAvatarContent(comment?.user?.name)}
+                              </h6>
+                            </Avatar>
+                          </div>
+                          <div
+                            className="reviewer-say"
+                            style={{ width: "95%" }}
+                          >
+                            <h3 style={{ whiteSpace: "nowrap" }}>
+                              {comment?.user?.name}{" "}
+                              <span>
+                                {comment.createdTime &&
+                                  moment(comment.createdTime).format("lll")}
+                              </span>
                             </h3>
-                            <p>
-                              Lorem is simply dummy text of the printing and
-                              typesetting industry. Lorem has been the
-                              industry's.
-                            </p>
+                            <p>{comment?.content}</p>
                           </div>
                         </div>
-                      </li>
-                    </ul>
-                  </li>
+                        <div
+                          style={{
+                            width: "25%",
+                            padding: "2rem",
+                            textAlign: "start",
+                          }}
+                        >
+                          <h6 style={{ margin: 0 }}>
+                            {comment?.projectTask?.code}
+                          </h6>
+                          <p style={{ margin: 0, lineHeight: "1.5rem" }}>
+                            {comment?.projectTask?.name}
+                          </p>
+                        </div>
+                      </div>
+                      <ul style={{ marginLeft: "8rem" }}>
+                        {comment?.commentReplies &&
+                          comment?.commentReplies.length > 0 &&
+                          comment?.commentReplies.map((commentReply) => (
+                            <li key={commentReply.id}>
+                              <div className="review-content">
+                                <Avatar
+                                  sx={{
+                                    bgcolor: getColorForAvatar(
+                                      commentReply?.user?.name
+                                    ),
+                                    width: 50,
+                                    height: 50,
+                                  }}
+                                  alt={commentReply?.user?.name}
+                                >
+                                  <h6
+                                    className="my-auto"
+                                    style={{ color: "white" }}
+                                  >
+                                    {getAvatarContent(commentReply?.user?.name)}
+                                  </h6>
+                                </Avatar>
+                                <div className="reviewer-say">
+                                  <h3>
+                                    {commentReply?.user?.name}{" "}
+                                    <span>
+                                      {commentReply.createdTime &&
+                                        moment(commentReply.createdTime).format(
+                                          "lll"
+                                        )}
+                                    </span>
+                                  </h3>
+                                  <p>{commentReply?.content}</p>
+                                </div>
+                              </div>
+                            </li>
+                          ))}
+                      </ul>
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 <Stack sx={{ height: "30rem" }}>

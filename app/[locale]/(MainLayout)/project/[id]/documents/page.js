@@ -123,7 +123,7 @@ export default function DocumentsPage() {
             size="3rem"
           ></CircularProgress>
         </Stack>
-      ) : (
+      ) : documents && documents.length > 0 ? (
         <table className="table table-striped table-hover">
           <thead
             className="shadow-sm"
@@ -142,25 +142,28 @@ export default function DocumentsPage() {
             </tr>
           </thead>
           <tbody>
-            {documents &&
-              documents.map((document) => (
-                <tr key={document.id}>
-                  <td className="align-middle">{document?.name}</td>
-                  <td className="align-middle">{document?.description}</td>
-                  <td className="align-middle">
-                    {projectDocumentCategory[document?.category] ??
-                      "Không xác định"}
-                  </td>
-                  <td className="align-middle">
-                    {document.createdDate
-                      ? moment(document.createdDate).format("L")
-                      : "Chưa xác định"}
-                  </td>
-                  <td className="align-middle m-0">Tải</td>
-                </tr>
-              ))}
+            {documents.map((document) => (
+              <tr key={document.id}>
+                <td className="align-middle">{document?.name}</td>
+                <td className="align-middle">{document?.description}</td>
+                <td className="align-middle">
+                  {projectDocumentCategory[document?.category] ??
+                    "Không xác định"}
+                </td>
+                <td className="align-middle">
+                  {document.createdDate
+                    ? moment(document.createdDate).format("L")
+                    : "Chưa xác định"}
+                </td>
+                <td className="align-middle m-0">Tải</td>
+              </tr>
+            ))}
           </tbody>
         </table>
+      ) : (
+        <Stack sx={{ height: "30rem" }}>
+          <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+        </Stack>
       )}
       <Pagination count={count}></Pagination>
     </div>

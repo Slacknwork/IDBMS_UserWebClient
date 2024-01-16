@@ -1,17 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-import { Box, Card, Chip, CircularProgress, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
-
+import {
+  Box,
+  Card,
+  Chip,
+  CircularProgress,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useTranslations } from "next-intl";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import { getProjectParticipationInProjectByUserView } from "/services/projectParticipationServices";
 import participationRole from "/constants/enums/participationRole";
+
+import NavButton from "/components/Shared/NavButton";
 
 export default function ParticipationsPage() {
   // CONSTANTS
@@ -23,9 +31,15 @@ export default function ParticipationsPage() {
   const pageSizeQuery = "size";
 
   // INIT
+  const o = useTranslations("ProjectDetails_Overview");
   const params = useParams();
   const searchParams = useSearchParams();
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // PARTICIPATIONS
   const [participations, setParticipations] = useState([]);
@@ -36,6 +50,7 @@ export default function ParticipationsPage() {
 
   // FETCH DATA
   const fetchDataFromApi = async () => {
+    setLoading(true);
     const fetchParticipations = async () => {
       const projectId = params.id;
       const search = searchParams.get(searchQuery) || "";
@@ -48,7 +63,7 @@ export default function ParticipationsPage() {
           projectId,
           search,
           page,
-          pageSize
+          pageSize,
         });
         console.log(response);
 
@@ -70,13 +85,21 @@ export default function ParticipationsPage() {
     fetchDataFromApi();
   }, [searchParams]);
 
-
   return (
-    <div
-      style={{
-        minHeight: "35rem",
-      }}
-    >
+    <div className="container" style={{ minHeight: "40rem" }}>
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
+        </div>
+        <div className="col col-lg-12 col-12 mb-4">
+          <div className="d-flex justify-content-between">
+            <h3 className="my-auto">Participants</h3>
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder="Search by Name..."></Search>
@@ -134,11 +157,7 @@ export default function ParticipationsPage() {
             {participations &&
               participations.map((participation) => (
                 <tr key={participation.id}>
-                  <td className="align-middle">
-                    {
-                      participation?.user?.name
-                    }
-                  </td>
+                  <td className="align-middle">{participation?.user?.name}</td>
                   <td className="align-middle">
                     <Chip label={participationRole[participation.role]}></Chip>
                   </td>

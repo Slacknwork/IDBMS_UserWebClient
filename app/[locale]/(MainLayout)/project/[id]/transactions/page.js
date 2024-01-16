@@ -1,23 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { CircularProgress, Stack } from "@mui/material";
-import Image from "next/image";
+import { useTranslations } from "next-intl";
+import moment from "moment-timezone";
 
-import { getItemInTasksByProjectId } from "/services/itemInTaskServices";
-import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServices";
+import { getTransactionsByProjectId } from "/services/transactionServices";
+
+import transactionStatus from "/constants/enums/transactionStatus";
+import transactionType from "/constants/enums/transactionType";
+import timezone from "/constants/timezone";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
-import { getTransactionsByProjectId } from "/services/transactionServices";
-import transactionStatus from "/constants/enums/transactionStatus";
-import transactionType from "/constants/enums/transactionType";
-import moment from "moment-timezone";
+import NavButton from "/components/Shared/NavButton";
 
-moment.tz.setDefault("Asia/Ho_Chi_Minh");
+moment.tz.setDefault(timezone.momentDefault);
 
 export default function TransactionsPage() {
   // CONSTANTS
@@ -31,9 +31,15 @@ export default function TransactionsPage() {
   const statusQuery = "status";
 
   // INIT
+  const o = useTranslations("ProjectDetails_Overview");
   const params = useParams();
   const searchParams = useSearchParams();
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // TRANSACTIONS
   const [transactions, setTransactions] = useState([]);
@@ -42,15 +48,14 @@ export default function TransactionsPage() {
 
   // FETCH DATA
   const fetchDataFromApi = async () => {
+    setLoading(true);
     const fetchTransactions = async () => {
       const projectId = params.id;
-      const search = searchParams.get(searchQuery) || "";
-      const type = searchParams.get(typeQuery) || "";
-      const status = searchParams.get(statusQuery) || "";
-      const pageNo = parseInt(searchParams.get(pageQuery)) || defaultPage;
-      const pageSize =
-        parseInt(searchParams.get(pageSizeQuery)) || defaultPageSize;
-
+      const search = searchParams.get(searchQuery) ?? "";
+      const type = searchParams.get(typeQuery) ?? "";
+      const status = searchParams.get(statusQuery) ?? "";
+      const pageNo = searchParams.get(pageQuery) ?? defaultPage;
+      const pageSize = searchParams.get(pageSizeQuery) ?? defaultPageSize;
       try {
         const response = await getTransactionsByProjectId({
           projectId,
@@ -60,12 +65,9 @@ export default function TransactionsPage() {
           pageSize,
           pageNo,
         });
-        console.log(response);
-
         setTransactions(response?.list ?? []);
         setCount(response?.totalPage ?? 0);
       } catch (error) {
-        console.error("Error fetching data:", error);
         toast.error("Lỗi nạp dữ liệu 'Thanh Toán' từ hệ thống");
       }
     };
@@ -79,10 +81,22 @@ export default function TransactionsPage() {
 
   return (
     <div
+      className="container"
       style={{
         minHeight: "35rem",
       }}
     >
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
+        </div>
+        <div className="col col-lg-12 col-12 mb-4">
+          <h3 className="my-auto">Transactions</h3>
+        </div>
+      </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder="Search by payer name..."></Search>
@@ -136,16 +150,14 @@ export default function TransactionsPage() {
             size="3rem"
           ></CircularProgress>
         </Stack>
-      ) : (
+      ) : transactions && transactions.length > 0 ? (
         <table className="table table-striped table-hover">
           <thead
             className="shadow-sm"
             style={{ position: "sticky", top: 0, zIndex: 1 }}
           >
             <tr>
-              <th scope="col">
-                Type
-              </th>
+              <th scope="col">Type</th>
               <th scope="col">Amount (VND)</th>
               <th scope="col">Created Date</th>
               <th scope="col">Payer Name</th>
@@ -156,33 +168,30 @@ export default function TransactionsPage() {
             </tr>
           </thead>
           <tbody>
-            {transactions &&
-              transactions.map((transaction) => (
-                <tr key={transaction.id}>
-                  <td className="align-middle">
-                    {transaction?.type}
-                  </td>
-                  <td className="align-middle">
-                    {transaction?.amount?.toLocaleString("en-US")}
-                  </td>
-                  <td className="align-middle">
-                    {transaction.createdDate
-                      ? moment(transaction.createdDate).format("L")
-                      : "-"}
-                  </td>
-                  <td className="align-middle">
-                    {transaction?.payerName}
-                  </td>
-                  <td className="align-middle">
-                    {transactionStatus[transaction?.status]}
-                  </td>
-                  <td className="align-middle m-0">
-                    Tải hóa đơn
-                  </td>
-                </tr>
-              ))}
+            {transactions.map((transaction) => (
+              <tr key={transaction.id}>
+                <td className="align-middle">{transaction?.type}</td>
+                <td className="align-middle">
+                  {transaction?.amount?.toLocaleString("en-US")}
+                </td>
+                <td className="align-middle">
+                  {transaction.createdDate
+                    ? moment(transaction.createdDate).format("L")
+                    : "-"}
+                </td>
+                <td className="align-middle">{transaction?.payerName}</td>
+                <td className="align-middle">
+                  {transactionStatus[transaction?.status]}
+                </td>
+                <td className="align-middle m-0">Tải hóa đơn</td>
+              </tr>
+            ))}
           </tbody>
         </table>
+      ) : (
+        <Stack sx={{ height: "30rem" }}>
+          <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+        </Stack>
       )}
       <Pagination count={count}></Pagination>
     </div>

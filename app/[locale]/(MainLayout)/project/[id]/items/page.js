@@ -6,13 +6,18 @@ import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { CircularProgress, Stack } from "@mui/material";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { getItemInTasksByProjectId } from "/services/itemInTaskServices";
 import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServices";
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
-import projectTaskStatusOptions, { projectTaskStatusOptionsEnglish } from "/constants/enums/projectTaskStatus";
+import projectTaskStatusOptions, {
+  projectTaskStatusOptionsEnglish,
+} from "/constants/enums/projectTaskStatus";
+
+import NavButton from "/components/Shared/NavButton";
 
 export default function ItemsPage() {
   // CONSTANTS
@@ -27,9 +32,15 @@ export default function ItemsPage() {
   const pageSizeQuery = "size";
 
   // INIT
+  const o = useTranslations("ProjectDetails_Overview");
   const params = useParams();
   const searchParams = useSearchParams();
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // FETCH DATA
   const [loading, setLoading] = useState(true);
@@ -38,6 +49,7 @@ export default function ItemsPage() {
 
   // FETCH DATA
   const fetchDataFromApi = async () => {
+    setLoading(true);
     const fetchItems = async () => {
       const projectId = params.id;
       const search = searchParams.get(searchQuery) || "";
@@ -79,7 +91,6 @@ export default function ItemsPage() {
 
   // FETCH OPTIONS
   const fetchOptionsFromApi = async () => {
-    setLoading(true);
     const fetchCategories = async () => {
       try {
         const response = await getAllInteriorItemCategories();
@@ -91,7 +102,6 @@ export default function ItemsPage() {
       }
     };
     await Promise.all([fetchCategories()]);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -99,11 +109,20 @@ export default function ItemsPage() {
   }, []);
 
   return (
-    <div
-      style={{
-        minHeight: "35rem",
-      }}
-    >
+    <div className="container" style={{ minHeight: "40rem" }}>
+      <div className="row">
+        <div className="col col-lg-12 col-12">
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
+        </div>
+        <div className="col col-lg-12 col-12 mb-4">
+          <div className="d-flex justify-content-between">
+            <h3 className="my-auto">Items</h3>
+          </div>
+        </div>
+      </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder="Search Items..."></Search>
@@ -121,7 +140,9 @@ export default function ItemsPage() {
                   >
                     {itemCategories.map((category) => (
                       <option value={category.id} key={category.id}>
-                        {language === "english" ? category.englishName : category.name}
+                        {language === "english"
+                          ? category.englishName
+                          : category.name}
                       </option>
                     ))}
                   </select>
@@ -137,7 +158,9 @@ export default function ItemsPage() {
                   >
                     {projectTaskStatusOptions.map((status, index) => (
                       <option key={status} value={index}>
-                        {language === "english" ? projectTaskStatusOptionsEnglish[index] : status}
+                        {language === "english"
+                          ? projectTaskStatusOptionsEnglish[index]
+                          : status}
                       </option>
                     ))}
                   </select>
@@ -155,7 +178,7 @@ export default function ItemsPage() {
             size="3rem"
           ></CircularProgress>
         </Stack>
-      ) : (
+      ) : items && items.length > 0 ? (
         <table className="table table-striped table-hover">
           <thead
             className="shadow-sm"
@@ -174,67 +197,67 @@ export default function ItemsPage() {
             </tr>
           </thead>
           <tbody>
-            {items &&
-              items.map((item) => (
-                <tr key={item.id}>
-                  <td className="align-middle">
-                    <div className="shop-img">
-                      <Image
-                        src={item && item.interiorItem?.imageUrl}
-                        alt=""
-                        width={500}
-                        height={500}
-                        style={{
-                          width: "6rem",
-                          height: "6rem",
-                          objectFit: "cover",
-                        }}
-                        unoptimized={true}
-                      />
-                    </div>
-                  </td>
-                  <td className="align-middle">
-                    {
-                      (() => {
-                        if (language === "english") {
-                          return item?.interiorItem?.englishName;
-                        } else if (language === "vietnamese") {
-                          return item?.interiorItem?.name;
-                        } else {
-                          return '';
-                        }
-                      })()
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td className="align-middle">
+                  <div className="shop-img">
+                    <Image
+                      src={item && item.interiorItem?.imageUrl}
+                      alt=""
+                      width={500}
+                      height={500}
+                      style={{
+                        width: "6rem",
+                        height: "6rem",
+                        objectFit: "cover",
+                      }}
+                      unoptimized={true}
+                    />
+                  </div>
+                </td>
+                <td className="align-middle">
+                  {(() => {
+                    if (language === "english") {
+                      return item?.interiorItem?.englishName;
+                    } else if (language === "vietnamese") {
+                      return item?.interiorItem?.name;
+                    } else {
+                      return "";
                     }
-                  </td>
-                  <td className="align-middle">
-                    {
-                      (() => {
-                        if (language === "english") {
-                          return item?.interiorItem?.interiorItemCategory?.englishName;
-                        } else if (language === "vietnamese") {
-                          return item?.interiorItem?.interiorItemCategory?.name;
-                        } else {
-                          return '';
-                        }
-                      })()
+                  })()}
+                </td>
+                <td className="align-middle">
+                  {(() => {
+                    if (language === "english") {
+                      return item?.interiorItem?.interiorItemCategory
+                        ?.englishName;
+                    } else if (language === "vietnamese") {
+                      return item?.interiorItem?.interiorItemCategory?.name;
+                    } else {
+                      return "";
                     }
-                  </td>
-                  <td className="align-middle">{item && item.quantity}</td>
-                  <td className="align-middle m-0">
-                    <div className="d-flex">
-                      <Link
-                        href={`/items/${item?.interiorItem.id}`}
-                        className="theme-btn m-1"
-                        style={{ width: "6rem", zIndex: 0 }}
-                      >
-                        Details
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                  })()}
+                </td>
+                <td className="align-middle">{item && item.quantity}</td>
+                <td className="align-middle m-0">
+                  <div className="d-flex">
+                    <Link
+                      href={`/items/${item?.interiorItem.id}`}
+                      className="theme-btn m-1"
+                      style={{ width: "6rem", zIndex: 0 }}
+                    >
+                      Details
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
+      ) : (
+        <Stack sx={{ height: "100%" }}>
+          <p style={{ margin: "auto", textAlign: "center" }}>No Data.</p>
+        </Stack>
       )}
       <Pagination count={count}></Pagination>
     </div>
