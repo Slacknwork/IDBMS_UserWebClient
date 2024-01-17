@@ -9,10 +9,13 @@ import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "/store/reducers/customer";
 import { loginUser } from "/services/authenticationServices";
+import { useTranslations } from "next-intl";
 
 const LoginPage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const t = useTranslations("Login");
+  const er = useTranslations("Error");
 
   const user = useSelector((state) => state.customer);
 
@@ -29,7 +32,7 @@ const LoginPage = (props) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmailValid = emailRegex.test(value.email);
 
-    setEmailError(isEmailValid ? "" : "Invalid format for email address");
+    setEmailError(isEmailValid ? "" : er("InvalidEmail"));
 
     return isEmailValid;
   };
@@ -37,7 +40,7 @@ const LoginPage = (props) => {
   const validatePassword = () => {
     const isPasswordValid = value.password && value.password.trim() !== "";
 
-    setPasswordError(isPasswordValid ? "" : "Password is required");
+    setPasswordError(isPasswordValid ? "" : er("RequirePassword"));
 
     return isPasswordValid;
   };
@@ -48,6 +51,7 @@ const LoginPage = (props) => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+
     const isEmailValid = validateEmail();
     const isPasswordValid = validatePassword();
 
@@ -64,28 +68,28 @@ const LoginPage = (props) => {
         }
       } catch (error) {
         console.error("Error login :", error);
-        toast.error("Error login!");
+        toast.error(er("LoginFailed"));
       }
     } else {
-      toast.error("Please fix the validation errors before submitting.");
+      toast.error(er("FixValidation"));
     }
   };
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
-        <h2>Sign In</h2>
-        <p>Sign in to your account</p>
+        <h2>{t("SignIn")}</h2>
+        <p>{t("SignInAccount")}</p>
         <form onSubmit={submitForm}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="E-mail"
+                placeholder="Email"
                 value={value.email}
                 variant="outlined"
                 name="email"
-                label="E-mail"
+                label="Email"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -101,12 +105,12 @@ const LoginPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Password"
+                placeholder={t("Password")}
                 value={value.password}
                 variant="outlined"
                 name="password"
                 type="password"
-                label="Password"
+                label={t("Password")}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -139,16 +143,16 @@ const LoginPage = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  Forgot Password?
+                  {t("ForgotPassword")}
                 </Link>
               </Grid>
               <Grid className="formFooter">
                 <Button fullWidth className="cBtnTheme" type="submit">
-                  Login
+                {t("Login")}
                 </Button>
               </Grid>
               <Grid className="loginWithSocial">
-                <p>- or -</p>
+                <p>- {t("Or")} -</p>
               </Grid>
               <Grid className="loginWithSocial">
                 <Button className="google" style={{ background: "#DB4437" }}>
@@ -156,8 +160,8 @@ const LoginPage = (props) => {
                 </Button>
               </Grid>
               <p className="noteHelp">
-                Don't have an account?{" "}
-                <Link href="/register">Register account</Link>
+              {t("NoAccount")}{" "}
+                <Link href="/register">{t("Register")}</Link>
               </p>
             </Grid>
           </Grid>

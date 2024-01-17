@@ -4,9 +4,18 @@ import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 import {getAllInteriorItemCategories} from "/services/interiorItemCategoryServices";
+import { useParams } from "next/navigation";
 
 function Category(categoryDetails) {
   const item = categoryDetails.item;
+  const params = useParams();
+
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
   return (
     <div className="col col-xl-3 col-lg-6 col-md-6 col-12">
       <div
@@ -35,7 +44,10 @@ function Category(categoryDetails) {
             WebkitLineClamp: 2,
           }}
         >
-          <h2 style={{ fontSize: "25px" }}>{item && item.name}</h2>
+          <h2 style={{ fontSize: "19px" }}>{language === "english"
+                      ? item && item.englishName
+                      : item && item.name
+                    }</h2>
         </div>
       </div>
     </div>
