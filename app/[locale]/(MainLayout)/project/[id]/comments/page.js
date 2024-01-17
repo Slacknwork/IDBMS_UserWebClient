@@ -45,11 +45,13 @@ export default function TaskCommentsPage() {
   const fetchComments = async () => {
     try {
       const projectId = params.id;
+      const search = searchParams.get(searchQuery) ?? "";
       const page = searchParams.get(pageQuery) ?? defaultPage;
       const pageSize = defaultPageSize;
 
       const comments = await getCommentsByProjectId({
         projectId,
+        search,
         page,
         pageSize,
       });
@@ -67,7 +69,7 @@ export default function TaskCommentsPage() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="container">

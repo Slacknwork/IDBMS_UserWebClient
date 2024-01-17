@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
 
-import { localeIndex } from "/constants/locales";
+import { languageLocaleIndex } from "/constants/enums/language";
 
 import { createBookingRequest } from "/services/bookingRequestServices";
 import { useTranslations } from "next-intl";
@@ -13,7 +13,6 @@ export default function ContactForm() {
   const t = useTranslations("About");
 
   const [formData, setFormData] = useState({
-    language: localeIndex[params.locale],
     contactName: "",
     contactNameError: { hasError: false, label: "" },
     contactEmail: "",
@@ -36,7 +35,6 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(formData);
       await createBookingRequest(formData);
       toast.success("Gửi yêu cầu thành công!");
     } catch (error) {
