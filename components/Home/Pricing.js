@@ -9,6 +9,7 @@ import { getAllRoomTypes } from "/services/roomTypeServices";
 
 import SectionTitle2 from "/components/Shared/SectionTitle2";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function Pricing() {
   const settings = {
@@ -19,6 +20,14 @@ export default function Pricing() {
     slidesToScroll: 1,
   };
   const t = useTranslations("Home");
+  const params = useParams();
+
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   const [roomTypes, setRoomTypes] = useState([]);
 
@@ -56,18 +65,25 @@ export default function Pricing() {
                         <div className="wpo-pricing-item bg-white">
                           <div className="wpo-pricing-top">
                             <div className="pricing-thumb">
-                              <span>{roomType.name}</span>
+                              <span>
+                              {language === "english"
+                                  ? roomType.englishName ?? roomType.name
+                                  : roomType.name
+                              }
+                              </span>
                             </div>
                             <div>
+                            {roomType?.imageUrl && (
                               <Image
-                                className="mx-auto mt-4"
-                                src={roomType.imageUrl}
-                                alt={roomType.name}
-                                width={1000}
-                                height={1000}
-                                priority
-                                style={{ objectFit: "cover" }}
-                              ></Image>
+                              className="mx-auto mt-4"
+                              src={roomType.imageUrl}
+                              alt={roomType.name}
+                              width={1000}
+                              height={1000}
+                              priority
+                              style={{ objectFit: "cover" }}
+                            ></Image>
+                            )}
                             </div>
                             <div className="wpo-pricing-text">
                               <h2>

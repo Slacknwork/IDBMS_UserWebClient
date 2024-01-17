@@ -9,14 +9,23 @@ import SectionTitle2 from "/components/Shared/SectionTitle2";
 import bShape1 from "/public/images/blog/Vector3.png";
 import bShape2 from "/public/images/blog/Vector4.png";
 
-import projectTypeOptions from "/constants/enums/projectType";
+import projectTypeOptions, {projectTypeOptionsEnglish} from "/constants/enums/projectType";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
   const t = useTranslations("Home");
+  const params = useParams();
+
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   const fetchProjects = async () => {
     try {
@@ -59,7 +68,10 @@ export default function Projects() {
                       />
                     )}
                     <div className="thumb">
-                      {projectTypeOptions[project.type]}
+                    {language === "english"
+                      ? projectTypeOptionsEnglish[project.type]
+                      : projectTypeOptions[project.type]
+                    }
                     </div>
                   </div>
                   <div className="wpo-blog-content">

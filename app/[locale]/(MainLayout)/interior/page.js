@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "/navigation";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import {
@@ -45,7 +45,14 @@ export default function InteriorItemsPage() {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [count, setCount] = useState(0);
+  const params = useParams();
 
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
   const fetchItems = async () => {
     try {
       const search = searchParams.get(searchQuery) ?? "";
@@ -126,8 +133,11 @@ export default function InteriorItemsPage() {
                           WebkitLineClamp: 2,
                         }}
                       >
-                        <h2 style={{ fontSize: "25px" }}>
-                          {item && item.name}
+                        <h2 style={{ fontSize: "19px" }}>
+                        {language === "english"
+                          ? (item && item.englishName) ?? (item && item.name)
+                          : item && item.name
+                        }
                         </h2>
                       </div>
                     </div>
@@ -177,7 +187,10 @@ export default function InteriorItemsPage() {
                 <div className="details">
                   <h3 style={{ height: "55px", overflowY: "auto" }}>
                     <Link href={`/interior/${item.id}`}>
-                      {item && item.name}
+                    {language === "english"
+                      ? (item && item.englishName) ?? (item && item.name)
+                      : item && item.name
+                    }
                     </Link>
                   </h3>
                   <div className="price">

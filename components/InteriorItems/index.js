@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "/navigation";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
@@ -54,8 +54,8 @@ const t = useTranslations("InteriorItems");
                   className="rounded-2"
                   style={{ backgroundColor: "white", height: "55px" }}
                 >
-                  <option>Category</option>
-                  <option>Architecture</option>
+                  <option>{t("Category")}</option>
+                  <option>{t("Architecture")}</option>
                 </select>
               </div>
             </div>
@@ -73,8 +73,8 @@ const t = useTranslations("InteriorItems");
                   className="rounded-2"
                   style={{ backgroundColor: "white", height: "55px" }}
                 >
-                  <option>Category</option>
-                  <option>Architecture</option>
+                  <option>{t("Category")}</option>
+                  <option>{t("Architecture")}</option>
                 </select>
               </div>
             </div>
@@ -112,7 +112,14 @@ function InteriorItemFilter() {
 function InteriorItemSingle(itemDetails) {
   const item = itemDetails.item;
   const t = useTranslations("InteriorItems");
+  const params = useParams();
 
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
   return (
     <div className="grid" style={{ backgroundColor: "white" }}>
       <Image
@@ -125,7 +132,10 @@ function InteriorItemSingle(itemDetails) {
       />
       <div className="details">
         <h3 style={{ height: "55px", overflowY: "auto" }}>
-          <Link href={`/interior/${item.id}`}>{item && item.name}</Link>
+          <Link href={`/interior/${item.id}`}>{language === "english"
+                      ? (item && item.englishName) ?? (item && item.name)
+                      : item && item.name
+                    }</Link>
         </h3>
         <div className="price">
           <span>

@@ -20,6 +20,7 @@
     "DaysOfWork": "ngày làm việc",
     "Projects": "Dự án",
     "OurProjects": "Dự án của chúng tôi",
+    "FeaturedWorks":" DỰ ÁN NỔI BẬT",
     "WhatWeDo": "Những việc chúng tôi làm",
     "Decor": "Thiết kế nội thất",
     "Construction": "Thi công",
@@ -71,7 +72,9 @@
     "Price": "Giá",
     "Filter": "Lọc đồ",
     "Cart": "Thêm vào giỏ hàng",
-    "Search": "Tìm đồ.."
+    "Search": "Tìm đồ..",
+    "Category": "Phân loại",
+    "Architecture": "Kiến trúc"
   },
   "ProjectListPage": {
     "Search": "Tìm dự án",
@@ -222,6 +225,7 @@
     "Floors": "Kiến trúc",
     "Stages": "Giai đoạn",
     "Tasks": "Công việc",
+    "Reports": "Báo cáo",
     "Comments": "Bình luận",
     "Items": "Đồ dùng",
     "Documents": "Tài liệu",
@@ -554,12 +558,55 @@
     "AdvertisementStatus": "Trạng thái Quảng cáo",
     "AdminNote": "Ghi chú của quản trị viên"
   },
+  "Login": {
+    "LoginSuccessfully": "Đăng nhập thành công!",
+    "SignIn": "Đăng nhập",
+    "SignInAccount": "Đăng nhập vào tài khoản của bạn",
+    "Password": "Mật khẩu",
+    "ForgotPassword": "Quên mật khẩu?",
+    "Login": "Đăng nhập",
+    "Or":"hoặc",
+    "NoAccount":"Không có tài khoản?",
+    "Register":"Đăng ký tài khoản"
+  },
+  "Register": {
+    "RegistrationSuccessful": "Đăng ký thành công!",
+    "Signup": "Đăng ký",
+    "SignupAccount": "Đăng ký tài khoản của bạn",
+    "Name": "Tên",
+    "EnterName": "Nhập họ tên",
+    "Password": "Mật khẩu",
+    "EnterPassword":"Nhập mật khẩu",
+    "ConfirmPassword":"Xác nhận mật khẩu",
+    "ConfirmYourPassword":"Xác nhận lại mật khẩu của bạn",
+    "Address":"Địa chỉ",
+    "EnterAddress":"Nhập địa chỉ",
+    "Phone":"Điện thoại",
+    "PhoneNumber":"+84 779054212 hoặc 0779054212",
+    "DateOfBirth":"Ngày sinh",
+    "Language":"Ngôn ngữ",
+    "English":"Tiếng Anh",
+    "Vietnamese":"Tiếng Việt",
+    "SignUp":"Đăng Ký",
+    "HaveAccount":"Đã có tài khoản?",
+    "ReturnSignIn":"Trở về trang đăng nhập"
+  },
   "Error": {
     "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
     "TasksError": "Lỗi dữ liệu: Công việc!",
     "ParticipationsError": "Lỗi dữ liệu: Dự án tham gia!",
     "ProjectsError": "Lỗi dữ liệu: Dự án!",
     "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
-    "FetchDataError": "Lỗi nạp dữ liệu:"
+    "FetchDataError": "Lỗi nạp dữ liệu:",
+    "InvalidEmail":"Định dạng không hợp lệ cho email",
+    "InvalidPhone":"Định dạng không hợp lệ cho số điện thoại",
+    "RequirePassword":"Cần có mật khẩu!",
+    "MatchPassword":"Mật khẩu phải trùng khớp!",
+    "FillFields":"Cần điền tất cả thông tin.",
+    "LoginFailed":"Đăng nhập thất bại!",
+    "LoginError":"Lỗi đăng nhập!",
+    "RegistrationFailed":"Đăng ký thất bại!",
+    "RegistrationError":"Lỗi đăng ký!",
+    "FixValidation":"Vui lòng điền lại thông tin trước khi gửi."
   }
 }

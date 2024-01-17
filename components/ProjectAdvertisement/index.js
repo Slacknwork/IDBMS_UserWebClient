@@ -2,15 +2,25 @@ import { useState, useEffect } from "react";
 import { Link } from "/navigation";
 import Image from "next/image";
 
-import projectTypeOptions from "/constants/enums/projectType";
+import projectTypeOptions, {projectTypeOptionsEnglish} from "/constants/enums/projectType";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
+import { useTranslations } from "next-intl";
 
 import SectionTitle2 from "/components/Shared/SectionTitle2";
+import { useParams } from "next/navigation";
 
 export default function ProjectAdvertisement() {
   const [projects, setProjects] = useState([]);
+  const t = useTranslations("Home");
+  const params = useParams();
 
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
   const fetchProjects = async () => {
     try {
       const projectResponse = await getAdvertisementProjects({
@@ -31,7 +41,7 @@ export default function ProjectAdvertisement() {
   return (
     <div className="wpo-project-area-s2 section-padding">
       <div className="container">
-        <SectionTitle2 subTitle={"Featured Works"} MainTitle={"Our Projects"} />
+        <SectionTitle2 subTitle={t("FeaturedWorks")} MainTitle={t("OurProjects")} />
         <div className="row align-items-center">
           <div className="wpo-project-wrap">
             <div className="sortable-gallery">
@@ -64,7 +74,10 @@ export default function ProjectAdvertisement() {
                           <div className="wpo-project-text">
                             <h2>
                               <Link href={`/project/demo/${project.id}`}>
-                                {projectTypeOptions[project.type]}
+                              {language === "english"
+                                ? projectTypeOptionsEnglish[project.type]
+                                : projectTypeOptions[project.type]
+                              }
                               </Link>
                             </h2>
                             <span>{project.name}</span>

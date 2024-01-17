@@ -67,16 +67,18 @@ export default function AdvertisementDetails() {
                           Client :<span>Robert William</span>
                         </li>
                         <li>
-                          Location :<span>7 Lake Street,London</span>
+                          Location :<span>{project?.site?.name ?? "N/A"}</span>
                         </li>
                         <li>
-                          Date :<span>20 Apr 2021</span>
+                          Date :<span>{new Date(
+                                        project?.createdDate
+                                      ).toLocaleDateString("en-GB")}</span>
                         </li>
                         <li>
-                          Duration : <span>3 Month</span>
+                          Duration : <span>{project?.estimateBusinessDay ?? "N/A"}</span>
                         </li>
                         <li>
-                          Tag :<span>Consulting, Business</span>
+                          Tag :<span>{project?.projectDesign?.name ?? "N/A"}</span>
                         </li>
                       </ul>
                     </div>

@@ -20,7 +20,7 @@ export default function TaskLayout({ children }) {
     },
     {
       path: "reports",
-      label: "Reports",
+      label: t("Reports"),
     },
     {
       path: "items",

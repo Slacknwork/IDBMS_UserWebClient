@@ -12,10 +12,13 @@ import { registerUser } from "/services/authenticationServices";
 import { login } from "/store/reducers/customer";
 import { useDispatch } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslations } from "next-intl";
 
 const SignUpPage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const t = useTranslations("Register");
+  const er = useTranslations("Error");
 
   const [user, setUser] = useState({
     email: "",
@@ -40,7 +43,7 @@ const SignUpPage = (props) => {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const confirmMessage = () => {
     if (user.password !== user.confirm_password) {
-      setConfirmPasswordError("Passwords must match!");
+      setConfirmPasswordError(er("MatchPassword"));
       return false;
     } else {
       setConfirmPasswordError("");
@@ -55,7 +58,7 @@ const SignUpPage = (props) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmailValid = emailRegex.test(user.email);
 
-    setEmailError(isEmailValid ? "" : "Invalid format for email address");
+    setEmailError(isEmailValid ? "" : er("InvalidEmail"));
 
     return isEmailValid;
   };
@@ -64,7 +67,7 @@ const SignUpPage = (props) => {
     const phoneRegex = /^(\+\d{1,2}\s?)?(\d{9}|\d{10})$/;
     const isPhoneValid = phoneRegex.test(user.phone);
 
-    setPhoneError(isPhoneValid ? "" : "Invalid format for phone number");
+    setPhoneError(isPhoneValid ? "" : er("InvalidPhone"));
 
     return isPhoneValid;
   };
@@ -93,7 +96,7 @@ const SignUpPage = (props) => {
         (field) => user[field] === null || user[field] === ""
       )
     ) {
-      toast.error("All fields must be filled out.");
+      toast.error(er("FillFields"));
     } else {
       const isEmailValid = validateEmail();
       const isPhoneValid = validatePhone();
@@ -113,7 +116,7 @@ const SignUpPage = (props) => {
           const response = await registerUser(formattedUser);
           console.log(response);
           if (response.data != null) {
-            toast.success("Registration successful!");
+            toast.success(t("RegistrationSuccessful"));
             dispatch(login(response.data));
             router.push("/");
           } else {
@@ -121,10 +124,10 @@ const SignUpPage = (props) => {
           }
         } catch (error) {
           console.error("Error registering user:", error);
-          toast.error("Error registering user");
+          toast.error(er("RegistrationFailed"));
         }
       } else {
-        toast.error("Please fix the validation errors before submitting.");
+        toast.error(er("FixValidation"));
       }
     }
   };
@@ -132,19 +135,19 @@ const SignUpPage = (props) => {
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
-        <h2>Signup</h2>
-        <p>Signup your account</p>
+        <h2>{t("Signup")}</h2>
+        <p>{t("SignupAccount")}</p>
         <form onSubmit={submitForm}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Enter full name"
+                placeholder={t("EnterName")}
                 user={user.name}
                 variant="outlined"
                 name="name"
-                label="Name"
+                label={t("Name")}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -176,11 +179,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Enter password"
+                placeholder={t("EnterPassword")}
                 user={user.password}
                 variant="outlined"
                 name="password"
-                label="Password"
+                label={t("Password")}
                 type="password"
                 InputLabelProps={{
                   shrink: true,
@@ -193,11 +196,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Confirm your password"
+                placeholder={t("ConfirmYourPassword")}
                 user={user.confirm_password}
                 variant="outlined"
                 name="confirm_password"
-                label="Confirm Password"
+                label={t("ConfirmPassword")}
                 type="password"
                 InputLabelProps={{
                   shrink: true,
@@ -216,11 +219,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="Enter address"
+                placeholder={t("EnterAddress")}
                 user={user.address}
                 variant="outlined"
                 name="address"
-                label="Address"
+                label={t("Address")}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -232,11 +235,11 @@ const SignUpPage = (props) => {
               <TextField
                 className="inputOutline"
                 fullWidth
-                placeholder="+84 779054212 or 0779054212"
+                placeholder={t("PhoneNumber")}
                 user={user.phone}
                 variant="outlined"
                 name="phone"
-                label="Phone"
+                label={t("Phone")}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -249,14 +252,14 @@ const SignUpPage = (props) => {
               {phoneError && <span className="errorMessage">{phoneError}</span>}
             </Grid>
             <Grid item xs={12}>
-              <label>Date of Birth</label>
+              <label>{t("DateOfBirth")}</label>
               <DatePicker
                 selected={user.dateOfBirth}
                 onChange={(date) => handleDateChange(date)}
               />
             </Grid>
             <Grid item xs={12}>
-              Language
+            {t("Language")}
               <RadioGroup
                 row
                 user={user.language}
@@ -266,13 +269,13 @@ const SignUpPage = (props) => {
                 <FormControlLabel
                   value="0"
                   control={<Radio />}
-                  label="English"
+                  label={t("English")}
                   sx={{ paddingRight: 5 }}
                 />
                 <FormControlLabel
                   value="1"
                   control={<Radio />}
-                  label="Vietnamese"
+                  label={t("Vietnamese")}
                   sx={{ paddingRight: 5 }}
                 />
               </RadioGroup>
@@ -285,12 +288,12 @@ const SignUpPage = (props) => {
                   className="cBtn cBtnLarge cBtnTheme"
                   type="submit"
                 >
-                  Sign Up
+                  {t("SignUp")}
                 </Button>
               </Grid>
               <p className="noteHelp">
-                Already have an account?{" "}
-                <Link href="/login">Return to Sign In</Link>
+              {t("HaveAccount")}{" "}
+                <Link href="/login">{t("ReturnSignIn")}</Link>
               </p>
             </Grid>
           </Grid>
