@@ -261,6 +261,8 @@
     "Category": "Category",
     "Created": "Created",
     "LastUpdated": "Last Updated",
+    "VAT": "VAT",
+    "TotalIncludeVAT": "Total include VAT",
     "AmountPaid": "Amount Paid",
     "TotalArea": "Total area",
     "EstimateWorkingDays": "Estimate working days",

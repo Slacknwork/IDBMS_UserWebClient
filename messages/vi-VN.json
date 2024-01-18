@@ -261,6 +261,8 @@
     "Category": "Phân loại",
     "Created": "Được tạo",
     "LastUpdated": "Lần cuối cập nhật",
+    "VAT": "VAT",
+    "TotalIncludeVAT": "Tổng cộng (gồm VAT)",
     "AmountPaid": "Số tiền đã thanh toán",
     "TotalArea": "Tổng diện tích",
     "EstimateWorkingDays": "Ước tính ngày làm việc",
