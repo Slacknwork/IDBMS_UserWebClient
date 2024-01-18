@@ -33,6 +33,9 @@ export default function ItemsPage() {
 
   // INIT
   const o = useTranslations("ProjectDetails_Overview");
+  const t = useTranslations("ProjectDetails_Item");
+  const e = useTranslations("Error");
+
   const params = useParams();
   const searchParams = useSearchParams();
   const language =
@@ -75,7 +78,7 @@ export default function ItemsPage() {
         setCount(response?.totalPage ?? 0);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu từ hệ thống");
+        toast.error(e("FetchError"));
       }
     };
     await Promise.all([fetchItems()]);
@@ -98,7 +101,7 @@ export default function ItemsPage() {
         setItemCategories(response.list);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu từ hệ thống");
+        toast.error(e("FetchError"));
       }
     };
     await Promise.all([fetchCategories()]);
@@ -119,13 +122,13 @@ export default function ItemsPage() {
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
-            <h3 className="my-auto">Items</h3>
+            <h3 className="my-auto">{t("Items")}</h3>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search Items..."></Search>
+          <Search placeholder={t("SearchItems")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
@@ -186,13 +189,12 @@ export default function ItemsPage() {
           >
             <tr>
               <th scope="col" style={{ width: "12rem" }}>
-                Image
+              {t("Image")}
               </th>
-              <th scope="col">Name</th>
-              <th scope="col">Category</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">{t("Name")}</th>
+              <th scope="col">{t("Category")}</th>
+              <th scope="col">{t("Quantity")}</th>
               <th scope="col" style={{ width: "10rem" }}>
-                Actions
               </th>
             </tr>
           </thead>
@@ -246,7 +248,7 @@ export default function ItemsPage() {
                       className="theme-btn m-1"
                       style={{ width: "6rem", zIndex: 0 }}
                     >
-                      Details
+                      {t("Details")}
                     </Link>
                   </div>
                 </td>
@@ -256,7 +258,7 @@ export default function ItemsPage() {
         </table>
       ) : (
         <Stack sx={{ height: "100%" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>No Data.</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoItem")}</p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

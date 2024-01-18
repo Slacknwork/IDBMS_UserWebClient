@@ -30,6 +30,8 @@ export default function WarrantiesPage() {
 
   // INIT
   const o = useTranslations("ProjectDetails_Overview");
+  const t = useTranslations("ProjectDetails_Warranty");
+  const e = useTranslations("Error");
   const params = useParams();
   const searchParams = useSearchParams();
   const language =
@@ -74,7 +76,7 @@ export default function WarrantiesPage() {
         setCount(response?.totalPage ?? 0);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu 'Thanh Toán' từ hệ thống");
+        toast.error(e("FetchWarrantyError"));
       }
     };
     await Promise.all([fetchWarrantyClaims()]);
@@ -100,12 +102,12 @@ export default function WarrantiesPage() {
           ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
-          <h3 className="my-auto">Warranty Claims</h3>
+          <h3 className="my-auto">{t("WarrantyClaims")}</h3>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search by name..."></Search>
+          <Search placeholder={t("SearchName")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
@@ -152,13 +154,12 @@ export default function WarrantiesPage() {
             style={{ position: "sticky", top: 0, zIndex: 1 }}
           >
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Amount (VND)</th>
-              <th scope="col">Cover By</th>
-              <th scope="col">Created Date</th>
-              <th scope="col">End Date</th>
+              <th scope="col">{t("Name")}</th>
+              <th scope="col">{t("Amount")} (VND)</th>
+              <th scope="col">{t("CoverBy")}</th>
+              <th scope="col">{t("CreatedDate")}</th>
+              <th scope="col">{t("EndDate")}</th>
               <th scope="col" style={{ width: "10rem" }}>
-                Actions
               </th>
             </tr>
           </thead>
@@ -186,14 +187,14 @@ export default function WarrantiesPage() {
                 <td className="align-middle">
                   {claim?.endDate ? moment(claim?.endDate).format("L") : "-"}
                 </td>
-                <td className="align-middle m-0">Tải hóa đơn</td>
+                <td className="align-middle m-0">{t("Download")}</td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
         <Stack sx={{ height: "30rem" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoWarranty")}</p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

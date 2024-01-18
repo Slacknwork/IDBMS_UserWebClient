@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 export default function ProjectAdvertisement() {
   const [projects, setProjects] = useState([]);
   const t = useTranslations("Home");
+  const e = useTranslations("Error");
   const params = useParams();
 
   const language =
@@ -29,7 +30,7 @@ export default function ProjectAdvertisement() {
       });
       setProjects(projectResponse.list);
     } catch (error) {
-      toast.error("Error loading projects!");
+      toast.error(e("ErrorLoadingProjects"));
       console.log(error);
     }
   };

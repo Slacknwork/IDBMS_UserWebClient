@@ -29,7 +29,7 @@ export default function ItemsPage() {
   // INIT
   const params = useParams();
   const searchParams = useSearchParams();
-  const t = useTranslations("ProjectDetails_Item");
+  const t = useTranslations("ProjectDetails_TaskReport");
   const e = useTranslations("Error");
   const language =
     params?.locale === "en-US"
@@ -62,7 +62,7 @@ export default function ItemsPage() {
       setReports(response?.list ?? []);
       setCount(response?.totalPage ?? 0);
     } catch (error) {
-      toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      toast.error(e("FetchError"));
     }
   };
   const fetchDataFromApi = async () => {
@@ -79,12 +79,12 @@ export default function ItemsPage() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12 mb-3">
-          <h3 style={{ fontSize: 24 }}>Task Reports</h3>
+          <h3 style={{ fontSize: 24 }}>{t("TaskReports")}</h3>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder={t("SearchItems")}></Search>
+          <Search placeholder={t("SearchReport")}></Search>
         </div>
         <div className="col col-lg-12 col-12" style={{ height: "30rem" }}>
           {loading ? (
@@ -105,10 +105,10 @@ export default function ItemsPage() {
                     {t("Name")}
                   </th>
                   <th scope="col" width="25%">
-                    Created Date
+                    {t("CreatedDate")}
                   </th>
                   <th scope="col" width="25%">
-                    Units used
+                    {t("UnitsUsed")}
                   </th>
                   <th scope="col" width="10%"></th>
                 </tr>
@@ -140,7 +140,7 @@ export default function ItemsPage() {
             </table>
           ) : (
             <Stack sx={{ height: "30rem" }}>
-              <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+              <p style={{ margin: "auto", textAlign: "center" }}>{t("NoTaskReport")}</p>
             </Stack>
           )}
           <Pagination count={count}></Pagination>

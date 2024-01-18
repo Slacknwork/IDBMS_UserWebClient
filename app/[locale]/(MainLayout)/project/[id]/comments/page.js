@@ -25,6 +25,8 @@ export default function TaskCommentsPage() {
   moment.locale(timezone.momentLocale);
   // CONSTANTS
   const o = useTranslations("ProjectDetails_Overview");
+  const t = useTranslations("ProjectDetails_Comment");
+  const e = useTranslations("Error");
   const searchQuery = "search";
   const typeQuery = "type";
   const statusQuery = "status";
@@ -57,7 +59,7 @@ export default function TaskCommentsPage() {
       });
       setComments(comments.list);
     } catch (error) {
-      toast.error("Error: Comments!");
+      toast.error(e("ErrorComment"));
     }
   };
 
@@ -81,12 +83,12 @@ export default function TaskCommentsPage() {
           ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
-          <h3 className="my-auto">Comments</h3>
+          <h3 className="my-auto">{t("Comment")}</h3>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12">
-          <Search placeholder="Search comment..."></Search>
+          <Search placeholder={t("SearchComment")}></Search>
         </div>
         <div className="col col-lg-12 col-12">
           <div className="review">
@@ -202,7 +204,7 @@ export default function TaskCommentsPage() {
               ) : (
                 <Stack sx={{ height: "30rem" }}>
                   <p style={{ margin: "auto", textAlign: "center" }}>
-                    No data.
+                  {t("NoComment")}
                   </p>
                 </Stack>
               )}

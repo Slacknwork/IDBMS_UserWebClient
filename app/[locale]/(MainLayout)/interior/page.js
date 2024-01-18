@@ -40,6 +40,7 @@ export default function InteriorItemsPage({ success }) {
 
   // INIT
   const t = useTranslations("InteriorItems");
+  const e = useTranslations("Error");
   const searchParams = useSearchParams();
 
   // FETCH DATA
@@ -66,7 +67,7 @@ export default function InteriorItemsPage({ success }) {
       setItems(items.list);
       setCount(items.totalPage);
     } catch (error) {
-      toast.error("Error: Items!");
+      toast.error(e("ItemsError"));
     }
   };
 
@@ -80,7 +81,7 @@ export default function InteriorItemsPage({ success }) {
       });
       setCategories(categories.list);
     } catch (error) {
-      toast.error("Error: Item categories!");
+      toast.error(e("ItemCategoriesError"));
     }
   };
 

@@ -66,7 +66,8 @@
     "FormPhone": "Your Phone",
     "FormAddress": "Your Address",
     "FormMessage": "Message",
-    "FormSubmit": "Submit Now"
+    "FormSubmit": "Submit Now",
+    "SubmitSuccessfully":"Submit successfully!"
   },
   "InteriorItems": {
     "Price": "Price",
@@ -275,7 +276,9 @@
     "Ended": "Ended"
   },
   "ProjectDetails_Comment": {
+    "Comment":"Comments",
     "Content": "Content",
+    "SearchComment":"Search comment...",
     "Details": "Comment Details",
     "ProjectTaskId": "Project Task Id",
     "ProjectId": "Project Id",
@@ -284,9 +287,18 @@
     "CreatedTime": "Created Time",
     "LastModifiedTime": "Last Modified Time",
     "Status": "Status",
-    "IsDeleted": "IsDeleted"
+    "IsDeleted": "IsDeleted",
+    "CreatedCommentSuccessfully":"Post Comment successfully!",
+    "AddComment":"Add a Comment",
+    "YourComment":"Your Comment...",
+    "Submit":"Submit",
+    "ConfirmSubmission":"Confirm Submission",
+    "AreYouSure":"Are you sure you want to submit the comment?",
+    "Cancel":"Cancel",
+    "NoComment":"No comment."
   },
   "ProjectDetails_Item": {
+    "Items":"Items",
     "Code": "Code",
     "Name": "Name",
     "SearchItems": "Search Items...",
@@ -307,9 +319,12 @@
     "InteriorItemCategoryId": "Category",
     "Status": "Status",
     "IsDeleted": "Is Deleted",
-    "ParentItemId": "Parent Item"
+    "ParentItemId": "Parent Item",
+    "NoItem":"No item."
   },
   "ProjectDetails_Document": {
+    "Documents":"Documents",
+    "SearchDocuments":"Search Documents...",
     "Name": "Name",
     "Details": "Document Details",
     "Description": "Description",
@@ -319,7 +334,9 @@
     "ProjectId": "Project",
     "ProjectDocumentTemplateId": "ProjectDocumentTemplate",
     "IsPublicAdvertisement": "Public Advertisement",
-    "IsDeleted": "Is Deleted"
+    "Download":"Download",
+    "IsDeleted": "Is Deleted",
+    "NoDocument":"No document."
   },
   "ProjectDetails_Payment": {
     "Name": "Name",
@@ -341,11 +358,38 @@
     "IsHidden": "Is Hidden"
   },
   "ProjectDetails_Participation": {
+    "Participants":"Participants",
+    "SearchName":"Search by name...",
+    "Name": "Name",
     "UserId": "User",
-    "Details": "Participation Details",
+    "Details": "Details",
     "ProjectId": "Project",
     "Role": "Role",
+    "ProjectManager":"Project Manager",
+    "Delete":"Delete",
     "IsDeleted": "Is Deleted"
+  },
+  "ProjectDetails_Transaction": {
+    "Transactions":"Transactions",
+    "SearchPayerName":"Search by payer name...",
+    "Type": "Type",
+    "Amount": "Amount",
+    "CreatedDate": "Created Date",
+    "PayerName": "Payer Name",
+    "Status": "Status",
+    "DownloadInvoice":"Download invoice",
+    "NoTransaction":"No transaction."
+  },
+  "ProjectDetails_Warranty": {
+    "WarrantyClaims":"Warranty Claims",
+    "SearchName":"Search by name...",
+    "Name": "Name",
+    "Amount": "Amount",
+    "CoverBy": "Cover By",
+    "CreatedDate": "Created Date",
+    "EndDate": "End Date",
+    "Download":"Download",
+    "NoWarranty":"No warranty claim."
   },
   "ProjectDetail_Site": {
     "Name": "Name",
@@ -431,26 +475,31 @@
     "TaskDesignId": "Task Design",
     "RoomId": "Room",
     "Status": "Status",
-    "No": "No Stage",
-    "NonArchitect": "Non-architect",
-    "Category": "Category",
-    "Price": "Price",
-    "StartDate": "Start Date",
-    "Progress": "Progress",
-    "Undefined": "Undefined",
-    "Unclassified": "Unclassified",
-    "NoData": "No data"
+    "No":"No Stage",
+    "NonArchitect":"Non-architect",
+    "Category":"Category",
+    "Price":"Price",
+    "StartDate":"Start Date",
+    "Progress":"Progress",
+    "Undefined":"Undefined",
+    "Unclassified":"Unclassified",
+    "NoData":"No data."
   },
   "ProjectDetails_TaskReport": {
+    "TaskReports": "Task Reports",
     "Name": "Name",
-    "Details": "Task Report Details",
+    "Details": "Details",
+    "SearchReport": "Search Reports...",
+    "CreatedDate":"Created Date",
+    "UnitsUsed":"Units used",
     "CalculationUnit": "Calculation Unit",
     "UnitUsed": "Unit Used",
     "Description": "Description",
     "CreatedTime": "Created Time",
     "UpdatedTime": "Updated Time",
     "ProjectTaskId": "Project Task",
-    "IsDeleted": "Is Deleted"
+    "IsDeleted": "Is Deleted",
+    "NoTaskReport":"No task report."
   },
   "ProjectDetails_TaskDocument": {
     "Name": "Name",
@@ -608,19 +657,34 @@
   "Error": {
     "TaskCategoryError": "Fetch Data Error: Task Categories!",
     "TasksError": "Fetch Data Error: Tasks!",
+    "ItemsError": "Fetch Data Error: Items!",
+    "ItemCategoriesError": "Fetch Data Error: Item Categories!",
+    "FloorsError": "Fetch Data Error: Floors!",
+    "RoomsError": "Fetch Data Error: Rooms!",
+    "FloorDetailsError": "Fetch Data Error: Floor Details!",
     "ParticipationsError": "Fetch Data Error: Participations!",
     "ProjectsError": "Fetch Data Error: Projects!",
+    "ProjectStatusError": "Fetch Data Error: Project status!",
+    "StagesError": "Fetch Data Error: Stages!",
     "FetchError": "Error loading data from the system",
-    "FetchDataError": "Error fetching data:",
-    "InvalidEmail": "Invalid format for email address",
-    "InvalidPhone": "Invalid format for phone number",
-    "RequirePassword": "Password is required!",
-    "MatchPassword": "Passwords must match!",
-    "FillFields": "All fields must be filled out.",
-    "LoginFailed": "Login failed!",
-    "LoginError": "Error login!",
-    "RegistrationFailed": "Registration failed!",
-    "RegistrationError": "Error registering user!",
-    "FixValidation": "Please fix the validation errors before submitting."
+    "FetchDocumentError":"Error loading 'Document' data from the system",
+    "FetchParticipationError":"Error loading 'Participation' data from the system",
+    "FetchTransactionError":"Error loading 'Transaction' data from the system",
+    "FetchWarrantyError":"Error loading 'Warranty' data from the system",
+    "FetchDataError": "Error fetching data",
+    "InvalidEmail":"Invalid format for email address",
+    "InvalidPhone":"Invalid format for phone number",
+    "RequirePassword":"Password is required!",
+    "MatchPassword":"Passwords must match!",
+    "FillFields":"All fields must be filled out.",
+    "LoginFailed":"Login failed!",
+    "LoginError":"Error login!",
+    "RegistrationFailed":"Registration failed!",
+    "RegistrationError":"Error registering user!",
+    "FixValidation":"Please fix the validation errors before submitting.",
+    "ErrorComment":"Error: Create Comment!",
+    "ErrorGettingRoomType":"Error getting Room Type data!",
+    "ErrorLoadingProjects":"Error loading projects!",
+    "SubmitFalied":"Submit falied!"
   }
 }

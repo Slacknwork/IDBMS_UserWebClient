@@ -32,6 +32,8 @@ export default function ParticipationsPage() {
 
   // INIT
   const o = useTranslations("ProjectDetails_Overview");
+  const t = useTranslations("ProjectDetails_Participation");
+  const e = useTranslations("Error");
   const params = useParams();
   const searchParams = useSearchParams();
   const language =
@@ -74,7 +76,7 @@ export default function ParticipationsPage() {
         setProjectManager(response?.projectManager ?? []);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu 'Thành viên' từ hệ thống");
+        toast.error(e("FetchParticipationError"));
       }
     };
     await Promise.all([fetchParticipations()]);
@@ -96,13 +98,13 @@ export default function ParticipationsPage() {
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
-            <h3 className="my-auto">Participants</h3>
+            <h3 className="my-auto">{t("Participants")}</h3>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search by Name..."></Search>
+          <Search placeholder={t("SearchName")}></Search>
         </div>
       </div>
 
@@ -119,7 +121,7 @@ export default function ParticipationsPage() {
         >
           <Box>
             <Typography variant="h5" sx={{ my: "auto" }}>
-              Quản lý dự án
+            {t("ProjectManager")}
             </Typography>
             <Box sx={{ display: "flex", mt: 2 }}>
               {/* <UserCard
@@ -146,10 +148,9 @@ export default function ParticipationsPage() {
             style={{ position: "sticky", top: 0, zIndex: 1 }}
           >
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Role</th>
+              <th scope="col">{t("Name")}</th>
+              <th scope="col">{t("Role")}</th>
               <th scope="col" style={{ width: "10rem" }}>
-                Actions
               </th>
             </tr>
           </thead>
@@ -161,7 +162,7 @@ export default function ParticipationsPage() {
                   <td className="align-middle">
                     <Chip label={participationRole[participation.role]}></Chip>
                   </td>
-                  <td className="align-middle"> xóa</td>
+                  <td className="align-middle">{t("Delete")}</td>
                 </tr>
               ))}
           </tbody>
