@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "/navigation";
 import { useParams, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { CircularProgress, Stack } from "@mui/material";
@@ -11,20 +10,14 @@ import "moment/locale/vi";
 
 import timezone from "/constants/timezone";
 
-import { getTaskReportsByProjectTaskId } from "/services/taskReportServices";
+import { getTaskReportById } from "/services/taskReportServices";
+import { downloadFileByUrl } from "/services/downloadServices";
 
-import Search from "/components/Shared/Search";
-import Pagination from "/components/Shared/Pagination";
+import NavButton from "/components/Shared/NavButton";
 
 export default function ItemsPage() {
   moment.tz.setDefault(timezone.momentDefault);
   moment.locale(timezone.momentLocale);
-  // CONSTANTS
-  const searchQuery = "search";
-  const pageQuery = "page";
-  const defaultPage = 1;
-  const defaultPageSize = 5;
-  const pageSizeQuery = "size";
 
   // INIT
   const params = useParams();
@@ -41,26 +34,15 @@ export default function ItemsPage() {
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [reports, setReports] = useState([]);
-  const [count, setCount] = useState(0);
 
   // FETCH DATA
   const fetchReports = async () => {
     const projectId = params.id;
-    const projectTaskId = params.taskId;
-    const search = searchParams.get(searchQuery) ?? "";
-    const page = searchParams.get(pageQuery) ?? defaultPage;
-    const pageSize = searchParams.get(pageSizeQuery) ?? defaultPageSize;
+    const taskReportId = params.reportId;
 
     try {
-      const response = await getTaskReportsByProjectTaskId({
-        projectId,
-        projectTaskId,
-        search,
-        page,
-        pageSize,
-      });
-      setReports(response?.list ?? []);
-      setCount(response?.totalPage ?? 0);
+      const response = await getTaskReportById(taskReportId, projectId);
+      setReports(response?.taskDocuments ?? []);
     } catch (error) {
       toast.error("Lỗi nạp dữ liệu từ hệ thống");
     }
@@ -75,17 +57,33 @@ export default function ItemsPage() {
     fetchDataFromApi();
   }, [searchParams]);
 
+  const onDownload = async (document) => {
+    try {
+      toast.loading(`Đang tải ${document.name}...`);
+      await downloadFileByUrl({
+        imageUrl: document.document,
+        name: document.name,
+      });
+      toast.dismiss();
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Lỗi tải file!");
+    }
+  };
+
   return (
     <div className="container">
       <div className="row">
+        <div className="col col-lg-12 col-12">
+          <NavButton
+            url={`/project/${params.id}/tasks/${params.taskId}/reports`}
+          ></NavButton>
+        </div>
         <div className="col col-lg-12 col-12 mb-3">
-          <h3 style={{ fontSize: 24 }}>Task Reports</h3>
+          <h3 style={{ fontSize: 24 }}>Report Details</h3>
         </div>
       </div>
       <div className="row">
-        <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder={t("SearchItems")}></Search>
-        </div>
         <div className="col col-lg-12 col-12" style={{ height: "30rem" }}>
           {loading ? (
             <Stack sx={{ height: "30rem" }}>
@@ -101,37 +99,25 @@ export default function ItemsPage() {
                 style={{ position: "sticky", top: 0, zIndex: 1 }}
               >
                 <tr>
-                  <th scope="col" width="40%">
+                  <th scope="col" width="80%">
                     {t("Name")}
                   </th>
-                  <th scope="col" width="25%">
-                    Created Date
-                  </th>
-                  <th scope="col" width="25%">
-                    Units used
-                  </th>
-                  <th scope="col" width="10%"></th>
+                  <th scope="col" width="20%"></th>
                 </tr>
               </thead>
               <tbody>
                 {reports.map((report) => (
                   <tr key={report.id}>
                     <td className="align-middle">{report?.name}</td>
-                    <td className="align-middle">
-                      {report?.createdTime
-                        ? moment(report?.createdTime).format("lll")
-                        : "N/A"}
-                    </td>
-                    <td className="align-middle">{report?.unitUsed}</td>
-                    <td className="align-middle m-0">
+                    <td className="align-middle m-0 d-flex justify-content-end">
                       <div className="d-flex">
-                        <Link
-                          href={`/project/${params.id}/tasks/${params.taskId}/reports/${report?.id}`}
-                          className="theme-btn m-1"
-                          style={{ width: "6rem", zIndex: 0 }}
+                        <button
+                          className="theme-btn m-1 px-2 py-2"
+                          style={{ zIndex: 0 }}
+                          onClick={() => onDownload(report)}
                         >
-                          {t("Details")}
-                        </Link>
+                          Download
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -143,7 +129,6 @@ export default function ItemsPage() {
               <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
             </Stack>
           )}
-          <Pagination count={count}></Pagination>
         </div>
       </div>
     </div>

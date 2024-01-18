@@ -120,12 +120,12 @@ const deleteTaskReport = async (reportId) => {
   }
 };
 
-const getTaskReportById = async (reportId) => {
+const getTaskReportById = async (reportId, projectId = "") => {
   try {
     const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}/${reportId}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "?projectId=" + projectId : ""}`,
       method: "GET",
       token,
       body: null,

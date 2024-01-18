@@ -229,7 +229,7 @@ export default function TaskLayout({ children }) {
                                 {t("Started")}:{" "}
                                 <span style={{ fontWeight: 1000 }}>
                                   {task?.startedDate
-                                    ? moment(task.createdDate).format("L")
+                                    ? moment(task.startedDate).format("L")
                                     : "N/A"}
                                 </span>
                               </li>
