@@ -1,21 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import { toast } from "react-toastify";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "/store/reducers/customer";
-import { loginUser } from "/services/authenticationServices";
+import {
+  verifyAuthenPassword,
+  updatePassword,
+} from "/services/authenticationServices";
 import { useTranslations } from "next-intl";
 import { signIn } from "next-auth/react";
 
 const LoginPage = (props) => {
+  const emailQuery = "email";
+  const codeQuery = "code";
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const dispatch = useDispatch();
   const params = useParams();
   const t = useTranslations("Login");
   const er = useTranslations("Error");
@@ -23,92 +27,65 @@ const LoginPage = (props) => {
   const user = useSelector((state) => state.customer);
 
   const [value, setValue] = useState({
-    email: "",
     password: "",
+    confirmPassword: "",
     // remember: false,
   });
 
-  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  const validateEmail = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isEmailValid = emailRegex.test(value.email);
-
-    setEmailError(isEmailValid ? "" : er("InvalidEmail"));
-
-    return isEmailValid;
-  };
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const validatePassword = () => {
     const isPasswordValid = value.password && value.password.trim() !== "";
-
+    const isConfirmPasswordValid = value.password === value.confirmPassword;
     setPasswordError(isPasswordValid ? "" : er("RequirePassword"));
-
-    return isPasswordValid;
+    setConfirmPasswordError(isConfirmPasswordValid ? "" : "Khác mật khẩu!");
+    return isPasswordValid && isConfirmPasswordValid;
   };
 
   const changeHandler = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-
-    const isEmailValid = validateEmail();
-    const isPasswordValid = validatePassword();
-
-    if (isEmailValid && isPasswordValid) {
-      try {
-        const response = await loginUser(value);
-        console.log(response);
-        if (response.data != null) {
-          toast.success("Login successfully!");
-          dispatch(login(response.data));
-          router.push("/project");
-        } else {
-          throw new Error("Login failed!");
-        }
-      } catch (error) {
-        console.error("Error login :", error);
-        toast.error(er("LoginFailed"));
-      }
-    } else {
-      toast.error(er("FixValidation"));
+  const [token, setToken] = useState("");
+  const verifyAuthenCode = async () => {
+    try {
+      const email = searchParams.get(emailQuery) ?? "";
+      const code = searchParams.get(codeQuery) ?? "";
+      const response = await verifyAuthenPassword({ email, code });
+      response?.data ? setToken(response.data) : router.push("/login/email");
+    } catch (error) {
+      toast.error("Lỗi!");
+      router.push("/login/email");
     }
   };
 
-  const handleGoogleLogin = () => {
-    signIn("google", { callbackUrl: `/${params.locale}/google` });
+  const onUpdatePassword = async (e) => {
+    e.preventDefault();
+    try {
+      const email = searchParams.get(emailQuery) ?? "";
+      const newPassword = value.password;
+      const response = await updatePassword({ email, newPassword }, token);
+      if (response) {
+        toast.success("Update Password successful!");
+        router.push("/login");
+      }
+    } catch (error) {
+      toast.error("Lỗi!");
+    }
   };
+
+  useEffect(() => {
+    if (!token) verifyAuthenCode();
+  }, []);
 
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
-        <h2>{t("SignIn")}</h2>
-        <p>{t("SignInAccount")}</p>
-        <form onSubmit={submitForm}>
+        <h2>Update Password</h2>
+        <p>Change Password</p>
+        <form onSubmit={onUpdatePassword}>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                className="inputOutline"
-                fullWidth
-                placeholder="Email"
-                value={value.email}
-                variant="outlined"
-                name="email"
-                label="Email"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onBlur={(e) => {
-                  changeHandler(e);
-                  validateEmail();
-                }}
-                onChange={(e) => changeHandler(e)}
-              />
-              {emailError && <span className="errorMessage">{emailError}</span>}
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 className="inputOutline"
@@ -133,6 +110,29 @@ const LoginPage = (props) => {
               )}
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                className="inputOutline"
+                fullWidth
+                placeholder="Confirm Password"
+                value={value.confirmPassword}
+                variant="outlined"
+                name="confirmPassword"
+                type="password"
+                label="Confirm Password"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onBlur={(e) => {
+                  changeHandler(e);
+                  validatePassword();
+                }}
+                onChange={(e) => changeHandler(e)}
+              />
+              {confirmPasswordError && (
+                <span className="errorMessage">{confirmPasswordError}</span>
+              )}
+            </Grid>
+            <Grid item xs={12}>
               <Grid className="formAction">
                 {/* <FormControlLabel
                 control={
@@ -144,36 +144,21 @@ const LoginPage = (props) => {
                 label="Remember Me"
               /> */}
                 <Link
-                  href="/login/email"
+                  href="/login"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
-                  {t("ForgotPassword")}
+                  Trở về Đăng nhập
                 </Link>
               </Grid>
               <Grid className="formFooter">
                 <Button fullWidth className="cBtnTheme" type="submit">
-                  {t("Login")}
+                  Cập nhật
                 </Button>
               </Grid>
-              <Grid className="loginWithSocial">
-                <p>- {t("Or")} -</p>
-              </Grid>
-              <Grid className="loginWithSocial">
-                <Button
-                  className="google"
-                  onClick={handleGoogleLogin}
-                  style={{ background: "#DB4437" }}
-                >
-                  <i className="fa fa-google"></i>
-                </Button>
-              </Grid>
-              <p className="noteHelp">
-                {t("NoAccount")} <Link href="/register">{t("Register")}</Link>
-              </p>
             </Grid>
           </Grid>
         </form>
