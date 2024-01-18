@@ -20,7 +20,7 @@
     "DaysOfWork": "days of work",
     "Projects": "Projects",
     "OurProjects": "Our Projects",
-    "FeaturedWorks":"FEATURED WORKS",
+    "FeaturedWorks": "FEATURED WORKS",
     "WhatWeDo": "What we do",
     "Decor": "Decor",
     "Construction": "Construction",
@@ -267,10 +267,10 @@
     "Site": "Site",
     "Address": "Address",
     "Days": "days",
-    "ContractedUnits":"Contracted units",
-    "UsedUnits":"Used units",
-    "Started":"Started",
-    "Ended":"Ended"
+    "ContractedUnits": "Contracted units",
+    "UsedUnits": "Used units",
+    "Started": "Started",
+    "Ended": "Ended"
   },
   "ProjectDetails_Comment": {
     "Comment":"Comments",
@@ -429,8 +429,8 @@
     "IsHidden": "Is Hidden"
   },
   "ProjectDetails_Stage": {
-    "Stages":"Stages",
-    "SearchStages":"Search Stages",
+    "Stages": "Stages",
+    "SearchStages": "Search Stages",
     "No": "No",
     "Name": "Name",
     "ContractTotal": "Contract Total",
@@ -441,8 +441,8 @@
     "WarrantyPeriod": "Warranty period",
     "Paid": "Paid",
     "Unpaid": "Unpaid",
-    "Undefined":"Undefined",
-    "Unknown":"Unknown"
+    "Undefined": "Undefined",
+    "Unknown": "Unknown"
   },
   "ProjectDetails_Task": {
     "Tasks": "Tasks",
@@ -614,9 +614,20 @@
     "Password": "Password",
     "ForgotPassword": "Forgot Password?",
     "Login": "Login",
-    "Or":"or",
-    "NoAccount":"Don't have an account?",
-    "Register":"Register account"
+    "Or": "or",
+    "NoAccount": "Don't have an account?",
+    "Register": "Register account"
+  },
+  "ForgotPassword": {
+    "Forgot": "Forgot Password?",
+    "ForgotSub": "Enter email to verify.",
+    "Back": "Back",
+    "Password": "Mật khẩu",
+    "ForgotPassword": "Quên mật khẩu?",
+    "Login": "Đăng nhập",
+    "Or": "hoặc",
+    "NoAccount": "Không có tài khoản?",
+    "Register": "Đăng ký tài khoản"
   },
   "Register": {
     "RegistrationSuccessful": "Registration successful!",
@@ -625,20 +636,20 @@
     "Name": "Name",
     "EnterName": "Enter full name",
     "Password": "Password",
-    "EnterPassword":"Enter password",
-    "ConfirmPassword":"Confirm your password",
-    "ConfirmYourPassword":"Confirm your password",
-    "Address":"Address",
-    "EnterAddress":"Enter address",
-    "Phone":"Phone",
-    "PhoneNumber":"+84 779054212 or 0779054212",
-    "DateOfBirth":"Date of Birth",
-    "Language":"Language",
-    "English":"English",
-    "Vietnamese":"Vietnamese",
-    "SignUp":"Sign Up",
-    "HaveAccount":"Already have an account?",
-    "ReturnSignIn":"Return to Sign In"
+    "EnterPassword": "Enter password",
+    "ConfirmPassword": "Confirm your password",
+    "ConfirmYourPassword": "Confirm your password",
+    "Address": "Address",
+    "EnterAddress": "Enter address",
+    "Phone": "Phone",
+    "PhoneNumber": "+84 779054212 or 0779054212",
+    "DateOfBirth": "Date of Birth",
+    "Language": "Language",
+    "English": "English",
+    "Vietnamese": "Vietnamese",
+    "SignUp": "Sign Up",
+    "HaveAccount": "Already have an account?",
+    "ReturnSignIn": "Return to Sign In"
   },
   "Error": {
     "TaskCategoryError": "Fetch Data Error: Task Categories!",

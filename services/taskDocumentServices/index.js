@@ -54,45 +54,8 @@ const getTaskDocumentsByTaskReportId = async (taskReportId) => {
   }
 };
 
-const createTaskDocument = async (request) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}`;
-    const response = await fetchData({
-      url,
-      method: "POST",
-      contentType: "application/json",
-      token,
-      body: JSON.stringify(request),
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error creating task document:", error);
-    throw error;
-  }
-};
-
-const deleteTaskDocument = async (documentId) => {
-  try {
-    const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/${documentId}`;
-    const response = await fetchData({
-      url,
-      method: "DELETE",
-      token,
-      body: null,
-    });
-    return response.message;
-  } catch (error) {
-    console.error("Error deleting task document:", error);
-    throw error;
-  }
-};
-
 export {
   getAllTaskDocuments,
   getTaskDocumentById,
   getTaskDocumentsByTaskReportId,
-  createTaskDocument,
-  deleteTaskDocument,
 };

@@ -9,15 +9,14 @@ import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "/store/reducers/customer";
-import { loginUser } from "/services/authenticationServices";
+import { sendEmailForgotPassword } from "/services/authenticationServices";
 import { useTranslations } from "next-intl";
-import { signIn } from "next-auth/react";
 
 const LoginPage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const params = useParams();
-  const t = useTranslations("Login");
+  const t = useTranslations("ForgotPassword");
   const er = useTranslations("Error");
 
   const user = useSelector((state) => state.customer);
@@ -29,7 +28,6 @@ const LoginPage = (props) => {
   });
 
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,35 +38,18 @@ const LoginPage = (props) => {
     return isEmailValid;
   };
 
-  const validatePassword = () => {
-    const isPasswordValid = value.password && value.password.trim() !== "";
-
-    setPasswordError(isPasswordValid ? "" : er("RequirePassword"));
-
-    return isPasswordValid;
-  };
-
   const changeHandler = (e) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
   const submitForm = async (e) => {
     e.preventDefault();
-
     const isEmailValid = validateEmail();
-    const isPasswordValid = validatePassword();
 
-    if (isEmailValid && isPasswordValid) {
+    if (isEmailValid) {
       try {
-        const response = await loginUser(value);
-        console.log(response);
-        if (response.data != null) {
-          toast.success("Login successfully!");
-          dispatch(login(response.data));
-          router.push("/project");
-        } else {
-          throw new Error("Login failed!");
-        }
+        const response = await sendEmailForgotPassword(value.email);
+        toast.info(response.message);
       } catch (error) {
         console.error("Error login :", error);
         toast.error(er("LoginFailed"));
@@ -78,15 +59,11 @@ const LoginPage = (props) => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    signIn("google", { callbackUrl: `/${params.locale}/google` });
-  };
-
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
-        <h2>{t("SignIn")}</h2>
-        <p>{t("SignInAccount")}</p>
+        <h2>{t("Forgot")}</h2>
+        <p>{t("ForgotSub")}</p>
         <form onSubmit={submitForm}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
@@ -110,29 +87,6 @@ const LoginPage = (props) => {
               {emailError && <span className="errorMessage">{emailError}</span>}
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                className="inputOutline"
-                fullWidth
-                placeholder={t("Password")}
-                value={value.password}
-                variant="outlined"
-                name="password"
-                type="password"
-                label={t("Password")}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onBlur={(e) => {
-                  changeHandler(e);
-                  validatePassword();
-                }}
-                onChange={(e) => changeHandler(e)}
-              />
-              {passwordError && (
-                <span className="errorMessage">{passwordError}</span>
-              )}
-            </Grid>
-            <Grid item xs={12}>
               <Grid className="formAction">
                 {/* <FormControlLabel
                 control={
@@ -144,14 +98,14 @@ const LoginPage = (props) => {
                 label="Remember Me"
               /> */}
                 <Link
-                  href="/login/email"
+                  href="/login"
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
-                  {t("ForgotPassword")}
+                  {t("Back")}
                 </Link>
               </Grid>
               <Grid className="formFooter">
@@ -159,21 +113,6 @@ const LoginPage = (props) => {
                   {t("Login")}
                 </Button>
               </Grid>
-              <Grid className="loginWithSocial">
-                <p>- {t("Or")} -</p>
-              </Grid>
-              <Grid className="loginWithSocial">
-                <Button
-                  className="google"
-                  onClick={handleGoogleLogin}
-                  style={{ background: "#DB4437" }}
-                >
-                  <i className="fa fa-google"></i>
-                </Button>
-              </Grid>
-              <p className="noteHelp">
-                {t("NoAccount")} <Link href="/register">{t("Register")}</Link>
-              </p>
             </Grid>
           </Grid>
         </form>

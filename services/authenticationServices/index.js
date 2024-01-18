@@ -34,12 +34,29 @@ const loginUser = async (request) => {
   }
 };
 
-const updatePassword = async (userId, request) => {
+const loginByGoogle = async ({ googleToken = "" } = {}) => {
   try {
-    const url = `${endpoint}/update-password/${userId}`;
+    const url = `${endpoint}/loginByGoogle`;
+    const response = await fetchData({
+      url,
+      method: "POST",
+      contentType: "application/json",
+      body: JSON.stringify({ googleToken }),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in google:", error);
+    throw error;
+  }
+};
+
+const updatePassword = async (request, token) => {
+  try {
+    const url = `${endpoint}/setpassword`;
     const response = await fetchData({
       url,
       method: "PUT",
+      token,
       contentType: "application/json",
       body: JSON.stringify(request),
     });
@@ -98,11 +115,42 @@ const resetPassword = async (request) => {
   }
 };
 
+const sendEmailForgotPassword = async (email) => {
+  try {
+    const url = `${endpoint}/forgotpassword?email=${email}`;
+    const response = await fetchData({
+      url,
+      method: "PUT",
+    });
+    return response;
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    throw error;
+  }
+};
+
+const verifyAuthenPassword = async ({ code, email } = {}) => {
+  try {
+    const url = `${endpoint}/verifyAuthencode?email=${email}&code=${code}`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+    });
+    return response;
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    throw error;
+  }
+};
+
 export {
   registerUser,
   loginUser,
+  loginByGoogle,
   updatePassword,
   logoutUser,
   verifyUser,
   resetPassword,
+  sendEmailForgotPassword,
+  verifyAuthenPassword,
 };
