@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link, useRouter } from "/navigation";
@@ -10,10 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "/store/reducers/customer";
 import { loginUser } from "/services/authenticationServices";
 import { useTranslations } from "next-intl";
+import { signIn } from "next-auth/react";
 
 const LoginPage = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const params = useParams();
   const t = useTranslations("Login");
   const er = useTranslations("Error");
 
@@ -74,6 +77,11 @@ const LoginPage = (props) => {
       toast.error(er("FixValidation"));
     }
   };
+
+  const handleGoogleLogin = () => {
+    signIn("google", { callbackUrl: `/${params.locale}/google` });
+  };
+
   return (
     <Grid className="loginWrapper">
       <Grid className="loginForm">
@@ -148,20 +156,23 @@ const LoginPage = (props) => {
               </Grid>
               <Grid className="formFooter">
                 <Button fullWidth className="cBtnTheme" type="submit">
-                {t("Login")}
+                  {t("Login")}
                 </Button>
               </Grid>
               <Grid className="loginWithSocial">
                 <p>- {t("Or")} -</p>
               </Grid>
               <Grid className="loginWithSocial">
-                <Button className="google" style={{ background: "#DB4437" }}>
+                <Button
+                  className="google"
+                  onClick={handleGoogleLogin}
+                  style={{ background: "#DB4437" }}
+                >
                   <i className="fa fa-google"></i>
                 </Button>
               </Grid>
               <p className="noteHelp">
-              {t("NoAccount")}{" "}
-                <Link href="/register">{t("Register")}</Link>
+                {t("NoAccount")} <Link href="/register">{t("Register")}</Link>
               </p>
             </Grid>
           </Grid>

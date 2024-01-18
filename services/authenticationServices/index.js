@@ -34,6 +34,22 @@ const loginUser = async (request) => {
   }
 };
 
+const loginByGoogle = async ({ googleToken = "" } = {}) => {
+  try {
+    const url = `${endpoint}/loginByGoogle`;
+    const response = await fetchData({
+      url,
+      method: "POST",
+      contentType: "application/json",
+      body: JSON.stringify({ googleToken }),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in google:", error);
+    throw error;
+  }
+};
+
 const updatePassword = async (userId, request) => {
   try {
     const url = `${endpoint}/update-password/${userId}`;
@@ -101,6 +117,7 @@ const resetPassword = async (request) => {
 export {
   registerUser,
   loginUser,
+  loginByGoogle,
   updatePassword,
   logoutUser,
   verifyUser,
