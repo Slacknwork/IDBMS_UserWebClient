@@ -160,6 +160,7 @@ function InteriorItemSingle(itemDetails) {
 
 export default function InteriorItems() {
   const searchParams = useSearchParams();
+  const e = useTranslations("Error");
 
   const [values, setValues] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -181,7 +182,7 @@ export default function InteriorItems() {
           console.log(data.list)
         } catch (error) {
           console.error("Error fetching data:", error);
-          toast.error("Error fetching data");
+          toast.error(e("FetchDataError"));
         }
       };
       fetchDataFromApi();

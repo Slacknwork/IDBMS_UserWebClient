@@ -173,7 +173,7 @@ export default function ProjectOverview() {
                                   {t("LastUpdated")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {new Date(
-                                        project?.createdDate
+                                        project?.updatedDate
                                       ).toLocaleDateString("en-GB")}
                                     </span>
                                   </li>

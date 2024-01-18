@@ -1,4 +1,4 @@
-const documentCategoryOptionsEnglish = ["Unclassified", "BookingDescription", "DecorProgressReport", "Contract", "ConfirmationMinute", "FinalSettlementReport", "CompletionImage"];
+const documentCategoryOptionsEnglish = ["Unclassified", "Booking Description", "Decor Progress Report", "Contract", "Confirmation Minute", "Final Settlement Report", "Completion Image"];
 
 const documentCategoryOptions = [
     "Chưa phân loại",

@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 export default function ContactForm() {
   const params = useParams();
   const t = useTranslations("About");
+  const er = useTranslations("Error");
 
   const [formData, setFormData] = useState({
     contactName: "",
@@ -36,9 +37,9 @@ export default function ContactForm() {
     e.preventDefault();
     try {
       await createBookingRequest(formData);
-      toast.success("Gửi yêu cầu thành công!");
+      toast.success(t("SubmitSuccessfully"));
     } catch (error) {
-      toast.error("Lỗi gửi yêu cầu!");
+      toast.error(er("SubmitFalied"));
     }
   };
 

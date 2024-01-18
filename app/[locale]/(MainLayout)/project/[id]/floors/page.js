@@ -30,6 +30,7 @@ export default function FloorList() {
   const [count, setCount] = useState(0);
   const t = useTranslations("ProjectDetails_Floor");
   const o = useTranslations("ProjectDetails_Overview");
+  const e = useTranslations("Error");
 
   const fetchFloors = async () => {
     try {
@@ -46,7 +47,7 @@ export default function FloorList() {
       setFloors(floors.list);
       setCount(floors.totalPage);
     } catch (error) {
-      toast.error("Error: Floors");
+      toast.error(e("FloorsError"));
     }
   };
 

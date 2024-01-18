@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import {getAllInteriorItemCategories} from "/services/interiorItemCategoryServices";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 function Category(categoryDetails) {
   const item = categoryDetails.item;
@@ -59,6 +60,7 @@ export default function InteriorItemCategories() {
   const [userId, setUserId] = useState("A3C81D01-8CF6-46B7-84DF-DCF39EB7D4CF");
   const [loading, setLoading] = useState(true);
   const initialized = useRef(false);
+  const e = useTranslations("Error");
 
   useEffect(() => {
     if (!initialized.current) {
@@ -70,7 +72,7 @@ export default function InteriorItemCategories() {
           setLoading(false);
         } catch (error) {
           console.error("Error fetching data:", error);
-          toast.error("Error fetching data");
+          toast.error(e("FetchDataError"));
         }
       };
       fetchDataFromApi();

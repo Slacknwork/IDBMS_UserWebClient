@@ -20,6 +20,7 @@ export default function Pricing() {
     slidesToScroll: 1,
   };
   const t = useTranslations("Home");
+  const e = useTranslations("Error");
   const params = useParams();
 
   const language =
@@ -36,7 +37,7 @@ export default function Pricing() {
       const data = await getAllRoomTypes({});
       setRoomTypes(data.list);
     } catch (error) {
-      toast.error("Error getting Room Type data!");
+      toast.error(e("ErrorGettingRoomType"));
       console.log(error);
     }
   };

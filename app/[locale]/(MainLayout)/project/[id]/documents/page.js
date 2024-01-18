@@ -11,13 +11,15 @@ import NavButton from "/components/Shared/NavButton";
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import { getDocumentsByProjectId } from "/services/projectDocumentServices";
-import projectDocumentCategory from "/constants/enums/projectDocumentCategory";
+import documentCategoryOptions, {documentCategoryOptionsEnglish} from "/constants/enums/projectDocumentCategory";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
 export default function DocumentsPage() {
   // CONSTANTS
   const o = useTranslations("ProjectDetails_Overview");
+  const t = useTranslations("ProjectDetails_Document");
+  const e = useTranslations("Error");
   const searchQuery = "search";
   const pageQuery = "page";
   const categoryQuery = "itemCategory";
@@ -64,7 +66,7 @@ export default function DocumentsPage() {
         setCount(response?.totalPage ?? 0);
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("Lỗi nạp dữ liệu 'Tài liệu' từ hệ thống");
+        toast.error(e("FetchDocumentError"));
       }
     };
     await Promise.all([fetchDocuments()]);
@@ -85,12 +87,12 @@ export default function DocumentsPage() {
           ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
-          <h3 className="my-auto">Documents</h3>
+          <h3 className="my-auto">{t("Documents")}</h3>
         </div>
       </div>
       <div className="row">
         <div className="col col-lg-6 col-12 mb-4">
-          <Search placeholder="Search Documents..."></Search>
+          <Search placeholder={t("SearchDocuments")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
@@ -103,11 +105,13 @@ export default function DocumentsPage() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {/* {projectDocumentCategory.map((category) => (
-                      <option value={category.id} key={category.id}>
-                        {category.name}
+                    {documentCategoryOptions.map((status, index) => (
+                      <option key={status} value={index}>
+                        {language === "english"
+                          ? documentCategoryOptionsEnglish[index]
+                          : status}
                       </option>
-                    ))} */}
+                    ))}
                   </select>
                 </div>
               </div>
@@ -131,13 +135,12 @@ export default function DocumentsPage() {
           >
             <tr>
               <th scope="col" style={{ width: "12rem" }}>
-                Name
+              {t("Name")}
               </th>
-              <th scope="col">Description</th>
-              <th scope="col">Category</th>
-              <th scope="col">Created Date</th>
+              <th scope="col">{t("Description")}</th>
+              <th scope="col">{t("Category")}</th>
+              <th scope="col">{t("CreatedDate")}</th>
               <th scope="col" style={{ width: "10rem" }}>
-                Actions
               </th>
             </tr>
           </thead>
@@ -147,22 +150,24 @@ export default function DocumentsPage() {
                 <td className="align-middle">{document?.name}</td>
                 <td className="align-middle">{document?.description}</td>
                 <td className="align-middle">
-                  {projectDocumentCategory[document?.category] ??
-                    "Không xác định"}
+                {language === "english"
+                    ? documentCategoryOptionsEnglish[document?.category]
+                    : documentCategoryOptions[document?.category]
+                }
                 </td>
                 <td className="align-middle">
                   {document.createdDate
                     ? moment(document.createdDate).format("L")
                     : "Chưa xác định"}
                 </td>
-                <td className="align-middle m-0">Tải</td>
+                <td className="align-middle m-0">{t("Download")}</td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
         <Stack sx={{ height: "30rem" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoDocument")}</p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

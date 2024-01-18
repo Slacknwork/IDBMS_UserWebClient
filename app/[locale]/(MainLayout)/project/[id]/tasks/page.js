@@ -484,8 +484,8 @@ export default function ProjectTasks() {
                             ).toLocaleString(params.locale)}{" "}
                         </td>
                         <td className="align-middle">
-                          {task.startDate
-                            ? moment(task.startDate).format("L")
+                          {task.startedDate
+                            ? moment(task.startedDate).format("L")
                             : t("Undefined")}
                         </td>
                         <td

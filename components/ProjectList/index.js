@@ -68,7 +68,7 @@ export default function ProjectList() {
         userId: user.id,
       });
     } catch (error) {
-      toast.error("Lỗi dữ liệu: Trạng thái dự án!");
+      toast.error(e("ProjectStatusError"));
     }
   };
 

@@ -7,6 +7,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { CircularProgress, Stack } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { FaPlus } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 import {
   getCommentsByProjectTaskId,
@@ -39,6 +40,8 @@ export default function TaskCommentsPage() {
   const params = useParams();
   const searchParams = useSearchParams();
   const user = useSelector((state) => state.customer);
+  const t = useTranslations("ProjectDetails_Comment");
+  const e = useTranslations("Error");
 
   const [comment, setComment] = useState("");
   const onCommentChange = (e) => {
@@ -86,7 +89,7 @@ export default function TaskCommentsPage() {
       });
       setComments(comments.list);
     } catch (error) {
-      toast.error("Error: Comments!");
+      toast.error(e("ErrorComment"));
     }
   };
 
@@ -107,10 +110,10 @@ export default function TaskCommentsPage() {
         content: comment,
         file: selectedFile,
       });
-      toast.success("Created Comment successfully!");
+      toast.success(t("CreatedCommentSuccessfully"));
       await fetchData();
     } catch (error) {
-      toast.error("Error: Create Comment!");
+      toast.error(e("ErrorComment"));
     }
   };
 
@@ -124,14 +127,14 @@ export default function TaskCommentsPage() {
         <div className="col col-lg-12 col-12">
           <div className="review">
             <div className="add-review-sec">
-              <h3 style={{ fontSize: 24 }}>Add a Comment</h3>
+              <h3 style={{ fontSize: 24 }}>{t("AddComment")}</h3>
               <div className="form-field">
                 <textarea
                   style={{ color: "black", height: "8rem" }}
                   name="comment"
                   value={comment}
                   onChange={onCommentChange}
-                  placeholder="Your Comment..."
+                  placeholder={t("YourComment")}
                 ></textarea>
               </div>
               <div className="form-submit d-flex justify-content-end">
@@ -141,7 +144,7 @@ export default function TaskCommentsPage() {
                     className="theme-btn px-4 py-2"
                     onClick={handleOpenConfirmModal}
                   >
-                    Submit
+                    {t("Submit")}
                   </button>
                   <Modal
                     isOpen={isModalConfirmOpen}
@@ -149,24 +152,24 @@ export default function TaskCommentsPage() {
                     centered
                   >
                     <ModalHeader toggle={handleCloseConfirmModal}>
-                      Confirm Submission
+                    {t("ConfirmSubmission")}
                     </ModalHeader>
                     <ModalBody>
-                      <p>Are you sure you want to submit the comment?</p>
+                      <p>{t("AreYouSure")}</p>
                     </ModalBody>
                     <ModalFooter>
                       <button
                         className="theme-btn-s2 px-4 py-2"
                         onClick={handleCloseConfirmModal}
                       >
-                        Cancel
+                        {t("Cancel")}
                       </button>
                       <div className="d-flex">
                         <button
                           className="theme-btn px-4 py-2 rounded-0"
                           onClick={handleSubmitComment}
                         >
-                          Submit
+                          {t("Submit")}
                         </button>
                       </div>
                     </ModalFooter>
@@ -175,7 +178,7 @@ export default function TaskCommentsPage() {
               </div>
             </div>
             <div className="review-section mt-4" style={{ minHeight: "30rem" }}>
-              <h3>Comments</h3>
+              <h3>{t("Comment")}</h3>
               {loading ? (
                 <Stack sx={{ height: "30rem" }}>
                   <CircularProgress
@@ -218,7 +221,7 @@ export default function TaskCommentsPage() {
               ) : (
                 <Stack sx={{ height: "30rem" }}>
                   <p style={{ margin: "auto", textAlign: "center" }}>
-                    No data.
+                  {t("NoComment")}
                   </p>
                 </Stack>
               )}

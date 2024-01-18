@@ -69,7 +69,7 @@ export default function ItemsPage() {
       setItems(response?.list ?? []);
       setCount(response?.totalPage ?? 0);
     } catch (error) {
-      toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      toast.error(e("FetchError"));
     }
   };
   const fetchDataFromApi = async () => {
@@ -106,7 +106,7 @@ export default function ItemsPage() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12 mb-3">
-          <h3 style={{ fontSize: 24 }}>Items</h3>
+          <h3 style={{ fontSize: 24 }}>{t("Items")}</h3>
         </div>
       </div>
       <div className="row">
@@ -241,7 +241,7 @@ export default function ItemsPage() {
             </table>
           ) : (
             <Stack sx={{ height: "100%" }}>
-              <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+              <p style={{ margin: "auto", textAlign: "center" }}>{t("NoItem")}</p>
             </Stack>
           )}
           <Pagination count={count}></Pagination>

@@ -87,7 +87,7 @@ const getCommentsById = async (id) => {
 
 const createComment = async (projectId, request) => {
   try {
-    const token = store.getState().customer?.token ?? "";
+    const token = store.getState().user?.token ?? ""
     const formData = new FormData();
 
     Object.keys(request).forEach((key) => {
@@ -95,9 +95,9 @@ const createComment = async (projectId, request) => {
         formData.append(key, request[key]);
       }
     });
-    const url = `${endpoint}?projectId=${projectId}`;
+    const url = `${endpoint}`;
     const response = await fetchData({
-      url,
+      url: `${url}${projectId ? "?projectId=" + projectId : ""}`,
       method: "POST",
       token,
       body: formData,

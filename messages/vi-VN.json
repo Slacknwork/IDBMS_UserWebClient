@@ -66,7 +66,8 @@
     "FormPhone": "Số điện thoại",
     "FormAddress": "Địa chỉ",
     "FormMessage": "Tin nhắn",
-    "FormSubmit": "Gửi"
+    "FormSubmit": "Gửi",
+    "SubmitSuccessfully":"Gửi yêu cầu thành công!"
   },
   "InteriorItems": {
     "Price": "Giá",
@@ -237,8 +238,8 @@
     "Overview": "Tổng quan",
     "Progress": "Tiến độ",
     "Projects": "Dự án",
-    "Booking": "Đặt chỗ Dự án",
-    "Details": "Chi tiết Dự án",
+    "Booking": "Đặt chỗ dự án",
+    "Details": "Chi tiết dự án",
     "Name": "Tên",
     "CompanyName": "Tên Công ty",
     "CompanyAddress": "Địa chỉ Công ty",
@@ -272,7 +273,9 @@
     "Ended": "Kết thúc"
   },
   "ProjectDetails_Comment": {
+    "Comment":"Bình luận",
     "Content": "Nội dung",
+    "SearchComment":"Tìm bình luận...",
     "Details": "Chi tiết Bình luận",
     "ProjectTaskId": "ID Nhiệm vụ Dự án",
     "ProjectId": "ID Dự án",
@@ -281,9 +284,18 @@
     "CreatedTime": "Thời gian tạo",
     "LastModifiedTime": "Thời gian chỉnh sửa cuối cùng",
     "Status": "Trạng thái",
-    "IsDeleted": "Đã xóa"
+    "IsDeleted": "Đã xóa",
+    "CreatedCommentSuccessfully":"Đăng bình luận thành công!",
+    "AddComment":"Thêm bình luận",
+    "YourComment":"Bình luận của bạn...",
+    "Submit":"Gửi",
+    "ConfirmSubmission":"Xác nhận gửi",
+    "AreYouSure":"Bạn có chắc chắn muốn gửi bình luận?",
+    "Cancel":"Hủy",
+    "NoComment":"Không có bình luận."
   },
   "ProjectDetails_Item": {
+    "Items":"Đồ dùng",
     "Code": "Mã",
     "Name": "Tên",
     "SearchItems": "Tìm đồ dùng...",
@@ -304,9 +316,12 @@
     "InteriorItemCategoryId": "Danh mục Vật phẩm nội thất",
     "Status": "Trạng thái",
     "IsDeleted": "Đã xóa",
-    "ParentItemId": "ID Vật phẩm cha"
+    "ParentItemId": "ID Vật phẩm cha",
+    "NoItem":"Không có đồ dùng."
   },
   "ProjectDetails_Document": {
+    "Documents":"Tài liệu",
+    "SearchDocuments":"Tìm tài liệu...",
     "Name": "Tên",
     "Details": "Chi tiết Tài liệu",
     "Description": "Mô tả",
@@ -316,7 +331,9 @@
     "ProjectId": "ID Dự án",
     "ProjectDocumentTemplateId": "ID Mẫu tài liệu Dự án",
     "IsPublicAdvertisement": "Quảng cáo công khai",
-    "IsDeleted": "Đã xóa"
+    "Download":"Tải",
+    "IsDeleted": "Đã xóa",
+    "NoDocument":"Không có tài liệu."
   },
   "ProjectDetails_Payment": {
     "Name": "Tên",
@@ -338,11 +355,38 @@
     "IsHidden": "Ẩn đi"
   },
   "ProjectDetails_Participation": {
+    "Participants":"Thành viên",
+    "SearchName":"Tìm theo tên...",
+    "Name": "Tên",
     "UserId": "ID Người dùng",
-    "Details": "Chi tiết Tham gia",
+    "Details": "Chi tiết",
     "ProjectId": "ID Dự án",
     "Role": "Vai trò",
+    "ProjectManager":"Quản lý dự án",
+    "Delete":"Xóa",
     "IsDeleted": "Đã xóa"
+  },
+  "ProjectDetails_Transaction": {
+    "Transactions":"Thanh toán",
+    "SearchPayerName":"Tìm theo tên người trả...",
+    "Type": "Kiểu thanh toán",
+    "Amount": "Số tiền",
+    "CreatedDate": "Ngày tạo",
+    "PayerName": "Người trả",
+    "Status": "Trạng thái",
+    "DownloadInvoice":"Tải hóa đơn",
+    "NoTransaction":"Không có thanh toán."
+  },
+  "ProjectDetails_Warranty": {
+    "WarrantyClaims":"Bảo hiểm",
+    "SearchName":"Tìm theo tên...",
+    "Name": "Tên",
+    "Amount": "Số tiền",
+    "CoverBy": "Trả bởi",
+    "CreatedDate": "Ngày tạo",
+    "EndDate": "Ngày kết thúc",
+    "Download":"Tải",
+    "NoWarranty":"Không có bảo hiểm."
   },
   "ProjectDetail_Site": {
     "Name": "Tên",
@@ -411,7 +455,7 @@
     "Description": "Mô tả",
     "Percentage": "Phần trăm",
     "CalculationUnit": "Đơn vị tính",
-    "PricePerUnit": "Giá per đơn vị",
+    "PricePerUnit": "Giá mỗi đơn vị",
     "UnitInContract": "Số đơn vị trong hợp đồng",
     "UnitUsed": "Số đơn vị đã sử dụng",
     "IsIncurred": "Có phát sinh",
@@ -428,7 +472,7 @@
     "TaskDesignId": "ID Thiết kế Nhiệm vụ",
     "RoomId": "ID Phòng",
     "Status": "Trạng thái",
-    "No": "Số giai đoạn",
+    "No": "Không có giai đoạn",
     "NonArchitect": "Không phải kiến trúc",
     "Category": "Phân loại",
     "Price": "Giá tiền",
@@ -439,15 +483,20 @@
     "NoData": "không có dữ liệu"
   },
   "ProjectDetails_TaskReport": {
+    "TaskReports": "Báo cáo",
     "Name": "Tên",
-    "Details": "Chi tiết Báo cáo Nhiệm vụ",
+    "Details": "Chi tiết",
+    "SearchReport": "Tìm báo cáo...",
+    "CreatedDate":"Ngày tạo",
+    "UnitsUsed":"KL đã thực hiện",
     "CalculationUnit": "Đơn vị tính",
     "UnitUsed": "Số đơn vị đã sử dụng",
     "Description": "Mô tả",
     "CreatedTime": "Thời gian tạo",
     "UpdatedTime": "Thời gian cập nhật",
     "ProjectTaskId": "ID Nhiệm vụ Dự án",
-    "IsDeleted": "Đã xóa"
+    "IsDeleted": "Đã xóa",
+    "NoTaskReport":"Không có báo cáo."
   },
   "ProjectDetails_TaskDocument": {
     "Name": "Tên",
@@ -458,8 +507,8 @@
     "IsDeleted": "Đã xóa"
   },
   "ProjectDetails_Suggestion": {
-    "Booking": "Đặt chỗ Dự án",
-    "Details": "Chi tiết Dự án",
+    "Booking": "Đặt chỗ dự án",
+    "Details": "Chi tiết dự án",
     "Name": "Tên",
     "CompanyName": "Tên Công ty",
     "CompanyAddress": "Địa chỉ Công ty",
@@ -517,8 +566,8 @@
     "ParentItemId": "Vật phẩm cha"
   },
   "AdvertisementProjectList": {
-    "Booking": "Đặt chỗ Dự án",
-    "Details": "Chi tiết Dự án",
+    "Booking": "Đặt chỗ dự án",
+    "Details": "Chi tiết dự án",
     "Name": "Tên",
     "CompanyName": "Tên Công ty",
     "CompanyAddress": "Địa chỉ Công ty",
@@ -538,8 +587,8 @@
     "AdminNote": "Ghi chú của quản trị viên"
   },
   "AdvertisementProjectDetails": {
-    "Booking": "Đặt chỗ Dự án",
-    "Details": "Chi tiết Dự án",
+    "Booking": "Đặt chỗ dự án",
+    "Details": "Chi tiết dự án",
     "Name": "Tên",
     "CompanyName": "Tên Công ty",
     "CompanyAddress": "Địa chỉ Công ty",
@@ -594,10 +643,21 @@
   "Error": {
     "TaskCategoryError": "Lỗi dữ liệu: Phân loại công việc!",
     "TasksError": "Lỗi dữ liệu: Công việc!",
+    "ItemsError": "Lỗi dữ liệu: Đồ dùng!",
+    "ItemCategoriesError": "Lỗi dữ liệu: Loại đồ dùng!",
+    "FloorsError": "Lỗi dữ liệu: Tầng!",
+    "RoomsError": "Lỗi dữ liệu: Phòng!",
+    "FloorDetailsError": "Lỗi dữ liệu: Chi tiết tầng!",
     "ParticipationsError": "Lỗi dữ liệu: Dự án tham gia!",
     "ProjectsError": "Lỗi dữ liệu: Dự án!",
+    "ProjectStatusError": "Lỗi dữ liệu: Trạng thái dự án!",
+    "StagesError": "Lỗi dữ liệu: Giai đoạn!",
     "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
-    "FetchDataError": "Lỗi nạp dữ liệu:",
+    "FetchDocumentError":"Lỗi nạp dữ liệu 'Tài liệu' từ hệ thống",
+    "FetchParticipationError":"Lỗi nạp dữ liệu 'Thành viên' từ hệ thống",
+    "FetchTransactionError":"Lỗi nạp dữ liệu 'Thanh Toán' từ hệ thống",
+    "FetchWarrantyError":"Lỗi nạp dữ liệu 'Bảo hiểm' từ hệ thống",
+    "FetchDataError": "Lỗi nạp dữ liệu",
     "InvalidEmail":"Định dạng không hợp lệ cho email",
     "InvalidPhone":"Định dạng không hợp lệ cho số điện thoại",
     "RequirePassword":"Cần có mật khẩu!",
@@ -607,6 +667,10 @@
     "LoginError":"Lỗi đăng nhập!",
     "RegistrationFailed":"Đăng ký thất bại!",
     "RegistrationError":"Lỗi đăng ký!",
-    "FixValidation":"Vui lòng điền lại thông tin trước khi gửi."
+    "FixValidation":"Vui lòng điền lại thông tin trước khi gửi.",
+    "ErrorComment":"Lỗi tạo bình luận!",
+    "ErrorGettingRoomType":"Lỗi không lấy được dữ liệu loại phòng!",
+    "ErrorLoadingProjects":"Lỗi tải dự án!",
+    "SubmitFalied":"Lỗi gửi yêu cầu!"
   }
 }

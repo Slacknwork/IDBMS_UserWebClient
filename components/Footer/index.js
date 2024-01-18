@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 export default function Footer(props) {
   const [projects, setProjects] = useState([]);
   const t = useTranslations("Footer");
+  const e = useTranslations("Error");
 
   const fetchProjects = async () => {
     try {
@@ -18,7 +19,7 @@ export default function Footer(props) {
       });
       setProjects(projectResponse.list);
     } catch (error) {
-      toast.error("Error loading projects!");
+      toast.error(e("ErrorLoadingProjects"));
       console.log(error);
     }
   };

@@ -37,6 +37,7 @@ export default function PaymentStagesPage() {
   const [count, setCount] = useState(0);
   const t = useTranslations("ProjectDetails_Stage");
   const o = useTranslations("ProjectDetails_Overview");
+  const e = useTranslations("Error");
 
   const fetchStages = async () => {
     try {
@@ -51,7 +52,7 @@ export default function PaymentStagesPage() {
       setCount(stages.totalPage);
       setStages(stages.list);
     } catch (error) {
-      toast.error("Error: Stages");
+      toast.error(e("StagesError"));
     }
   };
 

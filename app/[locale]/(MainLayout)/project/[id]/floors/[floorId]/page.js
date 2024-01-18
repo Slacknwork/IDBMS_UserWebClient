@@ -31,6 +31,7 @@ export default function FloorDetails() {
   const [count, setCount] = useState(0);
   const t = useTranslations("ProjectDetails_Floor");
   const r = useTranslations("ProjectDetails_Room");
+  const e = useTranslations("Error");
 
   const fetchFloor = async () => {
     try {
@@ -40,7 +41,7 @@ export default function FloorDetails() {
       });
       setFloor(floor);
     } catch (error) {
-      toast.error("Error: Floor Details");
+      toast.error(e("FloorDetailsError"));
     }
   };
 
@@ -60,7 +61,7 @@ export default function FloorDetails() {
       setRooms(rooms.list);
       setCount(rooms.totalPage);
     } catch (error) {
-      toast.error("Error: Rooms");
+      toast.error(e("RoomsError"));
     }
   };
 
