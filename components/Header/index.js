@@ -107,7 +107,7 @@ const Header = (props) => {
                       sx={{ width: 18, height: 18 }}
                       src={
                         languageTypeChipImages[
-                          languageLocaleIndex[params.locale]
+                        languageLocaleIndex[params.locale]
                         ]
                       }
                     />
@@ -135,9 +135,8 @@ const Header = (props) => {
                         onClick={() => openMenu(!menuActive)}
                       ></HiUserCircle>
                       <div
-                        className={`header-right-menu-wrap ${
-                          menuActive ? "right-menu-active" : ""
-                        }`}
+                        className={`header-right-menu-wrap ${menuActive ? "right-menu-active" : ""
+                          }`}
                       >
                         <button
                           onClick={() => openMenu(!menuActive)}
@@ -148,6 +147,13 @@ const Header = (props) => {
                         <h4 className="text-white mb-4">
                           Welcome, {user.username}
                         </h4>
+
+                        <h4 className="text-white mb-4">
+                          <Link href="/bookmark">
+                            Bookmarks
+                          </Link>
+                        </h4>
+
                         <Link onClick={() => dispatch(logout())} href="/login">
                           Logout
                         </Link>

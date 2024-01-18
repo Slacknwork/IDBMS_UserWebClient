@@ -71,8 +71,9 @@
   "InteriorItems": {
     "Price": "Giá",
     "Filter": "Lọc đồ",
-    "Cart": "Thêm vào giỏ hàng",
-    "Search": "Tìm đồ..",
+    "Save": "Thêm vào mục yêu thích",
+    "Remove": "Xóa khỏi mục yêu thích",
+    "Search": "Tìm theo tên..",
     "Category": "Phân loại",
     "Architecture": "Kiến trúc"
   },
@@ -260,6 +261,8 @@
     "Category": "Phân loại",
     "Created": "Được tạo",
     "LastUpdated": "Lần cuối cập nhật",
+    "VAT": "VAT",
+    "TotalIncludeVAT": "Tổng cộng (gồm VAT)",
     "AmountPaid": "Số tiền đã thanh toán",
     "TotalArea": "Tổng diện tích",
     "EstimateWorkingDays": "Ước tính ngày làm việc",

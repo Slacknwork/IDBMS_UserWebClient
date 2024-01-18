@@ -71,8 +71,9 @@
   "InteriorItems": {
     "Price": "Price",
     "Filter": "Filter Items",
-    "Cart": "Add to cart",
-    "Search": "Search Item..",
+    "Save": "Add to Favorite",
+    "Remove": "Remove from Favorite",
+    "Search": "Search by name..",
     "Category": "Category",
     "Architecture": "Architecture"
   },
@@ -260,6 +261,8 @@
     "Category": "Category",
     "Created": "Created",
     "LastUpdated": "Last Updated",
+    "VAT": "VAT",
+    "TotalIncludeVAT": "Total include VAT",
     "AmountPaid": "Amount Paid",
     "TotalArea": "Total area",
     "EstimateWorkingDays": "Estimate working days",

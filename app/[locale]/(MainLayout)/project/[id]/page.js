@@ -5,11 +5,11 @@ import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Chip, CircularProgress, Stack } from "@mui/material";
 
-import languageOptions, {languageOptionsEnglish} from "/constants/enums/language";
+import languageOptions, { languageOptionsEnglish } from "/constants/enums/language";
 import projectTypeOptions from "/constants/enums/projectType";
-import {projectTypeOptionsEnglish} from "/constants/enums/projectType";
+import { projectTypeOptionsEnglish } from "/constants/enums/projectType";
 import projectStatusOptions from "/constants/enums/projectStatus";
-import {projectStatusOptionsEnglish} from "/constants/enums/projectStatus";
+import { projectStatusOptionsEnglish } from "/constants/enums/projectStatus";
 
 import { getProjectById } from "/services/projectServices";
 import { useTranslations } from "next-intl";
@@ -85,13 +85,13 @@ export default function ProjectOverview() {
                             (() => {
                               if (language === "english") {
                                 return projectTypeOptionsEnglish[
-                                    project?.type
-                                  ]
-                                ;
+                                  project?.type
+                                ]
+                                  ;
                               } else if (language === "vietnamese") {
                                 return projectTypeOptions[
-                                    project?.type
-                                  ]
+                                  project?.type
+                                ]
                               } else {
                                 return '';
                               }
@@ -109,47 +109,47 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                  {t("Category")}:{" "}
+                                    {t("Category")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {
                                         (() => {
-                                        if (language === "english") {
-                                        return project?.projectCategory?.englishName;
-                                        } else if (language === "vietnamese") {
-                                        return project?.projectCategory?.name;
-                                        }
+                                          if (language === "english") {
+                                            return project?.projectCategory?.englishName;
+                                          } else if (language === "vietnamese") {
+                                            return project?.projectCategory?.name;
+                                          }
                                         })()
                                       }
                                     </span>
                                   </li>
                                   <li>
-                                  {t("Language")}:{" "}
+                                    {t("Language")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {
                                         (() => {
-                                        if (language === "english") {
-                                        return languageOptionsEnglish[project?.language ?? 0];
-                                        } else if (language === "vietnamese") {
-                                        return languageOptions[project?.language ?? 0];
-                                        }
+                                          if (language === "english") {
+                                            return languageOptionsEnglish[project?.language ?? 0];
+                                          } else if (language === "vietnamese") {
+                                            return languageOptions[project?.language ?? 0];
+                                          }
                                         })()
                                       }
                                     </span>
                                   </li>
                                   <li>
-                                  {t("Status")}:{" "}
+                                    {t("Status")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {
                                         (() => {
                                           if (language === "english") {
                                             return projectStatusOptionsEnglish[
-                                                project?.status ?? 0
-                                              ]
-                                            ;
+                                              project?.status ?? 0
+                                            ]
+                                              ;
                                           } else if (language === "vietnamese") {
                                             return projectStatusOptions[
-                                                project?.status ?? 0
-                                              ]
+                                              project?.status ?? 0
+                                            ]
                                           } else {
                                             return '';
                                           }
@@ -162,7 +162,7 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                  {t("Created")}:{" "}
+                                    {t("Created")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {new Date(
                                         project?.createdDate
@@ -170,7 +170,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                  {t("LastUpdated")}:{" "}
+                                    {t("LastUpdated")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {new Date(
                                         project?.createdDate
@@ -186,7 +186,7 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                  {t("EstimatedPrice")}:{" "}
+                                    {t("EstimatedPrice")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.estimatedPrice?.toLocaleString(
                                         "vi-VN"
@@ -195,7 +195,7 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                  {t("FinalPrice")}:{" "}
+                                    {t("FinalPrice")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.finalPrice?.toLocaleString(
                                         "vi-VN"
@@ -204,18 +204,18 @@ export default function ProjectOverview() {
                                     </span>
                                   </li>
                                   <li>
-                                  {t("TotalWarrantyPaid")}:{" "}
+                                    {t("VAT") + " (10%)"}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
-                                      {project?.totalWarrantyPaid?.toLocaleString(
+                                      {(project?.finalPrice * 0.1 ?? 0).toLocaleString(
                                         "vi-VN"
                                       )}{" "}
                                       VND
                                     </span>
                                   </li>
                                   <li>
-                                  {t("AmountPaid")}:{" "}
+                                    {t("TotalIncludeVAT")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
-                                      {project?.amountPaid?.toLocaleString(
+                                      {(project?.finalPrice * 0.1 + project?.finalPrice ?? 0).toLocaleString(
                                         "vi-VN"
                                       )}{" "}
                                       VND
@@ -226,15 +226,33 @@ export default function ProjectOverview() {
                               <div className="col-lg-6">
                                 <ul>
                                   <li>
-                                  {t("TotalArea")}:{" "}
+                                    {t("TotalArea")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.area ?? 0} m<sup>2</sup>
                                     </span>
                                   </li>
                                   <li>
-                                  {t("EstimateWorkingDays")}:{" "}
+                                    {t("EstimateWorkingDays")}:{" "}
                                     <span style={{ fontWeight: 1000 }}>
                                       {project?.estimateBusinessDay ?? 0} {t("Days")}
+                                    </span>
+                                  </li>
+                                  <li>
+                                    {t("TotalWarrantyPaid")}:{" "}
+                                    <span style={{ fontWeight: 1000 }}>
+                                      {project?.totalWarrantyPaid?.toLocaleString(
+                                        "vi-VN"
+                                      )}{" "}
+                                      VND
+                                    </span>
+                                  </li>
+                                  <li>
+                                    {t("AmountPaid")}:{" "}
+                                    <span style={{ fontWeight: 1000 }}>
+                                      {project?.amountPaid?.toLocaleString(
+                                        "vi-VN"
+                                      )}{" "}
+                                      VND
                                     </span>
                                   </li>
                                 </ul>
@@ -251,17 +269,17 @@ export default function ProjectOverview() {
                       >
                         <ul>
                           <li>
-                          {t("Site")}:{" "}
+                            {t("Site")}:{" "}
                             <span>{project?.site?.name ?? "N/A"}</span>
                           </li>
                           <li>
-                          {t("Address")}:{" "}
+                            {t("Address")}:{" "}
                             <span>
                               {project?.site?.address ?? "N/A"}
                             </span>
                           </li>
                           <li>
-                          {t("Description")}:{" "}
+                            {t("Description")}:{" "}
                             <span>{project?.site?.description ?? "N/A"}</span>
                           </li>
                         </ul>
