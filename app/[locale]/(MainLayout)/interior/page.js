@@ -19,6 +19,8 @@ import { getAllInteriorItemCategories } from "/services/interiorItemCategoryServ
 
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
+import { createInteriorItemBookmark } from "/services/bookmarkServices";
+import { useSelector } from "react-redux";
 
 const theme = createTheme({
   palette: {
@@ -28,7 +30,7 @@ const theme = createTheme({
   },
 });
 
-export default function InteriorItemsPage() {
+export default function InteriorItemsPage({ success }) {
   // CONSTANTS
   const searchQuery = "search";
   const pageQuery = "page";
@@ -46,13 +48,14 @@ export default function InteriorItemsPage() {
   const [categories, setCategories] = useState([]);
   const [count, setCount] = useState(0);
   const params = useParams();
+  const user = useSelector((state) => state.customer);
 
   const language =
     params?.locale === "en-US"
       ? "english"
       : params?.locale === "vi-VN"
-      ? "vietnamese"
-      : "";
+        ? "vietnamese"
+        : "";
   const fetchItems = async () => {
     try {
       const search = searchParams.get(searchQuery) ?? "";
@@ -90,6 +93,18 @@ export default function InteriorItemsPage() {
   useEffect(() => {
     fetchData();
   }, [searchParams]);
+
+  const handleCreateBookmark = async (itemId) => {
+    try {
+      const response = await createInteriorItemBookmark({ userId: user.id, interiorItemId: itemId });
+      toast.success("Thêm thành công!");
+      console.log(response);
+      // success(true);
+    } catch (error) {
+      console.error("Error :", error);
+      toast.error("Lỗi!");
+    }
+  };
 
   return (
     <div className="container wpo-shop-section my-4">
@@ -134,10 +149,10 @@ export default function InteriorItemsPage() {
                         }}
                       >
                         <h2 style={{ fontSize: "19px" }}>
-                        {language === "english"
-                          ? (item && item.englishName) ?? (item && item.name)
-                          : item && item.name
-                        }
+                          {language === "english"
+                            ? (item && item.englishName) ?? (item && item.name)
+                            : item && item.name
+                          }
                         </h2>
                       </div>
                     </div>
@@ -187,10 +202,10 @@ export default function InteriorItemsPage() {
                 <div className="details">
                   <h3 style={{ height: "55px", overflowY: "auto" }}>
                     <Link href={`/interior/${item.id}`}>
-                    {language === "english"
-                      ? (item && item.englishName) ?? (item && item.name)
-                      : item && item.name
-                    }
+                      {language === "english"
+                        ? (item && item.englishName) ?? (item && item.name)
+                        : item && item.name
+                      }
                     </Link>
                   </h3>
                   <div className="price">
@@ -205,8 +220,9 @@ export default function InteriorItemsPage() {
                       data-bs-toggle="tooltip"
                       data-bs-html="true"
                       title="Add to Cart"
+                      onClick={() => handleCreateBookmark(item.id)}
                     >
-                      {t("Cart")}
+                      {t("Save")}
                     </button>
                   </div>
                 </div>

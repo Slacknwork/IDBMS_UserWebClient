@@ -1,4 +1,5 @@
 import { fetchData } from "/utils/api";
+import { store } from "/store";
 
 const endpoint = "/InteriorItemBookmarks";
 const getAllInteriorItemBookmarks = async () => {
@@ -18,10 +19,16 @@ const getAllInteriorItemBookmarks = async () => {
   }
 };
 
-const getInteriorItemBookmarksByUserId = async (userId) => {
+const getInteriorItemBookmarksByUserId = async ({
+  userId = "",
+  name = "",
+  page = "",
+  pageSize = "",
+} = {}) => {
   try {
     const token = store.getState().customer?.token ?? "";
-    const url = `${endpoint}/user/${userId}`;
+
+    const url = `${endpoint}/user/${userId}?name=${name}&pageSize=${pageSize}&pageNo=${page}`;
     const response = await fetchData({
       url,
       method: "GET",
@@ -38,6 +45,7 @@ const getInteriorItemBookmarksByUserId = async (userId) => {
 const createInteriorItemBookmark = async (request) => {
   try {
     const token = store.getState().customer?.token ?? "";
+    console.log(request)
     const url = `${endpoint}`;
     const response = await fetchData({
       url,
