@@ -10,7 +10,7 @@ import { getParticipationsByUserId } from "/services/projectParticipationService
 import { getProjectStatusByUserId } from "/services/projectServices";
 
 import projectStatusOptions from "/constants/enums/projectStatus";
-import {projectStatusOptionsEnglish} from "/constants/enums/projectStatus";
+import { projectStatusOptionsEnglish } from "/constants/enums/projectStatus";
 
 import Search from "/components/Shared/Search";
 import { useTranslations } from "next-intl";
@@ -46,6 +46,7 @@ export default function ProjectList() {
   // FETCH DATA
   const [loading, setLoading] = useState(true);
   const [participations, setParticipations] = useState([]);
+  const [count, setCount] = useState(0);
 
   const fetchParticipations = async () => {
     try {
@@ -56,17 +57,22 @@ export default function ProjectList() {
         search,
         status,
       });
+      setCount(participations?.totalItem)
       setParticipations(participations.list);
     } catch (error) {
       toast.error(e("ParticipationsError"));
     }
   };
 
+  const [projectStatusCount, setProjectStatusCount] = useState({})
+
   const fetchProjectStatusCount = async () => {
     try {
       const projectStatusCount = await getProjectStatusByUserId({
         userId: user.id,
       });
+      console.log(projectStatusCount)
+      setProjectStatusCount(projectStatusCount)
     } catch (error) {
       toast.error(e("ProjectStatusError"));
     }
@@ -79,7 +85,6 @@ export default function ProjectList() {
   };
 
   useEffect(() => {
-    console.log(projectStatusOptionsEnglish)
     fetchData();
   }, [searchParams]);
 
@@ -97,50 +102,50 @@ export default function ProjectList() {
                 <ul>
                   <li>
                     <a onClick={() => setStatus(0)}>
-                    {t("All")}
-                      <span>0</span>
+                      {t("All")}
+                      <span>{count}</span>
                     </a>
                   </li>
-                  { 
-                      (() => {
-                        if (language === "english") {
-                          return projectStatusOptionsEnglish.map(
-                            (status, index) =>
-                              index > 1 && (
-                                <li key={status}>
-                                  <a onClick={() => setStatus(index)}>
-                                    {status}
-                                    <span>{index}</span>
-                                  </a>
-                                </li>
-                              )
-                          );
-                        } else if (language === "vietnamese") {
-                          return projectStatusOptions.map(
-                            (status, index) =>
-                              index > 1 && (
-                                <li key={status}>
-                                  <a onClick={() => setStatus(index)}>
-                                    {status}
-                                    <span>{index}</span>
-                                  </a>
-                                </li>
-                              )
-                          )
-                        } else {
-                          return '';
-                        }
-                      })()
-                    }
-                  
+                  {
+                    (() => {
+                      if (language === "english") {
+                        return projectStatusOptionsEnglish.map(
+                          (status, index) =>
+                            index > 1 && (
+                              <li key={status}>
+                                <a onClick={() => setStatus(index)}>
+                                  {status}
+                                  <span>{projectStatusCount[projectStatusOptionsEnglish[index]]}</span>
+                                </a>
+                              </li>
+                            )
+                        );
+                      } else if (language === "vietnamese") {
+                        return projectStatusOptions.map(
+                          (status, index) =>
+                            index > 1 && (
+                              <li key={status}>
+                                <a onClick={() => setStatus(index)}>
+                                  {status}
+                                  <span>{index}</span>
+                                </a>
+                              </li>
+                            )
+                        )
+                      } else {
+                        return '';
+                      }
+                    })()
+                  }
+
                 </ul>
               </div>
               <div className="wpo-contact-widget widget">
                 <h2>
-                {t("ContactText1")} <br /> {t("ContactText2")}
+                  {t("ContactText1")} <br /> {t("ContactText2")}
                 </h2>
                 <p>
-                {t("ContactText3")}
+                  {t("ContactText3")}
                 </p>
                 <Link href="/contact">{t("ContactUs")}</Link>
               </div>

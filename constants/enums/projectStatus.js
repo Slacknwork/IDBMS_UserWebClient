@@ -17,8 +17,8 @@ const projectStatusOptionsEnglish = [
   "PendingDeposit",
   "Ongoing",
   "Suspended",
-  "Canceled",
-  "Warranty",
+  "Cancelled",
+  "WarrantyPending",
   "Done",
 ];
 
