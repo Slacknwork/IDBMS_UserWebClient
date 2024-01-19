@@ -9,7 +9,7 @@ import SectionTitle2 from "/components/Shared/SectionTitle2";
 import bShape1 from "/public/images/blog/Vector3.png";
 import bShape2 from "/public/images/blog/Vector4.png";
 
-import projectTypeOptions, {projectTypeOptionsEnglish} from "/constants/enums/projectType";
+import projectTypeOptions, { projectTypeOptionsEnglish } from "/constants/enums/projectType";
 
 import { getAdvertisementProjects } from "/services/advertisementServices";
 import { useTranslations } from "next-intl";
@@ -25,8 +25,8 @@ export default function Projects() {
     params?.locale === "en-US"
       ? "english"
       : params?.locale === "vi-VN"
-      ? "vietnamese"
-      : "";
+        ? "vietnamese"
+        : "";
 
   const fetchProjects = async () => {
     try {
@@ -45,6 +45,13 @@ export default function Projects() {
     fetchProjects();
   }, []);
 
+  const truncateText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength) + '...';
+  };
+
   return (
     <section className="wpo-blog-section section-padding">
       <div className="container">
@@ -53,7 +60,7 @@ export default function Projects() {
           <div className="row">
             {projects.map((project) => (
               <div className="col col-lg-4 col-md-6 col-12" key={project.id}>
-                <div className="wpo-blog-item" style={{ height: 525 }}>
+                <div className="wpo-blog-item" style={{ height: 650 }}>
                   <div className="wpo-blog-img">
                     {project.representImageUrl && (
                       <Image
@@ -69,10 +76,10 @@ export default function Projects() {
                       />
                     )}
                     <div className="thumb">
-                    {language === "english"
-                      ? projectTypeOptionsEnglish[project.type]
-                      : projectTypeOptions[project.type]
-                    }
+                      {language === "english"
+                        ? projectTypeOptionsEnglish[project.type]
+                        : projectTypeOptions[project.type]
+                      }
                     </div>
                   </div>
                   <div className="wpo-blog-content">
@@ -85,10 +92,18 @@ export default function Projects() {
                     </ul>
                     <h2>
                       <Link href={`/project/demo/${project.id}`}>
-                        {project.name}
+                        {language === "english"
+                          ? project.englishName
+                          : project.name
+                        }
                       </Link>
                     </h2>
-                    <p>{project.description}</p>
+                    <p dangerouslySetInnerHTML={{
+                      __html: truncateText(language === 'english'
+                        ? project?.englishAdvertisementDescription ?? ''
+                        : project?.advertisementDescription ?? '',
+                        370)
+                    }} />
                   </div>
                 </div>
               </div>

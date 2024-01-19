@@ -10,7 +10,7 @@ const getAdvertisementProjects = async ({
   pageSize = "",
 } = {}) => {
   try {
-    const url = `${endpoint}?name=${search}&status=${status}&type=${type}&pageNo=${page}&pageSize=${pageSize}`;
+    const url = `${endpoint}/public?name=${search}&status=${status}&type=${type}&pageNo=${page}&pageSize=${pageSize}`;
     const response = await fetchData({
       url,
       method: "GET",
