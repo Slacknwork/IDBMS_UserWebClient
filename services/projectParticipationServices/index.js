@@ -2,6 +2,26 @@ import { store } from "/store";
 import { fetchData } from "/utils/api";
 
 const endpoint = "/ProjectParticipations";
+const getProjectParticipation = async ({
+  projectId = "",
+  userId = "",
+} = {}) => {
+  try {
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}?userId=${userId}&projectId=${projectId}`;
+    const response = await fetchData({
+      url: `${url}`,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all project participations:", error);
+    throw error;
+  }
+};
+
 const getAllProjectParticipations = async ({
   role = "",
   search = "",
@@ -159,6 +179,7 @@ const deleteProjectParticipation = async (participationId) => {
 };
 
 export {
+  getProjectParticipation,
   getAllProjectParticipations,
   getParticipationsByUserId,
   getProjectParticipationInProjectByUserView,
