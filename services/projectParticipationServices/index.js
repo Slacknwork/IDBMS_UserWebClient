@@ -178,6 +178,46 @@ const deleteProjectParticipation = async (participationId) => {
   }
 };
 
+const getParticipationsUserView = async ({
+  projectId = "",
+  search = "",
+  page = "",
+  pageSize = "",
+} = {}) => {
+  try {
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/user-view`;
+    const response = await fetchData({
+      url,
+      method: "GET",
+      token,
+      body: null,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting project participation:", error);
+    throw error;
+  }
+};
+
+const createParticipationByEmail = async (email, projectId) => {
+  try {
+    const token = store.getState().customer?.token ?? "";
+    const url = `${endpoint}/addviewer?projectId=${projectId}`;
+    const response = await fetchData({
+      url,
+      method: "POST",
+      contentType: "application/json",
+      token,
+      body: JSON.stringify(email),
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting project participation:", error);
+    throw error;
+  }
+};
+
 export {
   getProjectParticipation,
   getAllProjectParticipations,
@@ -188,4 +228,6 @@ export {
   createEmployees,
   updateProjectParticipation,
   deleteProjectParticipation,
+  getParticipationsUserView,
+  createParticipationByEmail,
 };
