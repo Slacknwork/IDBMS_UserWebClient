@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useSearchParams } from "next/navigation";
-import { Avatar, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { CircularProgress, Stack } from "@mui/material";
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Avatar, CircularProgress, Stack } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { FaPlus } from "react-icons/fa";
 import { useTranslations } from "next-intl";
