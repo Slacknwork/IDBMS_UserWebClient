@@ -3,16 +3,22 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useSearchParams } from "next/navigation";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { Avatar, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { CircularProgress, Stack } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { FaPlus } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import moment from "moment-timezone";
+import "moment/locale/vi";
+
+import timezone from "/constants/timezone";
 
 import {
   getCommentsByProjectTaskId,
   createComment,
 } from "/services/commentServices";
+
+import { getColorForAvatar, getAvatarContent } from "/utils/avatar";
 
 import "./style.css";
 import { toast } from "react-toastify";
@@ -27,6 +33,8 @@ const dropzoneStyles = {
 };
 
 export default function TaskCommentsPage() {
+  moment.tz.setDefault(timezone.momentDefault);
+  moment.locale(timezone.momentLocale);
   // CONSTANTS
   const searchQuery = "search";
   const typeQuery = "type";
