@@ -13,7 +13,9 @@ import moment from "moment-timezone";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
-import projectTaskStatusOptions, {projectTaskStatusOptionsEnglish} from "/constants/enums/projectTaskStatus";
+import projectTaskStatusOptions, {
+  projectTaskStatusOptionsEnglish,
+} from "/constants/enums/projectTaskStatus";
 
 import { getProjectTasksByProjectId } from "/services/projectTaskServices";
 import { getAllTaskCategories } from "/services/taskCategoryServices";
@@ -83,7 +85,12 @@ export default function ProjectTasks() {
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // VIEWMODE (STAGE / FLOOR & ROOMS)
   const viewModeLabels = [t("SwitchStage"), t("SwitchFloorRoom")];
@@ -272,7 +279,10 @@ export default function ProjectTasks() {
     <div className="container">
       <div className="row">
         <div className="col col-lg-12 col-12">
-          <NavButton url={`/project/${params.id}`} label={o("Overview")}></NavButton>
+          <NavButton
+            url={`/project/${params.id}`}
+            label={o("Overview")}
+          ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-4">
           <div className="d-flex justify-content-between">
@@ -293,7 +303,7 @@ export default function ProjectTasks() {
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder={t("SearchTasks")}></Search>
         </div>
-        <div className="col col-lg-6 col-12 wpo-contact-pg-section">
+        {/* <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
             <div className="wpo-contact-form-area-transparent m-0 row">
               <div className="col col-lg-6 col-12">
@@ -358,7 +368,7 @@ export default function ProjectTasks() {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
       <div className="row">
         <div className="col col-lg-12 col-12">
@@ -440,19 +450,19 @@ export default function ProjectTasks() {
                   >
                     <tr>
                       <th scope="col" width="22.5%">
-                      {t("Name")}
+                        {t("Name")}
                       </th>
                       <th scope="col" width="12.5%">
-                      {t("Category")}
+                        {t("Category")}
                       </th>
                       <th scope="col" width="12.5%">
-                      {t("Price")} (VND)
+                        {t("Price")} (VND)
                       </th>
                       <th scope="col" width="12.5%">
-                      {t("StartDate")}
+                        {t("StartDate")}
                       </th>
                       <th scope="col" width="17.5%">
-                      {t("Progress")}
+                        {t("Progress")}
                       </th>
                       <th
                         scope="col"
@@ -510,17 +520,17 @@ export default function ProjectTasks() {
                           </p>
                         </td>
                         <td className="align-middle text-center">
-                        {
-                            (() => {
-                              if (language === "english") {
-                                return projectTaskStatusOptionsEnglish[task.status];
-                              } else if (language === "vietnamese") {
-                                return projectTaskStatusOptions[task.status];
-                              } else {
-                                return t("Unknown");
-                              }
-                            })()
-                          }
+                          {(() => {
+                            if (language === "english") {
+                              return projectTaskStatusOptionsEnglish[
+                                task.status
+                              ];
+                            } else if (language === "vietnamese") {
+                              return projectTaskStatusOptions[task.status];
+                            } else {
+                              return t("Unknown");
+                            }
+                          })()}
                         </td>
                         <td className="align-middle m-0">
                           <div className="d-flex justify-content-end">
@@ -540,7 +550,7 @@ export default function ProjectTasks() {
               ) : (
                 <Stack sx={{ height: "100%" }}>
                   <p style={{ margin: "auto", textAlign: "center" }}>
-                  {t("NoData")}.
+                    {t("NoData")}.
                   </p>
                 </Stack>
               )}

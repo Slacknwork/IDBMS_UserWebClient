@@ -131,7 +131,7 @@ export default function ItemsPage() {
           <Search placeholder={t("SearchItems")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
-          <form>
+          {/* <form>
             <div className="wpo-contact-form-area-transparent m-0 row">
               <div className="col col-lg-6 col-12">
                 <div className="form-field shadow-sm">
@@ -170,7 +170,7 @@ export default function ItemsPage() {
                 </div>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
 
@@ -189,13 +189,12 @@ export default function ItemsPage() {
           >
             <tr>
               <th scope="col" style={{ width: "12rem" }}>
-              {t("Image")}
+                {t("Image")}
               </th>
               <th scope="col">{t("Name")}</th>
               <th scope="col">{t("Category")}</th>
               <th scope="col">{t("Quantity")}</th>
-              <th scope="col" style={{ width: "10rem" }}>
-              </th>
+              <th scope="col" style={{ width: "10rem" }}></th>
             </tr>
           </thead>
           <tbody>
@@ -257,7 +256,7 @@ export default function ItemsPage() {
           </tbody>
         </table>
       ) : (
-        <Stack sx={{ height: "100%" }}>
+        <Stack sx={{ height: "30rem" }}>
           <p style={{ margin: "auto", textAlign: "center" }}>{t("NoItem")}</p>
         </Stack>
       )}

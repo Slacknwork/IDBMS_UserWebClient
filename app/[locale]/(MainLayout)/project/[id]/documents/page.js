@@ -11,7 +11,9 @@ import NavButton from "/components/Shared/NavButton";
 import Search from "/components/Shared/Search";
 import Pagination from "/components/Shared/Pagination";
 import { getDocumentsByProjectId } from "/services/projectDocumentServices";
-import documentCategoryOptions, {documentCategoryOptionsEnglish} from "/constants/enums/projectDocumentCategory";
+import documentCategoryOptions, {
+  documentCategoryOptionsEnglish,
+} from "/constants/enums/projectDocumentCategory";
 
 moment.tz.setDefault("Asia/Ho_Chi_Minh");
 
@@ -95,7 +97,7 @@ export default function DocumentsPage() {
           <Search placeholder={t("SearchDocuments")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
-          <form>
+          {/* <form>
             <div className="wpo-contact-form-area-transparent m-0 row">
               <div className="col col-lg-6 col-12">
                 <div className="form-field shadow-sm">
@@ -116,7 +118,7 @@ export default function DocumentsPage() {
                 </div>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
 
@@ -135,13 +137,12 @@ export default function DocumentsPage() {
           >
             <tr>
               <th scope="col" style={{ width: "12rem" }}>
-              {t("Name")}
+                {t("Name")}
               </th>
               <th scope="col">{t("Description")}</th>
               <th scope="col">{t("Category")}</th>
               <th scope="col">{t("CreatedDate")}</th>
-              <th scope="col" style={{ width: "10rem" }}>
-              </th>
+              <th scope="col" style={{ width: "10rem" }}></th>
             </tr>
           </thead>
           <tbody>
@@ -150,10 +151,9 @@ export default function DocumentsPage() {
                 <td className="align-middle">{document?.name}</td>
                 <td className="align-middle">{document?.description}</td>
                 <td className="align-middle">
-                {language === "english"
+                  {language === "english"
                     ? documentCategoryOptionsEnglish[document?.category]
-                    : documentCategoryOptions[document?.category]
-                }
+                    : documentCategoryOptions[document?.category]}
                 </td>
                 <td className="align-middle">
                   {document.createdDate
@@ -167,7 +167,9 @@ export default function DocumentsPage() {
         </table>
       ) : (
         <Stack sx={{ height: "30rem" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoDocument")}</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>
+            {t("NoDocument")}
+          </p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

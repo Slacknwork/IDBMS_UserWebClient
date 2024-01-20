@@ -16,6 +16,7 @@ import languageOptions, {
 } from "/constants/enums/language";
 
 import MobileMenu from "/components/MobileMenu/MobileMenu";
+import { getColorForAvatar, getAvatarContent } from "/utils/avatar";
 
 const Logo = "/images/idt-logo.jpg";
 
@@ -29,7 +30,7 @@ const Header = (props) => {
   const user = useSelector((state) => state.customer);
 
   const openMenu = (state) => {
-    user.loggedIn ? setMenuActive(state) : router.push("/login");
+    setMenuActive(state);
   };
 
   return (
@@ -107,7 +108,7 @@ const Header = (props) => {
                       sx={{ width: 18, height: 18 }}
                       src={
                         languageTypeChipImages[
-                        languageLocaleIndex[params.locale]
+                          languageLocaleIndex[params.locale]
                         ]
                       }
                     />
@@ -128,33 +129,101 @@ const Header = (props) => {
                 <div className="header-right">
                   <div className="header-right-menu-wrapper">
                     <div className="header-right-menu">
-                      <HiUserCircle
-                        size={40}
-                        title="User"
-                        style={{ cursor: "pointer" }}
-                        onClick={() => openMenu(!menuActive)}
-                      ></HiUserCircle>
-                      <div
-                        className={`header-right-menu-wrap ${menuActive ? "right-menu-active" : ""
-                          }`}
-                      >
-                        <button
+                      {!user.loggedIn ? (
+                        <Link href="/login" style={{ color: "black" }}>
+                          {t("Login")}
+                        </Link>
+                      ) : (
+                        <Avatar
+                          sx={{
+                            cursor: "pointer",
+                            bgcolor: getColorForAvatar(user?.username),
+                            width: 50,
+                            height: 50,
+                          }}
                           onClick={() => openMenu(!menuActive)}
-                          className="right-menu-close"
+                          alt={user?.username}
                         >
-                          <i className="ti-close"></i>
-                        </button>
-                        <h4 className="text-white mb-4">
-                          Welcome, {user.username}
-                        </h4>
+                          <h5 className="my-auto" style={{ color: "white" }}>
+                            {getAvatarContent(user?.username)}
+                          </h5>
+                        </Avatar>
+                      )}
 
-                        <h4 className="text-white mb-4">
-                          <Link href="/bookmark">
-                            Bookmarks
-                          </Link>
-                        </h4>
+                      <div
+                        className={`header-right-menu-wrap d-flex flex-column justify-content-between ${
+                          menuActive ? "right-menu-active" : ""
+                        }`}
+                      >
+                        <div className="">
+                          <button
+                            onClick={() => openMenu(!menuActive)}
+                            className="right-menu-close"
+                          >
+                            <i className="ti-close"></i>
+                          </button>
+                          <div className="d-flex mb-5">
+                            <Avatar
+                              sx={{
+                                mr: 2,
+                                cursor: "pointer",
+                                bgcolor: getColorForAvatar(user?.username),
+                                width: 50,
+                                height: 50,
+                              }}
+                              onClick={() => openMenu(!menuActive)}
+                              alt={user?.username}
+                            >
+                              <h5
+                                className="my-auto"
+                                style={{ color: "white" }}
+                              >
+                                {getAvatarContent(user?.username)}
+                              </h5>
+                            </Avatar>
+                            <h3 className="text-white my-auto">
+                              {user.username}
+                            </h3>
+                          </div>
 
-                        <Link onClick={() => dispatch(logout())} href="/login">
+                          <h5 className="mb-4">
+                            <Link
+                              href="/bookmark"
+                              style={{
+                                color: "white",
+                                textDecoration: "none",
+                                transition: "color 0.3s",
+                                ":hover": {
+                                  color: "#CAAD06",
+                                },
+                              }}
+                            >
+                              Projects
+                            </Link>
+                          </h5>
+
+                          <h5 className="mb-4">
+                            <Link
+                              href="/bookmark"
+                              style={{
+                                color: "white",
+                                textDecoration: "none",
+                                transition: "color 0.3s",
+                                ":hover": {
+                                  color: "#CAAD06",
+                                },
+                              }}
+                            >
+                              Bookmarks
+                            </Link>
+                          </h5>
+                        </div>
+
+                        <Link
+                          className="theme-btn"
+                          onClick={() => dispatch(logout())}
+                          href="/login"
+                        >
                           Logout
                         </Link>
                       </div>

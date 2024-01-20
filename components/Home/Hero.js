@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import Link from "next/link";
+import { Link } from "/navigation";
 import { useTranslations } from "next-intl";
 
 const Hero2 = (props) => {
@@ -35,14 +35,12 @@ const Hero2 = (props) => {
                         <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
-                        <p>
-                        {t("HeroDescription")}
-                        </p>
+                        <p>{t("HeroDescription")}</p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                        {t("DiscoverMore")}
+                          {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>
@@ -62,14 +60,12 @@ const Hero2 = (props) => {
                         <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
-                        <p>
-                        {t("HeroDescription")}
-                        </p>
+                        <p>{t("HeroDescription")}</p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                        {t("DiscoverMore")}
+                          {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>
@@ -89,14 +85,12 @@ const Hero2 = (props) => {
                         <h2>{t("HeroTitle")}</h2>
                       </div>
                       <div className="slide-title-sub">
-                        <p>
-                        {t("HeroDescription")}
-                        </p>
+                        <p>{t("HeroDescription")}</p>
                       </div>
                       <div className="clearfix"></div>
                       <div className="slide-btns d-flex">
                         <Link href="/about" className="theme-btn">
-                        {t("DiscoverMore")}
+                          {t("DiscoverMore")}
                         </Link>
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -25,12 +25,10 @@ export default function About() {
                 <span>{t("About")}</span>
                 <h2>{t("AboutTitle")}</h2>
               </div>
-              <p>
-              {t("AboutDescription")}
-              </p>
+              <p>{t("AboutDescription")}</p>
               <div className="btns">
                 <Link href="/about" className="theme-btn">
-                {t("DiscoverMore")}
+                  {t("DiscoverMore")}
                 </Link>
                 {/*<ul>
                   <li className="video-holder">

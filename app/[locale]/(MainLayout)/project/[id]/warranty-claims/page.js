@@ -110,7 +110,7 @@ export default function WarrantiesPage() {
           <Search placeholder={t("SearchName")}></Search>
         </div>
         <div className="col col-lg-6 col-12 wpo-contact-pg-section">
-          <form>
+          {/* <form>
             <div className="wpo-contact-form-area-transparent m-0 row">
               <div className="col col-lg-6 col-12">
                 <div className="form-field shadow-sm">
@@ -120,7 +120,6 @@ export default function WarrantiesPage() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {/* is company cover*/}
                     {language === "english"
                       ? isCompanyCoverEnglishOptions.map((value, index) => (
                           <option value={value} key={index}>
@@ -136,7 +135,7 @@ export default function WarrantiesPage() {
                 </div>
               </div>
             </div>
-          </form>
+          </form> */}
         </div>
       </div>
 
@@ -159,8 +158,7 @@ export default function WarrantiesPage() {
               <th scope="col">{t("CoverBy")}</th>
               <th scope="col">{t("CreatedDate")}</th>
               <th scope="col">{t("EndDate")}</th>
-              <th scope="col" style={{ width: "10rem" }}>
-              </th>
+              <th scope="col" style={{ width: "10rem" }}></th>
             </tr>
           </thead>
           <tbody>
@@ -194,7 +192,9 @@ export default function WarrantiesPage() {
         </table>
       ) : (
         <Stack sx={{ height: "30rem" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoWarranty")}</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>
+            {t("NoWarranty")}
+          </p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

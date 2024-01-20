@@ -67,24 +67,23 @@ export default function Pricing() {
                           <div className="wpo-pricing-top">
                             <div className="pricing-thumb">
                               <span>
-                              {language === "english"
+                                {language === "english"
                                   ? roomType.englishName ?? roomType.name
-                                  : roomType.name
-                              }
+                                  : roomType.name}
                               </span>
                             </div>
                             <div>
-                            {roomType?.imageUrl && (
-                              <Image
-                              className="mx-auto mt-4"
-                              src={roomType.imageUrl}
-                              alt={roomType.name}
-                              width={1000}
-                              height={1000}
-                              priority
-                              style={{ objectFit: "cover" }}
-                            ></Image>
-                            )}
+                              {roomType?.imageUrl && (
+                                <Image
+                                  className="mx-auto mt-4"
+                                  src={roomType.imageUrl}
+                                  alt={roomType.name}
+                                  width={1000}
+                                  height={1000}
+                                  priority
+                                  style={{ objectFit: "cover" }}
+                                ></Image>
+                              )}
                             </div>
                             <div className="wpo-pricing-text">
                               <h2>
@@ -92,13 +91,14 @@ export default function Pricing() {
                                 đ<span>/m²</span>
                               </h2>
                               <p>
-                                {roomType.estimateDayPerArea} {t("DaysOfWork")}/m²
+                                {roomType.estimateDayPerArea} {t("DaysOfWork")}
+                                /m²
                               </p>
                             </div>
                           </div>
                           <div
                             className="wpo-pricing-bottom"
-                            style={{ height: 150 }}
+                            style={{ height: 200 }}
                           >
                             <div className="wpo-pricing-bottom-text">
                               <ul>

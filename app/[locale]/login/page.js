@@ -63,7 +63,7 @@ const LoginPage = (props) => {
         const response = await loginUser(value);
         console.log(response);
         if (response.data != null) {
-          toast.success("Login successfully!");
+          //toast.success("Login successfully!");
           dispatch(login(response.data));
           router.push("/project");
         } else {

@@ -31,7 +31,8 @@
     "About": "About",
     "Projects": "Projects",
     "Interior": "Interior",
-    "InteriorItem": "Interior items"
+    "InteriorItem": "Interior items",
+    "Login": "Login"
   },
   "Footer": {
     "OurServices": "Our Services",
@@ -67,7 +68,7 @@
     "FormAddress": "Your Address",
     "FormMessage": "Message",
     "FormSubmit": "Submit Now",
-    "SubmitSuccessfully":"Submit successfully!"
+    "SubmitSuccessfully": "Submit successfully!"
   },
   "InteriorItems": {
     "Price": "Price",
@@ -276,9 +277,9 @@
     "Ended": "Ended"
   },
   "ProjectDetails_Comment": {
-    "Comment":"Comments",
+    "Comment": "Comments",
     "Content": "Content",
-    "SearchComment":"Search comment...",
+    "SearchComment": "Search comment...",
     "Details": "Comment Details",
     "ProjectTaskId": "Project Task Id",
     "ProjectId": "Project Id",
@@ -288,17 +289,17 @@
     "LastModifiedTime": "Last Modified Time",
     "Status": "Status",
     "IsDeleted": "IsDeleted",
-    "CreatedCommentSuccessfully":"Post Comment successfully!",
-    "AddComment":"Add a Comment",
-    "YourComment":"Your Comment...",
-    "Submit":"Submit",
-    "ConfirmSubmission":"Confirm Submission",
-    "AreYouSure":"Are you sure you want to submit the comment?",
-    "Cancel":"Cancel",
-    "NoComment":"No comment."
+    "CreatedCommentSuccessfully": "Post Comment successfully!",
+    "AddComment": "Add a Comment",
+    "YourComment": "Your Comment...",
+    "Submit": "Submit",
+    "ConfirmSubmission": "Confirm Submission",
+    "AreYouSure": "Are you sure you want to submit the comment?",
+    "Cancel": "Cancel",
+    "NoComment": "No comment."
   },
   "ProjectDetails_Item": {
-    "Items":"Items",
+    "Items": "Items",
     "Code": "Code",
     "Name": "Name",
     "SearchItems": "Search Items...",
@@ -320,11 +321,11 @@
     "Status": "Status",
     "IsDeleted": "Is Deleted",
     "ParentItemId": "Parent Item",
-    "NoItem":"No item."
+    "NoItem": "No item."
   },
   "ProjectDetails_Document": {
-    "Documents":"Documents",
-    "SearchDocuments":"Search Documents...",
+    "Documents": "Documents",
+    "SearchDocuments": "Search Documents...",
     "Name": "Name",
     "Details": "Document Details",
     "Description": "Description",
@@ -334,9 +335,9 @@
     "ProjectId": "Project",
     "ProjectDocumentTemplateId": "ProjectDocumentTemplate",
     "IsPublicAdvertisement": "Public Advertisement",
-    "Download":"Download",
+    "Download": "Download",
     "IsDeleted": "Is Deleted",
-    "NoDocument":"No document."
+    "NoDocument": "No document."
   },
   "ProjectDetails_Payment": {
     "Name": "Name",
@@ -358,38 +359,38 @@
     "IsHidden": "Is Hidden"
   },
   "ProjectDetails_Participation": {
-    "Participants":"Participants",
-    "SearchName":"Search by name...",
+    "Participants": "Participants",
+    "SearchName": "Search by name...",
     "Name": "Name",
     "UserId": "User",
     "Details": "Details",
     "ProjectId": "Project",
     "Role": "Role",
-    "ProjectManager":"Project Manager",
-    "Delete":"Delete",
+    "ProjectManager": "Project Manager",
+    "Delete": "Delete",
     "IsDeleted": "Is Deleted"
   },
   "ProjectDetails_Transaction": {
-    "Transactions":"Transactions",
-    "SearchPayerName":"Search by payer name...",
+    "Transactions": "Transactions",
+    "SearchPayerName": "Search by payer name...",
     "Type": "Type",
     "Amount": "Amount",
     "CreatedDate": "Created Date",
     "PayerName": "Payer Name",
     "Status": "Status",
-    "DownloadInvoice":"Download invoice",
-    "NoTransaction":"No transaction."
+    "DownloadInvoice": "Download invoice",
+    "NoTransaction": "No transaction."
   },
   "ProjectDetails_Warranty": {
-    "WarrantyClaims":"Warranty Claims",
-    "SearchName":"Search by name...",
+    "WarrantyClaims": "Warranty Claims",
+    "SearchName": "Search by name...",
     "Name": "Name",
     "Amount": "Amount",
     "CoverBy": "Cover By",
     "CreatedDate": "Created Date",
     "EndDate": "End Date",
-    "Download":"Download",
-    "NoWarranty":"No warranty claim."
+    "Download": "Download",
+    "NoWarranty": "No warranty claim."
   },
   "ProjectDetail_Site": {
     "Name": "Name",
@@ -475,23 +476,23 @@
     "TaskDesignId": "Task Design",
     "RoomId": "Room",
     "Status": "Status",
-    "No":"No Stage",
-    "NonArchitect":"Non-architect",
-    "Category":"Category",
-    "Price":"Price",
-    "StartDate":"Start Date",
-    "Progress":"Progress",
-    "Undefined":"Undefined",
-    "Unclassified":"Unclassified",
-    "NoData":"No data."
+    "No": "No Stage",
+    "NonArchitect": "Non-architect",
+    "Category": "Category",
+    "Price": "Price",
+    "StartDate": "Start Date",
+    "Progress": "Progress",
+    "Undefined": "Undefined",
+    "Unclassified": "Unclassified",
+    "NoData": "No data."
   },
   "ProjectDetails_TaskReport": {
     "TaskReports": "Task Reports",
     "Name": "Name",
     "Details": "Details",
     "SearchReport": "Search Reports...",
-    "CreatedDate":"Created Date",
-    "UnitsUsed":"Units used",
+    "CreatedDate": "Created Date",
+    "UnitsUsed": "Units used",
     "CalculationUnit": "Calculation Unit",
     "UnitUsed": "Unit Used",
     "Description": "Description",
@@ -499,7 +500,7 @@
     "UpdatedTime": "Updated Time",
     "ProjectTaskId": "Project Task",
     "IsDeleted": "Is Deleted",
-    "NoTaskReport":"No task report."
+    "NoTaskReport": "No task report."
   },
   "ProjectDetails_TaskDocument": {
     "Name": "Name",
@@ -667,24 +668,24 @@
     "ProjectStatusError": "Fetch Data Error: Project status!",
     "StagesError": "Fetch Data Error: Stages!",
     "FetchError": "Error loading data from the system",
-    "FetchDocumentError":"Error loading 'Document' data from the system",
-    "FetchParticipationError":"Error loading 'Participation' data from the system",
-    "FetchTransactionError":"Error loading 'Transaction' data from the system",
-    "FetchWarrantyError":"Error loading 'Warranty' data from the system",
+    "FetchDocumentError": "Error loading 'Document' data from the system",
+    "FetchParticipationError": "Error loading 'Participation' data from the system",
+    "FetchTransactionError": "Error loading 'Transaction' data from the system",
+    "FetchWarrantyError": "Error loading 'Warranty' data from the system",
     "FetchDataError": "Error fetching data",
-    "InvalidEmail":"Invalid format for email address",
-    "InvalidPhone":"Invalid format for phone number",
-    "RequirePassword":"Password is required!",
-    "MatchPassword":"Passwords must match!",
-    "FillFields":"All fields must be filled out.",
-    "LoginFailed":"Login failed!",
-    "LoginError":"Error login!",
-    "RegistrationFailed":"Registration failed!",
-    "RegistrationError":"Error registering user!",
-    "FixValidation":"Please fix the validation errors before submitting.",
-    "ErrorComment":"Error: Create Comment!",
-    "ErrorGettingRoomType":"Error getting Room Type data!",
-    "ErrorLoadingProjects":"Error loading projects!",
-    "SubmitFalied":"Submit falied!"
+    "InvalidEmail": "Invalid format for email address",
+    "InvalidPhone": "Invalid format for phone number",
+    "RequirePassword": "Password is required!",
+    "MatchPassword": "Passwords must match!",
+    "FillFields": "All fields must be filled out.",
+    "LoginFailed": "Login failed!",
+    "LoginError": "Error login!",
+    "RegistrationFailed": "Registration failed!",
+    "RegistrationError": "Error registering user!",
+    "FixValidation": "Please fix the validation errors before submitting.",
+    "ErrorComment": "Error: Create Comment!",
+    "ErrorGettingRoomType": "Error getting Room Type data!",
+    "ErrorLoadingProjects": "Error loading projects!",
+    "SubmitFalied": "Submit falied!"
   }
 }

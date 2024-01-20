@@ -9,8 +9,12 @@ import moment from "moment-timezone";
 
 import { getTransactionsByProjectId } from "/services/transactionServices";
 
-import transactionStatus, {transactionStatusOptionsEnglish} from "/constants/enums/transactionStatus";
-import transactionType, {transactionTypeOptionsEnglish} from "/constants/enums/transactionType";
+import transactionStatus, {
+  transactionStatusOptionsEnglish,
+} from "/constants/enums/transactionStatus";
+import transactionType, {
+  transactionTypeOptionsEnglish,
+} from "/constants/enums/transactionType";
 import timezone from "/constants/timezone";
 
 import Search from "/components/Shared/Search";
@@ -103,7 +107,7 @@ export default function TransactionsPage() {
         <div className="col col-lg-6 col-12 mb-4">
           <Search placeholder={t("SearchPayerName")}></Search>
         </div>
-        <div className="col col-lg-6 col-12 wpo-contact-pg-section">
+        {/* <div className="col col-lg-6 col-12 wpo-contact-pg-section">
           <form>
             <div className="wpo-contact-form-area-transparent m-0 row">
               <div className="col col-lg-6 col-12">
@@ -114,7 +118,6 @@ export default function TransactionsPage() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {/* type*/}
                     {transactionType.map((status, index) => (
                       <option key={status} value={index}>
                         {language === "english"
@@ -133,7 +136,6 @@ export default function TransactionsPage() {
                     className="rounded-2"
                     style={{ backgroundColor: "white", height: "55px" }}
                   >
-                    {/* status */}
                     {transactionStatus.map((status, index) => (
                       <option key={status} value={index}>
                         {language === "english"
@@ -146,7 +148,7 @@ export default function TransactionsPage() {
               </div>
             </div>
           </form>
-        </div>
+        </div> */}
       </div>
 
       {loading ? (
@@ -168,8 +170,7 @@ export default function TransactionsPage() {
               <th scope="col">{t("CreatedDate")}</th>
               <th scope="col">{t("PayerName")}</th>
               <th scope="col">{t("Status")}</th>
-              <th scope="col" style={{ width: "10rem" }}>
-              </th>
+              <th scope="col" style={{ width: "10rem" }}></th>
             </tr>
           </thead>
           <tbody>
@@ -187,9 +188,8 @@ export default function TransactionsPage() {
                 <td className="align-middle">{transaction?.payerName}</td>
                 <td className="align-middle">
                   {language === "english"
-                      ? transactionStatusOptionsEnglish[transaction?.status]
-                      : transactionStatus[transaction?.status]
-                    }
+                    ? transactionStatusOptionsEnglish[transaction?.status]
+                    : transactionStatus[transaction?.status]}
                 </td>
                 <td className="align-middle m-0">{t("DownloadInvoice")}</td>
               </tr>
@@ -198,7 +198,9 @@ export default function TransactionsPage() {
         </table>
       ) : (
         <Stack sx={{ height: "30rem" }}>
-          <p style={{ margin: "auto", textAlign: "center" }}>{t("NoTransaction")}</p>
+          <p style={{ margin: "auto", textAlign: "center" }}>
+            {t("NoTransaction")}
+          </p>
         </Stack>
       )}
       <Pagination count={count}></Pagination>

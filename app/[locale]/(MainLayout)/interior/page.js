@@ -55,15 +55,20 @@ export default function InteriorItemsPage({ success }) {
     params?.locale === "en-US"
       ? "english"
       : params?.locale === "vi-VN"
-        ? "vietnamese"
-        : "";
+      ? "vietnamese"
+      : "";
   const fetchItems = async () => {
     try {
       const search = searchParams.get(searchQuery) ?? "";
       const pageNo = searchParams.get(pageQuery) ?? defaultPage;
       const pageSize = defaultPageSize;
 
-      const items = await getAllInteriorItems({ search, pageNo, pageSize, itemType: 0 });
+      const items = await getAllInteriorItems({
+        search,
+        pageNo,
+        pageSize,
+        itemType: 0,
+      });
       setItems(items.list);
       setCount(items.totalPage);
     } catch (error) {
@@ -97,7 +102,10 @@ export default function InteriorItemsPage({ success }) {
 
   const handleCreateBookmark = async (itemId) => {
     try {
-      const response = await createInteriorItemBookmark({ userId: user.id, interiorItemId: itemId });
+      const response = await createInteriorItemBookmark({
+        userId: user.id,
+        interiorItemId: itemId,
+      });
       toast.success("Thêm thành công!");
       console.log(response);
       // success(true);
@@ -152,8 +160,7 @@ export default function InteriorItemsPage({ success }) {
                         <h2 style={{ fontSize: "19px" }}>
                           {language === "english"
                             ? (item && item.englishName) ?? (item && item.name)
-                            : item && item.name
-                          }
+                            : item && item.name}
                         </h2>
                       </div>
                     </div>
@@ -164,7 +171,7 @@ export default function InteriorItemsPage({ success }) {
         </div>
       </section>
       <div className="row">
-        <div className="col col-lg-3 col-12">
+        {/* <div className="col col-lg-3 col-12">
           <div className="shadow p-4" style={{ backgroundColor: "white" }}>
             <ThemeProvider theme={theme}>
               <h4 className="mt-2">{t("Filter")}</h4>
@@ -178,23 +185,23 @@ export default function InteriorItemsPage({ success }) {
               />
             </ThemeProvider>
           </div>
-        </div>
-        <div className="col col-lg-9 col-12">
+        </div> */}
+        <div className="col col-lg-12 col-12">
           <Search placeholder={t("Search")}></Search>
           <div>
             {items.map((item) => (
               <div
                 key={item.id}
-                className="grid"
+                className="grid mt-5"
                 style={{ backgroundColor: "white" }}
               >
                 <Image
                   src={item.imageUrl ?? ""}
                   alt=""
-                  width={0}
-                  height={0}
+                  width={500}
+                  height={500}
                   style={{
-                    width: "24rem",
+                    width: "100%",
                     height: "24rem",
                     objectFit: "cover",
                   }}
@@ -205,8 +212,7 @@ export default function InteriorItemsPage({ success }) {
                     <Link href={`/interior/${item.id}`}>
                       {language === "english"
                         ? (item && item.englishName) ?? (item && item.name)
-                        : item && item.name
-                      }
+                        : item && item.name}
                     </Link>
                   </h3>
                   <div className="price">

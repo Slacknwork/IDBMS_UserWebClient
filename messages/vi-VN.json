@@ -31,7 +31,8 @@
     "About": "Về chúng tôi",
     "Projects": "Dự án",
     "Interior": "Nội thất",
-    "InteriorItem": "Đồ nội thất"
+    "InteriorItem": "Đồ nội thất",
+    "Login": "Đăng nhập"
   },
   "Footer": {
     "OurServices": "Dịch vụ của chúng tôi",
@@ -67,7 +68,7 @@
     "FormAddress": "Địa chỉ",
     "FormMessage": "Tin nhắn",
     "FormSubmit": "Gửi",
-    "SubmitSuccessfully":"Gửi yêu cầu thành công!"
+    "SubmitSuccessfully": "Gửi yêu cầu thành công!"
   },
   "InteriorItems": {
     "Price": "Giá",
@@ -276,9 +277,9 @@
     "Ended": "Kết thúc"
   },
   "ProjectDetails_Comment": {
-    "Comment":"Bình luận",
+    "Comment": "Bình luận",
     "Content": "Nội dung",
-    "SearchComment":"Tìm bình luận...",
+    "SearchComment": "Tìm bình luận...",
     "Details": "Chi tiết Bình luận",
     "ProjectTaskId": "ID Nhiệm vụ Dự án",
     "ProjectId": "ID Dự án",
@@ -288,17 +289,17 @@
     "LastModifiedTime": "Thời gian chỉnh sửa cuối cùng",
     "Status": "Trạng thái",
     "IsDeleted": "Đã xóa",
-    "CreatedCommentSuccessfully":"Đăng bình luận thành công!",
-    "AddComment":"Thêm bình luận",
-    "YourComment":"Bình luận của bạn...",
-    "Submit":"Gửi",
-    "ConfirmSubmission":"Xác nhận gửi",
-    "AreYouSure":"Bạn có chắc chắn muốn gửi bình luận?",
-    "Cancel":"Hủy",
-    "NoComment":"Không có bình luận."
+    "CreatedCommentSuccessfully": "Đăng bình luận thành công!",
+    "AddComment": "Thêm bình luận",
+    "YourComment": "Bình luận của bạn...",
+    "Submit": "Gửi",
+    "ConfirmSubmission": "Xác nhận gửi",
+    "AreYouSure": "Bạn có chắc chắn muốn gửi bình luận?",
+    "Cancel": "Hủy",
+    "NoComment": "Không có bình luận."
   },
   "ProjectDetails_Item": {
-    "Items":"Đồ dùng",
+    "Items": "Đồ dùng",
     "Code": "Mã",
     "Name": "Tên",
     "SearchItems": "Tìm đồ dùng...",
@@ -320,11 +321,11 @@
     "Status": "Trạng thái",
     "IsDeleted": "Đã xóa",
     "ParentItemId": "ID Vật phẩm cha",
-    "NoItem":"Không có đồ dùng."
+    "NoItem": "Không có đồ dùng."
   },
   "ProjectDetails_Document": {
-    "Documents":"Tài liệu",
-    "SearchDocuments":"Tìm tài liệu...",
+    "Documents": "Tài liệu",
+    "SearchDocuments": "Tìm tài liệu...",
     "Name": "Tên",
     "Details": "Chi tiết Tài liệu",
     "Description": "Mô tả",
@@ -334,9 +335,9 @@
     "ProjectId": "ID Dự án",
     "ProjectDocumentTemplateId": "ID Mẫu tài liệu Dự án",
     "IsPublicAdvertisement": "Quảng cáo công khai",
-    "Download":"Tải",
+    "Download": "Tải",
     "IsDeleted": "Đã xóa",
-    "NoDocument":"Không có tài liệu."
+    "NoDocument": "Không có tài liệu."
   },
   "ProjectDetails_Payment": {
     "Name": "Tên",
@@ -358,38 +359,38 @@
     "IsHidden": "Ẩn đi"
   },
   "ProjectDetails_Participation": {
-    "Participants":"Thành viên",
-    "SearchName":"Tìm theo tên...",
+    "Participants": "Thành viên",
+    "SearchName": "Tìm theo tên...",
     "Name": "Tên",
     "UserId": "ID Người dùng",
     "Details": "Chi tiết",
     "ProjectId": "ID Dự án",
     "Role": "Vai trò",
-    "ProjectManager":"Quản lý dự án",
-    "Delete":"Xóa",
+    "ProjectManager": "Quản lý dự án",
+    "Delete": "Xóa",
     "IsDeleted": "Đã xóa"
   },
   "ProjectDetails_Transaction": {
-    "Transactions":"Thanh toán",
-    "SearchPayerName":"Tìm theo tên người trả...",
+    "Transactions": "Thanh toán",
+    "SearchPayerName": "Tìm theo tên người trả...",
     "Type": "Kiểu thanh toán",
     "Amount": "Số tiền",
     "CreatedDate": "Ngày tạo",
     "PayerName": "Người trả",
     "Status": "Trạng thái",
-    "DownloadInvoice":"Tải hóa đơn",
-    "NoTransaction":"Không có thanh toán."
+    "DownloadInvoice": "Tải hóa đơn",
+    "NoTransaction": "Không có thanh toán."
   },
   "ProjectDetails_Warranty": {
-    "WarrantyClaims":"Bảo hiểm",
-    "SearchName":"Tìm theo tên...",
+    "WarrantyClaims": "Bảo hiểm",
+    "SearchName": "Tìm theo tên...",
     "Name": "Tên",
     "Amount": "Số tiền",
     "CoverBy": "Trả bởi",
     "CreatedDate": "Ngày tạo",
     "EndDate": "Ngày kết thúc",
-    "Download":"Tải",
-    "NoWarranty":"Không có bảo hiểm."
+    "Download": "Tải",
+    "NoWarranty": "Không có bảo hiểm."
   },
   "ProjectDetail_Site": {
     "Name": "Tên",
@@ -490,8 +491,8 @@
     "Name": "Tên",
     "Details": "Chi tiết",
     "SearchReport": "Tìm báo cáo...",
-    "CreatedDate":"Ngày tạo",
-    "UnitsUsed":"KL đã thực hiện",
+    "CreatedDate": "Ngày tạo",
+    "UnitsUsed": "KL đã thực hiện",
     "CalculationUnit": "Đơn vị tính",
     "UnitUsed": "Số đơn vị đã sử dụng",
     "Description": "Mô tả",
@@ -499,7 +500,7 @@
     "UpdatedTime": "Thời gian cập nhật",
     "ProjectTaskId": "ID Nhiệm vụ Dự án",
     "IsDeleted": "Đã xóa",
-    "NoTaskReport":"Không có báo cáo."
+    "NoTaskReport": "Không có báo cáo."
   },
   "ProjectDetails_TaskDocument": {
     "Name": "Tên",
@@ -667,24 +668,24 @@
     "ProjectStatusError": "Lỗi dữ liệu: Trạng thái dự án!",
     "StagesError": "Lỗi dữ liệu: Giai đoạn!",
     "FetchError": "Lỗi nạp dữ liệu từ hệ thống",
-    "FetchDocumentError":"Lỗi nạp dữ liệu 'Tài liệu' từ hệ thống",
-    "FetchParticipationError":"Lỗi nạp dữ liệu 'Thành viên' từ hệ thống",
-    "FetchTransactionError":"Lỗi nạp dữ liệu 'Thanh Toán' từ hệ thống",
-    "FetchWarrantyError":"Lỗi nạp dữ liệu 'Bảo hiểm' từ hệ thống",
+    "FetchDocumentError": "Lỗi nạp dữ liệu 'Tài liệu' từ hệ thống",
+    "FetchParticipationError": "Lỗi nạp dữ liệu 'Thành viên' từ hệ thống",
+    "FetchTransactionError": "Lỗi nạp dữ liệu 'Thanh Toán' từ hệ thống",
+    "FetchWarrantyError": "Lỗi nạp dữ liệu 'Bảo hiểm' từ hệ thống",
     "FetchDataError": "Lỗi nạp dữ liệu",
-    "InvalidEmail":"Định dạng không hợp lệ cho email",
-    "InvalidPhone":"Định dạng không hợp lệ cho số điện thoại",
-    "RequirePassword":"Cần có mật khẩu!",
-    "MatchPassword":"Mật khẩu phải trùng khớp!",
-    "FillFields":"Cần điền tất cả thông tin.",
-    "LoginFailed":"Đăng nhập thất bại!",
-    "LoginError":"Lỗi đăng nhập!",
-    "RegistrationFailed":"Đăng ký thất bại!",
-    "RegistrationError":"Lỗi đăng ký!",
-    "FixValidation":"Vui lòng điền lại thông tin trước khi gửi.",
-    "ErrorComment":"Lỗi tạo bình luận!",
-    "ErrorGettingRoomType":"Lỗi không lấy được dữ liệu loại phòng!",
-    "ErrorLoadingProjects":"Lỗi tải dự án!",
-    "SubmitFalied":"Lỗi gửi yêu cầu!"
+    "InvalidEmail": "Định dạng không hợp lệ cho email",
+    "InvalidPhone": "Định dạng không hợp lệ cho số điện thoại",
+    "RequirePassword": "Cần có mật khẩu!",
+    "MatchPassword": "Mật khẩu phải trùng khớp!",
+    "FillFields": "Cần điền tất cả thông tin.",
+    "LoginFailed": "Đăng nhập thất bại!",
+    "LoginError": "Lỗi đăng nhập!",
+    "RegistrationFailed": "Đăng ký thất bại!",
+    "RegistrationError": "Lỗi đăng ký!",
+    "FixValidation": "Vui lòng điền lại thông tin trước khi gửi.",
+    "ErrorComment": "Lỗi tạo bình luận!",
+    "ErrorGettingRoomType": "Lỗi không lấy được dữ liệu loại phòng!",
+    "ErrorLoadingProjects": "Lỗi tải dự án!",
+    "SubmitFalied": "Lỗi gửi yêu cầu!"
   }
 }

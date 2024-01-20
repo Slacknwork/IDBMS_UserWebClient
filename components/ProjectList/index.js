@@ -9,8 +9,12 @@ import { toast } from "react-toastify";
 import { getParticipationsByUserId } from "/services/projectParticipationServices";
 import { getProjectStatusByUserId } from "/services/projectServices";
 
-import projectStatusOptions from "/constants/enums/projectStatus";
-import { projectStatusOptionsEnglish } from "/constants/enums/projectStatus";
+import projectStatusOptions, {
+  projectStatusOptionsEnglish,
+} from "/constants/enums/projectStatus";
+import projectTypeOptions, {
+  projectTypeOptionsEnglish,
+} from "/constants/enums/projectType";
 
 import Search from "/components/Shared/Search";
 import { useTranslations } from "next-intl";
@@ -25,7 +29,12 @@ export default function ProjectList() {
   const user = useSelector((state) => state.customer);
   const t = useTranslations("ProjectListPage");
   const e = useTranslations("Error");
-  const language = params?.locale === "en-US" ? "english" : params?.locale === "vi-VN" ? "vietnamese" : "";
+  const language =
+    params?.locale === "en-US"
+      ? "english"
+      : params?.locale === "vi-VN"
+      ? "vietnamese"
+      : "";
 
   // SEARCH
   const searchQuery = "search";
@@ -57,22 +66,22 @@ export default function ProjectList() {
         search,
         status,
       });
-      setCount(participations?.totalItem)
+      setCount(participations?.totalItem);
       setParticipations(participations.list);
     } catch (error) {
       toast.error(e("ParticipationsError"));
     }
   };
 
-  const [projectStatusCount, setProjectStatusCount] = useState({})
+  const [projectStatusCount, setProjectStatusCount] = useState({});
 
   const fetchProjectStatusCount = async () => {
     try {
       const projectStatusCount = await getProjectStatusByUserId({
         userId: user.id,
       });
-      console.log(projectStatusCount)
-      setProjectStatusCount(projectStatusCount)
+      console.log(projectStatusCount);
+      setProjectStatusCount(projectStatusCount);
     } catch (error) {
       toast.error(e("ProjectStatusError"));
     }
@@ -106,48 +115,55 @@ export default function ProjectList() {
                       <span>{count}</span>
                     </a>
                   </li>
-                  {
-                    (() => {
-                      if (language === "english") {
-                        return projectStatusOptionsEnglish.map(
-                          (status, index) =>
-                            index > 1 && (
-                              <li key={status}>
-                                <a onClick={() => setStatus(index)}>
-                                  {status}
-                                  <span>{projectStatusCount[projectStatusOptionsEnglish[index]]}</span>
-                                </a>
-                              </li>
-                            )
-                        );
-                      } else if (language === "vietnamese") {
-                        return projectStatusOptions.map(
-                          (status, index) =>
-                            index > 1 && (
-                              <li key={status}>
-                                <a onClick={() => setStatus(index)}>
-                                  {status}
-                                  <span>{index}</span>
-                                </a>
-                              </li>
-                            )
-                        )
-                      } else {
-                        return '';
-                      }
-                    })()
-                  }
-
+                  {(() => {
+                    if (language === "english") {
+                      return projectStatusOptionsEnglish.map(
+                        (status, index) =>
+                          index > 1 && (
+                            <li key={status}>
+                              <a onClick={() => setStatus(index)}>
+                                {status}
+                                <span>
+                                  {
+                                    projectStatusCount[
+                                      projectStatusOptionsEnglish[index]
+                                    ]
+                                  }
+                                </span>
+                              </a>
+                            </li>
+                          )
+                      );
+                    } else if (language === "vietnamese") {
+                      return projectStatusOptions.map(
+                        (status, index) =>
+                          index > 1 && (
+                            <li key={status}>
+                              <a onClick={() => setStatus(index)}>
+                                {status}
+                                <span>
+                                  {
+                                    projectStatusCount[
+                                      projectStatusOptionsEnglish[index]
+                                    ]
+                                  }
+                                </span>
+                              </a>
+                            </li>
+                          )
+                      );
+                    } else {
+                      return "";
+                    }
+                  })()}
                 </ul>
               </div>
               <div className="wpo-contact-widget widget">
                 <h2>
                   {t("ContactText1")} <br /> {t("ContactText2")}
                 </h2>
-                <p>
-                  {t("ContactText3")}
-                </p>
-                <Link href="/contact">{t("ContactUs")}</Link>
+                <p>{t("ContactText3")}</p>
+                <Link href="/about">{t("ContactUs")}</Link>
               </div>
             </div>
           </div>
@@ -190,8 +206,23 @@ export default function ProjectList() {
                         <div className="entry-meta">
                           <ul>
                             <li>
-                              <i className="fi ti-user"></i> {t("By")}{" "}
-                              <Link href="/">aaa</Link>{" "}
+                              {language === "english" ? (
+                                <>
+                                  {
+                                    projectTypeOptionsEnglish[
+                                      participation.project?.type
+                                    ]
+                                  }
+                                </>
+                              ) : (
+                                <>
+                                  {
+                                    projectTypeOptions[
+                                      participation.project?.type
+                                    ]
+                                  }
+                                </>
+                              )}
                             </li>
                             <li>
                               <i className="fi flaticon-calendar"></i>{" "}
