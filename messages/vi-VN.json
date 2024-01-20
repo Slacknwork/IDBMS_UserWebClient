@@ -502,6 +502,12 @@
     "IsDeleted": "Đã xóa",
     "NoTaskReport": "Không có báo cáo."
   },
+  "ProjectDetails_TaskReportDetail": {
+    "ReportDetails": "Chi tiết báo cáo",
+    "Download": "Tải",
+    "Loading": "Đang tải",
+    "NoData": "không có dữ liệu."
+  },
   "ProjectDetails_TaskDocument": {
     "Name": "Tên",
     "Details": "Chi tiết Tài liệu Nhiệm vụ",
@@ -686,6 +692,7 @@
     "ErrorComment": "Lỗi tạo bình luận!",
     "ErrorGettingRoomType": "Lỗi không lấy được dữ liệu loại phòng!",
     "ErrorLoadingProjects": "Lỗi tải dự án!",
-    "SubmitFalied": "Lỗi gửi yêu cầu!"
+    "SubmitFalied": "Lỗi gửi yêu cầu!",
+    "DownloadFailed":"Lỗi tải file!"
   }
 }

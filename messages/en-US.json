@@ -502,6 +502,12 @@
     "IsDeleted": "Is Deleted",
     "NoTaskReport": "No task report."
   },
+  "ProjectDetails_TaskReportDetail": {
+    "ReportDetails": "Report Details",
+    "Download": "Download",
+    "Loading": "Loading",
+    "NoData": "No data."
+  },
   "ProjectDetails_TaskDocument": {
     "Name": "Name",
     "Details": "Task Document Details",
@@ -686,6 +692,7 @@
     "ErrorComment": "Error: Create Comment!",
     "ErrorGettingRoomType": "Error getting Room Type data!",
     "ErrorLoadingProjects": "Error loading projects!",
-    "SubmitFalied": "Submit falied!"
+    "SubmitFalied": "Submit falied!",
+    "DownloadFailed":"Download file failed!"
   }
 }

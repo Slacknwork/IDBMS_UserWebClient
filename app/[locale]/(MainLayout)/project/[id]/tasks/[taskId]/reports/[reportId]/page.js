@@ -23,6 +23,7 @@ export default function ItemsPage() {
   const params = useParams();
   const searchParams = useSearchParams();
   const t = useTranslations("ProjectDetails_Item");
+  const tr = useTranslations("ProjectDetails_TaskReportDetail");
   const e = useTranslations("Error");
   const language =
     params?.locale === "en-US"
@@ -44,7 +45,7 @@ export default function ItemsPage() {
       const response = await getTaskReportById(taskReportId, projectId);
       setReports(response?.taskDocuments ?? []);
     } catch (error) {
-      toast.error("Lỗi nạp dữ liệu từ hệ thống");
+      toast.error(e("FetchError"));
     }
   };
   const fetchDataFromApi = async () => {
@@ -59,7 +60,7 @@ export default function ItemsPage() {
 
   const onDownload = async (document) => {
     try {
-      toast.loading(`Đang tải ${document.name}...`);
+      toast.loading(`${tr("Loading")} ${document.name}...`);
       await downloadFileByUrl({
         imageUrl: document.document,
         name: document.name,
@@ -67,7 +68,7 @@ export default function ItemsPage() {
       toast.dismiss();
     } catch (error) {
       toast.dismiss();
-      toast.error("Lỗi tải file!");
+      toast.error(e("DownloadFailed"));
     }
   };
 
@@ -80,7 +81,7 @@ export default function ItemsPage() {
           ></NavButton>
         </div>
         <div className="col col-lg-12 col-12 mb-3">
-          <h3 style={{ fontSize: 24 }}>Report Details</h3>
+          <h3 style={{ fontSize: 24 }}>{tr("ReportDetails")}</h3>
         </div>
       </div>
       <div className="row">
@@ -116,7 +117,7 @@ export default function ItemsPage() {
                           style={{ zIndex: 0 }}
                           onClick={() => onDownload(report)}
                         >
-                          Download
+                          {tr("Download")}
                         </button>
                       </div>
                     </td>
@@ -126,7 +127,7 @@ export default function ItemsPage() {
             </table>
           ) : (
             <Stack sx={{ height: "30rem" }}>
-              <p style={{ margin: "auto", textAlign: "center" }}>No data.</p>
+              <p style={{ margin: "auto", textAlign: "center" }}>{tr("NoData")}</p>
             </Stack>
           )}
         </div>
