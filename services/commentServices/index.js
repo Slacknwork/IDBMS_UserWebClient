@@ -92,6 +92,7 @@ const createComment = async (projectId, request) => {
     const response = await fetchData({
       url: `${url}${projectId ? "?projectId=" + projectId : ""}`,
       method: "POST",
+      contentType: "application/json",
       token,
       body: JSON.stringify(request),
     });
