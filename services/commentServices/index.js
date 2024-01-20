@@ -87,20 +87,13 @@ const getCommentsById = async (id) => {
 
 const createComment = async (projectId, request) => {
   try {
-    const token = store.getState().user?.token ?? ""
-    const formData = new FormData();
-
-    Object.keys(request).forEach((key) => {
-      if (!key.endsWith("Error")) {
-        formData.append(key, request[key]);
-      }
-    });
+    const token = store.getState().customer?.token ?? "";
     const url = `${endpoint}`;
     const response = await fetchData({
       url: `${url}${projectId ? "?projectId=" + projectId : ""}`,
       method: "POST",
       token,
-      body: formData,
+      body: JSON.stringify(request),
     });
     return response.data;
   } catch (error) {

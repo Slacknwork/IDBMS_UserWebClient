@@ -108,7 +108,6 @@ export default function TaskCommentsPage() {
         userId: user.id,
         type: 0,
         content: comment,
-        file: selectedFile,
       });
       toast.success(t("CreatedCommentSuccessfully"));
       await fetchData();
@@ -152,7 +151,7 @@ export default function TaskCommentsPage() {
                     centered
                   >
                     <ModalHeader toggle={handleCloseConfirmModal}>
-                    {t("ConfirmSubmission")}
+                      {t("ConfirmSubmission")}
                     </ModalHeader>
                     <ModalBody>
                       <p>{t("AreYouSure")}</p>
@@ -221,7 +220,7 @@ export default function TaskCommentsPage() {
               ) : (
                 <Stack sx={{ height: "30rem" }}>
                   <p style={{ margin: "auto", textAlign: "center" }}>
-                  {t("NoComment")}
+                    {t("NoComment")}
                   </p>
                 </Stack>
               )}
